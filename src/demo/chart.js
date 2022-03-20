@@ -78,9 +78,6 @@ const dataAreaChart = [
     },
 ];
 
-const dataPieChart = [
-    { percentage: 43 },
-];
 
 const chartDemo = () => {
     return (
@@ -133,8 +130,7 @@ const chartDemo = () => {
                 />
 
                 <PieChart
-                    data={dataPieChart}
-                    dataKey="percentage"
+                    percent={60}
 
                     width={200}
                     height={200}

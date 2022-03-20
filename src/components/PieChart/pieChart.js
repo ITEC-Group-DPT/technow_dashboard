@@ -6,13 +6,13 @@ import { Typography } from '@mui/material';
 import color from '../../constant/color';
 
 const CustomPieChart = ({
-    data, width, height, dataKey,
+    percent, width, height,
     innerRadius, bottom, left,
 }) => {
 
     const pieData = [
-        data[0],
-        {[dataKey]: 100 - data[0][dataKey]}
+        { percentage: percent },
+        { percentage: 100 - percent },
     ];
     return (
         <Box sx={{ position: "relative" }}>
@@ -21,7 +21,7 @@ const CustomPieChart = ({
                 height={height}
             >
                 <Pie
-                    dataKey={dataKey}
+                    dataKey={"percentage"}
                     startAngle={112}
                     endAngle={-360}
                     data={pieData}
@@ -46,7 +46,7 @@ const CustomPieChart = ({
                     color: color.lightBlack,
                 }}
             >
-                {data[0][dataKey]}%
+                {percent}%
             </Typography>
         </Box>
     )
