@@ -1,6 +1,9 @@
 // common
 import DropDownIc from '../assets/ic_dropdown.svg'
 import GreyDropDownIc from '../assets/ic_grey_dropdown.svg'
+import LeftArrowIc from '../assets/ic_left_arrow.svg'
+import RightArrowIc from '../assets/ic_right_arrow.svg'
+import SearchIc from '../assets/ic_search.svg'
 
 // navbar
 import DefaultAvaIc from '../assets/ic_default_avatar.svg'
@@ -29,10 +32,7 @@ import GreenUpStonkIc from '../assets/ic_green_up_stonk.svg'
 import RedDownStonkIc from '../assets/ic_red_down_stonk.svg'
 
 // product
-import SearchIc from '../assets/ic_search.svg'
 import FilterIc from '../assets/ic_filter.svg'
-import LeftArrowIc from '../assets/ic_left_arrow.svg'
-import RightArrowIc from '../assets/ic_right_arrow.svg'
 import PlusIc from '../assets/ic_plus.svg'
 import ThreeDotIc from '../assets/ic_three_dot.svg'
 
