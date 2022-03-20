@@ -14,10 +14,10 @@ import Sales from '../pages/Sales/sales'
 import Products from '../pages/Products/products'
 import Customers from '../pages/Customers/customer'
 import Orders from '../pages/Orders/order'
-import ChartDemo from "../pages/ChartDemo/chartDemo.js";
 
 //demo purpose
 import UserInfo from "../displayUserInfo.js";
+import ChartDemo from "../demo/Chart/chart";
 
 
 
@@ -47,6 +47,7 @@ const AppNavigagtion = () => {
                     exact path={"/orders"} element={<Orders />}
                 />
 
+                {/* demo */}
                 <Route
                     exact path={"/chartdemo"} element={<ChartDemo />}
                 />
