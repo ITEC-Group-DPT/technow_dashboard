@@ -91,8 +91,10 @@ const chartDemo = () => {
             <div>
                 <BarChart
                     data={dataBarChart}
-                    xAxisName="month"
-                    yAxisName="orders"
+
+                    xAxisName="month" //key
+                    yAxisName="orders" //key
+
                     yAxisCount={6}
                     width={400}
                     height={300}
@@ -106,11 +108,14 @@ const chartDemo = () => {
 
                 <LineChart
                     data={dataLineChart}
+
                     xAxisName="month"
                     yAxisName="income"
+
                     yAxisCount={6}
                     width={400}
                     height={300}
+
                     lineColor={color.blue}
                 />
 
@@ -130,7 +135,7 @@ const chartDemo = () => {
                 />
 
                 <PieChart
-                    percent={60}
+                    percent={69}
 
                     width={200}
                     height={200}

@@ -44,7 +44,9 @@ const Home = () => {
             justifyContent: "center",
         }}>
 
+
             <TextField
+                variant="outlined"
                 value={usernameInput}
                 placeholder={"Username"}
                 onChange={(e) => setUsernameInput(e.target.value)}

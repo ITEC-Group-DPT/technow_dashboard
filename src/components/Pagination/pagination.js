@@ -20,7 +20,7 @@ const Pagination = ({
 
             {/* back arrow */}
             <Button
-                onClick = {onBack}
+                onClick={onBack}
                 style={styles.arrowBox}
             >
                 <img src={LeftArrowIc} width={14} height={14} />
@@ -28,7 +28,7 @@ const Pagination = ({
 
             {/* forward arrow */}
             <Button
-                onClick = {onForward}
+                onClick={onForward}
                 style={styles.arrowBox}
             >
                 <img src={RightArrowIc} width={14} height={14} />
@@ -53,6 +53,7 @@ const styles = {
         display: "flex",
     },
     arrowBox: {
+        cursor: "pointer",
         border: "1px solid #D0D0D0",
         background: "white",
 
