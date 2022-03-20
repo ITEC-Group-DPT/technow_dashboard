@@ -4,7 +4,7 @@ import useStore from "../../appStore";
 
 import { useNavigate } from 'react-router-dom'
 import { Button, TextField } from '@mui/material'
-import "./home.css"
+import styles from "./home.style";
 
 
 const Home = () => {
@@ -46,11 +46,13 @@ const Home = () => {
 
             <TextField
                 value={usernameInput}
+                placeholder={"Username"}
                 onChange={(e) => setUsernameInput(e.target.value)}
             />
 
             <TextField
                 sx={{ my: 2 }}
+                placeholder={"Password"}
                 value={passwordInput}
                 onChange={(e) => setPasswordInput(e.target.value)}
             />
@@ -74,13 +76,38 @@ const Home = () => {
                     display: "flex",
                 }}
             >
-                <button onClick={goToSales}>Sales</button>
-                <button onClick={goToProducts}>Products</button>
-                <button onClick={goToCustomers}>Customers Statistic</button>
-                <button onClick={goToOrders}>Order Reports</button>
+                <Button
+                    sx={styles.navButton}
+                    variant="outlined"
+                    onClick={goToSales}>
+                    Sales
+                </Button>
+
+                <Button
+                    sx={styles.navButton}
+                    variant="outlined"
+                    onClick={goToProducts}>
+                    Products
+                </Button>
+
+                <Button
+                    sx={styles.navButton}
+                    variant="outlined"
+                    onClick={goToCustomers}>
+                    Customers Statistic
+                </Button>
+
+                <Button
+                    sx={styles.navButton}
+                    variant="outlined"
+                    onClick={goToOrders}>
+                    Order Reports
+                </Button>
             </div>
         </div>
     )
 }
+
+
 
 export default Home
