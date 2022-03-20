@@ -21,6 +21,8 @@ const color = {
 
     graySelected: "#F7F7F7",
     grayFocused: '#ADAEAF',
+
+    lightGrayText: "#848484",
     grayText: '#868686',
 };
 

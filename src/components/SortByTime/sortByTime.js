@@ -26,13 +26,11 @@ const SortByTime = ({
             </Typography>
 
             <Box>
-
-
                 <FormControl
                     sx={styles.formControl}
                 >
                     <Select
-                        sx={{ margin: -0.8 }}
+                        sx={{ margin: -1 }}
                         value={sortValue}
                         onChange={handleChange}
                         inputProps={{ 'aria-label': 'Without label' }}
@@ -56,11 +54,13 @@ const styles = {
     },
     formControl: {
         m: 1,
-        width: 95,
+        px: "8px",
+        minWidth: 90,
         textAlign: "center",
         background: "white",
-        borderRadius: "15px",
+        borderRadius: "12px",
 
+        boxShadow: "0px 1px 1px rgb(0, 0, 0, 0.15)"
     },
 }
 
