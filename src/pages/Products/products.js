@@ -1,17 +1,23 @@
 import React from 'react'
+import color from '../../constant/color'
+import { Box } from '@mui/system'
+import { Typography } from '@mui/material'
 
 const Products = () => {
     return (
-        <div
+        <Box
             style={{
-                flex: 1,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center"
+                height: "100vh",
+                background: color.background
             }}
         >
-            <h1 style={{ fontSize: "32px" }}>Hello Products</h1>
-        </div>
+            <Typography
+                style={{ fontSize: "32px", textAlign: "center" }}
+            >
+                Hello Products
+            </Typography>
+
+        </Box>
     )
 }
 

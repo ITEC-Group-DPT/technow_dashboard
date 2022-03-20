@@ -2,13 +2,17 @@ import React from 'react'
 
 import { Typography, Box, Button } from '@mui/material';
 import useStore from "./appStore";
+import color from './constant/color';
+
 const UserInfo = () => {
 
     const { username, password } = useStore(state => state.userInfo);
     const logOut = useStore(state => state.logout);
 
     return (
-        <Box>
+        <Box
+        sx = {{background: color.background}}
+        >
             {
                 username != ""
                 &&
