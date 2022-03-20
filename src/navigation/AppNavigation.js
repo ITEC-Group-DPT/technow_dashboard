@@ -18,6 +18,7 @@ import Orders from '../pages/Orders/order'
 //demo purpose
 import UserInfo from "../displayUserInfo.js";
 import ChartDemo from "../demo/Chart/chart";
+import OtherDemo from "../demo/Others/others"
 
 
 
@@ -50,6 +51,9 @@ const AppNavigagtion = () => {
                 {/* demo */}
                 <Route
                     exact path={"/chartdemo"} element={<ChartDemo />}
+                />
+                <Route
+                    exact path={"/otherdemo"} element={<OtherDemo />}
                 />
 
             </Switch>

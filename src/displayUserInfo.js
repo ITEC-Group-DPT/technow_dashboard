@@ -11,7 +11,9 @@ const UserInfo = () => {
 
     return (
         <Box
-        sx = {{background: color.background}}
+            sx={{
+                position: "absolute",
+            }}
         >
             {
                 username != ""
