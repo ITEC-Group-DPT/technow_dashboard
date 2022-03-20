@@ -17,8 +17,8 @@ import Orders from '../pages/Orders/order'
 
 //demo purpose
 import UserInfo from "../displayUserInfo.js";
-import ChartDemo from "../demo/Chart/chart";
-import OtherDemo from "../demo/Others/others"
+import ChartDemo from "../demo/chart";
+import OtherDemo from "../demo/others"
 
 
 

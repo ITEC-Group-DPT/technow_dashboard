@@ -1,9 +1,9 @@
 import React from 'react'
-import BarChart from '../../components/BarChart/barChart'
-import LineChart from '../../components/LineChart/lineChart'
-import AreaChart from '../../components/AreaChart/areaChart'
-import PieChart from '../../components/PieChart/pieChart'
-import color from '../../constant/color'
+import BarChart from '../components/BarChart/barChart'
+import LineChart from '../components/LineChart/lineChart'
+import AreaChart from '../components/AreaChart/areaChart'
+import PieChart from '../components/PieChart/pieChart'
+import color from '..//constant/color'
 
 const dataBarChart = [
     {

@@ -4,8 +4,8 @@ import React, { useState } from 'react'
 import { Box } from '@mui/system'
 import { Typography } from '@mui/material';
 
-import color from '../../constant/color';
-import SortByTime from "../../component/SortByTime/sortByTime"
+import color from '../constant/color';
+import SortByTime from "../components/SortByTime/sortByTime"
 
 const OtherDemo = () => {
 
