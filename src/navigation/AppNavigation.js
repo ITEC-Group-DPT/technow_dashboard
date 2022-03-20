@@ -9,17 +9,21 @@ import {
 import App from "../App.js"
 
 //Pages
-import Home from '../pages/Home'
-import Sales from '../pages/Sales'
-import Products from '../pages/Products'
-import Customers from '../pages/Customers'
-import Orders from '../pages/Orders'
+import Home from '../pages/Home/home'
+import Sales from '../pages/Sales/sales'
+import Products from '../pages/Products/products'
+import Customers from '../pages/Customers/customer'
+import Orders from '../pages/Orders/order'
+
+//demo purpose
+import UserInfo from "../displayUserInfo.js";
 
 
 
 const AppNavigagtion = () => {
     return (
         <Router>
+            <UserInfo/>
             <Switch>
 
                 <Route
