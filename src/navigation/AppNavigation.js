@@ -17,13 +17,14 @@ import Orders from '../pages/Orders/order'
 
 //demo purpose
 import UserInfo from "../displayUserInfo.js";
+import ChartDemo from "../demo/Chart/chart";
 
 
 
 const AppNavigagtion = () => {
     return (
         <Router>
-            <UserInfo/>
+            <UserInfo />
             <Switch>
 
                 <Route
@@ -44,6 +45,11 @@ const AppNavigagtion = () => {
 
                 <Route
                     exact path={"/orders"} element={<Orders />}
+                />
+
+                {/* demo */}
+                <Route
+                    exact path={"/chartdemo"} element={<ChartDemo />}
                 />
 
             </Switch>
