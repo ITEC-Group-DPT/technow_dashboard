@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
 import { Box } from '@mui/system'
 
-import { Typography, Select, FormControl, MenuItem } from '@mui/material'
+import { Typography, Select, FormControl, MenuItem, styled, InputBase } from '@mui/material'
 
-import "./sortByTime.css"
-
+const MyInput = styled(InputBase)(() => ({
+    '& .MuiInputBase-input': {
+        borderWidth: 0,
+        'aria-label': 'Without label',
+    },
+}));
 const SortByTime = ({
     defaultValue = "Month",
     onChangeValue,
@@ -20,7 +24,7 @@ const SortByTime = ({
     }
 
     return (
-        <Box sx = {styles.container}>
+        <Box sx={styles.container}>
             <Typography>
                 Sort by
             </Typography>
@@ -30,10 +34,10 @@ const SortByTime = ({
                     sx={styles.formControl}
                 >
                     <Select
-                        sx={{ margin: -1 }}
+                        sx={styles.select}
                         value={sortValue}
                         onChange={handleChange}
-                        inputProps={{ 'aria-label': 'Without label' }}
+                        input={<MyInput />}
                     >
                         <MenuItem
                             value={"Week"}>Week</MenuItem>
@@ -54,13 +58,14 @@ const styles = {
     },
     formControl: {
         m: 1,
-        px: "8px",
-        minWidth: 90,
-        textAlign: "center",
         background: "white",
         borderRadius: "12px",
 
         boxShadow: "0px 1px 1px rgb(0, 0, 0, 0.15)"
+    },
+    select: {
+        py: "4px",
+        paddingLeft: "20px",
     },
 }
 
