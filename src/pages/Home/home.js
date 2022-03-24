@@ -3,7 +3,10 @@ import React, { useState } from 'react'
 import useStore from "../../appStore";
 
 import { useNavigate } from 'react-router-dom'
-import { Button, TextField } from '@mui/material'
+import { Box, Button, TextField } from '@mui/material'
+
+
+import color from "../../constant/color"
 import styles from "./home.style";
 
 
@@ -35,13 +38,14 @@ const Home = () => {
 
 
     return (
-        <div style={{
+        <Box style={{
             flex: 1,
             height: "100vh",
             display: "flex",
             flexDirection: " column",
             alignItems: "center",
             justifyContent: "center",
+            background: color.background
         }}>
 
 
@@ -106,7 +110,7 @@ const Home = () => {
                     Order Reports
                 </Button>
             </div>
-        </div>
+        </Box>
     )
 }
 
