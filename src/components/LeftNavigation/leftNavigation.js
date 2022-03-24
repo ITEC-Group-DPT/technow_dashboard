@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 
 //MUI
 import { Box, Typography } from '@mui/material'
-import Button from '@mui/material/ButtonBase';
 import { useNavigate } from 'react-router-dom'
+import Button from '@mui/base/ButtonUnstyled';
 
 //component 
 import TabIcon from './tabIcon'
+import BottomTab from './bottomTab';
 
 //theme, design
 import {
@@ -16,8 +17,6 @@ import {
     ProductIc,
     StatIc,
     OrderIc,
-    VersionIc,
-    LogOutIc,
 } from "../../constant/icon"
 import styles from "./leftNavigation.style"
 
@@ -29,6 +28,7 @@ const LeftNavigation = () => {
     const navigate = useNavigate();
 
     const [tabChoose, setTabChoose] = useState(0);
+    const [isOpen, setIsOpen] = useState(false);
 
     const navigateTab = (index) => {
 
@@ -61,16 +61,40 @@ const LeftNavigation = () => {
         }
     }
 
+    const onControlOpen = (open) => {
+        setTimeout(() => {
+            setIsOpen(open)
+        }, 50);
+    } 
     return (
-        <Box sx={styles.main}>
-            <Box sx={styles.container}>
-                <img style={styles.avatar} src={DefaultAvaIc} />
+        <Box sx={[styles.main, isOpen && { background: "rgba(0,0,0,0.3)" }]}>
+
+            <button
+                id='leftNav'
+                onMouseEnter={() => onControlOpen(true)}
+                onMouseLeave={() => onControlOpen(false)}
+
+                style={isOpen ? styles.openContainer : styles.container}
+            >
+
+                <Box sx={styles.avatarBox}>
+                    <img style={styles.avatar} src={DefaultAvaIc} />
+                    {
+                        isOpen &&
+                        <Typography
+                            sx={styles.username}
+                        >
+                            Kurozemi
+                        </Typography>
+                    }
+                </Box>
 
                 {
                     tabIcon.map((icon, index) => (
                         <TabIcon
+                            isOpen={isOpen}
                             currentTab={tabChoose}
-                            tabName = {tabNames[index]}
+                            tabName={tabNames[index]}
 
                             icon={icon}
                             index={index}
@@ -79,25 +103,10 @@ const LeftNavigation = () => {
                     ))
                 }
 
-                <Box
-                    sx={styles.bottomBox}>
-                    <Box
-                        sx={styles.bottomIc}
-                    >
-                        <img src={VersionIc} width={38} height={38} />
-                    </Box>
-
-                    <Button
-                        sx={styles.bottomIc}
-                        color={"error"}
-                        disableRipple
-                    >
-                        <img src={LogOutIc} width={20} height={20} />
-                    </Button>
-                </Box>
+                <BottomTab isOpen={isOpen} />
 
 
-            </Box>
+            </button>
         </Box>
     )
 }

@@ -4,6 +4,7 @@ import { Button, Typography } from '@mui/material'
 import styles from "./leftNavigation.style"
 
 const TabIcon = ({
+    isOpen,
     currentTab,
     tabName,
 
@@ -13,12 +14,28 @@ const TabIcon = ({
 }) => {
     return (
         <Button
-            sx={[styles.icBox, currentTab == index && styles.choosenIc]}
+            sx={[
+                styles.icBox,
+                currentTab == index && styles.choosenIc,
+                isOpen && {
+                    justifyContent: "start",
+                    pl: index == currentTab ? "29px" : "30px",
+                    pr: 0,
+                }
+            ]}
             onClick={onClick}
             color={"black"}
         >
             <img src={icon} style={styles.tabIc} />
-            {/* <Typography>{tabName}</Typography> */}
+
+            {
+                isOpen &&
+                <Typography
+                    sx={styles.tabName}
+                >
+                    {tabName}
+                </Typography>
+            }
 
         </Button>
     )

@@ -10,7 +10,7 @@ const theme = createTheme({
         fontFamily: ['"Segoe UI"', 'Arial', 'sans-serif'].join(',')
     },
     button: {
-        fontFamily: ['"Segoe UI"', 'Arial', 'sans-serif'].join(',')
+        fontFamily: ['"Segoe UI"', 'Arial', 'sans-serif'].join(','),
     }
 })
 
