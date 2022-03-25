@@ -53,7 +53,7 @@ const styles = {
 
         display: "flex",
         flexDirection: "column",
-        boxShadow: "1px 0px 1px rgba(0,0,0, 0.25)",
+        boxShadow: "0.5px 0px 1px rgba(0,0,0, 0.25)",
 
 
         border: "none",
@@ -63,7 +63,6 @@ const styles = {
         height: "100vh",
     },
     avatar: {
-
         margin: "80px 14px",
         display: "flex",
         alignItems: "center",
@@ -75,7 +74,7 @@ const styles = {
         fontWeight: "600",
         fontSize: "24px",
         textAlign: "start",
-        marginLeft: "32px",
+        marginLeft: "18px",
     },
 
     choosenIc: {
@@ -92,7 +91,7 @@ const styles = {
         justifyContent: "flex-start"
     },
     tabName: {
-        marginLeft: "23px",
+        marginLeft: "10px",
         fontSize: "18px",
         lineHeight: "24px",
         color: "black !important",
@@ -117,6 +116,9 @@ const styles = {
         borderRadius: 0,
         py: "12px",
         alignItems: "center",
+        "&.MuiButtonBase-root:hover": {
+            bgcolor: "transparent"
+        }
     },
     bottomTextBox: {
         width: "100%",
@@ -137,7 +139,7 @@ const styles = {
         paddingBottom: "4px"
     },
     logoutText: {
-        marginLeft: "16px",
+        marginLeft: "2px",
 
         fontWeight: "600",
         color: "#FF5454 !important",

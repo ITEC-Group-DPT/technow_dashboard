@@ -24,6 +24,7 @@ const BottomTab = () => {
             <Button
                 sx={styles.bottomIc}
                 color={"error"}
+                disableRipple
             >
                 <img src={LogOutIc} width={20} height={20} />
             </Button>

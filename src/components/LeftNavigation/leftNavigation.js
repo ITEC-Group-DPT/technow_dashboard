@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 //MUI
-import { Box, Typography } from '@mui/material'
+import { Box, Slide, Fade } from '@mui/material'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Button from '@mui/base/ButtonUnstyled';
 
@@ -31,6 +31,7 @@ const LeftNavigation = () => {
 
     const [tabChoose, setTabChoose] = useState();
     const [isOpen, setIsOpen] = useState(false);
+
 
     useEffect(() => {
         switch (location.pathname) {
@@ -86,9 +87,14 @@ const LeftNavigation = () => {
     }
 
     const onControlOpen = (open) => {
-        setTimeout(() => {
-            setIsOpen(open)
-        }, 50);
+        if (open) {
+            setIsOpen(true)
+        }
+        else {
+            setTimeout(() => {
+                setIsOpen(false)
+            }, 100);
+        }
     }
     return (
         <Box sx={[styles.main, isOpen && { background: "rgba(0,0,0,0.3)" }]}>
@@ -121,6 +127,7 @@ const LeftNavigation = () => {
 
 
                 </Box>
+
                 {
                     isOpen &&
                     <OpenNav
@@ -129,6 +136,8 @@ const LeftNavigation = () => {
                         navigateTab={navigateTab}
                     />
                 }
+
+
             </button>
         </Box>
     )
