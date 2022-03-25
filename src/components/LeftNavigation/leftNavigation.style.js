@@ -5,7 +5,17 @@ const styles = {
         width: "100%",
         height: "100%",
         zIndex: 99,
-        // background: "rgba(0,0,0,0.5)"
+     
+    },
+    navigation: {
+        position: "relative",
+        background: "white",
+
+        display: "flex",
+        border: "none",
+        padding: 0,
+
+        height: "100vh",
     },
     container: {
         position: "relative",
@@ -18,12 +28,12 @@ const styles = {
         padding: 0,
 
 
-        
+
         boxShadow: "0.5px 0px rgba(0,0,0, 0.25)",
         height: "100vh",
     },
 
-    openContainer: {
+    openMiniContainer: {
         position: "relative",
         background: "white",
 
@@ -33,23 +43,39 @@ const styles = {
         border: "none",
         padding: 0,
 
-        width: 330,
+        boxShadow: "0px",
         height: "100vh",
     },
 
-    avatarBox: {
+    openContainer: {
+        position: "relative",
+        background: "white",
+
+        display: "flex",
+        flexDirection: "column",
+        boxShadow: "1px 0px 1px rgba(0,0,0, 0.25)",
+
+
+        border: "none",
+        padding: 0,
+
+        width: 280,
+        height: "100vh",
+    },
+    avatar: {
+
         margin: "80px 14px",
         display: "flex",
         alignItems: "center",
-    },
-    avatar: {
         width: "56px",
         height: "56px",
     },
     username: {
+        my: "90px",
         fontWeight: "600",
         fontSize: "24px",
-        marginLeft: "28px",
+        textAlign: "start",
+        marginLeft: "32px",
     },
 
     choosenIc: {
@@ -60,15 +86,20 @@ const styles = {
         width: "24px",
         height: "24px",
     },
+    tabNameBox: {
+        py: "24px",
+        display: "flex",
+        justifyContent: "flex-start"
+    },
     tabName: {
-        marginLeft: "44px",
+        marginLeft: "23px",
         fontSize: "18px",
         lineHeight: "24px",
+        color: "black !important",
 
         textTransform: "capitalize",
     },
     icBox: {
-        width: "100%",
         py: "24px",
         display: "flex",
         justifyContent: "center",
@@ -86,7 +117,31 @@ const styles = {
         borderRadius: 0,
         py: "12px",
         alignItems: "center",
+    },
+    bottomTextBox: {
+        width: "100%",
+        py: "12px",
+        pr: 0,
+        display: "flex",
+        justifyContent: "start",
 
+        "&.MuiButtonBase-root:hover": {
+            bgcolor: "transparent"
+        }
+
+    },
+    versionText: {
+        fontWeight: "600",
+        color: "#8B8B8B !important",
+        lineHeight: "24px",
+        paddingBottom: "4px"
+    },
+    logoutText: {
+        marginLeft: "16px",
+
+        fontWeight: "600",
+        color: "#FF5454 !important",
+        lineHeight: "24px",
     },
 
 }

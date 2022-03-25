@@ -16,12 +16,14 @@ const TabIcon = ({
         <Button
             sx={[
                 styles.icBox,
-                currentTab == index && styles.choosenIc,
-                isOpen && {
-                    justifyContent: "start",
-                    pl: index == currentTab ? "29px" : "30px",
-                    pr: 0,
-                }
+                currentTab == index 
+                ? styles.choosenIc
+                : {
+                    "&.MuiButtonBase-root:hover": {
+                        bgcolor: "transparent"
+                    }
+                },
+                
             ]}
             onClick={onClick}
             color={"black"}

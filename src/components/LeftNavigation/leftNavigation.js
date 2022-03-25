@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 //MUI
 import { Box, Typography } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Button from '@mui/base/ButtonUnstyled';
 
 //component 
 import TabIcon from './tabIcon'
 import BottomTab from './bottomTab';
+import OpenNav from "./openNav"
 
 //theme, design
 import {
@@ -26,10 +27,33 @@ const tabIcon = [HomeIc, SaleIc, ProductIc, StatIc, OrderIc]
 const LeftNavigation = () => {
 
     const navigate = useNavigate();
+    const location = useLocation();
 
-    const [tabChoose, setTabChoose] = useState(0);
+    const [tabChoose, setTabChoose] = useState();
     const [isOpen, setIsOpen] = useState(false);
 
+    useEffect(() => {
+        switch (location.pathname) {
+            case "/":
+                setTabChoose(0)
+                break;
+            case "/sales":
+                setTabChoose(1)
+                break;
+            case "/products":
+                setTabChoose(2)
+                break;
+            case "customers":
+                setTabChoose(3)
+                break;
+            case "/orders":
+                setTabChoose(4)
+                break;
+
+            default:
+                break;
+        }
+    }, []);
     const navigateTab = (index) => {
 
         if (tabChoose == index) return;
@@ -65,47 +89,46 @@ const LeftNavigation = () => {
         setTimeout(() => {
             setIsOpen(open)
         }, 50);
-    } 
+    }
     return (
         <Box sx={[styles.main, isOpen && { background: "rgba(0,0,0,0.3)" }]}>
 
             <button
-                id='leftNav'
+                style={styles.navigation}
                 onMouseEnter={() => onControlOpen(true)}
                 onMouseLeave={() => onControlOpen(false)}
-
-                style={isOpen ? styles.openContainer : styles.container}
             >
+                <Box
+                    style={!isOpen ? styles.container : styles.openMiniContainer}
+                >
 
-                <Box sx={styles.avatarBox}>
                     <img style={styles.avatar} src={DefaultAvaIc} />
+
                     {
-                        isOpen &&
-                        <Typography
-                            sx={styles.username}
-                        >
-                            Kurozemi
-                        </Typography>
+                        tabIcon.map((icon, index) => (
+                            <TabIcon
+                                currentTab={tabChoose}
+                                tabName={tabNames[index]}
+
+                                icon={icon}
+                                index={index}
+                                onClick={() => navigateTab(index)}
+                            />
+                        ))
                     }
+
+                    <BottomTab />
+
+
                 </Box>
-
                 {
-                    tabIcon.map((icon, index) => (
-                        <TabIcon
-                            isOpen={isOpen}
-                            currentTab={tabChoose}
-                            tabName={tabNames[index]}
-
-                            icon={icon}
-                            index={index}
-                            onClick={() => navigateTab(index)}
-                        />
-                    ))
+                    isOpen &&
+                    <OpenNav
+                        tabNames={tabNames}
+                        currentTab={tabChoose}
+                        navigateTab={navigateTab}
+                    />
                 }
-
-                <BottomTab isOpen={isOpen} />
-
-
             </button>
         </Box>
     )
