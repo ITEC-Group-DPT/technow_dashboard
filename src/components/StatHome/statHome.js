@@ -2,7 +2,7 @@ import React from 'react'
 
 import styles from './statHome.style'
 import { Box } from '@mui/system'
-import { Typography } from '@mui/material'
+import { Typography, useMediaQuery } from '@mui/material'
 
 import PieChart from "../PieChart/pieChart"
 import { ReactComponent as ArrowUp } from '../../assets/ic_degree_up_arrow.svg';
@@ -18,6 +18,7 @@ const StatHome = ({
     stat,
 }) => {
 
+    // const shortLength = useMediaQuery("(max-length:1300px)")
     const formattedPrice = (price) => {
         return price / 1000000 + " triệu";
     }
@@ -59,8 +60,8 @@ const StatHome = ({
             <Box sx={styles.arrowBox}>
                 {
                     stat.percent > 0
-                    ? <ArrowUp id={`stat${title}`} />
-                    : <ArrowDown id={`stat${title}`} />
+                        ? <ArrowUp id={`stat${title}`} />
+                        : <ArrowDown id={`stat${title}`} />
                 }
             </Box>
         </Box>

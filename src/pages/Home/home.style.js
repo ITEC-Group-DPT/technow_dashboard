@@ -2,23 +2,14 @@ import color from "../../constant/color"
 const styles = {
     main: {
         backgroundColor: color.background,
-        marginLeft: "84px",
-        pl: "10%",
-        pr: "7%",
+        marginLeft: "365px",
+
         minHeight: "100vh",
 
         display: "flex",
-    },
-    leftData: {
-        paddingTop: "50px",
-        flex: 6,
-    },
-    rightData: {
-        flex: 4,
-        mt: "100px",
-        mb: "40px",
-        marginLeft: "5%",
-        background: "#ECECEC",
+        flexDirection: "column",
+        justifyContent: "center",
+
     },
     pageTitle: {
         fontFamily: "Roboto",

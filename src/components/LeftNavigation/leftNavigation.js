@@ -36,6 +36,7 @@ const LeftNavigation = () => {
     useEffect(() => {
         switch (location.pathname) {
             case "/":
+                setIsOpen(true);
                 setTabChoose(0)
                 break;
             case "/sales":
@@ -54,7 +55,7 @@ const LeftNavigation = () => {
             default:
                 break;
         }
-    }, []);
+    }, [location]);
     const navigateTab = (index) => {
 
         if (tabChoose == index) return;
@@ -87,6 +88,7 @@ const LeftNavigation = () => {
     }
 
     const onControlOpen = (open) => {
+        if (location.pathname == "/") return
         if (open) {
             setIsOpen(true)
         }
@@ -98,7 +100,7 @@ const LeftNavigation = () => {
     }
     return (
         <Box sx={
-            isOpen
+            (isOpen && location.pathname != "/")
                 ? styles.openMain
                 : styles.main
         }>
