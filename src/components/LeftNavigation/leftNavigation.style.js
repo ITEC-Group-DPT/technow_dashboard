@@ -3,9 +3,7 @@ const styles = {
         position: "absolute",
         left: 0,
         width: "100%",
-        height: "100%",
-        zIndex: 99,
-     
+        height: "100%",     
     },
     navigation: {
         position: "relative",
@@ -14,7 +12,7 @@ const styles = {
         display: "flex",
         border: "none",
         padding: 0,
-
+        zIndex: 99,
         height: "100vh",
     },
     container: {
