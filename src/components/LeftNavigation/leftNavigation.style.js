@@ -2,8 +2,15 @@ const styles = {
     main: {
         position: "absolute",
         left: 0,
-        width: "100%",
         height: "100%",     
+    },
+    openMain: {
+        position: "absolute",
+        left: 0,
+        height: "100%", 
+        width:"100%",
+        background: "rgba(0,0,0,0.3)",
+        zIndex: 99,
     },
     navigation: {
         position: "relative",

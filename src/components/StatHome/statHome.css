@@ -1,0 +1,15 @@
+svg#statSales path {
+    fill: #FEC59D;
+}
+
+svg#statProducts path {
+    fill:#67F071;
+}
+
+svg#statOrders path {
+    fill: #41D7FF;
+}
+
+svg#statCustomers path {
+    fill: #7C7C7C;
+}

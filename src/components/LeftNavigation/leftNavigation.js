@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 //MUI
-import { Box, Slide, Fade } from '@mui/material'
+import { Box, Slide, Fade, useMediaQuery } from '@mui/material'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Button from '@mui/base/ButtonUnstyled';
 
@@ -97,10 +97,11 @@ const LeftNavigation = () => {
         }
     }
     return (
-        <Box sx={[styles.main, isOpen && {
-            background: "rgba(0,0,0,0.3)",
-            zIndex: 9999,
-        }]}>
+        <Box sx={
+            isOpen
+                ? styles.openMain
+                : styles.main
+        }>
 
             <button
                 style={styles.navigation}
