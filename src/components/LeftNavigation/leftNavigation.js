@@ -97,7 +97,10 @@ const LeftNavigation = () => {
         }
     }
     return (
-        <Box sx={[styles.main, isOpen && { background: "rgba(0,0,0,0.3)" }]}>
+        <Box sx={[styles.main, isOpen && {
+            background: "rgba(0,0,0,0.3)",
+            zIndex: 9999,
+        }]}>
 
             <button
                 style={styles.navigation}

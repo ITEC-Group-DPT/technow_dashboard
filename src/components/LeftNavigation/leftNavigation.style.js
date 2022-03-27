@@ -12,7 +12,7 @@ const styles = {
         display: "flex",
         border: "none",
         padding: 0,
-        zIndex: 99,
+        zIndex: 9999,
         height: "100vh",
     },
     container: {
