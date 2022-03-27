@@ -2,7 +2,7 @@ const styles = {
     main: {
         position: "absolute",
         left: 0,
-        width: "100%",
+        width: "fit-content",
         height: "100%",
         zIndex: 99,
      
