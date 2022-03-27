@@ -1,116 +1,99 @@
 import React, { useState } from 'react'
 
-import useStore from "../../appStore";
+import {
+    bannerData,
+    salesSection,
+    productsSection,
+    ordersSection,
+    customersSection
+} from "./dummyData"
+//component
+import SortByTime from "../../components/SortByTime/sortByTime"
+import BannerHome from '../../components/BannerHome/bannerHome'
+import StatHome from '../../components/StatHome/statHome'
 
-import { useNavigate } from 'react-router-dom'
-import { Box, Button, TextField } from '@mui/material'
-
-
-import color from "../../constant/color"
-import styles from "./home.style";
+//MUI & design
+import { Box, Typography, useMediaQuery } from '@mui/material'
+import styles from "./home.style"
 
 
 const Home = () => {
 
-    const navigate = useNavigate()
+    const [filterTime, setFilterTime] = useState("Month");
 
-    const { login } = useStore();
-
-    const [usernameInput, setUsernameInput] = useState("");
-    const [passwordInput, setPasswordInput] = useState("");
-
-    const goToSales = () => {
-        // console.log('hehe');
-        navigate("/sales")
-    }
-
-    const goToProducts = () => {
-        navigate("/products")
-    }
-
-    const goToCustomers = () => {
-        navigate("/customers")
-    }
-
-    const goToOrders = () => {
-        navigate("/orders")
-    }
-
-
+    const hideOverall = useMediaQuery('(max-width: 1400px)')
+    console.log('hideoverall: ', hideOverall);
     return (
-        <Box style={{
-            flex: 1,
-            height: "100vh",
-            display: "flex",
-            flexDirection: " column",
-            alignItems: "center",
-            justifyContent: "center",
-            background: color.background
-        }}>
+        <Box sx={styles.main}>
+
+            <Box sx={styles.leftData}>
+                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                    <Typography sx={styles.pageTitle}>Admin Dashboard</Typography>
+
+                    <SortByTime
+                        onChangeValue={setFilterTime}
+                    />
+                </Box>
+
+                <BannerHome
+                    data={bannerData}
+                />
+
+                <Box sx={styles.sectionRow}>
+                    <StatHome
+                        title="Sales"
+                        subTitle={`This ${filterTime}`}
+                        style={{
+                            marginRight: "12px",
+                            background: "#FFEEE2"
+                        }}
+                        stat={salesSection}
+                        background="#FFEEE2"
+                    />
+
+                    <StatHome
+                        title="Products"
+                        subTitle={`Solds`}
+                        style={{
+                            marginLeft: "13px",
+                            background: "#E0FFE7"
+                        }}
+                        stat={productsSection}
+                    />
+                </Box>
+
+                <Box sx={styles.sectionRow}>
+                    <StatHome
+                        title="Orders"
+                        subTitle={`Completed`}
+                        style={{
+                            marginRight: "12px",
+                            background: "#E6F5F9"
+                        }}
+                        stat={ordersSection}
+                    />
+
+                    <StatHome
+                        title="Customers"
+                        subTitle={`Visited`}
+                        style={{
+                            marginLeft: "12px",
+                            background: "#ECECEC"
+                        }}
+                        stat={customersSection}
+                    />
+                </Box>
+            </Box>
+
+            {
+                !hideOverall &&
+                <Box sx={styles.rightData}>
+
+                </Box>
+            }
 
 
-            <TextField
-                variant="outlined"
-                value={usernameInput}
-                placeholder={"Username"}
-                onChange={(e) => setUsernameInput(e.target.value)}
-            />
-
-            <TextField
-                sx={{ my: 2 }}
-                placeholder={"Password"}
-                value={passwordInput}
-                onChange={(e) => setPasswordInput(e.target.value)}
-            />
-
-            <Button
-                variant='outlined'
-                onClick={() => {
-                    if (usernameInput != "" && passwordInput != "") {
-                        login(usernameInput, passwordInput);
-                        setUsernameInput("");
-                        setPasswordInput("");
-                    }
-                }}
-            >
-                Login
-            </Button>
-
-            <div
-                style={{
-                    marginTop: 50,
-                    display: "flex",
-                }}
-            >
-                <Button
-                    sx={styles.navButton}
-                    variant="outlined"
-                    onClick={goToSales}>
-                    Sales
-                </Button>
-
-                <Button
-                    sx={styles.navButton}
-                    variant="outlined"
-                    onClick={goToProducts}>
-                    Products
-                </Button>
-
-                <Button
-                    sx={styles.navButton}
-                    variant="outlined"
-                    onClick={goToCustomers}>
-                    Customers Statistic
-                </Button>
-
-                <Button
-                    sx={styles.navButton}
-                    variant="outlined"
-                    onClick={goToOrders}>
-                    Order Reports
-                </Button>
-            </div>
-        </Box>
+        </Box >
     )
 }
 

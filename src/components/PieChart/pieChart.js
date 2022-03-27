@@ -8,6 +8,7 @@ import color from '../../constant/color';
 const CustomPieChart = ({
     percent, width, height,
     innerRadius, bottom, left,
+    fontSize = 26,
 }) => {
 
     const pieData = [
@@ -31,15 +32,15 @@ const CustomPieChart = ({
                     innerRadius={innerRadius}
                     animationDuration={1000}
                 >
-                    <Cell fill={color.lightBlack} />
-                    <Cell fill='rgba(255, 0, 0, 0)' />
+                    <Cell strokeOpacity={"0"} fill={color.lightBlack} />
+                    <Cell strokeOpacity={"0"} fill='rgba(255, 0, 0, 0)' />
                 </Pie>
             </PieChart>
 
             <Typography
                 sx={{
                     fontWeight: "bold",
-                    fontSize: 26,
+                    fontSize: fontSize,
                     position: "absolute",
                     bottom: bottom,
                     left: left,
