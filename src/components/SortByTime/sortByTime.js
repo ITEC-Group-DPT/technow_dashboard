@@ -19,7 +19,7 @@ const SortByTime = ({
     const handleChange = (event) => {
         let value = event.target.value;
 
-        onChangeValue(value);
+        onChangeValue && onChangeValue(value);
         setSortValue(value);
     }
 
@@ -58,6 +58,7 @@ const styles = {
     },
     formControl: {
         m: 1,
+        mr: 0,
         background: "white",
         borderRadius: "12px",
 
