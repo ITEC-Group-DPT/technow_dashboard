@@ -7,20 +7,21 @@ const styles = {
     },
 
     main: {
-        pt: 3,
+        pt: 2,
         maxWidth: '1200px !important',
         paddingLeft: '108px !important',
+        height: '100%',
+        overflow: 'hidden',
     },
 
     title1Wrapper: {
         display: "flex",
         justifyContent: 'space-between',
         mb: 1,
-
     },
 
     title: {
-        fontSize: '28px',
+        fontSize: '27px',
         fontWeight: 'bold',
     },
 
@@ -32,8 +33,8 @@ const styles = {
         background: 'white',
         borderRadius: '15px',
         boxShadow: '0px .5px #d5d6d8',
-        pt: 3,
-        pb: 2,
+        pt: 2,
+        pb: 1,
         pl: 4,
         pr: 4,
     },
@@ -46,22 +47,23 @@ const styles = {
     },
 
     title2Wrapper: {
-        mt: 3,
-        mb: 2,
+        mt: 2,
+        mb: 1,
     },
 
     orderContent: {
         background: 'white',
         borderRadius: '15px',
         boxShadow: '0px .5px #d5d6d8',
-        pt: 5,
-        pb: 2,
+        pt: 4,
+        pb: 0.1,
         pl: 8,
         pr: 8,
     },
 
     controlWrapper: {
         height: "35px",
+        mb: 3,
 
     },
 
@@ -78,9 +80,37 @@ const styles = {
     },
 
     tableWrapper: {
-        height: "400px",
+
 
     },
+
+    divider: {
+        borderColor: "#EAEAEA",
+        mt: 1,
+        mb: 2,
+    },
+
+    tableHeader: {
+        fontWeight: 700,
+        fontSize: '17px',
+    },
+
+    priceHeaderItem: {
+        display: 'flex',
+        justifyContent: 'center',
+    },
+
+    priceHeaderWrapper: {
+        width: '110px',
+    },
+
+    priceHeader: {
+        textAlign: 'end',
+    },
+
+    textCenter: {
+        textAlign: 'center',
+    }
 
 
 }

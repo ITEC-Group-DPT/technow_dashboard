@@ -57,7 +57,7 @@ const styles = {
         alignItems: "center",
     },
     formControl: {
-        m: 1,
+        ml: 1,
         mr: 0,
         background: "white",
         borderRadius: "12px",

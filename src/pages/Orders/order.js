@@ -1,6 +1,6 @@
 import { React, useState } from 'react'
 import { Box } from '@mui/system'
-import { Typography, Container, Grid } from '@mui/material'
+import { Typography, Container, Grid, Divider } from '@mui/material'
 import styles from './order.style'
 import './order.css'
 import color from '../../constant/color'
@@ -10,6 +10,7 @@ import LineChart from '../../components/LineChart/lineChart'
 import SearchBar from '../../components/SearchBar/searchBar'
 import Pagination from '../../components/Pagination/pagination'
 import DropDownStatus from '../../components/DropDownStatus/dropDownStatus'
+import OrderItem from '../../components/OrderItem/orderItem'
 
 const dataBarChart = [
     {
@@ -57,6 +58,44 @@ const dataLineChart = [
     },
 ];
 
+const orderList = [
+    {
+        id: 'HLS1293',
+        cusName: 'Quan Minh Tri',
+        date: '15/01/2022',
+        price: '3,210,000 đ',
+        status: 'Received',
+    },
+    {
+        id: 'AKT9023',
+        cusName: 'Tran Nguyen Minh Dao',
+        date: '07/01/2022',
+        price: '799,000 đ',
+        status: 'Processing',
+    },
+    {
+        id: 'VED0054',
+        cusName: 'Truong Minh Nam Phu',
+        date: '02/01/2022',
+        price: '1,500,00 đ',
+        status: 'Shipping',
+    },
+    {
+        id: 'MNI6381',
+        cusName: 'Tran Ngoc Hien Long',
+        date: '10/12/2021',
+        price: '1,990,000 đ',
+        status: 'Completed',
+    },
+    {
+        id: 'TLA3424',
+        cusName: 'Ly Vi Cuong',
+        date: '05/12/2021',
+        price: '12,499,000 đ',
+        status: 'Cancelled',
+    },
+];
+
 const Orders = () => {
     const [sort, setSort] = useState("Month")
     const [search, setSearch] = useState("")
@@ -84,7 +123,7 @@ const Orders = () => {
                                 yAxisName="orders"
                                 yAxisCount={6}
                                 width={430}
-                                height={270}
+                                height={260}
                                 barSize={45}
                                 barColor={color.orange}
                             />
@@ -99,7 +138,7 @@ const Orders = () => {
                                 yAxisName="income"
                                 yAxisCount={6}
                                 width={430}
-                                height={270}
+                                height={260}
                                 lineColor={color.blue}
                             />
                         </Box>
@@ -112,7 +151,7 @@ const Orders = () => {
 
                 <Box sx={styles.orderContent}>
                     <Grid container sx={styles.controlWrapper}>
-                        <Grid item xs={6.5} style={{height: '100%'}}>
+                        <Grid item xs={6.5} style={{ height: '100%' }}>
                             <SearchBar
                                 placeholder="Search for order, customer name..."
                                 text={search}
@@ -120,13 +159,11 @@ const Orders = () => {
                             />
 
                         </Grid>
-
                         <Grid item xs={3.5} style={styles.centerHori}>
                             <DropDownStatus
                                 onChangeValue={value => setStatus(value)}
                             />
                         </Grid>
-
                         <Grid item xs={2} style={styles.endHori}>
                             <Pagination
                                 page={page}
@@ -145,13 +182,38 @@ const Orders = () => {
 
 
                     </Grid>
-                    {/* <Box sx={styles.tableWrapper}>
+                    <Box sx={styles.tableWrapper}>
+                        <Grid container>
+                            <Grid item xs={2}>
+                                <Typography sx={styles.tableHeader}>Order ID</Typography>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <Typography sx={styles.tableHeader}>Customer Name</Typography>
+                            </Grid>
+                            <Grid item xs={2}>
+                                <Typography sx={{...styles.tableHeader, ...styles.textCenter}}>Order Date</Typography>
+                            </Grid>
+                            <Grid item xs={2.5} sx={styles.priceHeaderItem} >
+                                <Box sx={styles.priceHeaderWrapper}>
+                                    <Typography sx={{...styles.tableHeader, ...styles.priceHeader}}>Total Price</Typography>
+                                </Box>
+                            </Grid>
+                            <Grid item xs={2.5}>
+                                <Typography sx={{...styles.tableHeader, ...styles.textCenter}}>Delivery Status</Typography>
+                            </Grid>
+                        </Grid>
 
-                    </Box> */}
+                        <Divider sx={styles.divider} />
+
+                        {orderList.map((order) => (
+                            <OrderItem
+                                order={order}
+                                key={order.id}
+                            />
+                        ))}
+                    </Box>
 
                 </Box>
-
-
             </Container>
         </Box>
     )
