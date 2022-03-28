@@ -8,7 +8,7 @@ const styles = {
 
     },
     openMain: {
-        position: "absolute",
+        position: "fixed",
         left: 0,
         height: "100%", 
         width:"100%",
@@ -17,7 +17,7 @@ const styles = {
 
     },
     navigation: {
-        position: "relative",
+        position: "fixed",
         background: "white",
 
         display: "flex",
@@ -27,7 +27,7 @@ const styles = {
         height: "100vh",
     },
     container: {
-        position: "relative",
+        position: "fixed",
         background: "white",
 
         display: "flex",
@@ -40,7 +40,7 @@ const styles = {
     },
 
     openMiniContainer: {
-        position: "relative",
+        position: "fixed",
         background: "white",
 
         display: "flex",
@@ -54,9 +54,10 @@ const styles = {
     },
 
     openContainer: {
-        position: "relative",
+        position: "fixed",
         background: "white",
 
+        left: 84,
         display: "flex",
         flexDirection: "column",
         boxShadow: "0.5px 0px 1px rgba(0,0,0, 0.25)",
