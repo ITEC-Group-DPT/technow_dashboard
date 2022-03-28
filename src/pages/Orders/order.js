@@ -116,7 +116,9 @@ const Orders = () => {
                 <Grid container spacing={7} sx={styles.graphContent}>
                     <Grid item xs={6}>
                         <Box sx={styles.graphWrapper}>
-                            <Typography sx={styles.graphTitle}>Total Orders</Typography>
+                            <Box sx={{mb: 2}}>
+                                <Typography sx={styles.graphTitle}>Total Orders</Typography>
+                            </Box>
                             <BarChart
                                 data={dataBarChart}
                                 xAxisName="month"
@@ -131,7 +133,14 @@ const Orders = () => {
                     </Grid>
                     <Grid item xs={6}>
                         <Box sx={styles.graphWrapper}>
-                            <Typography sx={styles.graphTitle}>Total Income</Typography>
+                            <Grid container sx={{mb: 2}}>
+                                <Grid item xs={4} sx={styles.labelWrapper}>
+                                    <Typography sx={styles.label} >(million VND)</Typography>
+                                </Grid>
+                                <Grid item xs={4}>
+                                    <Typography sx={styles.graphTitle}>Total Income</Typography>
+                                </Grid>
+                            </Grid>
                             <LineChart
                                 data={dataLineChart}
                                 xAxisName="month"
@@ -191,15 +200,15 @@ const Orders = () => {
                                 <Typography sx={styles.tableHeader}>Customer Name</Typography>
                             </Grid>
                             <Grid item xs={2}>
-                                <Typography sx={{...styles.tableHeader, ...styles.textCenter}}>Order Date</Typography>
+                                <Typography sx={{ ...styles.tableHeader, ...styles.textCenter }}>Order Date</Typography>
                             </Grid>
                             <Grid item xs={2.5} sx={styles.priceHeaderItem} >
                                 <Box sx={styles.priceHeaderWrapper}>
-                                    <Typography sx={{...styles.tableHeader, ...styles.priceHeader}}>Total Price</Typography>
+                                    <Typography sx={{ ...styles.tableHeader, ...styles.priceHeader }}>Total Price</Typography>
                                 </Box>
                             </Grid>
                             <Grid item xs={2.5}>
-                                <Typography sx={{...styles.tableHeader, ...styles.textCenter}}>Delivery Status</Typography>
+                                <Typography sx={{ ...styles.tableHeader, ...styles.textCenter }}>Delivery Status</Typography>
                             </Grid>
                         </Grid>
 

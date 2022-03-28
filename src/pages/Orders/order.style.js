@@ -35,15 +35,30 @@ const styles = {
         boxShadow: '0px .5px #d5d6d8',
         pt: 2,
         pb: 1,
-        pl: 4,
-        pr: 4,
+        px: 4,
+    },
+
+    lineTitleWrapper: {
+        display: 'flex',
+
     },
 
     graphTitle: {
         textAlign: 'center',
         fontSize: '17px',
         fontWeight: 'bold',
-        mb: 1,
+    },
+
+    labelWrapper: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+
+    label: {
+        color: '#868686',
+        fontSize: '12px',
+        fontWeight: 500,
+
     },
 
     title2Wrapper: {
@@ -55,7 +70,7 @@ const styles = {
         background: 'white',
         borderRadius: '15px',
         boxShadow: '0px .5px #d5d6d8',
-        pt: 4,
+        pt: 3,
         pb: 0.1,
         pl: 8,
         pr: 8,
