@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Box, Typography, Container, Grid, Divider } from '@mui/material'
 import styles from './order.style'
 import './order.css'
@@ -32,7 +32,7 @@ const dataBarChart = [
         month: 'May',
         orders: 96,
     },
-];
+]
 
 const dataLineChart = [
     {
@@ -55,9 +55,10 @@ const dataLineChart = [
         month: 'May',
         income: 40,
     },
-];
+]
 
-const orderList = [
+const dataOrder = [
+    //page 1
     {
         id: 'HLS1293',
         cusName: 'Quan Minh Tri',
@@ -76,7 +77,7 @@ const orderList = [
         id: 'VED0054',
         cusName: 'Truong Minh Nam Phu',
         date: '02/01/2022',
-        price: '1,500,00 đ',
+        price: '1,500,000 đ',
         status: 3,
     },
     {
@@ -93,17 +94,92 @@ const orderList = [
         price: '12,499,000 đ',
         status: 0,
     },
-];
+
+    //page 2
+    {
+        id: 'CLG1035',
+        cusName: 'Nguyen Van An',
+        date: '01/12/2021',
+        price: '10,990,000 đ',
+        status: 2,
+    },
+    {
+        id: 'DLK2781',
+        cusName: 'Nguyen Ngoc Minh Thu',
+        date: '22/11/2021',
+        price: '590,000 đ',
+        status: 1,
+    },
+    {
+        id: 'TKL1001',
+        cusName: 'Tran Thi Thu Trang',
+        date: '20/11/2021',
+        price: '2,500,000 đ',
+        status: 3,
+    },
+    {
+        id: 'BBC1419',
+        cusName: 'Phan Quang Anh Hao',
+        date: '17/11/2021',
+        price: '9,990,000 đ',
+        status: 4,
+    },
+    {
+        id: 'DNB3812',
+        cusName: 'Truong Ngoc Quang Minh',
+        date: '11/10/2021',
+        price: '2,490,000 đ',
+        status: 4,
+    },
+
+    //page 3
+    {
+        id: 'PQC1592',
+        cusName: 'Ly Van Tai',
+        date: '02/10/2021',
+        price: '200,000 đ',
+        status: 0,
+    },
+    {
+        id: 'PQJ1178',
+        cusName: 'Pham Thi Anh Dung',
+        date: '30/09/2021',
+        price: '690,000 đ',
+        status: 4,
+    },
+    {
+        id: 'DPC4921',
+        cusName: 'Phi Thu Lan',
+        date: '23/09/2021',
+        price: '1,590,000 đ',
+        status: 4,
+    },
+]
 
 const Orders = () => {
+    const [orderList, setOrderList] = useState([])
     const [sort, setSort] = useState("Month")
     const [search, setSearch] = useState("")
     const [sortByStatus, setSortByStatus] = useState("All")
+    const [totalPage, setTotalPage] = useState()
     const [page, setPage] = useState(1)
-    const maxPages = 3
+
+    const itemsPerPage = 5
+    const offset = (page - 1) * itemsPerPage
+
+    useEffect(() => {
+        //call getTotalPage API here
+        setTotalPage(3)
+        setPage(1)
+    }, [])
+
+    useEffect(() => {
+        //call getOrderList with offset API here
+        setOrderList(dataOrder.slice(offset, offset + itemsPerPage))
+    }, [page, sort])
 
     const onChangeStatus = (status) => {
-        console.log(status);
+        console.log(status)
     }
 
     return (
@@ -111,11 +187,8 @@ const Orders = () => {
             <Container maxWidth="md" sx={styles.main}>
                 <Box sx={styles.title1Wrapper}>
                     <Typography sx={styles.title}>Order Report</Typography>
-                    <SortByTime
-                        onChangeValue={value => setSort(value)}
-                    />
+                    <SortByTime onChangeValue={value => setSort(value)} />
                 </Box>
-
                 <Grid container spacing={6} sx={styles.graphContent}>
                     <Grid item xs={6}>
                         <Box sx={styles.graphWrapper}>
@@ -134,6 +207,7 @@ const Orders = () => {
                             />
                         </Box>
                     </Grid>
+
                     <Grid item xs={6}>
                         <Box sx={styles.graphWrapper}>
                             <Grid container sx={{ mb: 4 }}>
@@ -160,7 +234,6 @@ const Orders = () => {
                 <Box sx={styles.title2Wrapper}>
                     <Typography sx={styles.title}>Order Details</Typography>
                 </Box>
-
                 <Box sx={styles.orderContent}>
                     <Grid container sx={styles.controlWrapper}>
                         <Grid item xs={6.5} style={{ height: '100%' }}>
@@ -178,14 +251,14 @@ const Orders = () => {
                         <Grid item xs={2} style={styles.endHori}>
                             <Pagination
                                 page={page}
-                                maxPages={maxPages}
+                                maxPages={totalPage}
                                 onBack={() => {
                                     if (page > 1)
-                                        setPage(page - 1);
+                                        setPage(page - 1)
                                 }}
                                 onForward={() => {
-                                    if (page < maxPages)
-                                        setPage(page + 1);
+                                    if (page < totalPage)
+                                        setPage(page + 1)
                                 }}
                             />
                         </Grid>

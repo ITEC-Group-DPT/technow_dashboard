@@ -2,7 +2,8 @@ import color from '../../constant/color'
 
 const styles = {
     bg: {
-        background: color.background
+        background: color.background,
+        minHeight: '100vh',
     },
 
     main: {
@@ -69,6 +70,7 @@ const styles = {
         background: 'white',
         borderRadius: '15px',
         boxShadow: '0px .5px #d5d6d8',
+        minHeight: '48vh',
         pt: 5,
         pb: 1,
         pl: 8,
