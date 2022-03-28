@@ -1,17 +1,26 @@
 import React from 'react'
 import { Typography, Grid, Box } from '@mui/material'
+import ChangeStatus from '../../components/ChangeStatus/changeStatus'
 import styles from './orderItem.style'
 
-const OrderItem = ({ order }) => {
+const OrderItem = ({ order, changeStatus }) => {
+    const handleChange = (value) => {
+        let status = {
+            id: order.id,
+            status: value,
+        }
+        changeStatus(status)
+    }
+
     return (
         <Grid container sx={styles.container}>
-            <Grid item xs={2}>
+            <Grid item xs={2} sx={styles.alignCenter}>
                 <Typography sx={styles.id}>{order.id}</Typography>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={3} sx={styles.alignCenter}>
                 <Typography>{order.cusName}</Typography>
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={2} sx={styles.alignCenter}>
                 <Typography sx={{...styles.date, ...styles.textCenter}}>{order.date}</Typography>
             </Grid>
             <Grid item xs={2.5} sx={styles.priceItem}>
@@ -19,8 +28,11 @@ const OrderItem = ({ order }) => {
                     <Typography sx={styles.price}>{order.price}</Typography>
                 </Box>
             </Grid>
-            <Grid item xs={2.5}>
-                <Typography sx={styles.textCenter}>{order.status}</Typography>
+            <Grid item xs={2.5} sx={styles.changeStatusWrapper}>
+                <ChangeStatus
+                    initValue={order.status}
+                    onChangeValue={value => handleChange(value)}
+                />
             </Grid>
         </Grid>
     )

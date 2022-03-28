@@ -6,22 +6,17 @@ const MyInput = styled(InputBase)(() => ({
         borderWidth: 0,
         'aria-label': 'Without label',
     },
-}));
+}))
 
 const statusList = ['All', 'Received', 'Processing', 'Shipping', 'Completed', 'Cancelled']
 
-const SortByStatus = ({
-    defaultValue = "All",
-    onChangeValue,
-}) => {
-
-    const [status, setStatus] = useState(defaultValue);
+const SortByStatus = ({ defaultValue = "All", onChangeValue }) => {
+    const [status, setStatus] = useState(defaultValue)
 
     const handleChange = (event) => {
-        let value = event.target.value;
-
-        onChangeValue && onChangeValue(value);
-        setStatus(value);
+        let value = event.target.value
+        onChangeValue && onChangeValue(value)
+        setStatus(value)
     }
 
     return (
@@ -36,7 +31,7 @@ const SortByStatus = ({
                         input={<MyInput />}
                     >
                         {statusList.map((status) => (
-                            <MenuItem value={status}>{status}</MenuItem>
+                            <MenuItem value={status} key={status}>{status}</MenuItem>
                         ))}
                     </Select>
                 </FormControl>
@@ -53,9 +48,6 @@ const styles = {
     title: {
         color: '#848484',
     },
-    item: {
-
-    },
     formControl: {
         m: 1,
         border: "1px solid #D0D0D0",
@@ -71,4 +63,4 @@ const styles = {
     },
 }
 
-export default SortByStatus;
+export default SortByStatus

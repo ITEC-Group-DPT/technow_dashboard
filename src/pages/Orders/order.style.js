@@ -69,8 +69,8 @@ const styles = {
         background: 'white',
         borderRadius: '15px',
         boxShadow: '0px .5px #d5d6d8',
-        pt: 4,
-        pb: 0.1,
+        pt: 5,
+        pb: 1,
         pl: 8,
         pr: 8,
     },
@@ -123,9 +123,11 @@ const styles = {
 
     textCenter: {
         textAlign: 'center',
-    }
+    },
 
-
+    textEnd: {
+        textAlign: 'end',
+    },
 }
 
 export default styles;

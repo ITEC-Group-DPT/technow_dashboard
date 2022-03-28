@@ -63,44 +63,48 @@ const orderList = [
         cusName: 'Quan Minh Tri',
         date: '15/01/2022',
         price: '3,210,000 đ',
-        status: 'Received',
+        status: 1,
     },
     {
         id: 'AKT9023',
         cusName: 'Tran Nguyen Minh Dao',
         date: '07/01/2022',
         price: '799,000 đ',
-        status: 'Processing',
+        status: 2,
     },
     {
         id: 'VED0054',
         cusName: 'Truong Minh Nam Phu',
         date: '02/01/2022',
         price: '1,500,00 đ',
-        status: 'Shipping',
+        status: 3,
     },
     {
         id: 'MNI6381',
         cusName: 'Tran Ngoc Hien Long',
         date: '10/12/2021',
         price: '1,990,000 đ',
-        status: 'Completed',
+        status: 4,
     },
     {
         id: 'TLA3424',
         cusName: 'Ly Vi Cuong',
         date: '05/12/2021',
         price: '12,499,000 đ',
-        status: 'Cancelled',
+        status: 0,
     },
 ];
 
 const Orders = () => {
     const [sort, setSort] = useState("Month")
     const [search, setSearch] = useState("")
-    const [status, setStatus] = useState("All")
+    const [sortByStatus, setSortByStatus] = useState("All")
     const [page, setPage] = useState(1)
     const maxPages = 3
+
+    const onChangeStatus = (status) => {
+        console.log(status);
+    }
 
     return (
         <Box sx={styles.bg}>
@@ -168,7 +172,7 @@ const Orders = () => {
                         </Grid>
                         <Grid item xs={3.5} style={styles.centerHori}>
                             <SortByStatus
-                                onChangeValue={value => setStatus(value)}
+                                onChangeValue={value => setSortByStatus(value)}
                             />
                         </Grid>
                         <Grid item xs={2} style={styles.endHori}>
@@ -204,7 +208,7 @@ const Orders = () => {
                                 </Box>
                             </Grid>
                             <Grid item xs={2.5}>
-                                <Typography sx={{ ...styles.tableHeader, ...styles.textCenter }}>Delivery Status</Typography>
+                                <Typography sx={{ ...styles.tableHeader, ...styles.textEnd }}>Delivery Status</Typography>
                             </Grid>
                         </Grid>
 
@@ -214,6 +218,7 @@ const Orders = () => {
                             <OrderItem
                                 order={order}
                                 key={order.id}
+                                changeStatus={status => onChangeStatus(status)}
                             />
                         ))}
                     </Box>

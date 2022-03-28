@@ -20,6 +20,7 @@ const styles = {
 
     priceWrapper: {
         width: '110px',
+        alignSelf: 'center',
     },
 
     price: {
@@ -28,7 +29,17 @@ const styles = {
 
     textCenter: {
         textAlign: 'center',
-    }
+    },
+
+    alignCenter: {
+        alignSelf: 'center',
+    },
+
+    changeStatusWrapper: {
+        display: 'flex',
+        justifyContent: 'end',
+    },
+
 }
 
 export default styles;
