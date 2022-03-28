@@ -12,7 +12,7 @@ const OpenNav = ({
     return (
         <Fade
             in={true}
-            timeout={700}
+            timeout={600}
         >
             <Box
                 sx={styles.openContainer}
