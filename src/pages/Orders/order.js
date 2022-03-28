@@ -1,6 +1,5 @@
-import { React, useState } from 'react'
-import { Box } from '@mui/system'
-import { Typography, Container, Grid, Divider } from '@mui/material'
+import React, { useState } from 'react'
+import { Box, Typography, Container, Grid, Divider } from '@mui/material'
 import styles from './order.style'
 import './order.css'
 import color from '../../constant/color'
@@ -9,7 +8,7 @@ import BarChart from '../../components/BarChart/barChart'
 import LineChart from '../../components/LineChart/lineChart'
 import SearchBar from '../../components/SearchBar/searchBar'
 import Pagination from '../../components/Pagination/pagination'
-import DropDownStatus from '../../components/DropDownStatus/dropDownStatus'
+import SortByStatus from '../../components/SortByStatus/sortByStatus'
 import OrderItem from '../../components/OrderItem/orderItem'
 
 const dataBarChart = [
@@ -116,7 +115,7 @@ const Orders = () => {
                 <Grid container spacing={6} sx={styles.graphContent}>
                     <Grid item xs={6}>
                         <Box sx={styles.graphWrapper}>
-                            <Box sx={{mb: 4}}>
+                            <Box sx={{ mb: 4 }}>
                                 <Typography sx={styles.graphTitle}>Total Orders</Typography>
                             </Box>
                             <BarChart
@@ -133,7 +132,7 @@ const Orders = () => {
                     </Grid>
                     <Grid item xs={6}>
                         <Box sx={styles.graphWrapper}>
-                            <Grid container sx={{mb:4}}>
+                            <Grid container sx={{ mb: 4 }}>
                                 <Grid item xs={4} sx={styles.labelWrapper}>
                                     <Typography sx={styles.label} >(million VND)</Typography>
                                 </Grid>
@@ -166,10 +165,9 @@ const Orders = () => {
                                 text={search}
                                 setText={setSearch}
                             />
-
                         </Grid>
                         <Grid item xs={3.5} style={styles.centerHori}>
-                            <DropDownStatus
+                            <SortByStatus
                                 onChangeValue={value => setStatus(value)}
                             />
                         </Grid>
@@ -186,11 +184,9 @@ const Orders = () => {
                                         setPage(page + 1);
                                 }}
                             />
-
                         </Grid>
-
-
                     </Grid>
+
                     <Box sx={styles.tableWrapper}>
                         <Grid container>
                             <Grid item xs={2}>
@@ -221,7 +217,6 @@ const Orders = () => {
                             />
                         ))}
                     </Box>
-
                 </Box>
             </Container>
         </Box>
