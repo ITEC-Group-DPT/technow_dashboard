@@ -8,7 +8,7 @@ const styles = {
 
     main: {
         pt: 3,
-        maxWidth: '1100px !important',
+        maxWidth: '1200px !important',
         paddingLeft: '108px !important',
     },
 
@@ -19,8 +19,8 @@ const styles = {
 
     },
 
-    title1: {
-        fontSize: '30px',
+    title: {
+        fontSize: '28px',
         fontWeight: 'bold',
     },
 
@@ -31,6 +31,7 @@ const styles = {
     graphWrapper: {
         background: 'white',
         borderRadius: '15px',
+        boxShadow: '0px .5px #d5d6d8',
         pt: 3,
         pb: 2,
         pl: 4,
@@ -42,6 +43,43 @@ const styles = {
         fontSize: '17px',
         fontWeight: 'bold',
         mb: 1,
+    },
+
+    title2Wrapper: {
+        mt: 3,
+        mb: 2,
+    },
+
+    orderContent: {
+        background: 'white',
+        borderRadius: '15px',
+        boxShadow: '0px .5px #d5d6d8',
+        pt: 5,
+        pb: 2,
+        pl: 8,
+        pr: 8,
+    },
+
+    controlWrapper: {
+        height: "35px",
+
+    },
+
+    centerHori: {
+        height: "100%",
+        display: "flex",
+        justifyContent: 'center',
+    },
+
+    endHori: {
+        height: "100%",
+        display: "flex",
+        justifyContent: 'end',
+    },
+
+    tableWrapper: {
+        height: "400px",
+
     },
 
 
