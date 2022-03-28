@@ -2,22 +2,21 @@ import color from '../../constant/color'
 
 const styles = {
     bg: {
-        height: "100vh",
         background: color.background
     },
 
     main: {
-        pt: 2,
+        pt: 5,
         maxWidth: '1200px !important',
         paddingLeft: '108px !important',
         height: '100%',
-        overflow: 'hidden',
+        pb: 5,
     },
 
     title1Wrapper: {
         display: "flex",
         justifyContent: 'space-between',
-        mb: 1,
+        mb: 2,
     },
 
     title: {
@@ -33,8 +32,8 @@ const styles = {
         background: 'white',
         borderRadius: '15px',
         boxShadow: '0px .5px #d5d6d8',
-        pt: 2,
-        pb: 1,
+        pt: 3,
+        pb: 2,
         px: 4,
     },
 
@@ -45,41 +44,40 @@ const styles = {
 
     graphTitle: {
         textAlign: 'center',
-        fontSize: '17px',
+        fontSize: '18px',
         fontWeight: 'bold',
     },
 
     labelWrapper: {
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'end',
     },
 
     label: {
         color: '#868686',
-        fontSize: '12px',
+        fontSize: '13px',
         fontWeight: 500,
 
     },
 
     title2Wrapper: {
-        mt: 2,
-        mb: 1,
+        mt: 5,
+        mb: 2,
     },
 
     orderContent: {
         background: 'white',
         borderRadius: '15px',
         boxShadow: '0px .5px #d5d6d8',
-        pt: 3,
+        pt: 4,
         pb: 0.1,
         pl: 8,
         pr: 8,
     },
 
     controlWrapper: {
-        height: "35px",
-        mb: 3,
-
+        height: "37px",
+        mb: 4,
     },
 
     centerHori: {
@@ -101,8 +99,8 @@ const styles = {
 
     divider: {
         borderColor: "#EAEAEA",
-        mt: 1,
-        mb: 2,
+        mt: 2,
+        mb: 3,
     },
 
     tableHeader: {

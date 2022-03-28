@@ -113,10 +113,10 @@ const Orders = () => {
                     />
                 </Box>
 
-                <Grid container spacing={7} sx={styles.graphContent}>
+                <Grid container spacing={6} sx={styles.graphContent}>
                     <Grid item xs={6}>
                         <Box sx={styles.graphWrapper}>
-                            <Box sx={{mb: 2}}>
+                            <Box sx={{mb: 4}}>
                                 <Typography sx={styles.graphTitle}>Total Orders</Typography>
                             </Box>
                             <BarChart
@@ -125,7 +125,7 @@ const Orders = () => {
                                 yAxisName="orders"
                                 yAxisCount={6}
                                 width={430}
-                                height={260}
+                                height={270}
                                 barSize={45}
                                 barColor={color.orange}
                             />
@@ -133,7 +133,7 @@ const Orders = () => {
                     </Grid>
                     <Grid item xs={6}>
                         <Box sx={styles.graphWrapper}>
-                            <Grid container sx={{mb: 2}}>
+                            <Grid container sx={{mb:4}}>
                                 <Grid item xs={4} sx={styles.labelWrapper}>
                                     <Typography sx={styles.label} >(million VND)</Typography>
                                 </Grid>
@@ -147,7 +147,7 @@ const Orders = () => {
                                 yAxisName="income"
                                 yAxisCount={6}
                                 width={430}
-                                height={260}
+                                height={270}
                                 lineColor={color.blue}
                             />
                         </Box>
