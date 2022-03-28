@@ -24,6 +24,14 @@ const color = {
 
     lightGrayText: "#848484",
     grayText: '#868686',
+
+    // sale
+    R1: "#ff8a65",
+    R2: "#ffb74d",
+    R3: "#ffd54f",
+    R4: "#ffee58",
+    R5: "#dce775"
+
 };
 
 export default color;
