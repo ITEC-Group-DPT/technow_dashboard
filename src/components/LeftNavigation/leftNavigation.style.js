@@ -1,8 +1,11 @@
 const styles = {
     main: {
-        position: "absolute",
+        position: "fixed",
         left: 0,
         height: "100%",     
+        overflow: "hidden",
+        boxShadow: "1px 0 rgba(0,0,0,0.25)"
+
     },
     openMain: {
         position: "absolute",
@@ -11,6 +14,7 @@ const styles = {
         width:"100%",
         background: "rgba(0,0,0,0.3)",
         zIndex: 99,
+
     },
     navigation: {
         position: "relative",
@@ -32,9 +36,6 @@ const styles = {
         border: "none",
         padding: 0,
 
-
-
-        boxShadow: "0.5px 0px rgba(0,0,0, 0.25)",
         height: "100vh",
     },
 
@@ -93,7 +94,8 @@ const styles = {
     tabNameBox: {
         py: "24px",
         display: "flex",
-        justifyContent: "flex-start"
+        justifyContent: "flex-start",
+        borderRadius: 0,
     },
     tabName: {
         marginLeft: "10px",
