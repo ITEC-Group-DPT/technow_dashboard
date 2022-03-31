@@ -17,7 +17,11 @@ const OrderItem = ({ order, onChangeStatus }) => {
                 <Typography>{order.cusName}</Typography>
             </Grid>
             <Grid item xs={2} sx={styles.alignCenter}>
-                <Typography sx={{...styles.date, ...styles.textCenter}}>{order.date}</Typography>
+                <Typography
+                    sx={{ ...styles.date, ...styles.textCenter }}
+                >
+                    {order.date}
+                </Typography>
             </Grid>
             <Grid item xs={2.5} sx={styles.priceItem}>
                 <Box sx={styles.priceWrapper}>

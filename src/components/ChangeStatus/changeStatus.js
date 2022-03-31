@@ -9,51 +9,45 @@ const MyInput = styled(InputBase)(() => ({
     },
 }))
 
-const statusList = [
-    {
-        code: 0,
-        value: 'Cancelled',
+const statusList = {
+    Cancelled: {
+        value: "Cancelled",
         color: '#DB3838',
-        bgColor:'#FFE3E3',
+        bgColor: '#FFE3E3',
     },
-    {
-        code: 1,
-        value: 'Received',
+
+    Received: {
+        value: "Received",
         color: '#6D6D6D',
-        bgColor:'#E7E7E7',
+        bgColor: '#E7E7E7',
     },
-    {
-        code: 2,
-        value: 'Processing',
+
+    Processing: {
+        value: "Processing",
         color: '#386FDB',
-        bgColor:'#E3EEFF',
+        bgColor: '#E3EEFF',
     },
-    {
-        code: 3,
-        value: 'Shipping',
+
+    Shipping: {
+        value: "Shipping",
         color: '#DABB1C',
-        bgColor:'#FFFDD3',
+        bgColor: '#FFFDD3',
     },
-    {
-        code: 4,
-        value: 'Completed',
+
+    Completed: {
+        value: "Completed",
         color: '#31A32F',
-        bgColor:'#E1FFE4',
+        bgColor: '#E1FFE4',
     },
-]
+}
 
 const ChangeStatus = ({ defaultValue = 0, onChangeValue }) => {
-    const [status, setStatus] = useState({
-        code: defaultValue,
-        value: statusList[defaultValue].value,
-        color: statusList[defaultValue].color,
-        bgColor: statusList[defaultValue].bgColor,
-    })
+    const [status, setStatus] = useState(statusList[defaultValue])
 
     const handleChange = (event) => {
-        const code = event.target.value
-        onChangeValue && onChangeValue(code)
-        setStatus(statusList[code])
+        const value = event.target.value
+        onChangeValue && onChangeValue(value)
+        setStatus(statusList[value])
     }
 
     return (
@@ -70,13 +64,18 @@ const ChangeStatus = ({ defaultValue = 0, onChangeValue }) => {
                                 fill: status.color,
                             }
                         }]}
-                        value={status.code}
+                        value={status.value}
                         onChange={handleChange}
                         input={<MyInput />}
                         className="STATUS-WRAPPER"
                     >
-                        {statusList.map((status) => (
-                            <MenuItem value={status.code} key={status.code}>{status.value}</MenuItem>
+                        {Object.keys(statusList).map((key) => (
+                            <MenuItem
+                                value={statusList[key].value}
+                                key={statusList[key].value}
+                            >
+                                {statusList[key].value}
+                            </MenuItem>
                         ))}
                     </Select>
                 </FormControl>
