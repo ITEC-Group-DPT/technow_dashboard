@@ -9,45 +9,45 @@ const MyInput = styled(InputBase)(() => ({
     },
 }))
 
-const statusList = {
-    Cancelled: {
+const statusList = [
+    {
         value: "Cancelled",
         color: '#DB3838',
         bgColor: '#FFE3E3',
     },
-
-    Received: {
+    {
         value: "Received",
         color: '#6D6D6D',
         bgColor: '#E7E7E7',
     },
-
-    Processing: {
+    {
         value: "Processing",
         color: '#386FDB',
         bgColor: '#E3EEFF',
     },
-
-    Shipping: {
+    {
         value: "Shipping",
         color: '#DABB1C',
         bgColor: '#FFFDD3',
     },
-
-    Completed: {
+    {
         value: "Completed",
         color: '#31A32F',
         bgColor: '#E1FFE4',
     },
-}
+]
 
 const ChangeStatus = ({ defaultValue = 0, onChangeValue }) => {
     const [status, setStatus] = useState(statusList[defaultValue])
 
     const handleChange = (event) => {
-        const value = event.target.value
-        onChangeValue && onChangeValue(value)
-        setStatus(statusList[value])
+        const updatedStatus = event.target.value
+        statusList.forEach((status, index) => {
+            if (status.value == updatedStatus) {
+                onChangeValue && onChangeValue(updatedStatus)
+                setStatus(statusList[index])
+            }
+        })
     }
 
     return (
@@ -69,12 +69,12 @@ const ChangeStatus = ({ defaultValue = 0, onChangeValue }) => {
                         input={<MyInput />}
                         className="STATUS-WRAPPER"
                     >
-                        {Object.keys(statusList).map((key) => (
+                        {statusList.map((status) => (
                             <MenuItem
-                                value={statusList[key].value}
-                                key={statusList[key].value}
+                                value={status.value}
+                                key={status.value}
                             >
-                                {statusList[key].value}
+                                {status.value}
                             </MenuItem>
                         ))}
                     </Select>
