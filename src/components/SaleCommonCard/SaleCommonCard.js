@@ -4,7 +4,7 @@ import { Box, height } from '@mui/system'
 import { Card, Typography, CardHeader, CardMedia, CardContent } from '@mui/material'
 import styles from './SaleCommonCard.style'
 
-const SaleCommonCard = ({ title, content }) => {
+const SaleCommonCard = ({ title, children }) => {
     return (
         <Card variant="outlined" sx={{
             ...styles.card, py: 1, filter: "drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.15))",
@@ -14,7 +14,7 @@ const SaleCommonCard = ({ title, content }) => {
                     {title}
                 </Typography>
             </CardContent>
-            {content}
+            {children}
         </Card>
     )
 }
