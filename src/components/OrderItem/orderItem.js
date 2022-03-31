@@ -3,13 +3,9 @@ import { Typography, Grid, Box } from '@mui/material'
 import ChangeStatus from '../../components/ChangeStatus/changeStatus'
 import styles from './orderItem.style'
 
-const OrderItem = ({ order, changeStatus }) => {
-    const handleChange = (value) => {
-        let status = {
-            id: order.id,
-            status: value,
-        }
-        changeStatus(status)
+const OrderItem = ({ order, onChangeStatus }) => {
+    const handleChange = (status) => {
+        onChangeStatus(order.id, status)
     }
 
     return (
@@ -30,8 +26,8 @@ const OrderItem = ({ order, changeStatus }) => {
             </Grid>
             <Grid item xs={2.5} sx={styles.changeStatusWrapper}>
                 <ChangeStatus
-                    initValue={order.status}
-                    onChangeValue={value => handleChange(value)}
+                    defaultValue={order.status}
+                    onChangeValue={handleChange}
                 />
             </Grid>
         </Grid>

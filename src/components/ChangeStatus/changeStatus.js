@@ -42,18 +42,18 @@ const statusList = [
     },
 ]
 
-const ChangeStatus = ({ initValue, onChangeValue }) => {
+const ChangeStatus = ({ defaultValue = 0, onChangeValue }) => {
     const [status, setStatus] = useState({
-        code: initValue,
-        value: statusList[initValue].value,
-        color: statusList[initValue].color,
-        bgColor: statusList[initValue].bgColor,
+        code: defaultValue,
+        value: statusList[defaultValue].value,
+        color: statusList[defaultValue].color,
+        bgColor: statusList[defaultValue].bgColor,
     })
 
     const handleChange = (event) => {
-        let value = event.target.value
-        onChangeValue && onChangeValue(value)
-        setStatus(statusList[value])
+        const code = event.target.value
+        onChangeValue && onChangeValue(code)
+        setStatus(statusList[code])
     }
 
     return (

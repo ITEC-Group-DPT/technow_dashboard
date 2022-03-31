@@ -161,7 +161,7 @@ const Orders = () => {
     const [sort, setSort] = useState("Month")
     const [search, setSearch] = useState("")
     const [sortByStatus, setSortByStatus] = useState("All")
-    const [totalPage, setTotalPage] = useState()
+    const [totalPage, setTotalPage] = useState(0)
     const [page, setPage] = useState(1)
 
     const itemsPerPage = 5
@@ -170,7 +170,6 @@ const Orders = () => {
     useEffect(() => {
         //call getTotalPage API here
         setTotalPage(3)
-        setPage(1)
     }, [])
 
     useEffect(() => {
@@ -178,8 +177,8 @@ const Orders = () => {
         setOrderList(dataOrder.slice(offset, offset + itemsPerPage))
     }, [page, sort])
 
-    const onChangeStatus = (status) => {
-        console.log(status)
+    const onChangeStatus = (orderID, status) => {
+        console.log(orderID + " : " + status)
     }
 
     return (
@@ -245,7 +244,7 @@ const Orders = () => {
                         </Grid>
                         <Grid item xs={3.5} style={styles.centerHori}>
                             <SortByStatus
-                                onChangeValue={value => setSortByStatus(value)}
+                                onChangeValue={setSortByStatus}
                             />
                         </Grid>
                         <Grid item xs={2} style={styles.endHori}>
@@ -273,15 +272,27 @@ const Orders = () => {
                                 <Typography sx={styles.tableHeader}>Customer Name</Typography>
                             </Grid>
                             <Grid item xs={2}>
-                                <Typography sx={{ ...styles.tableHeader, ...styles.textCenter }}>Order Date</Typography>
+                                <Typography
+                                    sx={{ ...styles.tableHeader, ...styles.textCenter }}
+                                >
+                                    Order Date
+                                </Typography>
                             </Grid>
                             <Grid item xs={2.5} sx={styles.priceHeaderItem} >
                                 <Box sx={styles.priceHeaderWrapper}>
-                                    <Typography sx={{ ...styles.tableHeader, ...styles.priceHeader }}>Total Price</Typography>
+                                    <Typography
+                                        sx={{ ...styles.tableHeader, ...styles.priceHeader }}
+                                    >
+                                        Total Price
+                                    </Typography>
                                 </Box>
                             </Grid>
                             <Grid item xs={2.5}>
-                                <Typography sx={{ ...styles.tableHeader, ...styles.textEnd }}>Delivery Status</Typography>
+                                <Typography
+                                    sx={{ ...styles.tableHeader, ...styles.textEnd }}
+                                >
+                                    Delivery Status
+                                </Typography>
                             </Grid>
                         </Grid>
 
@@ -291,7 +302,7 @@ const Orders = () => {
                             <OrderItem
                                 order={order}
                                 key={order.id}
-                                changeStatus={status => onChangeStatus(status)}
+                                onChangeStatus={(orderID, status) => onChangeStatus(orderID, status)}
                             />
                         ))}
                     </Box>
