@@ -7,6 +7,10 @@ const styles = {
     },
     flex: {
         display: 'flex', flexWrap: 'wrap'
+    },
+    box: {
+        flex:3,
+        mx:5
     }
 }
 

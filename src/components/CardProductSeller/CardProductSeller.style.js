@@ -5,7 +5,6 @@ const styles = {
     flex: {
         display: 'flex', flexWrap: 'nowrap', alignItems: 'center',
         
-        
     },
 
 

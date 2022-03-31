@@ -7,7 +7,7 @@ const styles = {
         width: "400px"
     },
     flex: {
-        display: 'flex', flexWrap: 'wrap',alignItems: 'center' 
+        display: 'flex', flexWrap: 'nowrap',alignItems: 'center' 
     }
 }
 

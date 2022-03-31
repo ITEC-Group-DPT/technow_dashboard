@@ -4,21 +4,22 @@ import { Box, height } from '@mui/system'
 import { Card, Typography, CardHeader, CardMedia, CardContent } from '@mui/material'
 import SaleCommonCard from '../SaleCommonCard/SaleCommonCard'
 import styles from './CardNameSeller.style'
-let flexpercentage = [1, 4, 1, 4]
+let CatalogPercentage = [1, 4, 1, 3]
+let NamePercentage=[1,9]
 const CardNameSeller = ({ rank, name, grow, growImg, growStatus = 'red', payment, isName = false }) => {
     let rankcolor = color["R" + rank]
-
+    let flexpercentage = isName ?NamePercentage :CatalogPercentage
     return (
         <Box sx={{
             px: 3, py: 1
         }}>
             <Box sx={{ ...styles.flex }}>
-
                 <Box sx={{
                     minWidth: 50,
                     height: 50,
                     borderRadius: 50,
                     backgroundColor: rankcolor,
+                    mx:1,
                     flex: flexpercentage[0]
                 }}>
                     <p style={{ textAlign: 'center', color: color.white, fontWeight: "600" }}>{rank}</p>
@@ -33,7 +34,7 @@ const CardNameSeller = ({ rank, name, grow, growImg, growStatus = 'red', payment
                 {isName
                     ? <></>
                     :
-                    [<Box sx={{ ...styles.flex, flex: flexpercentage[2] }}>
+                    [<Box sx={{ ...styles.flex, flex: flexpercentage[2], justifyContent:'center' }}>
                         <img src={growImg} alt="" />
                         {growStatus == "red" ?
                             <p style={{ color: color.red }}>{grow}</p>
@@ -43,7 +44,7 @@ const CardNameSeller = ({ rank, name, grow, growImg, growStatus = 'red', payment
 
                     </Box>,
                     <Box sx={{ flex: flexpercentage[3], textAlign: 'end' }}>
-                        <Typography variant="p" sx={{ width: 'fit-content', maxWidth: "45%", backgroundColor: color.lightBlue, borderRadius: 5, px: 1, color: color.blue }}>
+                        <Typography variant="p" sx={{ width: 'fit-content', backgroundColor: color.lightBlue, borderRadius: 5, px:'4px', color: color.blue, fontSize:"0.9rem" }}>
                             {payment}
                         </Typography>
                     </Box>

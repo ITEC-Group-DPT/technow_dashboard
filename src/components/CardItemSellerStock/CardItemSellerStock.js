@@ -12,15 +12,15 @@ const CardItemSellerStock = ({ productImg, isViewed, content, contentImg, stonkI
                 <Box sx={{ ...styles.flex }}>
                     <CardMedia
                         component="img"
-                        sx={{ width: '120px', mx: 2 }}
+                        sx={{ width: '170px', mx: 2 }}
                         image={productImg}
                     >
                     </CardMedia>
-                    <CardContent sx={{ ml: 3 }}>
+                    <CardContent sx={{px:0, mx:1 }}>
                         {isViewed
                             ?
                             <Box sx={{ ...styles.flex, }}>
-                                <img src={contentImg} style={{ height: "1.5rem", width: "2rem", marginRight: "20px" }} alt="" />
+                                <img src={contentImg} style={{ height: "1.5rem", width: "2rem",  marginRight: "20px" }} alt="" />
                                 <Typography variant="h5" component="div">
                                     {content}
                                 </Typography>

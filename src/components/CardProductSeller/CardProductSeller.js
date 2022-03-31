@@ -4,9 +4,8 @@ import { Box, height } from '@mui/system'
 import { Card, Typography, CardHeader, CardMedia, CardContent } from '@mui/material'
 import SaleCommonCard from '../SaleCommonCard/SaleCommonCard'
 import styles from './CardProductSeller.style'
-let flexpercentage = [1, 9]
+let flexpercentage = [1, 5, 4]
 const CardProductSeller = ({ productImg = false, name, payment }) => {
-    let rankcolor = color["R" + rank]
 
     return (
         <Box sx={{
@@ -26,7 +25,12 @@ const CardProductSeller = ({ productImg = false, name, payment }) => {
                     {name}
                 </Typography>
 
-               
+                <Box sx={{ flex: flexpercentage[2], textAlign: 'end' }}>
+                    <Typography variant="p" sx={{ width: 'fit-content', maxWidth: "45%", backgroundColor: color.lightBlue, borderRadius: 5, px: 1, color: color.blue }}>
+                        {payment}
+                    </Typography>
+                </Box>
+
             </Box>
         </Box>
     )
