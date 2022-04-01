@@ -21,12 +21,12 @@ const CardProductSeller = ({ productImg = false, name, payment }) => {
                 </Box>
 
 
-                <Typography variant="p" component="div" sx={{ ...styles.pNameSlider, flex: flexpercentage[1], overflowWrap: 'anywhere', textAlign: "start", fontWeight: "600" }}>
+                <Typography  sx={{ ...styles.pNameSlider, flex: flexpercentage[1] }}>
                     {name}
                 </Typography>
 
-                <Box sx={{ flex: flexpercentage[2], textAlign: 'end' }}>
-                    <Typography variant="p" sx={{ width: 'fit-content', maxWidth: "45%", backgroundColor: color.lightBlue, borderRadius: 5, px: 1, color: color.blue }}>
+                <Box sx={{ flex: flexpercentage[2] }}>
+                    <Typography  sx={{...styles.money}}>
                         {payment}
                     </Typography>
                 </Box>

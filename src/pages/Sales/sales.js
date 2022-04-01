@@ -1,19 +1,22 @@
-import React from 'react'
+import React,{useState} from 'react'
 import color from '../../constant/color'
 import { borderRadius, Box, height, width } from '@mui/system'
 import { Card, Typography, CardHeader, CardMedia, CardContent } from '@mui/material'
 import { EyeIc, GreenUpArrIc, RedDownArrIc, GreenUpStonkIc, RedDownStonkIc } from '../../constant/icon'
 import styles from './sales.style'
+import "./sales.css"
 import CardItemSellerStock from '../../components/CardItemSellerStock/CardItemSellerStock'
 import SaleCommonCard from '../../components/SaleCommonCard/SaleCommonCard'
 import CardProductSeller from '../../components/CardProductSeller/CardProductSeller'
 import CardNameSeller from '../../components/CardNameSeller/CardNameSeller'
 import CustomLineChart from '../../components/LineChart/lineChart'
+import SortByTime from "../../components/SortByTime/sortByTime"
+
 let img = "https://product.hstatic.net/1000026716/product/45124_macbook_pro_14_m1_grey_ha4_5fced1b51ace4acd8825d494e0b55ec3.jpg"
-let catalog = [['laptoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaap', '2', '0000000000D'], ['laptop', '2', '10000'], ['laptop', '2', '10000'], ['aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalaptop', '2', '10000'], ['laptop', '2', '10000']]
-let customers = ['Naasdasasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadasam', 'Nam', 'Nam', 'Nam', 'Nam']
+let catalog = [['Laptop', '2', '5.444.400.000 đ'], ['Gaming chair', '-2', '54.400.000 đ'], ['Mouse', '-2', '54.400.000 đ'], ['SSD', '2', '54.400.000 đ'], ['Keyboard', '2', '54.400.000 đ']]
+let customers = ['Kurozemi', 'Tezuko', 'Miaojee', 'Jason', 'Tory']
 let product = ['mac', img, "121212"]
-let products = [['maaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac', img, "121212"], ['mac', img, "121212"], ['mac', img, "121212"], ['mac', img, "121212"]]
+let products = [['CPU Intel Core i7', img, "54.400.000 đ"], ['Màn hình Lenovo ThinkVision S22e dasd', img, "54.400.000 đ"],['Tai nghe không dây Over-ear SteelSeries', img, "5.114.400.000 đ"], ['mac', img, "54.400.000 đ"], ['mac', img, "54.400.000 đ"]]
 
 const dataLineChart = [
     {
@@ -36,94 +39,108 @@ const dataLineChart = [
         month: 'May',
         income: 40,
     },
+    {
+        month: 'June',
+        income: 40,
+    },
 ];
+
+
 const Sales = () => {
+    const [filterTime, setFilterTime] = useState("Month");
+
     return (
+        <Box sx={{ backgroundColor: color.background, ml: '84px' }}>
+            <Box sx={{ display: "flex", justifyContent: "space-between", mx:5,py:4 }}>
+                <Typography sx={styles.pageTitle}>Admin Dashboard</Typography>
 
-        <Box sx={{ ...styles.flex, justifyContent: 'space-around', backgroundColor: color.background, ml: '84px' }}>
-            <Box sx={styles.box}>
-                <SaleCommonCard title='Best seller'>
-                    <CardItemSellerStock productImg="https://product.hstatic.net/1000026716/product/45124_macbook_pro_14_m1_grey_ha4_5fced1b51ace4acd8825d494e0b55ec3.jpg" isViewed={false} content="1000000 đ" stonkImg={GreenUpStonkIc} percentage="51"></CardItemSellerStock>
-                </SaleCommonCard>
-
-
-
-                <SaleCommonCard title='Most viewed product'>
-                    <CardItemSellerStock productImg="https://product.hstatic.net/1000026716/product/45124_macbook_pro_14_m1_grey_ha4_5fced1b51ace4acd8825d494e0b55ec3.jpg" isViewed={true} content="1000000 đ" contentImg={EyeIc} stonkImg={GreenUpStonkIc} percentage="55"></CardItemSellerStock>
-                </SaleCommonCard>
-
-
-                <SaleCommonCard title='Most profitable categories'>
-                    {
-                        catalog.map((cata, rank) =>
-                            <CardNameSeller name={cata[0]} rank={rank + 1} grow={cata[1]} growImg={GreenUpArrIc} payment={cata[2]}></CardNameSeller>
-                        )
-                    }
-                </SaleCommonCard>
-
+                <SortByTime
+                    onChangeValue={setFilterTime}
+                />
             </Box>
+            <Box sx={{ ...styles.flex, justifyContent: 'space-around' }}>
+                <Box sx={styles.box}>
+                    <SaleCommonCard title='Best seller'>
+                        <CardItemSellerStock productImg="https://product.hstatic.net/1000026716/product/45124_macbook_pro_14_m1_grey_ha4_5fced1b51ace4acd8825d494e0b55ec3.jpg" isView={false} content="1000000 đ" stonkImg={GreenUpStonkIc} percentage="51%"></CardItemSellerStock>
+                    </SaleCommonCard>
 
 
-            <Box sx={styles.box}>
-
-                <SaleCommonCard title="Top selling products">
-                    {
-                        products.map((product) =>
-                            <CardProductSeller name={product[0]} productImg={product[1]} payment={product[2]} ></CardProductSeller>
-                        )
-                    }
-                </SaleCommonCard>
+                    <SaleCommonCard title='Most viewed product'>
+                        <CardItemSellerStock productImg="https://product.hstatic.net/1000026716/product/45124_macbook_pro_14_m1_grey_ha4_5fced1b51ace4acd8825d494e0b55ec3.jpg" isView={true} content="1000" contentImg={EyeIc} stonkImg={RedDownStonkIc} percentage="55%"></CardItemSellerStock>
+                    </SaleCommonCard>
 
 
-                <SaleCommonCard title='Total sales'>
+                    <SaleCommonCard title='Most profitable categories'>
+                        {
+                            catalog.map((cata, rank) =>
+                                <CardNameSeller name={cata[0]} rank={rank + 1} grow={cata[1]} payment={cata[2]}></CardNameSeller>
+                            )
+                        }
+                    </SaleCommonCard>
 
-                    <p style={{ marginLeft: 8 }}>million VND</p>
-                    <CustomLineChart
+                </Box>  
 
-                        data={dataLineChart}
-                        xAxisName="month"
-                        yAxisName="income"
-                        yAxisCount={6}
-                        width={370}
-                        height={300}
-                        lineColor={color.red}
-                    />
-                </SaleCommonCard>
-            </Box>
-            <Box sx={styles.box}>
-                <SaleCommonCard title="Top Customer">
-                    {
-                        customers.map((customer, rank) =>
-                            <CardNameSeller rank={rank + 1} name={customer} isName={true} ></CardNameSeller>
-                        )
-                    }
-                </SaleCommonCard>
 
-                <SaleCommonCard title="General Statistic">
-                    <Box sx={{ textAlign: 'center' }}>
-                        <Box sx={{my:5}}> 
-                              <Typography sx={{ color: color.red, fontWeight: 700, m: 0 }} variant="h3" gutterBottom>
-                            123
-                        </Typography>
-                        <Typography variant="p" gutterBottom>
-                            Items On Sale
-                        </Typography>
+                <Box sx={styles.box}>
+
+                    <SaleCommonCard title="Top selling products">
+                        {
+                            products.map((product) =>
+                                <CardProductSeller name={product[0]} productImg={product[1]} payment={product[2]} ></CardProductSeller>
+                            )
+                        }
+                    </SaleCommonCard>
+
+
+                    <SaleCommonCard title='Total sales'>
+
+                        <p style={{ marginLeft: 8, color:color.grayText }}>million VND</p>
+                        <CustomLineChart
+
+                            data={dataLineChart}
+                            xAxisName="month"
+                            yAxisName="income"
+                            yAxisCount={6}
+                            width={370}
+                            height={300}
+                            lineColor={color.red}
+                        />
+                    </SaleCommonCard>
+                </Box>
+                <Box sx={styles.box}>
+                    <SaleCommonCard title="Top Customer">
+                        {
+                            customers.map((customer, rank) =>
+                                <CardNameSeller rank={rank + 1} name={customer} isName={true} ></CardNameSeller>
+                            )
+                        }
+                    </SaleCommonCard>
+
+                    <SaleCommonCard title="General Statistic">
+                        <Box sx={{ textAlign: 'center' }}>
+                            <Box sx={{ my: 5 }}>
+                                <Typography sx={{ color: color.red, fontWeight: 700, m: 0 }} variant="h3" gutterBottom>
+                                    123
+                                </Typography>
+                                <Typography sx={{fontSize:'16px', fontWeight:600, color:color.grayText}} gutterBottom>
+                                    Items On Sale
+                                </Typography>
+
+                            </Box>
+                            <Box sx={{ my: 5 }}>
+                                <Typography sx={{ color: color.red, fontWeight: 700, m: 0, }} variant="h3" gutterBottom>
+                                    12311231
+                                </Typography>
+                                <Typography sx={{fontSize:'16px', fontWeight:600, color:color.grayText}} gutterBottom>
+                                    Sales this month
+                                </Typography>
+                            </Box>
 
                         </Box>
-                        <Box sx={{my:5}}> 
-                            <Typography sx={{ color: color.red, fontWeight: 700, m: 0 }} variant="h3" gutterBottom>
-                            123asdasdas
-                        </Typography>
-                        <Typography variant="p" gutterBottom>
-                            Sales this month
-                        </Typography>
-                      </Box>
-                      
-                    </Box>
 
-                </SaleCommonCard>
+                    </SaleCommonCard>
+                </Box>
             </Box>
-
 
         </Box>
 

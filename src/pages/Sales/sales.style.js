@@ -12,11 +12,15 @@ const styles = {
         flex:1,
         display:"flex",
         flexDirection:"column",
-
         justifyContent: "space-between",
         // alignItems: "center",
         mx:5
-    }
+    },
+    pageTitle: {
+        fontFamily: "Roboto",
+        fontWeight: "bold",
+        fontSize: "38px",
+    },
 }
 
 export default styles;

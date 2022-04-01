@@ -25,7 +25,7 @@ const SortByTime = ({
 
     return (
         <Box sx={styles.container}>
-            <Typography sx={{color: '#868686', fontWeight: 500}}>
+            <Typography sx={{ color: '#868686', fontWeight: 500 }}>
                 Sort by
             </Typography>
 

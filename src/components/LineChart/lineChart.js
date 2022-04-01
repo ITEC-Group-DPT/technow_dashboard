@@ -12,7 +12,7 @@ const CustomLineChart = ({
     yAxisCount }) => {
     return (
         <LineChart
-            style={{margin:'auto',marginLeft:"10px"}}
+            style={{margin:'auto',paddingRight:"20px"}}
             width={width}
             height={height}
             data={data}
