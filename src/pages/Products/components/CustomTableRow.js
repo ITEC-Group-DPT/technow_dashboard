@@ -32,6 +32,12 @@ const styles = {
 	marginRight10: {
 		mr: '10px',
 	},
+	button: {
+		display: 'flex',
+		justifyContent: 'flex-start',
+		mx: '0px',
+		px: '0px',
+	},
 }
 
 const CustomTableRow = ({ item, colorStock }) => {
@@ -119,12 +125,21 @@ const CustomTableRow = ({ item, colorStock }) => {
 						}}>
 						<Box sx={styles.popupBox}>
 							<Button
-								sx={[styles.box, styles.pointerCursor]}
+								sx={[
+									styles.box,
+									styles.pointerCursor,
+									styles.button,
+								]}
 								onClick={handleEditClick}>
 								<EditOutlinedIcon sx={styles.marginRight10} />
 								Edit
 							</Button>
-							<Button sx={[styles.box, styles.pointerCursor]}>
+							<Button
+								sx={[
+									styles.box,
+									styles.pointerCursor,
+									styles.button,
+								]}>
 								<DeleteOutlinedIcon sx={styles.marginRight10} />
 								Delete
 							</Button>

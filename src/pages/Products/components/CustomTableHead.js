@@ -79,7 +79,13 @@ const CustomTableHead = (props) => {
 						</TableCell>
 					)
 				})}
-				<TableCell padding='normal' align='center' />
+				<TableCell
+					padding='normal'
+					align='center'
+					sx={{
+						borderBottom: '0px solid rgba(224, 224, 224, 1)',
+					}}
+				/>
 			</TableRow>
 		</TableHead>
 	)
