@@ -37,7 +37,7 @@ const OtherDemo = () => {
                 <SearchBar
                     text={search}
                     setText={setSearch}
-                    width={350}
+                    placeholder="Search products..."
                 />
             </Box>
 
@@ -45,23 +45,24 @@ const OtherDemo = () => {
 
             <br />
             {/* pagination demo */}
+            <Box sx={styles.paginationContainer}>
+                <Pagination
+                    page={page}
 
-            <Pagination
-                page={page}
+                    // default maxPages = 3
+                    maxPages={maxPages}
 
-                // default maxPages = 3
-                maxPages={maxPages}
+                    onBack={() => {
+                        if (page > 1)
+                            setPage(page - 1);
+                    }}
 
-                onBack={() => {
-                    if (page > 1)
-                        setPage(page - 1);
-                }}
-
-                onForward={() => {
-                    if (page < maxPages)
-                        setPage(page + 1);
-                }}
-            />
+                    onForward={() => {
+                        if (page < maxPages)
+                            setPage(page + 1);
+                    }}
+                />
+            </Box>
 
             <br />
             <Typography><b>Current Page:</b> {page}</Typography>
@@ -81,8 +82,11 @@ const styles = {
     },
     searchContainer: {
         px: 1,
-
         mb: 1,
+        height: "40px",
     },
+    paginationContainer: {
+        height: "40px",
+    }
 }
 export default OtherDemo;
