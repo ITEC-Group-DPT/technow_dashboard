@@ -28,6 +28,7 @@ const OrderItem = ({ order, onChangeStatus }) => {
                     <Typography sx={styles.price}>{order.price}</Typography>
                 </Box>
             </Grid>
+            
             <Grid item xs={2.5} sx={styles.changeStatusWrapper}>
                 <ChangeStatus
                     defaultValue={order.status}
