@@ -37,6 +37,8 @@ const styles = {
         padding: 0,
 
         height: "100vh",
+        zIndex: 9999,
+
     },
 
     openMiniContainer: {
@@ -51,6 +53,7 @@ const styles = {
 
         boxShadow: "0px",
         height: "100vh",
+        zIndex: 9999,
     },
 
     openContainer: {
@@ -68,6 +71,7 @@ const styles = {
 
         width: 280,
         height: "100vh",
+        zIndex: 9998,
     },
     avatar: {
         margin: "80px 14px",
