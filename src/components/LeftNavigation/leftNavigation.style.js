@@ -1,12 +1,23 @@
 const styles = {
     main: {
-        position: "absolute",
+        position: "fixed",
         left: 0,
-        width: "100%",
         height: "100%",     
+        overflow: "hidden",
+        boxShadow: "1px 0 rgba(0,0,0,0.25)"
+
+    },
+    openMain: {
+        position: "fixed",
+        left: 0,
+        height: "100%", 
+        width:"100%",
+        background: "rgba(0,0,0,0.3)",
+        zIndex: 99,
+
     },
     navigation: {
-        position: "relative",
+        position: "fixed",
         background: "white",
 
         display: "flex",
@@ -16,7 +27,7 @@ const styles = {
         height: "100vh",
     },
     container: {
-        position: "relative",
+        position: "fixed",
         background: "white",
 
         display: "flex",
@@ -25,14 +36,13 @@ const styles = {
         border: "none",
         padding: 0,
 
-
-
-        boxShadow: "0.5px 0px rgba(0,0,0, 0.25)",
         height: "100vh",
+        zIndex: 9999,
+
     },
 
     openMiniContainer: {
-        position: "relative",
+        position: "fixed",
         background: "white",
 
         display: "flex",
@@ -43,12 +53,14 @@ const styles = {
 
         boxShadow: "0px",
         height: "100vh",
+        zIndex: 9999,
     },
 
     openContainer: {
-        position: "relative",
+        position: "fixed",
         background: "white",
 
+        left: 84,
         display: "flex",
         flexDirection: "column",
         boxShadow: "0.5px 0px 1px rgba(0,0,0, 0.25)",
@@ -59,6 +71,7 @@ const styles = {
 
         width: 280,
         height: "100vh",
+        zIndex: 9998,
     },
     avatar: {
         margin: "80px 14px",
@@ -86,7 +99,8 @@ const styles = {
     tabNameBox: {
         py: "24px",
         display: "flex",
-        justifyContent: "flex-start"
+        justifyContent: "flex-start",
+        borderRadius: 0,
     },
     tabName: {
         marginLeft: "10px",

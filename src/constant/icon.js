@@ -19,10 +19,8 @@ import LogOutIc from '../assets/ic_logout.svg'
 import TotalSalesIc from '../assets/ic_total_sales.svg'
 import TotalOrdersIc from '../assets/ic_total_orders.svg'
 import TotalUsersIc from '../assets/ic_total_users.svg'
-import YellowArrIc from '../assets/ic_yellow_arrow.svg'
-import GreenArrIc from '../assets/ic_green_arrow.svg'
-import BlueArrIc from '../assets/ic_blue_arrow.svg'
-import GreyArrIc from '../assets/ic_grey_arrow.svg'
+import UpDegreeArrow from '../assets/ic_degree_up_arrow.svg'
+import DownDegreeArrow from '../assets/ic_degree_down_arrow.svg'
 
 // sales
 import EyeIc from '../assets/ic_eye.svg'
@@ -46,7 +44,7 @@ import CanDropIc from '../assets/ic_cancelled_dropdown.svg'
 export {
     DropDownIc, GreyDropDownIc,
     DefaultAvaIc, HomeIc, SaleIc, ProductIc, StatIc, OrderIc, VersionIc, LogOutIc,
-    TotalSalesIc, TotalOrdersIc, TotalUsersIc, YellowArrIc, GreenArrIc, BlueArrIc, GreyArrIc,
+    TotalSalesIc, TotalOrdersIc, TotalUsersIc, UpDegreeArrow, DownDegreeArrow,
     EyeIc, GreenUpArrIc, RedDownArrIc, GreenUpStonkIc, RedDownStonkIc,
     SearchIc, FilterIc, LeftArrowIc, RightArrowIc, PlusIc, ThreeDotIc,
     RecDropIc, ProcDropIc, ShipDropIc, CompDropIc, CanDropIc
