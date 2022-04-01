@@ -42,10 +42,12 @@ const ChangeStatus = ({ defaultValue = 0, onChangeValue }) => {
 
     const handleChange = (event) => {
         const updatedStatus = event.target.value
+        
         statusList.forEach((status, index) => {
             if (status.value == updatedStatus) {
                 onChangeValue && onChangeValue(updatedStatus)
                 setStatus(statusList[index])
+                return;
             }
         })
     }
