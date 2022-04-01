@@ -20,8 +20,8 @@ import {
 } from '../../constant/icon'
 import CustomTableHead from './components/CustomTableHead'
 import CustomTableRow from './components/CustomTableRow'
-import { fakeData } from './store/index'
-import { ThemeProvider, createTheme } from '@mui/material/styles'
+import { productList } from './store/index'
+import _ from 'lodash'
 
 const categoryList = [
 	'CPU',
@@ -45,6 +45,7 @@ const styles = {
 		background: color.background,
 		py: '40px',
 		px: '20px !important',
+		minHeight: '100vh',
 	},
 	box: {
 		display: 'flex',
@@ -107,19 +108,34 @@ const styles = {
 		boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.25)',
 		borderRadius: '10px',
 		padding: '20px',
+		minHeight: '85vh',
 	},
 }
 
 const Products = () => {
 	const [searchValue, setSearchValue] = useState('')
-	const [filterCategory, setFilterCategory] = useState('1')
+	const [filter, setFilter] = useState({ text: '', category: 'Category' })
+
+	const filterProductList =
+		filter.category === 'Category'
+			? productList
+			: productList.filter(
+					(item) =>
+						item.type === filter.category &&
+						item.productName.includes(filter.text),
+			  )
 
 	const handleChangeFilter = (event) => {
-		setFilterCategory(event.target.value)
+		setFilter({
+			...filter,
+			category: event.target.value,
+		})
+		setPage(1)
 	}
 
-	const totalPage = 3
+	const totalPage = Math.ceil(filterProductList.length / 6)
 	const [page, setPage] = useState(1)
+
 	const handleChangePage = (value) => {
 		const temp = parseInt(page) + value
 		if (temp >= 1 && temp <= totalPage) {
@@ -201,12 +217,10 @@ const Products = () => {
 							</Typography>
 							<Select
 								disableScrollLock={true}
-								value={filterCategory}
+								value={filter.category}
 								onChange={handleChangeFilter}
 								sx={styles.selectInp}>
-								<MenuItem disabled value='1'>
-									Category
-								</MenuItem>
+								<MenuItem value='Category'>Category</MenuItem>
 								{categoryList?.map((item, index) => {
 									return (
 										<MenuItem
@@ -264,14 +278,13 @@ const Products = () => {
 								/>
 								<TableBody>
 									{stableSort(
-										fakeData,
+										filterProductList,
 										getComparator(order, orderBy),
 									).map((item, index) => {
-										const minLimit = (page - 1) * 7
-										const maxLimit = page * 7 - 1
+										const minLimit = (page - 1) * 6
+										const maxLimit = page * 6
 										if (
-											index >= minLimit &&
-											index <= maxLimit
+											_.inRange(index, minLimit, maxLimit)
 										) {
 											const colorStock =
 												changeStockColor(item.stock) ===

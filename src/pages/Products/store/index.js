@@ -1,6 +1,18 @@
 import create from 'zustand'
 
-export const fakeData = [
+export const productList = [
+	{
+		productID: 1,
+		productImage:
+			'https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/CPU%2Fcpu9.jpg?alt=media&token=a1ec6c52-f227-462e-b778-fa69cbc213ca',
+		productName: 'Test Product',
+		type: 'CPU',
+		dateAdded: '25/02/2022',
+		spec: '',
+		description: '',
+		productPrice: 5000000,
+		stock: 999,
+	},
 	{
 		productID: 1,
 		productImage:
