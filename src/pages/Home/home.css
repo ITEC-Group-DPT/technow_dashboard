@@ -1,3 +1,6 @@
+.MuiTypography-root {
+    user-select: none !important;
+}
 @media only screen and (min-width: 0px) {
     .homeAdmin {
         padding-left: 0%;
