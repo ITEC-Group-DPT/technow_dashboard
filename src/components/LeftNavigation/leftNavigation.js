@@ -134,14 +134,15 @@ const LeftNavigation = () => {
 
                 </Box>
 
-                {
-                    isOpen &&
+                {/* { */}
+                    // isOpen &&
                     <OpenNav
+                        isOpen = {isOpen}
                         tabNames={tabNames}
                         currentTab={tabChoose}
                         navigateTab={navigateTab}
                     />
-                }
+                {/* } */}
 
 
             </button>

@@ -5,14 +5,17 @@ import React from 'react'
 import styles from "./leftNavigation.style"
 
 const OpenNav = ({
+    isOpen,
     tabNames,
     currentTab,
     navigateTab,
 }) => {
+
     return (
-        <Fade
-            in={true}
-            timeout={600}
+        <Slide
+            in={isOpen}
+            timeout={280}
+            direction="right"
         >
             <Box
                 sx={styles.openContainer}
@@ -79,7 +82,7 @@ const OpenNav = ({
                 </Box>
 
             </Box>
-        </Fade>
+        </Slide>
     )
 }
 
