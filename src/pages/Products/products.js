@@ -1,16 +1,11 @@
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import {
 	Button,
 	Container,
 	MenuItem,
-	Popover,
 	Select,
 	Table,
 	TableBody,
-	TableCell,
 	TableContainer,
-	TableRow,
 	Typography,
 } from '@mui/material'
 import { Box } from '@mui/system'
@@ -22,10 +17,11 @@ import {
 	LeftArrowIc,
 	PlusIc,
 	RightArrowIc,
-	ThreeDotIc,
 } from '../../constant/icon'
 import CustomTableHead from './components/CustomTableHead'
+import CustomTableRow from './components/CustomTableRow'
 import { fakeData } from './store/index'
+import { ThemeProvider, createTheme } from '@mui/material/styles'
 
 const categoryList = [
 	'CPU',
@@ -48,7 +44,7 @@ const styles = {
 	container: {
 		background: color.background,
 		py: '40px',
-		px: '0px !important',
+		px: '20px !important',
 	},
 	box: {
 		display: 'flex',
@@ -56,8 +52,8 @@ const styles = {
 	},
 	selectInp: {
 		minWidth: '132px',
-		mx: '15px',
 		color: color.lightGrayText,
+		mx: '10px',
 	},
 	navigateBtn: {
 		display: 'flex',
@@ -98,6 +94,19 @@ const styles = {
 	},
 	marginRight10: {
 		mr: '10px',
+	},
+	title: {
+		fontFamily: 'Roboto',
+		fontWeight: 'bold',
+		fontSize: '35px',
+		marginTop: '20px',
+		marginBottom: '30px',
+	},
+	productBoard: {
+		shadow: '1px solid #848484',
+		boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.25)',
+		borderRadius: '10px',
+		padding: '20px',
 	},
 }
 
@@ -141,7 +150,6 @@ const Products = () => {
 	const descendingComparator = (a, b, orderBy) => {
 		if (b[orderBy] < a[orderBy]) return -1
 		if (b[orderBy] > a[orderBy]) return 1
-		debugger
 		return 0
 	}
 
@@ -151,228 +159,144 @@ const Products = () => {
 			: (a, b) => -descendingComparator(a, b, orderBy)
 	}
 
-	const [anchorEl, setAnchorEl] = useState(false)
-	const open = Boolean(anchorEl)
-	const handleEditClick = (event) => {
-		setAnchorEl(event.currentTarget)
-	}
-	const handleEditClose = () => {
-		setAnchorEl(null)
-	}
-
 	const changeStockColor = (value) => {
 		if (value >= 10) return 0
 		else if (value >= 5) return 1
 		else return 2
 	}
 
-	const convertToVND = (value) => {
-		return parseInt(value).toLocaleString() + ' đ'
-	}
-
 	return (
-		<Container sx={styles.container}>
-			<Box
-				sx={[
-					styles.box,
-					{
-						justifyContent: 'space-between',
-					},
-				]}>
-				<Box sx={styles.box}>
-					<SearchBar
-						width='406px'
-						text={searchValue}
-						setText={setSearchValue}
-					/>
-					<img
-						src={FilterIc}
-						style={{ marginLeft: '15px', marginRight: '15px' }}
-						alt=''
-					/>
-					<Typography
-						sx={{
-							fontFamily: 'Roboto',
-							fontSize: '15px',
-							color: color.lightGrayText,
-						}}>
-						Category
-					</Typography>
-					<Select
-						value={filterCategory}
-						onChange={handleChangeFilter}
-						sx={styles.selectInp}>
-						<MenuItem disabled value='1'>
-							Category
-						</MenuItem>
-						{categoryList?.map((item, index) => {
-							return (
-								<MenuItem
-									value={item}
-									key={index}
-									sx={{ color: color.lightGrayText }}>
-									{item}
+		<Box sx={styles.container}>
+			<Container>
+				<Typography sx={styles.title}>Product Management</Typography>
+				<Box sx={styles.productBoard}>
+					<Box
+						sx={[
+							styles.box,
+							{
+								justifyContent: 'space-between',
+							},
+						]}>
+						<Box sx={styles.box}>
+							<SearchBar
+								width='406px'
+								text={searchValue}
+								setText={setSearchValue}
+							/>
+							<img
+								src={FilterIc}
+								style={{
+									marginLeft: '15px',
+									marginRight: '15px',
+								}}
+								alt=''
+							/>
+							<Typography
+								sx={{
+									fontFamily: 'Roboto',
+									fontSize: '15px',
+									color: color.lightGrayText,
+								}}>
+								Category
+							</Typography>
+							<Select
+								disableScrollLock={true}
+								value={filterCategory}
+								onChange={handleChangeFilter}
+								sx={styles.selectInp}>
+								<MenuItem disabled value='1'>
+									Category
 								</MenuItem>
-							)
-						})}
-					</Select>
-					<Button
-						sx={styles.navigateBtn}
-						onClick={() => handleChangePage(-1)}>
-						<img src={LeftArrowIc} alt='' />
-					</Button>
-					<Button
-						sx={styles.navigateBtn}
-						onClick={() => handleChangePage(1)}>
-						<img src={RightArrowIc} alt='' />
-					</Button>
-					<Box sx={styles.pageDiv}>{`Page ${page}/${totalPage}`}</Box>
-				</Box>
-				<Box sx={styles.box}>
-					<Button
-						sx={{
-							color: color.lightGrayText,
-							border: `1px solid #c0c0c0`,
-							width: '137px',
-							height: '38px',
-						}}>
-						<img
-							src={PlusIc}
-							style={{ marginRight: '10px' }}
-							alt=''
-						/>
-						Add Product
-					</Button>
-				</Box>
-			</Box>
-
-			<Box sx={styles.box}>
-				<TableContainer>
-					<Table>
-						<CustomTableHead
-							order={order}
-							orderBy={orderBy}
-							onRequestSort={handleRequestSort}
-						/>
-						<TableBody>
-							{stableSort(
-								fakeData,
-								getComparator(order, orderBy),
-							).map((item, index) => {
-								const minLimit = (page - 1) * 7
-								const maxLimit = page * 7 - 1
-								if (index >= minLimit && index <= maxLimit) {
-									const colorStock =
-										changeStockColor(item.stock) === 0
-											? color.green
-											: changeStockColor(item.stock) === 1
-											? color.yellow
-											: color.darkRed
+								{categoryList?.map((item, index) => {
 									return (
-										<TableRow key={index}>
-											<TableCell sx={styles.dataCell}>
-												{item.productID}
-											</TableCell>
-											<TableCell>
-												<img
-													src={item.productImage}
-													width={75}
-													height={75}
-													alt=''
-												/>
-											</TableCell>
-											<TableCell sx={styles.dataCell}>
-												{item.productName}
-											</TableCell>
-											<TableCell
-												sx={[
-													styles.dataCell,
-													{
-														color: color.lightGrayText,
-													},
-												]}>
-												{item.dateAdded}
-											</TableCell>
-											<TableCell
-												align='right'
-												sx={[
-													styles.dataCell,
-													{
-														paddingRight: '30px',
-													},
-												]}>
-												{convertToVND(
-													item.productPrice,
-												)}
-											</TableCell>
-											<TableCell
-												align='center'
-												sx={[
-													styles.dataCell,
-													{
-														color: colorStock,
-														fontWeight: 'semibold',
-													},
-												]}>
-												{item.stock}
-											</TableCell>
-											<TableCell>
-												<img
-													style={styles.pointerCursor}
-													src={ThreeDotIc}
-													alt=''
-													onClick={handleEditClick}
-												/>
-												<Popover
-													open={open}
-													anchorEl={anchorEl}
-													onClose={handleEditClose}
-													disableScrollLock={true}
-													anchorOrigin={{
-														vertical: 'center',
-														horizontal: 'right',
-													}}
-													transformOrigin={{
-														vertical: 'center',
-														horizontal: 'left',
-													}}>
-													<Box sx={styles.popupBox}>
-														<Box
-															sx={[
-																styles.box,
-																styles.pointerCursor,
-															]}>
-															<EditOutlinedIcon
-																sx={
-																	styles.marginRight10
-																}
-															/>
-															Edit
-														</Box>
-														<Box
-															sx={[
-																styles.box,
-																styles.pointerCursor,
-															]}>
-															<DeleteOutlinedIcon
-																sx={
-																	styles.marginRight10
-																}
-															/>
-															Delete
-														</Box>
-													</Box>
-												</Popover>
-											</TableCell>
-										</TableRow>
+										<MenuItem
+											value={item}
+											key={index}
+											sx={{
+												color: color.lightGrayText,
+											}}>
+											{item}
+										</MenuItem>
 									)
-								}
-							})}
-						</TableBody>
-					</Table>
-				</TableContainer>
-			</Box>
-		</Container>
+								})}
+							</Select>
+
+							<Button
+								sx={styles.navigateBtn}
+								onClick={() => handleChangePage(-1)}>
+								<img src={LeftArrowIc} alt='' />
+							</Button>
+							<Button
+								sx={styles.navigateBtn}
+								onClick={() => handleChangePage(1)}>
+								<img src={RightArrowIc} alt='' />
+							</Button>
+							<Box
+								sx={
+									styles.pageDiv
+								}>{`Page ${page}/${totalPage}`}</Box>
+						</Box>
+						<Box sx={styles.box}>
+							<Button
+								sx={{
+									color: color.lightGrayText,
+									border: `1px solid #c0c0c0`,
+									width: '137px',
+									height: '38px',
+								}}>
+								<img
+									src={PlusIc}
+									style={{ marginRight: '10px' }}
+									alt=''
+								/>
+								Add Product
+							</Button>
+						</Box>
+					</Box>
+
+					<Box sx={styles.box}>
+						<TableContainer>
+							<Table>
+								<CustomTableHead
+									order={order}
+									orderBy={orderBy}
+									onRequestSort={handleRequestSort}
+								/>
+								<TableBody>
+									{stableSort(
+										fakeData,
+										getComparator(order, orderBy),
+									).map((item, index) => {
+										const minLimit = (page - 1) * 7
+										const maxLimit = page * 7 - 1
+										if (
+											index >= minLimit &&
+											index <= maxLimit
+										) {
+											const colorStock =
+												changeStockColor(item.stock) ===
+												0
+													? color.green
+													: changeStockColor(
+															item.stock,
+													  ) === 1
+													? color.yellow
+													: color.darkRed
+											return (
+												<CustomTableRow
+													colorStock={colorStock}
+													item={item}
+												/>
+											)
+										}
+									})}
+								</TableBody>
+							</Table>
+						</TableContainer>
+					</Box>
+				</Box>
+			</Container>
+		</Box>
 	)
 }
 

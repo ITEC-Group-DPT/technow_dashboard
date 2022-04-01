@@ -43,7 +43,6 @@ const headCells = [
 const CustomTableHead = (props) => {
 	const { orderBy, order, onRequestSort } = props
 	const createSortHandler = (property) => (event) => {
-		console.log(property)
 		onRequestSort(event, property)
 	}
 
@@ -53,6 +52,10 @@ const CustomTableHead = (props) => {
 				{headCells.map((headCell) => {
 					return (
 						<TableCell
+							sx={{
+								borderBottom:
+									'0px solid rgba(224, 224, 224, 1)',
+							}}
 							key={headCell.id}
 							align={headCell.numeric ? 'right' : 'left'}
 							sortDirection={
