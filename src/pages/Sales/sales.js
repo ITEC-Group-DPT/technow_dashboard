@@ -51,6 +51,8 @@ const Sales = () => {
                 <SaleCommonCard title='Most viewed product'>
                     <CardItemSellerStock productImg="https://product.hstatic.net/1000026716/product/45124_macbook_pro_14_m1_grey_ha4_5fced1b51ace4acd8825d494e0b55ec3.jpg" isViewed={true} content="1000000 đ" contentImg={EyeIc} stonkImg={GreenUpStonkIc} percentage="55"></CardItemSellerStock>
                 </SaleCommonCard>
+
+
                 <SaleCommonCard title='Most profitable categories'>
                     {
                         catalog.map((cata, rank) =>
@@ -71,11 +73,13 @@ const Sales = () => {
                         )
                     }
                 </SaleCommonCard>
+
+
                 <SaleCommonCard title='Total sales'>
 
-                    <p style={{marginLeft: 10}}>million VND</p>
+                    <p style={{ marginLeft: 8 }}>million VND</p>
                     <CustomLineChart
-                        
+
                         data={dataLineChart}
                         xAxisName="month"
                         yAxisName="income"
@@ -84,10 +88,6 @@ const Sales = () => {
                         height={300}
                         lineColor={color.red}
                     />
-
-
-
-
                 </SaleCommonCard>
             </Box>
             <Box sx={styles.box}>
@@ -97,6 +97,30 @@ const Sales = () => {
                             <CardNameSeller rank={rank + 1} name={customer} isName={true} ></CardNameSeller>
                         )
                     }
+                </SaleCommonCard>
+
+                <SaleCommonCard title="General Statistic">
+                    <Box sx={{ textAlign: 'center' }}>
+                        <Box sx={{my:5}}> 
+                              <Typography sx={{ color: color.red, fontWeight: 700, m: 0 }} variant="h3" gutterBottom>
+                            123
+                        </Typography>
+                        <Typography variant="p" gutterBottom>
+                            Items On Sale
+                        </Typography>
+
+                        </Box>
+                        <Box sx={{my:5}}> 
+                            <Typography sx={{ color: color.red, fontWeight: 700, m: 0 }} variant="h3" gutterBottom>
+                            123asdasdas
+                        </Typography>
+                        <Typography variant="p" gutterBottom>
+                            Sales this month
+                        </Typography>
+                      </Box>
+                      
+                    </Box>
+
                 </SaleCommonCard>
             </Box>
 
