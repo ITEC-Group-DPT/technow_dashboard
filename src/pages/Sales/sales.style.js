@@ -9,7 +9,12 @@ const styles = {
         display: 'flex', flexWrap: 'wrap'
     },
     box: {
-        flex:3,
+        flex:1,
+        display:"flex",
+        flexDirection:"column",
+
+        justifyContent: "space-between",
+        // alignItems: "center",
         mx:5
     }
 }
