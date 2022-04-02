@@ -6,16 +6,15 @@ import { SearchIc } from "../../constant/icon";
 import color from '../../constant/color';
 
 const SearchBar = ({
-    width = "100%",
+    // width = "",
     text = "",
-    setText
+    setText,
+    placeholder,
 }) => {
 
     return (
         <Box
-            sx={[styles.searchBox, {
-                width: width
-            }]}
+            sx={styles.searchBox}
         >
             <img
                 style={{ userSelect: 'none' }}
@@ -25,7 +24,7 @@ const SearchBar = ({
                 sx={styles.searchInput}
                 value={text}
                 onChange={e => setText(e.target.value)}
-                placeholder="Search for product ID, product name,..."
+                placeholder={placeholder}
             />
         </Box>
     )
@@ -36,12 +35,12 @@ const styles = {
         background: "white",
         display: "flex",
         alignItems: "center",
-
+        height: "100%",
 
         border: "1px solid #D0D0D0",
         borderRadius: "5px",
-
-        py: "2px",
+        boxSizing: 'border-box',
+        
         px: "12px",
 
     },

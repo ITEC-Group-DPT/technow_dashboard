@@ -1,0 +1,10 @@
+text.recharts-text.recharts-cartesian-axis-tick-value {
+   fill: #868686;
+   font-size: 14px;
+   font-family: "Segoe UI",Arial,sans-serif;
+   font-weight: 500;
+}
+
+g.recharts-cartesian-grid-horizontal > * {
+    stroke: #EAEAEA;
+}
