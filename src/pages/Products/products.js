@@ -1,6 +1,7 @@
 import {
 	Button,
 	Container,
+	FormControl,
 	MenuItem,
 	Select,
 	Table,
@@ -9,19 +10,16 @@ import {
 	Typography,
 } from '@mui/material'
 import { Box } from '@mui/system'
+import _ from 'lodash'
 import { useState } from 'react'
+import Pagination from '../../components/Pagination/pagination'
 import SearchBar from '../../components/SearchBar/searchBar'
 import color from '../../constant/color'
-import {
-	FilterIc,
-	LeftArrowIc,
-	PlusIc,
-	RightArrowIc,
-} from '../../constant/icon'
+import { FilterIc, PlusIc } from '../../constant/icon'
 import CustomTableHead from './components/CustomTableHead'
 import CustomTableRow from './components/CustomTableRow'
+import styles from './product.style'
 import { productList } from './store/index'
-import _ from 'lodash'
 
 const categoryList = [
 	'CPU',
@@ -40,101 +38,44 @@ const categoryList = [
 	'VGA',
 ]
 
-const styles = {
-	container: {
-		background: color.background,
-		py: '40px',
-		px: '20px !important',
-		minHeight: '100vh',
-	},
-	box: {
-		display: 'flex',
-		alignItems: 'center',
-	},
-	selectInp: {
-		minWidth: '132px',
-		color: color.lightGrayText,
-		mx: '10px',
-	},
-	navigateBtn: {
-		display: 'flex',
-		border: `1px solid #c0c0c0`,
-		borderRadius: '4px',
-		width: '33px',
-		height: '38px',
-		alignItems: 'center',
-		justifyContent: 'center',
-		ml: '10px',
-		minWidth: '33px',
-	},
-	pageDiv: {
-		display: 'flex',
-		color: color.lightGrayText,
-		border: `1px solid #c0c0c0`,
-		borderRadius: '4px',
-		width: '86px',
-		height: '38px',
-		alignItems: 'center',
-		justifyContent: 'center',
-		ml: '10px',
-	},
-	dataCell: {
-		fontFamily: 'Segoe UI',
-		fontSize: '16px',
-	},
-	popupBox: {
-		display: 'flex',
-		flexDirection: 'column',
-		px: '15px',
-		width: '106px',
-		height: '83px',
-		justifyContent: 'space-around',
-	},
-	pointerCursor: {
-		cursor: 'pointer',
-	},
-	marginRight10: {
-		mr: '10px',
-	},
-	title: {
-		fontFamily: 'Roboto',
-		fontWeight: 'bold',
-		fontSize: '35px',
-		marginTop: '20px',
-		marginBottom: '30px',
-	},
-	productBoard: {
-		shadow: '1px solid #848484',
-		boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.25)',
-		borderRadius: '10px',
-		padding: '20px',
-		minHeight: '85vh',
-	},
-}
-
 const Products = () => {
-	const [searchValue, setSearchValue] = useState('')
 	const [filter, setFilter] = useState({ text: '', category: 'Category' })
+	const [page, setPage] = useState(1)
+	const [order, setOrder] = useState('desc')
+	const [orderBy, setOrderBy] = useState('id')
 
-	const filterProductList =
-		filter.category === 'Category'
-			? productList
-			: productList.filter(
-					(item) =>
-						item.type === filter.category &&
-						item.productName.includes(filter.text),
-			  )
+	const filterProductList = (productList) => {
+		if (filter.category === 'Category' && filter.text === '') {
+			return productList
+		} else if (filter.text !== '') {
+			return productList.filter((item) =>
+				item.productName.includes(filter.text),
+			)
+		} else if (filter.category !== 'Category') {
+			return productList.filter((item) => item.type === filter.category)
+		}
+	}
 
-	const handleChangeFilter = (event) => {
+	const totalPage = Math.ceil(filterProductList(productList).length / 6)
+
+	const handleChangeCategory = (event) => {
 		setFilter({
 			...filter,
+			text: '',
 			category: event.target.value,
+		})
+		if (filterProductList(productList).length === 0) setPage(0)
+		else setPage(1)
+	}
+
+	const handleChangeSearchValue = (value) => {
+		setFilter({
+			...filter,
+			text: value,
+			category: 'Category',
 		})
 		setPage(1)
 	}
-
-	const totalPage = Math.ceil(filterProductList.length / 6)
-	const [page, setPage] = useState(1)
 
 	const handleChangePage = (value) => {
 		const temp = parseInt(page) + value
@@ -143,8 +84,6 @@ const Products = () => {
 		}
 	}
 
-	const [order, setOrder] = useState('desc')
-	const [orderBy, setOrderBy] = useState('id')
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === 'asc'
 		setOrder(isAsc ? 'desc' : 'asc')
@@ -196,8 +135,8 @@ const Products = () => {
 						<Box sx={styles.box}>
 							<SearchBar
 								width='406px'
-								text={searchValue}
-								setText={setSearchValue}
+								text={filter.text}
+								setText={handleChangeSearchValue}
 							/>
 							<img
 								src={FilterIc}
@@ -205,7 +144,6 @@ const Products = () => {
 									marginLeft: '15px',
 									marginRight: '15px',
 								}}
-								alt=''
 							/>
 							<Typography
 								sx={{
@@ -215,40 +153,35 @@ const Products = () => {
 								}}>
 								Category
 							</Typography>
-							<Select
-								disableScrollLock={true}
-								value={filter.category}
-								onChange={handleChangeFilter}
-								sx={styles.selectInp}>
-								<MenuItem value='Category'>Category</MenuItem>
-								{categoryList?.map((item, index) => {
-									return (
-										<MenuItem
-											value={item}
-											key={index}
-											sx={{
-												color: color.lightGrayText,
-											}}>
-											{item}
-										</MenuItem>
-									)
-								})}
-							</Select>
+							<FormControl>
+								<Select
+									MenuProps={{ disableScrollLock: false }}
+									value={filter.category}
+									onChange={handleChangeCategory}
+									sx={styles.selectInp}>
+									<MenuItem value='Category'>
+										<em>All category</em>
+									</MenuItem>
+									{categoryList?.map((item) => {
+										return (
+											<MenuItem
+												value={item}
+												sx={{
+													color: color.lightGrayText,
+												}}>
+												{item}
+											</MenuItem>
+										)
+									})}
+								</Select>
+							</FormControl>
 
-							<Button
-								sx={styles.navigateBtn}
-								onClick={() => handleChangePage(-1)}>
-								<img src={LeftArrowIc} alt='' />
-							</Button>
-							<Button
-								sx={styles.navigateBtn}
-								onClick={() => handleChangePage(1)}>
-								<img src={RightArrowIc} alt='' />
-							</Button>
-							<Box
-								sx={
-									styles.pageDiv
-								}>{`Page ${page}/${totalPage}`}</Box>
+							<Pagination
+								maxPages={totalPage}
+								page={page}
+								onBack={() => handleChangePage(-1)}
+								onForward={() => handleChangePage(1)}
+							/>
 						</Box>
 						<Box sx={styles.box}>
 							<Button
@@ -261,7 +194,6 @@ const Products = () => {
 								<img
 									src={PlusIc}
 									style={{ marginRight: '10px' }}
-									alt=''
 								/>
 								Add Product
 							</Button>
@@ -276,34 +208,54 @@ const Products = () => {
 									orderBy={orderBy}
 									onRequestSort={handleRequestSort}
 								/>
-								<TableBody>
-									{stableSort(
-										filterProductList,
-										getComparator(order, orderBy),
-									).map((item, index) => {
-										const minLimit = (page - 1) * 6
-										const maxLimit = page * 6
-										if (
-											_.inRange(index, minLimit, maxLimit)
-										) {
-											const colorStock =
-												changeStockColor(item.stock) ===
-												0
-													? color.green
-													: changeStockColor(
-															item.stock,
-													  ) === 1
-													? color.yellow
-													: color.darkRed
-											return (
-												<CustomTableRow
-													colorStock={colorStock}
-													item={item}
-												/>
-											)
-										}
-									})}
-								</TableBody>
+								{!_.isEmpty(filterProductList(productList)) ? (
+									<TableBody>
+										{stableSort(
+											filterProductList(productList),
+											getComparator(order, orderBy),
+										).map((item, index) => {
+											const minLimit = (page - 1) * 6
+											const maxLimit = page * 6
+											if (
+												_.inRange(
+													index,
+													minLimit,
+													maxLimit,
+												)
+											) {
+												const colorStock =
+													changeStockColor(
+														item.stock,
+													) === 0
+														? color.green
+														: changeStockColor(
+																item.stock,
+														  ) === 1
+														? color.yellow
+														: color.darkRed
+												return (
+													<CustomTableRow
+														colorStock={colorStock}
+														item={item}
+													/>
+												)
+											}
+										})}
+									</TableBody>
+								) : (
+									<Box
+										sx={{
+											display: 'flex',
+											justifyContent: 'center',
+											position: 'absolute',
+											zIndex: 999,
+											width: '60%',
+										}}>
+										<Typography variant='h3'>
+											Không tìm được sản phẩm nào phù hợp
+										</Typography>
+									</Box>
+								)}
 							</Table>
 						</TableContainer>
 					</Box>

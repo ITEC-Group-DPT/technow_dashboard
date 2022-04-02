@@ -41,8 +41,10 @@ const styles = {
 }
 
 const CustomTableRow = ({ item, colorStock }) => {
+	const [open, setOpen] = useState(false)
 	const [anchorEl, setAnchorEl] = useState(false)
 	const openShowMore = Boolean(anchorEl)
+
 	const handleShowMoreOpen = (event) => {
 		setAnchorEl(event.currentTarget)
 	}
@@ -58,19 +60,12 @@ const CustomTableRow = ({ item, colorStock }) => {
 		setOpen(true)
 	}
 
-	const [open, setOpen] = useState(false)
-
 	return (
 		<>
 			<TableRow>
 				<TableCell sx={styles.dataCell}>{item.productID}</TableCell>
 				<TableCell sx={styles.dataCell}>
-					<img
-						src={item.productImage}
-						width={75}
-						height={75}
-						alt=''
-					/>
+					<img src={item.productImage} width={75} height={75} />
 				</TableCell>
 				<TableCell sx={styles.dataCell}>{item.productName}</TableCell>
 				<TableCell
@@ -107,7 +102,6 @@ const CustomTableRow = ({ item, colorStock }) => {
 					<img
 						style={styles.pointerCursor}
 						src={ThreeDotIc}
-						alt=''
 						onClick={handleShowMoreOpen}
 					/>
 					<Popover
