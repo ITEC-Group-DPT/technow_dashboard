@@ -4,22 +4,18 @@ import {
     Container,
     Grid,
     Typography,
-    Divider,
-    FormControl,
-    InputLabel,
-    Select
+    Divider
 } from '@mui/material'
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
 import SearchBar from '../../components/SearchBar/searchBar'
 import SortByTime from '../../components/SortByTime/sortByTime'
 import Pagination from '../../components/Pagination/pagination'
 import color from '../../constant/color'
+import AreaChart from '../../components/AreaChart/areaChart'
 
 // import axios from 'axios'
 // import { BASE_API_URL, TEST_API_URL } from '../constant/string';
 
-import { getUserListAPI } from '../../api/userApi'
-import ErrorBoundary from '../../components/ErrorBoundary/errorBoundary'
+// import { getUserListAPI } from '../../api/userApi'
 
 const dataAreaChart = [
     {
@@ -141,11 +137,10 @@ const Customers = () => {
         <Box
             style={{
                 height: "100vh",
-                background: color.background,
-                fontFamily: "sans-serif"
+                background: color.background
             }}
         >
-            <Container style={{paddingTop: "1rem"}}>
+            <Container sx={{ py: "52px"}}>
                 <Box style={{display: "flex", justifyContent: "space-between"}}>
                     <Grid container spacing={2}>
                         <Grid item lg={4}>
@@ -161,11 +156,11 @@ const Customers = () => {
                 <Grid container spacing={10}>
                     <Grid item lg={6}>
 
-                        <Box style={{marginBottom: "2rem", background: color.white, borderRadius: "15px"}}>
+                        <Box style={{marginBottom: "2rem", background: color.white, borderRadius: "15px", paddingLeft: "45px"}}>
                             <Box>
                                 <Typography style={{ fontSize: "22px", fontWeight: 500, textAlign: "center", paddingTop: "10px", paddingBottom: "10px"}}>Guest Visited</Typography>
                             </Box>
-                            <AreaChart
+                            <AreaChart 
                                 data={dataAreaChart}
                                 xAxisName="month"
                                 yAxisName="users"
@@ -174,38 +169,11 @@ const Customers = () => {
                                 height={270}
                                 lineColor={color.yellow}
                                 areaColor={color.lightYellow}
-                                style={{ paddingLeft: "40px", fontSize: "15px"}}
-                            >
-
-                                <CartesianGrid vertical={false} />
-
-                                    <XAxis
-                                        dataKey="month"
-                                        padding={{ left: 20 }}
-                                        axisLine={false}
-                                        tickLine={false} />
-                                    <YAxis
-                                        padding={{ bottom: 15 }}
-                                        tickMargin={20}
-                                        tickCount={6}
-                                        axisLine={false}
-                                        tickLine={false} />
-
-                                    <Tooltip />
-
-                                    <Area
-                                        dataKey="users"
-                                        stroke={color.yellow}
-                                        strokeWidth={2}
-                                        fill={color.lightYellow}
-                                        dot={{ fill: color.yellow, strokeWidth: 1, r: 3}}
-                                        activeDot={{ r: 6 }}
-                                        animationDuration={1000}
-                                    />
-                            </AreaChart>
+                                style={{ fontSize: "13px"}}
+                            />
                         </Box>
                         
-                        <Box style={{marginBottom: "2rem", background: color.white, borderRadius: "15px"}}>
+                        <Box style={{marginBottom: "2rem", background: color.white, borderRadius: "15px", paddingLeft: "45px"}}>
                             <Box>
                                 <Typography style={{ fontSize: "22px", fontWeight: 500, textAlign: "center", paddingTop: "10px", paddingBottom: "10px"}}>Active Users</Typography>
                             </Box>
@@ -218,35 +186,8 @@ const Customers = () => {
                                 height={270}
                                 lineColor={color.green}
                                 areaColor={color.lightGreen}
-                                style={{ paddingLeft: "40px", fontSize: "15px"}}
-                            >
-
-                                <CartesianGrid vertical={false} />
-
-                                    <XAxis
-                                        dataKey="month"
-                                        padding={{ left: 20 }}
-                                        axisLine={false}
-                                        tickLine={false} />
-                                    <YAxis
-                                        padding={{ bottom: 15 }}
-                                        tickMargin={20}
-                                        tickCount={6}
-                                        axisLine={false}
-                                        tickLine={false} />
-
-                                    <Tooltip />
-
-                                    <Area
-                                        dataKey="users"
-                                        stroke={color.green}
-                                        strokeWidth={2}
-                                        fill={color.lightGreen}
-                                        dot={{ fill: color.green, strokeWidth: 1, r: 3}}
-                                        activeDot={{ r: 6 }}
-                                        animationDuration={1000}
-                                    />
-                            </AreaChart>
+                                style={{ fontSize: "13px"}}
+                            />
                         </Box>
                         
                     </Grid>
