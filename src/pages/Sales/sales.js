@@ -12,7 +12,7 @@ import CardNameSeller from '../../components/CardNameSeller/CardNameSeller'
 import CustomLineChart from '../../components/LineChart/lineChart'
 import SortByTime from "../../components/SortByTime/sortByTime"
 
-let img = "https://product.hstatic.net/1000026716/product/45124_macbook_pro_14_m1_grey_ha4_5fced1b51ace4acd8825d494e0b55ec3.jpg"
+let img = "https://product.hstatic.net/1000026716/product/viewsonic_va2215-h_gearvn_032d5d53effc48a2887c2879e6bc5cff.jpg"
 let catalog = [['Laptop', '2', '5.444.400.000 đ'], ['Gaming chair', '-2', '54.400.000 đ'], ['Mouse', '-2', '54.400.000 đ'], ['SSD', '2', '54.400.000 đ'], ['Keyboard', '2', '54.400.000 đ']]
 let customers = ['Kurozemi', 'Tezuko', 'Miaojee', 'Jason', 'Tory']
 let product = ['mac', img, "121212"]
@@ -50,7 +50,7 @@ const Sales = () => {
     const [filterTime, setFilterTime] = useState("Month");
 
     return (
-        <Box sx={{ backgroundColor: color.background, ml: '84px' }}>
+        <Box sx={{ backgroundColor: color.background, ml: '84px', py:4,px:4 }}>
             <Box sx={{ display: "flex", justifyContent: "space-between", mx:5,py:4 }}>
                 <Typography sx={styles.pageTitle}>Admin Dashboard</Typography>
 
@@ -94,21 +94,21 @@ const Sales = () => {
 
                     <SaleCommonCard title='Total sales'>
 
-                        <p style={{ marginLeft: 8, color:color.grayText }}>million VND</p>
+                        <p style={{ marginLeft: 30, color:color.grayText }}>(million VND)</p>
                         <CustomLineChart
 
                             data={dataLineChart}
                             xAxisName="month"
                             yAxisName="income"
                             yAxisCount={6}
-                            width={370}
-                            height={300}
+                            width={300}
+                            height={200}
                             lineColor={color.red}
                         />
                     </SaleCommonCard>
                 </Box>
                 <Box sx={styles.box}>
-                    <SaleCommonCard title="Top Customer">
+                    <SaleCommonCard title="Top Customer" footer={true}>
                         {
                             customers.map((customer, rank) =>
                                 <CardNameSeller rank={rank + 1} name={customer} isName={true} ></CardNameSeller>
@@ -118,8 +118,8 @@ const Sales = () => {
 
                     <SaleCommonCard title="General Statistic">
                         <Box sx={{ textAlign: 'center' }}>
-                            <Box sx={{ my: 5 }}>
-                                <Typography sx={{ color: color.red, fontWeight: 700, m: 0 }} variant="h3" gutterBottom>
+                            <Box sx={{ my: 6 }}>
+                                <Typography sx={{ color: color.red, fontWeight: 700, m: 0,fontSize:'52px' }} variant="h3" gutterBottom>
                                     123
                                 </Typography>
                                 <Typography sx={{fontSize:'16px', fontWeight:600, color:color.grayText}} gutterBottom>
@@ -127,8 +127,8 @@ const Sales = () => {
                                 </Typography>
 
                             </Box>
-                            <Box sx={{ my: 5 }}>
-                                <Typography sx={{ color: color.red, fontWeight: 700, m: 0, }} variant="h3" gutterBottom>
+                            <Box sx={{ my: 6 }}>
+                            <Typography sx={{ color: color.red, fontWeight: 700, m: 0,fontSize:'52px' }} variant="h3" gutterBottom>
                                     12311231
                                 </Typography>
                                 <Typography sx={{fontSize:'16px', fontWeight:600, color:color.grayText}} gutterBottom>

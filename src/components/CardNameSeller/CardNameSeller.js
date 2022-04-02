@@ -28,7 +28,7 @@ const CardNameSeller = ({ rank, name, grow, payment, isName = false }) => {
                     mx: 1,
                     flex: flexpercentage[0]
                 }}>
-                    <p style={{ textAlign: 'center', color: color.white, fontWeight: "600", marginTop: '13px' }}>{rank}</p>
+                    <p style={{ textAlign: 'center', color: color.white, fontWeight: "600", marginTop: '10px',fontSize:'20px' }}>{rank}</p>
 
                 </Box>
 
@@ -44,8 +44,8 @@ const CardNameSeller = ({ rank, name, grow, payment, isName = false }) => {
                     [<Box sx={{ ...styles.flex, flex: flexpercentage[2], justifyContent: 'center', ml: "2px" }}>
                         {rank < 4
                             &&
-                            [<img src={growImg} alt="" />,
-                            <span style={{ color: growImg == GreenUpArrIc ? color.green : color.red, fontWeight: 500 }}>{grow}</span>]
+                            [<img src={growImg} style={{height:'13px',marginTop:"2px"}} alt="" />,
+                            <p style={{ color: growImg == GreenUpArrIc ? color.green : color.red, fontWeight: 500 }}>{grow}</p>]
                         }
 
 

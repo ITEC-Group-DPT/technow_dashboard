@@ -10,14 +10,14 @@ import styles from './CardItemSellerStock.style'
 const CardItemSellerStock = ({ productImg, isView = false, content, contentImg, stonkImg, percentage }) => {
     return (
         <Box>
-            <Box sx={{ ...styles.flex }}>
+            <Box sx={{ ...styles.flex, flex: 1}}>
                 <CardMedia
                     component="img"
-                    sx={{ width: '170px', mx: 2 }}
+                    sx={{ width: '130px',  mx: 2, flex:3 }}
                     image={productImg}
                 >
                 </CardMedia>
-                <CardContent sx={{ px: 0, mx: 1 }}>
+                <CardContent sx={{ pl:5, mx: 1, flex :7 }}>
                     <Box sx={{ ...styles.flex, }}>
                         {isView &&<img src={contentImg} style={{ height: "1.5rem", width: "2rem", marginRight: "20px" }} alt="" />}
                         <Typography variant="h5" sx={{ py: 1, textAlign: "center", fontWeight:600,  }} component="div">

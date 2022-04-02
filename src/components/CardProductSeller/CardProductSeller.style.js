@@ -12,7 +12,7 @@ const styles = {
 	pNameSlider: {
 		margin: 0,
 		fontSize: '16px',
-		fontWeight: '500',
+
 		lineHeight: "20px",
 		textOverflow: "ellipsis",
 		display: "-webkit-box",
@@ -22,7 +22,7 @@ const styles = {
 
 		overflowWrap: 'anywhere',
 		textAlign: "start",
-		fontWeight: "700",
+		fontWeight: "600",
 		fontSize: '17px',
 
 	},
@@ -34,12 +34,11 @@ const styles = {
 	money: {
 		width: 'fit-content',
 		backgroundColor: color.lightBlue,
-		borderRadius: 5, px: '4px',
+		borderRadius: "5px", px: '8px', py:"4px",
 		color: color.blue,
-		fontSize: "0.9rem",
+		fontSize: "0.85rem",
+		fontWeight: "600",
 		marginLeft: "auto",
-		fontWeight: "700",
-
 	},
 }
 

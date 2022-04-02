@@ -14,7 +14,7 @@ const styles = {
         flexDirection:"column",
         justifyContent: "space-between",
         // alignItems: "center",
-        mx:5
+        mx:3
     },
     pageTitle: {
         fontFamily: "Roboto",
