@@ -1,5 +1,18 @@
 import React, { useState } from 'react'
-import { Select, FormControl, MenuItem, styled, InputBase, Box } from '@mui/material'
+import {
+    Select,
+    FormControl,
+    MenuItem,
+    InputBase,
+    Box,
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    styled,
+} from '@mui/material'
 import './changeStatus.css'
 
 const MyInput = styled(InputBase)(() => ({
@@ -44,11 +57,27 @@ const statusList = [
 
 const ChangeStatus = ({ defaultValue = 0, onChangeValue }) => {
     const [status, setStatus] = useState(statusList[defaultValue])
+    const [selectedID, setSelectedID] = useState(null)
+    const [openDialog, setOpenDialog] = useState(false)
+
+    const handleOpen = () => {
+        setOpenDialog(true)
+    }
+
+    const handleClose = () => {
+        setOpenDialog(false)
+        setSelectedID(null)
+    }
 
     const handleChange = (event) => {
-        const newID = event.target.value
+        handleOpen()
+        setSelectedID(event.target.value)
+    }
 
-        setStatus(statusList[newID]);
+    const handleConfirm = () => {
+        onChangeValue && onChangeValue(selectedID)
+        setStatus(statusList[selectedID])
+        handleClose()
     }
 
     return (
@@ -81,6 +110,29 @@ const ChangeStatus = ({ defaultValue = 0, onChangeValue }) => {
                     </Select>
                 </FormControl>
             </Box>
+
+            <Dialog
+                open={openDialog}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    Confirmation
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Are you sure you want to update this order status?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={handleConfirm} autoFocus>
+                        Confirm
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
         </Box>
     )
 }
