@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
     BrowserRouter as Router,
     Routes as Switch,
@@ -17,13 +17,26 @@ import Orders from '../pages/Orders/order'
 import LeftNavigation from "../components/LeftNavigation/leftNavigation"
 
 //demo purpose
-import UserInfo from "../displayUserInfo.js";
 import ChartDemo from "../demo/chart";
 import OtherDemo from "../demo/others"
 
 
+//API && action
+import useStore from "../appStore";
+import { checkToken } from "../api/testAPI";
+
 
 const AppNavigagtion = () => {
+
+    const { loginAction } = useStore();
+
+    useEffect(() => {
+        console.log('run use effect');
+        const email = "noaccount";
+        const password = "nevergonnagiveyouup";
+
+        loginAction(email, password);
+    }, []);
     return (
         <Router>
             <LeftNavigation />

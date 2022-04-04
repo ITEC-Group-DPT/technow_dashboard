@@ -7,6 +7,7 @@ const color = {
     lightBlack: "#595959",
 
     red: '#FF5454',
+    darkRed: '#DE0000',
 
     orange: '#FF9457',
 
@@ -24,6 +25,18 @@ const color = {
 
     lightGrayText: "#848484",
     grayText: '#868686',
+
+    // sale
+    // R1: "#ff8a65",
+    // R2: "#ffb74d",
+    // R3: "#ffd54f",
+    // R4: "#ffee58",
+    // R5: "#dce775"
+    R1:"#FFD337",
+    R2:"#B8B8B8",
+    R3:"#C7A48A",
+    R4:"#E4E4E4",
+    R5:"#D0D9EF",
 };
 
 export default color;
