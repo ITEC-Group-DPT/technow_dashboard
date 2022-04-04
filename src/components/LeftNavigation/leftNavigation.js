@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 //MUI
-import { Box, Slide, Fade } from '@mui/material'
+import { Box, Slide, Fade, useMediaQuery } from '@mui/material'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Button from '@mui/base/ButtonUnstyled';
 
@@ -36,6 +36,7 @@ const LeftNavigation = () => {
     useEffect(() => {
         switch (location.pathname) {
             case "/":
+                setIsOpen(true);
                 setTabChoose(0)
                 break;
             case "/sales":
@@ -54,7 +55,7 @@ const LeftNavigation = () => {
             default:
                 break;
         }
-    }, []);
+    }, [location]);
     const navigateTab = (index) => {
 
         if (tabChoose == index) return;
@@ -87,6 +88,7 @@ const LeftNavigation = () => {
     }
 
     const onControlOpen = (open) => {
+        if (location.pathname == "/") return
         if (open) {
             setIsOpen(true)
         }
@@ -97,7 +99,11 @@ const LeftNavigation = () => {
         }
     }
     return (
-        <Box sx={[styles.main, isOpen && { background: "rgba(0,0,0,0.3)" }]}>
+        <Box sx={
+            (isOpen && location.pathname != "/")
+                ? styles.openMain
+                : styles.main
+        }>
 
             <button
                 style={styles.navigation}
@@ -128,14 +134,15 @@ const LeftNavigation = () => {
 
                 </Box>
 
-                {
-                    isOpen &&
+                {/* { */}
+                    // isOpen &&
                     <OpenNav
+                        isOpen = {isOpen}
                         tabNames={tabNames}
                         currentTab={tabChoose}
                         navigateTab={navigateTab}
                     />
-                }
+                {/* } */}
 
 
             </button>

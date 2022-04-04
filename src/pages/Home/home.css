@@ -1,0 +1,24 @@
+.MuiTypography-root {
+    user-select: none !important;
+}
+@media only screen and (min-width: 0px) {
+    .homeAdmin {
+        padding-left: 0%;
+        padding-right: 0%;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    .homeAdmin {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+}
+
+@media only screen and (min-width: 1430px) {
+    .homeAdmin {
+        padding-left: 15%;
+        padding-right: 15%;
+    }
+}
+
