@@ -38,6 +38,8 @@ const SortByTime = ({
                         value={sortValue}
                         onChange={handleChange}
                         input={<MyInput />}
+                        MenuProps={{ disableScrollLock: true }}
+                        
                     >
                         <MenuItem
                             value={"Week"}>Week</MenuItem>

@@ -155,7 +155,7 @@ const Products = () => {
 							</Typography>
 							<FormControl>
 								<Select
-									MenuProps={{ disableScrollLock: false }}
+									MenuProps={{ disableScrollLock: true }}
 									value={filter.category}
 									onChange={handleChangeCategory}
 									sx={styles.selectInp}>
