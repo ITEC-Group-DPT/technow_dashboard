@@ -3,14 +3,15 @@ import {
     Box,
     Container,
     Grid,
-    Typography,
-    Divider
+    Typography
 } from '@mui/material'
 import SearchBar from '../../components/SearchBar/searchBar'
 import SortByTime from '../../components/SortByTime/sortByTime'
 import Pagination from '../../components/Pagination/pagination'
 import color from '../../constant/color'
 import AreaChart from '../../components/AreaChart/areaChart'
+import SortPurchased from './sortPurchased'
+import TableUser from './tableUser'
 
 // import axios from 'axios'
 // import { BASE_API_URL, TEST_API_URL } from '../constant/string';
@@ -98,45 +99,12 @@ const dataTable = [
 ];
 
 const Customers = () => {
-
-    // const [userList, updateUserList] = useState({"isLoading": true});
-    const [initialsort, setSort] = useState("month");
-    const [totalPage, setTotalPage] = useState(0);
-    const [page, setPage] = useState(1);
-    const [userList, setUserList] = useState([]);
-    const [search, setSearch] = useState("");
-    const itemsPerPage = 5
-    const offset = (page - 1) * itemsPerPage
-    // useEffect(() => {
-    //     getUserListAPI().then((response) => {
-	// 		if (response.data.success === true) {
-	// 			updateUserList({ "isLoading": false, data: response.data.data })
-	// 			console.log("userList ", response.data)
-	// 		}
-    //     })
-    // }, [])
-
-    useEffect(() => {
-        //call getTotalPage API here
-        setTotalPage(3)
-    }, [])
-
-    useEffect(() => {
-        //call getOrderList with offset API here
-        setUserList(dataTable.slice(offset, offset + itemsPerPage))
-    }, [page, initialsort])
-
-    // const formatPrice = (value) => {
-	// 	return new Intl.NumberFormat('vi-VN', {
-	// 		style: 'currency',
-	// 		currency: '₫',
-	// 	}).format(value)
-	// }
+    const [sortTime, setSort] = useState("month");
 
     return (
         <Box
             style={{
-                height: "100vh",
+                height: "111vh",
                 background: color.background
             }}
         >
@@ -192,55 +160,7 @@ const Customers = () => {
                         
                     </Grid>
                     <Grid item lg={6}>
-                        <Box style={{display: "block", background: color.white, paddingTop: "20px", borderRadius: '15px'}}>
-                            <Container>
-                                <Box>
-                                    <SearchBar placeholder="Search for username..."
-                                                text={search}
-                                                setText={setSearch} />
-                                </Box>
-                            </Container>
-                            <Box style={{ paddingLeft: "50px", paddingTop: "20px", paddingBottom: "20px"}}>
-                                <Grid container spacing={1}>
-                                    <Grid item lg={3}>
-                                        <Typography style={{ fontWeight: 600}}>Rank</Typography>
-                                    </Grid>
-                                    <Grid item lg={4}>
-                                        <Typography>Username</Typography>
-                                    </Grid>
-                                    <Grid item lg={5}>
-                                        <Typography>Purchase Amount</Typography>
-                                    </Grid>
-                                </Grid>
-                            <Divider style={{ marginTop: '20px'}}/>
-                            </Box>
-                            {dataTable.map(user => 
-                                <Box style={{ paddingLeft: "50px", paddingTop: "15px", paddingBottom: "10px"}}>
-                                    <Grid container spacing={1}>
-                                        <Grid item lg={3}>
-                                            <Typography>{user.rank}</Typography>
-                                        </Grid>
-                                        <Grid item lg={4}>
-                                            <Typography>{user.username}</Typography>
-                                        </Grid>
-                                        <Grid item lg={5}>
-                                            <Typography>{user.amount}</Typography>
-                                        </Grid>
-                                    </Grid>
-                                </Box>
-                            )}
-                            <Box style={{ display: 'flex', justifyContent: 'center', paddingTop: '20px', paddingBottom: '10px'}}>
-                                <Pagination page={page} maxPages={totalPage} 
-                                    onBack={() => {
-                                        if (page > 1)
-                                            setPage(page - 1)
-                                    }}
-                                    onForward={() => {
-                                        if (page < totalPage)
-                                            setPage(page + 1)
-                                    }}/>
-                            </Box>
-                        </Box>
+                        <TableUser sortTime={sortTime}/>
                     </Grid>
                 </Grid>
             </Container>

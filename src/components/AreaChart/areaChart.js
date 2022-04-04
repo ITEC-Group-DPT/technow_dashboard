@@ -5,6 +5,7 @@ const customAreaChart = ({
   data,
   width,
   height,
+  style,
   xAxisName,
   yAxisName,
   lineColor,
@@ -15,6 +16,7 @@ const customAreaChart = ({
       width={width}
       height={height}
       data={data}
+      style={style}
     >
 
       <CartesianGrid vertical={false} />
