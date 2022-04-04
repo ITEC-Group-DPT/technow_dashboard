@@ -1,18 +1,31 @@
 import create from "zustand";
+import { login } from "./api/testAPI";
 
 
 const useStore = create(set => ({
     userInfo: {
-        username: "",
-        password: "",
+        userID: 0,
+        username: "Anonymous",
     },
 
-    login: (username, password) => set({userInfo: {
-        username: username,
-        password: password,
-    }}),
+    loginAction: (username, password) => {
 
-    logout: () => set({userInfo: {username: "", password: ""}}),
+        login(username, password).then(response => {
+            if (response.data.success) {
+                console.log('login success: ', response.data.data);
+
+                const { userID, username } = response.data.data;
+                set({
+                    userInfo: {
+                        userID: userID,
+                        username: username,
+                    }
+                });
+            }
+        })
+    },
+
+    logout: () => set({ userInfo: { userID: 0, username: "" } }),
 }))
 
 export default useStore;

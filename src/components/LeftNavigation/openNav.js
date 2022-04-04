@@ -7,6 +7,7 @@ import styles from "./leftNavigation.style"
 const OpenNav = ({
     isOpen,
     tabNames,
+    username = "Admin",
     currentTab,
     navigateTab,
 }) => {
@@ -24,7 +25,7 @@ const OpenNav = ({
                 <Typography
                     sx={styles.username}
                 >
-                    Kurozemi
+                    {username}
                 </Typography>
 
 
