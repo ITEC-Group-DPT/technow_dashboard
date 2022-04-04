@@ -10,6 +10,7 @@ import SearchBar from '../../components/SearchBar/searchBar'
 import Pagination from '../../components/Pagination/pagination'
 import SortByStatus from '../../components/SortByStatus/sortByStatus'
 import OrderItem from '../../components/OrderItem/orderItem'
+import { getOrderSummary, getIncomeSummary } from '../../api/orderReportAPI'
 
 const dataBarChart = [
     {
@@ -157,8 +158,10 @@ const dataOrder = [
 ]
 
 const Orders = () => {
+    const [barChartData, setBarChartData] = useState([])
+    const [lineChartData, setLineChartData] = useState([])
     const [orderList, setOrderList] = useState([])
-    const [sort, setSort] = useState("Month")
+    const [sort, setSort] = useState("month")
     const [search, setSearch] = useState("")
     const [sortByStatus, setSortByStatus] = useState("All")
     const [totalPage, setTotalPage] = useState(0)
@@ -167,8 +170,37 @@ const Orders = () => {
     const itemsPerPage = 5
     const offset = (page - 1) * itemsPerPage
 
+    const toMonthName = (monthNumber) => {
+        const date = new Date()
+        date.setMonth(monthNumber - 1)
+        return date.toLocaleString('en-US', { month: 'short' })
+    }
+
     useEffect(() => {
         //call getTotalPage API here
+
+        getOrderSummary(sort).then(response => {
+            if (response.data.success === true) {
+                const data = response.data.data
+                data.forEach((item, index) => {
+                    data[index].month = toMonthName(data[index].month)
+                })
+                console.log("barChartData: ", data)
+                setBarChartData(data)
+            }
+        })
+
+        getIncomeSummary(sort).then(response => {
+            if (response.data.success === true) {
+                const data = response.data.data
+                data.forEach((item, index) => {
+                    data[index].month = toMonthName(data[index].month)
+                })
+                console.log("lineChartData: ", data)
+                setLineChartData(data)
+            }
+        })
+
         setTotalPage(3)
     }, [])
 
@@ -194,16 +226,18 @@ const Orders = () => {
                             <Box sx={{ mb: 4 }}>
                                 <Typography sx={styles.graphTitle}>Total Orders</Typography>
                             </Box>
-                            <BarChart
-                                data={dataBarChart}
-                                xAxisName="month"
-                                yAxisName="orders"
-                                yAxisCount={6}
-                                width={430}
-                                height={270}
-                                barSize={45}
-                                barColor={color.orange}
-                            />
+                            {barChartData.length > 0 &&
+                                <BarChart
+                                    data={barChartData}
+                                    xAxisName="month"
+                                    yAxisName="orders"
+                                    yAxisCount={6}
+                                    width={430}
+                                    height={270}
+                                    barSize={45}
+                                    barColor={color.orange}
+                                />
+                            }
                         </Box>
                     </Grid>
 
@@ -217,15 +251,17 @@ const Orders = () => {
                                     <Typography sx={styles.graphTitle}>Total Income</Typography>
                                 </Grid>
                             </Grid>
-                            <LineChart
-                                data={dataLineChart}
-                                xAxisName="month"
-                                yAxisName="income"
-                                yAxisCount={6}
-                                width={430}
-                                height={270}
-                                lineColor={color.blue}
-                            />
+                            {lineChartData.length > 0 &&
+                                <LineChart
+                                    data={lineChartData}
+                                    xAxisName="month"
+                                    yAxisName="income"
+                                    yAxisCount={6}
+                                    width={430}
+                                    height={270}
+                                    lineColor={color.blue}
+                                />
+                            }
                         </Box>
                     </Grid>
                 </Grid>
@@ -240,6 +276,7 @@ const Orders = () => {
                                 placeholder="Search for order, customer name..."
                                 text={search}
                                 setText={setSearch}
+                                width="100%"
                             />
                         </Grid>
                         <Grid item xs={3.5} style={styles.centerHori}>
