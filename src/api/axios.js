@@ -1,7 +1,7 @@
 import axios from 'axios';
 // import { decryptData } from '../constant/utils';
 
-const API_URL = "http://localhost:8080/Technowz_Backend/api/"
+const API_URL = "http://localhost:8080/Technowz_Backend/adminAPI/"
 
 const instance = axios.create({
 	baseURL: API_URL,
