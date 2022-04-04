@@ -7,6 +7,7 @@ const color = {
     lightBlack: "#595959",
 
     red: '#FF5454',
+    darkRed: '#DE0000',
 
     orange: '#FF9457',
 
