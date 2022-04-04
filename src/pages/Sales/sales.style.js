@@ -9,12 +9,11 @@ const styles = {
         display: 'flex', flexWrap: 'wrap'
     },
     box: {
-        flex:1,
+        // flex:1,
         display:"flex",
         flexDirection:"column",
         justifyContent: "space-between",
         // alignItems: "center",
-        mx:3
     },
     pageTitle: {
         fontFamily: "Roboto",
