@@ -136,7 +136,7 @@ const Customers = () => {
     return (
         <Box
             style={{
-                height: "100vh",
+                minHeight: "100vh",
                 background: color.background
             }}
         >
