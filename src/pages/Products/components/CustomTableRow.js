@@ -65,9 +65,9 @@ const CustomTableRow = ({ item, colorStock }) => {
 			<TableRow>
 				<TableCell sx={styles.dataCell}>{item.productID}</TableCell>
 				<TableCell sx={styles.dataCell}>
-					<img src={item.productImage} width={75} height={75} />
+					<img src={item.img1} width={75} height={75} />
 				</TableCell>
-				<TableCell sx={styles.dataCell}>{item.productName}</TableCell>
+				<TableCell sx={styles.dataCell}>{item.name}</TableCell>
 				<TableCell
 					sx={[
 						styles.dataCell,
@@ -85,7 +85,7 @@ const CustomTableRow = ({ item, colorStock }) => {
 							paddingRight: '30px',
 						},
 					]}>
-					{convertToVND(item.productPrice)}
+					{convertToVND(item.price)}
 				</TableCell>
 				<TableCell
 					align='center'
