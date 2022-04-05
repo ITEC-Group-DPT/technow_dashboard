@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import {
-    bannerData,
+    mockBannerData,
     salesSection,
     productsSection,
     ordersSection,
@@ -18,11 +18,56 @@ import { Box, Typography, useMediaQuery } from '@mui/material'
 import styles from "./home.style"
 import "./home.css"
 
+//API & Data
+import { getOverallStatistic, getDashboardDataByTime } from '../../api/homeAPI'
+
 
 const Home = () => {
 
     const [filterTime, setFilterTime] = useState("Month");
+    const [bannerData, setBannerData] = useState(mockBannerData);
+    const [homeStat, setHomeStat] = useState({
+        sale: salesSection,
+        order: ordersSection,
+        item: productsSection,
+        customer: customersSection,
+    });
 
+    const getBannerData = async () => {
+        const response = await getOverallStatistic();
+
+        if (response.data.success) {
+            const data = response.data.data;
+
+            let formatData = data;
+            console.log('data: ', data);
+            formatData['totalSales'] = (data['totalSales'] / (1000000000)).toFixed(1);
+
+            setBannerData(formatData)
+        }
+
+    }
+
+    const getAllHomeStat = async () => {
+        const response = await getDashboardDataByTime(filterTime);
+
+        if (response.data.success) {
+            const data = response.data.data;
+
+            setHomeStat(data);
+        }
+
+    }
+
+    useEffect(() => {
+        getAllHomeStat()
+    }, [filterTime]);
+
+    
+    useEffect(() => {
+        getBannerData();
+        getAllHomeStat();
+    }, []);
     return (
         <Box className='homeAdmin' sx={styles.main}>
 
@@ -47,7 +92,7 @@ const Home = () => {
                         marginRight: "12px",
                         background: "#FFEEE2"
                     }}
-                    stat={salesSection}
+                    stat={homeStat.sale}
                     background="#FFEEE2"
                 />
 
@@ -58,7 +103,7 @@ const Home = () => {
                         marginLeft: "13px",
                         background: "#E0FFE7"
                     }}
-                    stat={productsSection}
+                    stat={homeStat.item}
                 />
             </Box>
 
@@ -70,7 +115,7 @@ const Home = () => {
                         marginRight: "12px",
                         background: "#E6F5F9"
                     }}
-                    stat={ordersSection}
+                    stat={homeStat.order}
                 />
 
                 <StatHome
@@ -80,7 +125,7 @@ const Home = () => {
                         marginLeft: "12px",
                         background: "#ECECEC"
                     }}
-                    stat={customersSection}
+                    stat={homeStat.customer}
                 />
             </Box>
 

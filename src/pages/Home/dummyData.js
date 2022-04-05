@@ -1,30 +1,30 @@
-const bannerData = {
+const mockBannerData = {
     totalSales: 300,
     totalOrders: 581,
     totalUsers: 82,
 }
 
 const salesSection = {
-    data: 12400000,
-    percent: -50,
+    current: 12400000,
+    percent: -0.5,
 }
 
 const productsSection = {
-    data: 73,
-    percent: 30,
+    current: 73,
+    percent: 0.3,
 }
 
 const ordersSection = {
-    data: 50,
-    percent: 70,
+    current: 50,
+    percent: 0.7,
 }
 
 const customersSection = {
-    data: 35,
-    percent: -40,
+    current: 35,
+    percent: -0.4,
 }
 export {
-    bannerData,
+    mockBannerData,
     salesSection,
     productsSection,
     ordersSection,
