@@ -48,9 +48,7 @@ const Products = () => {
 		if (filter.category === 'Category' && filter.text === '') {
 			return productList
 		} else if (filter.text !== '') {
-			return productList.filter((item) =>
-				item.productName.includes(filter.text),
-			)
+			return productList.filter((item) => item.name.includes(filter.text))
 		} else if (filter.category !== 'Category') {
 			return productList.filter((item) => item.type === filter.category)
 		}

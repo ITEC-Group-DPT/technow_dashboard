@@ -30,6 +30,7 @@ const Home = () => {
                 <Typography sx={styles.pageTitle}>Admin Dashboard</Typography>
 
                 <SortByTime
+                    sortList={["Day", "Month", "Year"]}
                     onChangeValue={setFilterTime}
                 />
             </Box>
@@ -41,7 +42,7 @@ const Home = () => {
             <Box sx={styles.sectionRow}>
                 <StatHome
                     title="Sales"
-                    subTitle={`This ${filterTime}`}
+                    subTitle={filterTime == "Day" ? "Today" : `This ${filterTime}`}
                     style={{
                         marginRight: "12px",
                         background: "#FFEEE2"

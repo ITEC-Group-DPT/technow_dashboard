@@ -111,11 +111,11 @@ const CustomEditProductDialog = ({ item, open, setOpen }) => {
 								onChange={(e) =>
 									setNewValue({
 										...newValue,
-										productName: e.target.value,
+										name: e.target.value,
 									})
 								}
 								placeholder='Product name'
-								value={newValue.productName}
+								value={newValue.name}
 								variant='outlined'
 							/>
 							<Box sx={{ position: 'relative' }}>
@@ -158,13 +158,13 @@ const CustomEditProductDialog = ({ item, open, setOpen }) => {
 
 									setNewValue({
 										...newValue,
-										productPrice: value,
+										price: value,
 									})
 								}}
 								InputProps={{
 									endAdornment: <Typography>VND</Typography>,
 								}}
-								value={newValue.productPrice}
+								value={newValue.price}
 								variant='outlined'
 							/>
 
@@ -176,10 +176,55 @@ const CustomEditProductDialog = ({ item, open, setOpen }) => {
 								onChange={(e) =>
 									setNewValue({
 										...newValue,
-										productImage: e.target.value,
+										img1: e.target.value,
 									})
 								}
-								value={newValue.productImage}
+								value={newValue.img1}
+								variant='outlined'
+							/>
+
+							<TextField
+								sx={styles.textField}
+								name='img2'
+								label='Image 2'
+								placeholder='Product image 2 url'
+								onChange={(e) =>
+									setNewValue({
+										...newValue,
+										img2: e.target.value,
+									})
+								}
+								value={newValue.img2}
+								variant='outlined'
+							/>
+
+							<TextField
+								sx={styles.textField}
+								name='img3'
+								label='Image 3'
+								placeholder='Product image 3 url'
+								onChange={(e) =>
+									setNewValue({
+										...newValue,
+										img3: e.target.value,
+									})
+								}
+								value={newValue.img3}
+								variant='outlined'
+							/>
+
+							<TextField
+								sx={styles.textField}
+								name='img4'
+								label='Image 4'
+								placeholder='Product image 4 url'
+								onChange={(e) =>
+									setNewValue({
+										...newValue,
+										img4: e.target.value,
+									})
+								}
+								value={newValue.img4}
 								variant='outlined'
 							/>
 
