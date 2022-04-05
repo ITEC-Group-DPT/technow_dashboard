@@ -12,6 +12,7 @@ const MyInput = styled(InputBase)(() => ({
 const SortByTime = ({
     defaultValue = "Month",
     onChangeValue,
+    sortList = ["Week", "Month", "Year"]
 }) => {
 
     const [sortValue, setSortValue] = useState(defaultValue);
@@ -39,12 +40,14 @@ const SortByTime = ({
                         onChange={handleChange}
                         input={<MyInput />}
                         MenuProps={{ disableScrollLock: true }}
-                        
+
                     >
-                        <MenuItem
-                            value={"Week"}>Week</MenuItem>
-                        <MenuItem value={"Month"}>Month</MenuItem>
-                        <MenuItem value={"Year"}>Year</MenuItem>
+                        {
+                            sortList.map(item =>
+                                <MenuItem
+                                    value={item}>{item}</MenuItem>
+                            )
+                        }
                     </Select>
                 </FormControl>
 
