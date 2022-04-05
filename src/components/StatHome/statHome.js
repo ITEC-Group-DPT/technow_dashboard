@@ -20,13 +20,14 @@ const StatHome = ({
 
     // const shortLength = useMediaQuery("(max-length:1300px)")
     const formattedPrice = (price) => {
-        return price / 1000000 + " triệu";
+
+        return (price / 1000000).toFixed(1) + " triệu";
     }
 
     const numberData =
         title != "Sales"
-            ? stat.data
-            : formattedPrice(stat.data)
+            ? stat.current
+            : formattedPrice(stat.current)
 
     return (
         <Box sx={[styles.statBox, style]}>
@@ -46,14 +47,14 @@ const StatHome = ({
             </Box>
 
             <PieChart
-                percent={Math.abs(stat.percent)}
+                percent={Math.floor(Math.abs(stat.percent) * 100)}
 
                 width={135}
                 height={135}
 
                 innerRadius={44}
-                left={50}
-                bottom={"40%"}
+                left={stat.percent == 1 ? 40 : 45}
+                bottom={52}
                 fontSize={22}
             />
 
