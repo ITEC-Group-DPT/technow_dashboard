@@ -13,155 +13,9 @@ import OrderItem from '../../components/OrderItem/orderItem'
 import {
     getOrderSummary,
     getIncomeSummary,
-    searchOrdersByPage,
     getOrderByPage,
-    getOrderByStatus,
+    getOrderByFilter
 } from '../../api/orderReportAPI'
-
-const dataBarChart = [
-    {
-        month: 'Jan',
-        orders: 55,
-    },
-    {
-        month: 'Feb',
-        orders: 42,
-    },
-    {
-        month: 'Mar',
-        orders: 78,
-    },
-    {
-        month: 'Apr',
-        orders: 58,
-    },
-    {
-        month: 'May',
-        orders: 96,
-    },
-]
-
-const dataLineChart = [
-    {
-        month: 'Jan',
-        income: 25,
-    },
-    {
-        month: 'Feb',
-        income: 28,
-    },
-    {
-        month: 'Mar',
-        income: 23,
-    },
-    {
-        month: 'Apr',
-        income: 37,
-    },
-    {
-        month: 'May',
-        income: 40,
-    },
-]
-
-const dataOrder = [
-    //page 1
-    {
-        id: 'HLS1293',
-        cusName: 'Quan Minh Tri',
-        date: '15/01/2022',
-        price: '3,210,000 đ',
-        status: 1,
-    },
-    {
-        id: 'AKT9023',
-        cusName: 'Tran Nguyen Minh Dao',
-        date: '07/01/2022',
-        price: '799,000 đ',
-        status: 2,
-    },
-    {
-        id: 'VED0054',
-        cusName: 'Truong Minh Nam Phu',
-        date: '02/01/2022',
-        price: '1,500,000 đ',
-        status: 3,
-    },
-    {
-        id: 'MNI6381',
-        cusName: 'Tran Ngoc Hien Long',
-        date: '10/12/2021',
-        price: '1,990,000 đ',
-        status: 4,
-    },
-    {
-        id: 'TLA3424',
-        cusName: 'Ly Vi Cuong',
-        date: '05/12/2021',
-        price: '12,499,000 đ',
-        status: 0,
-    },
-
-    //page 2
-    {
-        id: 'CLG1035',
-        cusName: 'Nguyen Van An',
-        date: '01/12/2021',
-        price: '10,990,000 đ',
-        status: 4,
-    },
-    {
-        id: 'DLK2781',
-        cusName: 'Nguyen Ngoc Minh Thu',
-        date: '22/11/2021',
-        price: '590,000 đ',
-        status: 2,
-    },
-    {
-        id: 'TKL1001',
-        cusName: 'Tran Thi Thu Trang',
-        date: '20/11/2021',
-        price: '2,500,000 đ',
-        status: 4,
-    },
-    {
-        id: 'BBC1419',
-        cusName: 'Phan Quang Anh Hao',
-        date: '17/11/2021',
-        price: '9,990,000 đ',
-        status: 2,
-    },
-    {
-        id: 'DNB3812',
-        cusName: 'Truong Ngoc Quang Minh',
-        date: '11/10/2021',
-        price: '2,490,000 đ',
-        status: 0,
-    },
-
-    //page 3
-    {
-        id: 'PQC1592',
-        cusName: 'Ly Van Tai',
-        date: '02/10/2021',
-        price: '200,000 đ',
-        status: 1,
-    },
-    {
-        id: 'PQJ1178',
-        cusName: 'Pham Thi Anh Dung',
-        date: '30/09/2021',
-        price: '690,000 đ',
-        status: 3,
-    },
-    {
-        id: 'DPC4921',
-        cusName: 'Phi Thu Lan',
-        date: '23/09/2021',
-        price: '1,590,000 đ',
-        status: 2,
-    },
-]
 
 const Orders = () => {
     const [barChartData, setBarChartData] = useState([])
@@ -192,20 +46,55 @@ const Orders = () => {
         const offset = (newPage - 1) * itemsPerPage
 
         if (newPage != page) {
-            getOrderByPage(sortByStatus, offset, itemsPerPage).then(response => {
+            getOrderByPage(search, sortByStatus, offset, itemsPerPage).then(response => {
                 if (response.data.success === true) {
                     const data = response.data.data
-                    console.log("order list: ", data)
+                    console.log("order list (PAGINATION): ", data.orderList)
 
                     setPage(newPage)
-                    setOrderList(data)
+                    setOrderList(data.orderList)
                 }
             })
         }
     }
 
     const handleChangeSortByStatus = (status) => {
+        getOrderByFilter(search, status).then(response => {
+            if (response.data.success === true) {
+                const data = response.data.data
+                const totalPage = Math.ceil(data.total / itemsPerPage)
+                console.log("total page (SORT): ", totalPage)
+                console.log("order list (SORT): ", data.orderList)
 
+                setSortByStatus(status)
+                setTotalPage(totalPage)
+                setPage(1)
+                setOrderList(data.orderList)
+            }
+        })
+    }
+
+    useEffect(() => {
+        const delay = setTimeout(() => {
+            getOrderByFilter(search, sortByStatus).then(response => {
+                if (response.data.success === true) {
+                    const data = response.data.data
+                    const totalPage = Math.ceil(data.total / itemsPerPage)
+                    console.log("total page (SEARCH): ", totalPage)
+                    console.log("order list (SEARCH): ", data.orderList)
+
+                    setTotalPage(totalPage)
+                    setPage(1)
+                    setOrderList(data.orderList)
+                }
+            })
+        }, 500)
+        return () => clearTimeout(delay)
+
+    }, [search])
+
+    const onChangeStatus = (orderID, status) => {
+        console.log(orderID + " : " + status)
     }
 
     // sort graphs
@@ -233,41 +122,21 @@ const Orders = () => {
         })
     }, [sort])
 
-    // useEffect(() => {
-    // 	if (search !== '') {
-    // 		const delay = setTimeout(() => {
-    // 			searchOrdersByPage(search, offset, itemsPerPage).then(response => {
-    // 				if (response.data.success === true) {
-    //                     const data = response.data.data
-    // 					setOrderList(data)
-    //                     setPage(1)
-    // 				}
-    // 			})
-    // 		}, 300)
-    // 		return () => clearTimeout(delay)
-    // 	} else {
-    // 		setSearch([])
-    // 	}
-    // }, [search])
+
 
     useEffect(() => {
-        getOrderByStatus(sortByStatus).then(response => {
+        getOrderByFilter(search, sortByStatus).then(response => {
             if (response.data.success === true) {
                 const data = response.data.data
                 const totalPage = Math.ceil(data.total / itemsPerPage)
-                console.log("total page: ", totalPage)
-                console.log("order list: ", data.orderList)
+                console.log("total page (ON PAGE LOAD): ", totalPage)
+                console.log("order list (ON PAGE LOAD): ", data.orderList)
 
                 setTotalPage(totalPage)
                 setOrderList(data.orderList)
-                setPage(1)
             }
         })
-    }, [sortByStatus])
-
-    const onChangeStatus = (orderID, status) => {
-        console.log(orderID + " : " + status)
-    }
+    }, [])
 
     return (
         <Box sx={styles.bg}>
@@ -337,7 +206,7 @@ const Orders = () => {
                         </Grid>
                         <Grid item xs={3.5} style={styles.centerHori}>
                             <SortByStatus
-                                onChangeValue={setSortByStatus}
+                                onChangeValue={handleChangeSortByStatus}
                             />
                         </Grid>
                         <Grid item xs={2} style={styles.endHori}>
