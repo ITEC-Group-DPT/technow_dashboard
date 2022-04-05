@@ -13,8 +13,9 @@ import OrderItem from '../../components/OrderItem/orderItem'
 import {
     getOrderSummary,
     getIncomeSummary,
-    getOrderTotalPage,
-    getOrderListByPage,
+    searchOrdersByPage,
+    getOrderByPage,
+    getOrderByStatus,
 } from '../../api/orderReportAPI'
 
 const dataBarChart = [
@@ -173,7 +174,6 @@ const Orders = () => {
     const [page, setPage] = useState(1)
 
     const itemsPerPage = 10
-    const offset = (page - 1) * itemsPerPage
 
     const toMonthName = (monthNumber) => {
         const date = new Date()
@@ -181,9 +181,35 @@ const Orders = () => {
         return date.toLocaleString('en-US', { month: 'short' })
     }
 
-    useEffect(() => {
-        //call getTotalPage API here
+    const handleChangePage = (direction) => {
+        let newPage = page
 
+        if (direction == "back" && page > 1)
+            newPage = page - 1
+        else if (direction == "forward" && page < totalPage)
+            newPage = page + 1
+
+        const offset = (newPage - 1) * itemsPerPage
+
+        if (newPage != page) {
+            getOrderByPage(sortByStatus, offset, itemsPerPage).then(response => {
+                if (response.data.success === true) {
+                    const data = response.data.data
+                    console.log("order list: ", data)
+
+                    setPage(newPage)
+                    setOrderList(data)
+                }
+            })
+        }
+    }
+
+    const handleChangeSortByStatus = (status) => {
+
+    }
+
+    // sort graphs
+    useEffect(() => {
         getOrderSummary(sort).then(response => {
             if (response.data.success === true) {
                 const data = response.data.data
@@ -205,29 +231,39 @@ const Orders = () => {
                 setLineChartData(data)
             }
         })
+    }, [sort])
 
-        getOrderTotalPage().then(response => {
-            if (response.data.success === true) {
-                const data = response.data.data
-                const total = Math.ceil(data.total / itemsPerPage)
-                console.log("totalPage: ", total)
-                setTotalPage(total)
-            }
-        })
-
-        getOrderListByPage("All", offset, itemsPerPage).then(response => {
-            if (response.data.success === true) {
-                const data = response.data.data
-                console.log("orderListByPage: ", data)
-                setOrderList(data)
-            }
-        })
-    }, [page, sort])
+    // useEffect(() => {
+    // 	if (search !== '') {
+    // 		const delay = setTimeout(() => {
+    // 			searchOrdersByPage(search, offset, itemsPerPage).then(response => {
+    // 				if (response.data.success === true) {
+    //                     const data = response.data.data
+    // 					setOrderList(data)
+    //                     setPage(1)
+    // 				}
+    // 			})
+    // 		}, 300)
+    // 		return () => clearTimeout(delay)
+    // 	} else {
+    // 		setSearch([])
+    // 	}
+    // }, [search])
 
     useEffect(() => {
-        //call getOrderList with offset API here
-        // setOrderList(dataOrder.slice(offset, offset + itemsPerPage))
-    }, [page, sort])
+        getOrderByStatus(sortByStatus).then(response => {
+            if (response.data.success === true) {
+                const data = response.data.data
+                const totalPage = Math.ceil(data.total / itemsPerPage)
+                console.log("total page: ", totalPage)
+                console.log("order list: ", data.orderList)
+
+                setTotalPage(totalPage)
+                setOrderList(data.orderList)
+                setPage(1)
+            }
+        })
+    }, [sortByStatus])
 
     const onChangeStatus = (orderID, status) => {
         console.log(orderID + " : " + status)
@@ -308,14 +344,8 @@ const Orders = () => {
                             <Pagination
                                 page={page}
                                 maxPages={totalPage}
-                                onBack={() => {
-                                    if (page > 1)
-                                        setPage(page - 1)
-                                }}
-                                onForward={() => {
-                                    if (page < totalPage)
-                                        setPage(page + 1)
-                                }}
+                                onBack={() => handleChangePage("back")}
+                                onForward={() => handleChangePage("forward")}
                             />
                         </Grid>
                     </Grid>

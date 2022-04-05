@@ -16,23 +16,31 @@ const getIncomeSummary = (sortBy = 'month') => {
         `orderReport.php?command=${command}&sortBy=${sortBy}`)
 }
 
-const getOrderTotalPage = () => {
-    const command = 'getOrderTotalPage'
+const searchOrdersByPage = (search = "", offset = 0, limit = 10) => {
+    const command = 'searchOrdersByPage'
     return axios.get(
         API_URL +
-        `orderReport.php?command=${command}`)
+        `orderReport.php?command=${command}&search=${search}&offset=${offset}&limit=${limit}`)
 }
 
-const getOrderListByPage = (sortByStatus = "All", offset = 0, limit = 10) => {
-    const command = 'getOrderListByPage'
+const getOrderByPage = (sortByStatus = "All", offset = 0, limit = 10) => {
+    const command = 'getOrderByPage'
     return axios.get(
         API_URL +
         `orderReport.php?command=${command}&sortByStatus=${sortByStatus}&offset=${offset}&limit=${limit}`)
 }
 
+const getOrderByStatus = (sortByStatus = "All") => {
+    const command = 'getOrderByStatus'
+    return axios.get(
+        API_URL +
+        `orderReport.php?command=${command}&sortByStatus=${sortByStatus}`)
+}
+
 export {
     getOrderSummary,
     getIncomeSummary,
-    getOrderTotalPage,
-    getOrderListByPage,
+    searchOrdersByPage,
+    getOrderByPage,
+    getOrderByStatus,
 }

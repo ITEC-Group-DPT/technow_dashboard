@@ -98,6 +98,7 @@ const ChangeStatus = ({ defaultValue = 0, onChangeValue }) => {
                         onChange={handleChange}
                         input={<MyInput />}
                         className="STATUS-WRAPPER"
+                        MenuProps={{ disableScrollLock: true }}
                     >
                         {statusList.map((status) => (
                             <MenuItem
