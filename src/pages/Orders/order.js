@@ -10,7 +10,12 @@ import SearchBar from '../../components/SearchBar/searchBar'
 import Pagination from '../../components/Pagination/pagination'
 import SortByStatus from '../../components/SortByStatus/sortByStatus'
 import OrderItem from '../../components/OrderItem/orderItem'
-import { getOrderSummary, getIncomeSummary } from '../../api/orderReportAPI'
+import {
+    getOrderSummary,
+    getIncomeSummary,
+    getOrderTotalPage,
+    getOrderListByPage,
+} from '../../api/orderReportAPI'
 
 const dataBarChart = [
     {
@@ -167,7 +172,7 @@ const Orders = () => {
     const [totalPage, setTotalPage] = useState(0)
     const [page, setPage] = useState(1)
 
-    const itemsPerPage = 5
+    const itemsPerPage = 10
     const offset = (page - 1) * itemsPerPage
 
     const toMonthName = (monthNumber) => {
@@ -201,12 +206,27 @@ const Orders = () => {
             }
         })
 
-        setTotalPage(3)
-    }, [])
+        getOrderTotalPage().then(response => {
+            if (response.data.success === true) {
+                const data = response.data.data
+                const total = Math.ceil(data.total / itemsPerPage)
+                console.log("totalPage: ", total)
+                setTotalPage(total)
+            }
+        })
+
+        getOrderListByPage("All", offset, itemsPerPage).then(response => {
+            if (response.data.success === true) {
+                const data = response.data.data
+                console.log("orderListByPage: ", data)
+                setOrderList(data)
+            }
+        })
+    }, [page, sort])
 
     useEffect(() => {
         //call getOrderList with offset API here
-        setOrderList(dataOrder.slice(offset, offset + itemsPerPage))
+        // setOrderList(dataOrder.slice(offset, offset + itemsPerPage))
     }, [page, sort])
 
     const onChangeStatus = (orderID, status) => {
