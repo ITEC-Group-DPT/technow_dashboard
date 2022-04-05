@@ -12,24 +12,24 @@ const styles = {
 		borderBottom: '0px solid rgba(224, 224, 224, 1)',
 	},
 	productID: {
-		minWidth: '165px',
-		maxWidth: '165px',
-		width: '165px',
+		minWidth: '120px',
+		maxWidth: '120px',
+		width: '120px',
 	},
 	img1: {
-		minWidth: '197px',
-		maxWidth: '197px',
-		width: '197px',
+		minWidth: '160px',
+		maxWidth: '160px',
+		width: '160px',
 	},
 	name: {
-		minWidth: '195px',
-		maxWidth: '195px',
-		width: '195px',
+		minWidth: '180px',
+		maxWidth: '180px',
+		width: '180px',
 	},
 	dateAdded: {
-		minWidth: '175px',
-		maxWidth: '175px',
-		width: '175px',
+		minWidth: '110px',
+		maxWidth: '110px',
+		width: '110px',
 	},
 	price: {
 		minWidth: '186px',
@@ -37,14 +37,14 @@ const styles = {
 		width: '186px',
 	},
 	stock: {
-		minWidth: '122px',
-		maxWidth: '122px',
-		width: '122px',
+		minWidth: '100px',
+		maxWidth: '100px',
+		width: '100px',
 	},
 	blankCell: {
-		minWidth: '74px',
-		maxWidth: '74px',
-		width: '74px',
+		minWidth: '20px',
+		maxWidth: '20px',
+		width: '20px',
 	},
 }
 
@@ -65,7 +65,7 @@ const headCells = [
 		label: 'Product Name',
 	},
 	{
-		dateAdded: 'date',
+		id: 'dateAdded',
 		numeric: false,
 		label: 'Date Added',
 	},

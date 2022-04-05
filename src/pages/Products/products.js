@@ -11,7 +11,7 @@ import {
 } from '@mui/material'
 import { Box } from '@mui/system'
 import _ from 'lodash'
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Pagination from '../../components/Pagination/pagination'
 import SearchBar from '../../components/SearchBar/searchBar'
 import color from '../../constant/color'
@@ -41,23 +41,31 @@ const categoryList = [
 const Products = () => {
 	const [filter, setFilter] = useState({ text: '', category: 'Category' })
 	const [page, setPage] = useState(1)
+	const [totalPage, setTotalPage] = useState(1)
 	const [order, setOrder] = useState('desc')
 	const [orderBy, setOrderBy] = useState('id')
+	const [filteredList, setFilteredList] = useState([])
 
-	const filterProductList = (productList) => {
+	const filterProduct = (productList) => {
+		let temp = []
 		if (filter.category === 'Category' && filter.text === '') {
-			return productList
+			setFilteredList(productList)
+			temp = productList
 		} else if (filter.text !== '') {
-			return productList.filter((item) => item.name.includes(filter.text))
+			const _temp = productList.filter((item) =>
+				item.name.includes(filter.text),
+			)
+			setFilteredList(_temp)
+			temp = _temp
 		} else if (filter.category !== 'Category') {
-			return productList.filter((item) => item.type === filter.category)
+			const _temp = productList.filter(
+				(item) => item.type === filter.category,
+			)
+			setFilteredList(_temp)
+			temp = _temp
 		}
+		setTotalPage(Math.ceil(temp.length / 6))
 	}
-
-	const totalPage = useMemo(() =>
-		Math.ceil(filterProductList(productList).length / 6)
-		, [productList]);
-
 
 	const handleChangeCategory = (event) => {
 		setFilter({
@@ -65,8 +73,7 @@ const Products = () => {
 			text: '',
 			category: event.target.value,
 		})
-		if (filterProductList(productList).length === 0) setPage(0)
-		else setPage(1)
+		setPage(1)
 	}
 
 	const handleChangeSearchValue = (value) => {
@@ -121,6 +128,10 @@ const Products = () => {
 		else return 2
 	}
 
+	useEffect(() => {
+		filterProduct(productList)
+	}, [filter])
+
 	return (
 		<Box sx={styles.container}>
 			<Container>
@@ -135,9 +146,9 @@ const Products = () => {
 						]}>
 						<Box sx={styles.box}>
 							<SearchBar
-								width='30%'
+								width='406px'
 								text={filter.text}
-								placeholder="Cai chet"
+								placeholder='Search for product name,...'
 								setText={handleChangeSearchValue}
 							/>
 							<img
@@ -161,9 +172,7 @@ const Products = () => {
 									value={filter.category}
 									onChange={handleChangeCategory}
 									sx={styles.selectInp}>
-									<MenuItem value='Category'>
-										All
-									</MenuItem>
+									<MenuItem value='Category'>All</MenuItem>
 									{categoryList?.map((item) => {
 										return (
 											<MenuItem
@@ -210,10 +219,10 @@ const Products = () => {
 									orderBy={orderBy}
 									onRequestSort={handleRequestSort}
 								/>
-								{!_.isEmpty(filterProductList(productList)) ? (
+								{!_.isEmpty(filteredList) ? (
 									<TableBody>
 										{stableSort(
-											filterProductList(productList),
+											filteredList,
 											getComparator(order, orderBy),
 										).map((item, index) => {
 											const minLimit = (page - 1) * 6
@@ -231,10 +240,10 @@ const Products = () => {
 													) === 0
 														? color.green
 														: changeStockColor(
-															item.stock,
-														) === 1
-															? color.yellow
-															: color.darkRed
+																item.stock,
+														  ) === 1
+														? color.yellow
+														: color.darkRed
 												return (
 													<CustomTableRow
 														colorStock={colorStock}
