@@ -14,7 +14,8 @@ import {
     getOrderSummary,
     getIncomeSummary,
     getOrderByPage,
-    getOrderByFilter
+    getOrderByFilter,
+    updateStatus,
 } from '../../api/orderReportAPI'
 
 const Orders = () => {
@@ -74,6 +75,16 @@ const Orders = () => {
         })
     }
 
+    const onChangeStatus = (orderID, statusID) => {
+
+        updateStatus(orderID, statusID).then(response => {
+            if (response.data.success === true) {
+                const data = response.data.data
+                console.log(data);
+            }
+        })
+    }
+
     useEffect(() => {
         const delay = setTimeout(() => {
             getOrderByFilter(search, sortByStatus).then(response => {
@@ -92,10 +103,6 @@ const Orders = () => {
         return () => clearTimeout(delay)
 
     }, [search])
-
-    const onChangeStatus = (orderID, status) => {
-        console.log(orderID + " : " + status)
-    }
 
     // sort graphs
     useEffect(() => {
@@ -121,8 +128,6 @@ const Orders = () => {
             }
         })
     }, [sort])
-
-
 
     useEffect(() => {
         getOrderByFilter(search, sortByStatus).then(response => {

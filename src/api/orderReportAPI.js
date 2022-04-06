@@ -30,9 +30,20 @@ const getOrderByFilter = (searchVal = "", sortByStatus = "All") => {
         `orderReport.php?command=${command}&search=${searchVal}&sortByStatus=${sortByStatus}`)
 }
 
+const updateStatus = (orderID, statusID) => {
+
+    const data = new FormData();
+    data.append("command", "updateStatus");
+    data.append("orderID", orderID);
+    data.append("statusID", statusID);
+
+    return axios.post(API_URL + "orderReport.php", data);
+}
+
 export {
     getOrderSummary,
     getIncomeSummary,
     getOrderByPage,
-    getOrderByFilter
+    getOrderByFilter,
+    updateStatus,
 }
