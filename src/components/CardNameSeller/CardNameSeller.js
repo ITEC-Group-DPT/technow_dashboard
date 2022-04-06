@@ -14,6 +14,8 @@ const CardNameSeller = ({ rank, name, grow, payment, isName = false }) => {
     const flexpercentage = isName ? NamePercentage : CatalogPercentage
     const growImg = grow > 0 ? GreenUpArrIc : RedDownArrIc
     if (grow < 0) grow = grow * -1
+    payment = Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(payment)
+
 
 
     return (
