@@ -45,6 +45,7 @@ const SortByTime = ({
                         {
                             sortList.map(item =>
                                 <MenuItem
+                                    key={item}
                                     value={item}>{item}</MenuItem>
                             )
                         }
