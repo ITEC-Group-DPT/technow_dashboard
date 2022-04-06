@@ -20,6 +20,7 @@ const MyInput = styled(InputBase)(() => ({
         borderWidth: 0,
         'aria-label': 'Without label',
     },
+    // disabled: {}
 }))
 
 const statusList = [
@@ -60,6 +61,13 @@ const ChangeStatus = ({ defaultValue = 0, onChangeValue }) => {
     const [selectedID, setSelectedID] = useState(null)
     const [openDialog, setOpenDialog] = useState(false)
 
+    // let disabled = false
+    // if (defaultValue == 4) disabled = true
+
+    let activeList = statusList.slice(defaultValue)
+    if (defaultValue != 4 && defaultValue != 0)
+        activeList.push(statusList[0])
+
     const handleOpen = () => {
         setOpenDialog(true)
     }
@@ -86,7 +94,9 @@ const ChangeStatus = ({ defaultValue = 0, onChangeValue }) => {
                 <FormControl
                     sx={[styles.formControl, {
                         backgroundColor: status.bgColor
-                    }]}>
+                    }]}
+                    // disabled={disabled}
+                >
                     <Select
                         sx={[styles.select, {
                             color: status.color,
@@ -100,7 +110,7 @@ const ChangeStatus = ({ defaultValue = 0, onChangeValue }) => {
                         className="STATUS-WRAPPER"
                         MenuProps={{ disableScrollLock: true }}
                     >
-                        {statusList.map((status) => (
+                        {activeList.map((status) => (
                             <MenuItem
                                 value={status.id}
                                 key={status.id}
