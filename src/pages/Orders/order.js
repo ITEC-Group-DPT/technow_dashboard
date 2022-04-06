@@ -22,19 +22,13 @@ const Orders = () => {
     const [barChartData, setBarChartData] = useState([])
     const [lineChartData, setLineChartData] = useState([])
     const [orderList, setOrderList] = useState([])
-    const [sort, setSort] = useState("month")
+    const [sort, setSort] = useState("Month")
     const [search, setSearch] = useState("")
     const [sortByStatus, setSortByStatus] = useState("All")
     const [totalPage, setTotalPage] = useState(0)
     const [page, setPage] = useState(1)
 
     const itemsPerPage = 10
-
-    const toMonthName = (monthNumber) => {
-        const date = new Date()
-        date.setMonth(monthNumber - 1)
-        return date.toLocaleString('en-US', { month: 'short' })
-    }
 
     const handleChangePage = (direction) => {
         let newPage = page
@@ -76,11 +70,18 @@ const Orders = () => {
     }
 
     const onChangeStatus = (orderID, statusID) => {
-
         updateStatus(orderID, statusID).then(response => {
             if (response.data.success === true) {
                 const data = response.data.data
                 console.log(data);
+
+                getIncomeSummary(sort).then(response => {
+                    if (response.data.success === true) {
+                        const data = response.data.data
+                        console.log("lineChartData: ", data)
+                        setLineChartData(data)
+                    }
+                })
             }
         })
     }
@@ -104,14 +105,10 @@ const Orders = () => {
 
     }, [search])
 
-    // sort graphs
     useEffect(() => {
         getOrderSummary(sort).then(response => {
             if (response.data.success === true) {
                 const data = response.data.data
-                data.forEach((item, index) => {
-                    data[index].month = toMonthName(data[index].month)
-                })
                 console.log("barChartData: ", data)
                 setBarChartData(data)
             }
@@ -120,9 +117,6 @@ const Orders = () => {
         getIncomeSummary(sort).then(response => {
             if (response.data.success === true) {
                 const data = response.data.data
-                data.forEach((item, index) => {
-                    data[index].month = toMonthName(data[index].month)
-                })
                 console.log("lineChartData: ", data)
                 setLineChartData(data)
             }
@@ -148,7 +142,10 @@ const Orders = () => {
             <Container maxWidth="md" sx={styles.main}>
                 <Box sx={styles.title1Wrapper}>
                     <Typography sx={styles.title}>Order Report</Typography>
-                    <SortByTime onChangeValue={value => setSort(value)} />
+                    <SortByTime
+                        onChangeValue={value => setSort(value)}
+                        sortList = {["Day", "Month", "Year"]}
+                    />
                 </Box>
                 <Grid container spacing={6} sx={styles.graphContent}>
                     <Grid item xs={6}>
@@ -159,12 +156,12 @@ const Orders = () => {
                             {barChartData.length > 0 &&
                                 <BarChart
                                     data={barChartData}
-                                    xAxisName="month"
+                                    xAxisName="key"
                                     yAxisName="orders"
                                     yAxisCount={6}
                                     width={430}
                                     height={270}
-                                    barSize={45}
+                                    barSize={40}
                                     barColor={color.orange}
                                 />
                             }
@@ -184,7 +181,7 @@ const Orders = () => {
                             {lineChartData.length > 0 &&
                                 <LineChart
                                     data={lineChartData}
-                                    xAxisName="month"
+                                    xAxisName="key"
                                     yAxisName="income"
                                     yAxisCount={6}
                                     width={430}

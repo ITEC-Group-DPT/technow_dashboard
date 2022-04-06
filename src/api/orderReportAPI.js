@@ -2,14 +2,14 @@ import axios from "./axios"
 
 const API_URL = "http://localhost:8080/Technowz_Backend/adminAPI/"
 
-const getOrderSummary = (sortBy = 'month') => {
+const getOrderSummary = (sortBy = 'Month') => {
     const command = 'getOrderSummary'
     return axios.get(
         API_URL +
         `orderReport.php?command=${command}&sortBy=${sortBy}`)
 }
 
-const getIncomeSummary = (sortBy = 'month') => {
+const getIncomeSummary = (sortBy = 'Month') => {
     const command = 'getIncomeSummary'
     return axios.get(
         API_URL +
