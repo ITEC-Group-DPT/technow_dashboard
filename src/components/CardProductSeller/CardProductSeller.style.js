@@ -38,10 +38,17 @@ const styles = {
 		paddingLeft: '10px',
 	},
 	money: {
+		backgroundColor: "#F0F7FF",
+		borderRadius: "5px", 
+		px: '12px', 
+		py: "6px",
+		marginLeft: 'auto',
 		color: "#2C84B6",
 		fontSize: "0.85rem",
 		fontWeight: "600",
-		textAlign:"center",
+		width:"fit-content",
+		textAlign:"end",
+	
 	},
 }
 

@@ -14,10 +14,10 @@ import CustomLineChart from '../../components/LineChart/lineChart'
 import SortByTime from "../../components/SortByTime/sortByTime"
 
 let img = "https://product.hstatic.net/1000026716/product/viewsonic_va2215-h_gearvn_032d5d53effc48a2887c2879e6bc5cff.jpg"
-let catalog = [['Laptop', '2', '54.400.000 đ'], ['Gaming chair', '-2', '54.400.000 đ'], ['Mouse', '-2', '54.400.000 đ'], ['SSD', '2', '54.400.000 đ'], ['Keyboard', '2', '54.400.000 đ']]
+let catalog = [['Laptop', '2', '54.000.000 đ'], ['Gaming chair', '-2', '54.400.000 đ'], ['Mouse', '-2', '54.400.000 đ'], ['SSD', '2', '54.400.000 đ'], ['Keyboard', '2', '54.400.000 đ']]
 let customers = ['Kurozemi', 'Tezuko', 'Miaojee', 'Jason', 'Tory']
 let product = ['mac', img, "121212"]
-let products = [['CPU Intel Core i7', img, "54.400.000 đ"], ['Màn hình Lenovo ThinkVision S22e dasd', img, "54.400.000 đ"], ['Tai nghe không dây Over-ear SteelSeries', img, "5.400.000 đ"], ['mac', img, "54.400.000 đ"], ['mac', img, "54.400.000 đ"]]
+let products = [['CPU Intel Core i7', img, "54.400.000 đ"], ['Màn hình Lenovo ThinkVision S22e dasd', img, "54.400.000 đ"], ['Tai nghe không dây Over-ear SteelSeries', img, "5.400.000.000 đ"], ['mac', img, "54.400.000 đ"], ['mac', img, "54.400.000 đ"]]
 
 const dataLineChart = [
     {
@@ -51,7 +51,7 @@ const Sales = () => {
     const [filterTime, setFilterTime] = useState("Month");
 
     return (
-        <Box sx={{ backgroundColor: color.background, ml: '84px', py: 8, px: "7.5%" }}>
+        <Box sx={{ backgroundColor: color.background, ml: '84px', py: 8, px:'3rem' }}>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Typography sx={styles.pageTitle}>Sales Overview</Typography>
 
@@ -106,7 +106,7 @@ const Sales = () => {
                 <Box sx={{ ...styles.box }}>
 
                     <SaleCommonCard
-                        title="Top selling products"
+                        title="Top revenue by products"
                         sx={{ pt: "18px", pb: "26px" }}
                     >
                         <Box>
@@ -168,7 +168,7 @@ const Sales = () => {
                                     432
                                 </Typography>
                                 <Typography sx={{ fontSize: '16px', fontWeight: 600, color: color.grayText }} gutterBottom>
-                                    Sales this month
+                                    Sales this {filterTime}
                                 </Typography>
                             </Box>
 

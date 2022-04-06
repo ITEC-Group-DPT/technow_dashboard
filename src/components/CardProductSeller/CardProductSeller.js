@@ -12,13 +12,13 @@ const CardProductSeller = ({ productImg = false, name, payment }) => {
             <Box sx={{
                 minWidth: 70,
                 height: 70,
-                flex: 1,
+              
             }}>
                 <img style={{ height: "100%" }} src="https://product.hstatic.net/1000026716/product/45124_macbook_pro_14_m1_grey_ha4_5fced1b51ace4acd8825d494e0b55ec3.jpg" alt="" />
             </Box>
 
             <Box sx={{
-                flex: 4,
+                flex: 5,
             }}>
                 <Typography sx={{
                     ...styles.pNameSlider,
@@ -29,12 +29,8 @@ const CardProductSeller = ({ productImg = false, name, payment }) => {
             </Box>
 
             <Box sx={{
-                flex: 1.5,
-                marginLeft: "24px",
-                backgroundColor: "#F0F7FF",
-                borderRadius: "5px", 
-                px: '8px', 
-                py: "6px",
+                flex: 4,
+               
             }}>
                 <Typography sx={{
                     ...styles.money,
