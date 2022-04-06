@@ -5,18 +5,12 @@ import {
     Grid,
     Typography
 } from '@mui/material'
-import SearchBar from '../../components/SearchBar/searchBar'
-import SortByTime from '../../components/SortByTime/sortByTime'
-import Pagination from '../../components/Pagination/pagination'
 import color from '../../constant/color'
-import AreaChart from '../../components/AreaChart/areaChart'
-import SortPurchased from './sortPurchased'
+import SortByTime from '../../components/SortByTime/sortByTime'
 import TableUser from './tableUser'
+import AreaChart from '../../components/AreaChart/areaChart'
 
-// import axios from 'axios'
-// import { BASE_API_URL, TEST_API_URL } from '../constant/string';
-
-// import { getUserListAPI } from '../../api/userApi'
+import { getLeaderboardData, getActiveUsers, getVisitedUsers } from '../../api/customerStatistic'
 
 const dataAreaChart = [
     {
@@ -101,6 +95,16 @@ const dataTable = [
 const Customers = () => {
     const [sortTime, setSort] = useState("month");
 
+    const [leaderboard, updateLeaderboard] = useState(dataTable);
+    useEffect(() => {
+        getLeaderboardData().then((response) => {
+			if (response.data.success === true) {
+				updateLeaderboard(response.data.data);
+				console.log("leaderboardData ", response.data);
+			}
+        })
+    });
+
     return (
         <Box
             style={{
@@ -160,7 +164,7 @@ const Customers = () => {
                         
                     </Grid>
                     <Grid item lg={6}>
-                        <TableUser sortTime={sortTime}/>
+                        <TableUser sortTime={sortTime} data={leaderboard}/>
                     </Grid>
                 </Grid>
             </Container>

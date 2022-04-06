@@ -19,17 +19,17 @@ const login = (email, password) => {
 
 const getLeaderboardData = (time) => {
     let command = 'getLeaderboardData';
-    return axios.get(API_URL + `userAPI.php?command=${command}$each=${time}`);
+    return axios.get(API_URL + `customerStatistic.php?command=${command}$each=${time}`);
 }
 
-const getVisitedUsers = () => {
+const getVisitedUsers = (time) => {
     let command = 'getVisitedUsers';
-    return axios.get(API_URL + `userAPI.php?command=${command}$each=${time}`);
+    return axios.get(API_URL + `customerStatistic.php?command=${command}$each=${time}`);
 }
 
-const getActiveUsers = () => {
+const getActiveUsers = (time) => {
     let command = 'getActiveUsers';
-    return axios.get(API_URL + `userAPI.php?command=${command}$each=${time}`);
+    return axios.get(API_URL + `customerStatistic.php?command=${command}$each=${time}`);
 }
 
 export {

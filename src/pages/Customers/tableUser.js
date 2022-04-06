@@ -11,86 +11,24 @@ import Pagination from '../../components/Pagination/pagination'
 import SortPurchased from './sortPurchased'
 import React, { useState, useEffect } from 'react'
 
-const dataTable = [
-    {
-        rank: 1,
-        username: 'Tri Minh Quan',
-        amount: 12221000
-    },
-    {
-        rank: 2,
-        username: 'minhdaongtr',
-        amount: 102000000
-    },
-    {
-        rank: 3,
-        username: 'phutruong123',
-        amount: 79000000
-    },
-    {
-        rank: 4,
-        username: 'cuongvl',
-        amount: 47000000
-    },
-    {
-        rank: 5,
-        username: 'longtran',
-        amount: 18221000
-    },
-    {
-        rank: 6,
-        username: 'vanana111',
-        amount: 10221000
-    },
-    {
-        rank: 7,
-        username: 'chelinh',
-        amount: 9221000
-    },
-    {
-        rank: 8,
-        username: 'chelinh',
-        amount: 9221000
-    },
-    {
-        rank: 9,
-        username: 'chelinh',
-        amount: 9221000
-    },
-    {
-        rank: 10,
-        username: 'chelinh',
-        amount: 9221000
-    }
-];
-const TableUser = ({ sortTime = "month" }) => {
+const TableUser = ({ sortTime = "month", data}) => {
 
-    const [userList, setUserList] = useState(dataTable);
-    const [totalPage, setTotalPage] = useState(3);
+    const [userList, setUserList] = useState(data);
+    const [totalPage, setTotalPage] = useState(1);
     const [page, setPage] = useState(1);
     const [purchasedSort, setPurchasedSort] = useState("Top Purchased");
     const [search, setSearch] = useState("");
 
-    const itemsPerPage = 5;
+    const itemsPerPage = 10;
     const offset = (page - 1) * itemsPerPage;
 
     useEffect(() => {
-        setTotalPage(3)
+        setTotalPage(2)
     }, [])
 
     useEffect(() => {
-        setUserList(dataTable.slice(offset, offset + itemsPerPage))
+        setUserList(data.slice(offset, offset + itemsPerPage))
     }, [page, sortTime]);
-
-    // const [userList, updateUserList] = useState({"isLoading": true});
-    // useEffect(() => {
-    //     getUserListAPI().then((response) => {
-    // 		if (response.data.success === true) {
-    // 			updateUserList({ "isLoading": false, data: response.data.data })
-    // 			console.log("userList ", response.data)
-    // 		}
-    //     })
-    // }, [])
 
     // const formatPrice = (value) => {
     // 	return new Intl.NumberFormat('vi-VN', {
