@@ -21,6 +21,9 @@ import {
 } from "../../constant/icon"
 import styles from "./leftNavigation.style"
 
+//store & API
+import useStore from '../../appStore';
+
 const tabNames = ["Homes", "Sales", "Products", "Customer Statistic", "Order Reports"]
 const tabIcon = [HomeIc, SaleIc, ProductIc, StatIc, OrderIc]
 
@@ -31,6 +34,8 @@ const LeftNavigation = () => {
 
     const [tabChoose, setTabChoose] = useState();
     const [isOpen, setIsOpen] = useState(false);
+
+    const { username } = useStore(state => state.userInfo)
 
 
     useEffect(() => {
@@ -136,12 +141,13 @@ const LeftNavigation = () => {
 
                 {/* { */}
                     // isOpen &&
-                    <OpenNav
-                        isOpen = {isOpen}
-                        tabNames={tabNames}
-                        currentTab={tabChoose}
-                        navigateTab={navigateTab}
-                    />
+                <OpenNav
+                    isOpen={isOpen}
+                    tabNames={tabNames}
+                    currentTab={tabChoose}
+                    navigateTab={navigateTab}
+                    username={username}
+                />
                 {/* } */}
 
 
