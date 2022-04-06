@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Select,
     FormControl,
@@ -20,7 +20,6 @@ const MyInput = styled(InputBase)(() => ({
         borderWidth: 0,
         'aria-label': 'Without label',
     },
-    // disabled: {}
 }))
 
 const statusList = [
@@ -60,13 +59,23 @@ const ChangeStatus = ({ defaultValue = 0, onChangeValue }) => {
     const [status, setStatus] = useState(statusList[defaultValue])
     const [selectedID, setSelectedID] = useState(null)
     const [openDialog, setOpenDialog] = useState(false)
+    const [activeList, setActiveList] = useState(statusList)
 
-    // let disabled = false
-    // if (defaultValue == 4) disabled = true
+    useEffect(() => {
+        const index = statusList.findIndex(item => item.id == status.id)
+        if (index == -1) return
 
-    let activeList = statusList.slice(defaultValue)
-    if (defaultValue != 4 && defaultValue != 0)
-        activeList.push(statusList[0])
+        if (index == 0 || index == 4) {
+            setActiveList([statusList[index]])
+            return
+        }
+
+        const sliceData = statusList.slice(index)
+        sliceData.push(statusList[0])
+        setActiveList(sliceData)
+
+    }, [status])
+
 
     const handleOpen = () => {
         setOpenDialog(true)
@@ -95,7 +104,6 @@ const ChangeStatus = ({ defaultValue = 0, onChangeValue }) => {
                     sx={[styles.formControl, {
                         backgroundColor: status.bgColor
                     }]}
-                    // disabled={disabled}
                 >
                     <Select
                         sx={[styles.select, {

@@ -17,6 +17,8 @@ const getIncomeSummary = (sortBy = 'Month') => {
 }
 
 const getOrderByPage = (searchVal = "", sortByStatus = "All", offset = 0, limit = 10) => {
+    searchVal = searchVal.toUpperCase();
+
     const command = 'getOrderByPage'
     return axios.get(
         API_URL +
@@ -24,6 +26,8 @@ const getOrderByPage = (searchVal = "", sortByStatus = "All", offset = 0, limit 
 }
 
 const getOrderByFilter = (searchVal = "", sortByStatus = "All") => {
+    searchVal = searchVal.toUpperCase();
+
     const command = 'getOrderByFilter'
     return axios.get(
         API_URL +
