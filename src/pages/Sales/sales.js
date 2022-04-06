@@ -15,37 +15,9 @@ import CustomLineChart from '../../components/LineChart/lineChart'
 import { getSaleOverview } from '../../api/saleAPI'
 import SortByTime from "../../components/SortByTime/sortByTime"
 
-let img = "https://product.hstatic.net/1000026716/product/viewsonic_va2215-h_gearvn_032d5d53effc48a2887c2879e6bc5cff.jpg"
-let catalog = [['Laptop', '2', '54.000.000 đ'], ['Gaming chair', '-2', '54.400.000 đ'], ['Mouse', '-2', '54.400.000 đ'], ['SSD', '2', '54.400.000 đ'], ['Keyboard', '2', '54.400.000 đ']]
+
 let dummycustomers = ['Kurozemi', 'Tezuko', 'Miaojee', 'Jason', 'Tory']
-let product = ['mac', img, "121212"]
-let products = [['CPU Intel Core i7', img, "54.400.000 đ"], ['Màn hình Lenovo ThinkVision S22e dasd', img, "54.400.000 đ"], ['Tai nghe không dây Over-ear SteelSeries', img, "5.400.000.000 đ"], ['mac', img, "54.400.000 đ"], ['mac', img, "54.400.000 đ"]]
-const dataLineChart = [
-    {
-        month: 'Jan',
-        income: 25,
-    },
-    {
-        month: 'Feb',
-        income: 28,
-    },
-    {
-        month: 'Mar',
-        income: 23,
-    },
-    {
-        month: 'Apr',
-        income: 37,
-    },
-    {
-        month: 'May',
-        income: 40,
-    },
-    {
-        month: 'June',
-        income: 40,
-    },
-];
+
 let dummydata = {
     "saleInTime": [
         {
@@ -202,9 +174,9 @@ const Sales = () => {
             console.log(response.data);
         }
     }
-    // useEffect(() => {
-    //     getData()
-    // }, [filterTime]);
+    useEffect(() => {
+        getData()
+    }, [filterTime]);
 
     return (
         <Box sx={{ backgroundColor: color.background, ml: '84px', py: 8, px: largeScreen ? "4.5%" : "7%" }}>

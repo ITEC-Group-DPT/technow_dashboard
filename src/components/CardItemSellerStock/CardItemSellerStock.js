@@ -17,7 +17,7 @@ const CardItemSellerStock = ({ productImg, isView = false, content, percentage }
         <Box sx={{ ...styles.flex }}>
             <CardMedia
                 component="img"
-                sx={{ height: '130px' }}
+                sx={{ height: '130px',width:'130px' }}
                 image={productImg}
             >
             </CardMedia>

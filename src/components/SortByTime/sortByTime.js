@@ -12,7 +12,7 @@ const MyInput = styled(InputBase)(() => ({
 const SortByTime = ({
     defaultValue = "Month",
     onChangeValue,
-    sortList = ["Week", "Month", "Year"]
+    sortList = ["Day", "Month", "Year"]
 }) => {
 
     const [sortValue, setSortValue] = useState(defaultValue);
