@@ -16,12 +16,12 @@ const styles = {
 		maxWidth: '165px',
 		width: '165px',
 	},
-	productImage: {
+	img1: {
 		minWidth: '197px',
 		maxWidth: '197px',
 		width: '197px',
 	},
-	productName: {
+	name: {
 		minWidth: '195px',
 		maxWidth: '195px',
 		width: '195px',
@@ -31,7 +31,7 @@ const styles = {
 		maxWidth: '175px',
 		width: '175px',
 	},
-	productPrice: {
+	price: {
 		minWidth: '186px',
 		maxWidth: '186px',
 		width: '186px',
@@ -55,12 +55,12 @@ const headCells = [
 		label: 'Product ID',
 	},
 	{
-		id: 'productImage',
+		id: 'img1',
 		numeric: false,
 		label: 'Product Image',
 	},
 	{
-		id: 'productName',
+		id: 'name',
 		numeric: false,
 		label: 'Product Name',
 	},
@@ -70,7 +70,7 @@ const headCells = [
 		label: 'Date Added',
 	},
 	{
-		id: 'productPrice',
+		id: 'price',
 		numeric: true,
 		label: 'Product Price',
 	},
@@ -91,12 +91,12 @@ const CustomTableHead = (props) => {
 		switch (id) {
 			case 'productID':
 				return styles.productID
-			case 'productImage':
-				return styles.productImage
-			case 'productName':
-				return styles.productName
-			case 'productPrice':
-				return styles.productPrice
+			case 'img1':
+				return styles.img1
+			case 'name':
+				return styles.name
+			case 'price':
+				return styles.price
 			case 'dateAdded':
 				return styles.dateAdded
 			case 'stock':

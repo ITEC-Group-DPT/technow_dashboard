@@ -6,60 +6,74 @@ import { GreenUpArrIc, RedDownArrIc } from '../../constant/icon'
 
 import SaleCommonCard from '../SaleCommonCard/SaleCommonCard'
 import styles from './CardNameSeller.style'
-let CatalogPercentage = [1, 4, 1, 4]
-let NamePercentage = [1, 9]
+
+const CatalogPercentage = [1, 4, 1, 4]
+const NamePercentage = [1, 9]
 const CardNameSeller = ({ rank, name, grow, payment, isName = false }) => {
-    let rankcolor = color["R" + rank]
-    let flexpercentage = isName ? NamePercentage : CatalogPercentage
-    let growImg = grow > 0 ? GreenUpArrIc : RedDownArrIc
+    const rankcolor = color["R" + rank]
+    const flexpercentage = isName ? NamePercentage : CatalogPercentage
+    const growImg = grow > 0 ? GreenUpArrIc : RedDownArrIc
     if (grow < 0) grow = grow * -1
 
 
     return (
-        <Box sx={{
-            px: 3, py: 1
-        }}>
-            <Box sx={{ ...styles.flex }}>
-                <Box sx={{
-                    minWidth: 50,
-                    height: 50,
-                    borderRadius: 50,
-                    backgroundColor: rankcolor,
-                    mx: 1,
-                    flex: flexpercentage[0]
+        <Box sx={{ ...styles.flex, px: 3, py: "14px" }}>
+            <Box sx={{
+                width: 36,
+                height: 36,
+                borderRadius: 50,
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: rankcolor,
+                mx: 1,
+                display: "flex",
+                // flex: flexpercentage[0]
+            }}>
+                <Typography sx={{
+                    textAlign: 'center',
+                    color: color.white,
+                    fontWeight: "600",
+                    fontSize: '17px',
+                    my: 0,
                 }}>
-                    <p style={{ textAlign: 'center', color: color.white, fontWeight: "600", marginTop: '10px',fontSize:'20px' }}>{rank}</p>
+                    {rank}
+                </Typography>
 
+            </Box>
+
+
+
+            <Typography sx={{ ...styles.pNameSlider, flex: flexpercentage[1], }}>
+                {name}
+            </Typography>
+
+            {isName
+                ? <></>
+                :
+                [<Box sx={{ ...styles.flex, flex: flexpercentage[2], justifyContent: 'center', ml: "2px" }}>
+                    {rank < 4
+                        &&
+                        [<img src={growImg} style={{ height: '13px', marginTop: "2px" }} alt="" />,
+                        <p style={{ color: growImg == GreenUpArrIc ? color.green : color.red, fontWeight: 500, margin: 0 }}>{grow}</p>]
+                    }
+
+
+                </Box>,
+                <Box sx={{
+                    backgroundColor: "#F0F7FF",
+                    borderRadius: "5px", 
+                    px: '12px', 
+                    py: "6px",
+                    marginLeft: "12px",
+                }}>
+                    <Typography sx={{ ...styles.money, }}>
+                        {payment}
+                    </Typography>
                 </Box>
 
 
-
-                <Typography sx={{ ...styles.pNameSlider, flex: flexpercentage[1], }}>
-                    {name}
-                </Typography>
-
-                {isName
-                    ? <></>
-                    :
-                    [<Box sx={{ ...styles.flex, flex: flexpercentage[2], justifyContent: 'center', ml: "2px" }}>
-                        {rank < 4
-                            &&
-                            [<img src={growImg} style={{height:'13px',marginTop:"2px"}} alt="" />,
-                            <p style={{ color: growImg == GreenUpArrIc ? color.green : color.red, fontWeight: 500 }}>{grow}</p>]
-                        }
-
-
-                    </Box>,
-                    <Box sx={{ flex: flexpercentage[3] }}>
-                        <Typography sx={{ ...styles.money, }}>
-                            {payment}
-                        </Typography>
-                    </Box>
-
-
-                    ]
-                }
-            </Box>
+                ]
+            }
         </Box>
     )
 }

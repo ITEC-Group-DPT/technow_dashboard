@@ -4,7 +4,9 @@ import color from '../../constant/color'
 const styles = {
 
 	flex: {
-		display: 'flex', flexWrap: 'nowrap', alignItems: 'center',
+		display: 'flex', 
+		flexWrap: 'nowrap', 
+		alignItems: 'center',
 	},
 
 
@@ -30,13 +32,13 @@ const styles = {
 		paddingLeft: '10px',
 	},
 	money: {
-		width: 'fit-content',
-		backgroundColor: color.lightBlue,
-		borderRadius: "5px", px: '8px', py:"4px",
-		color: color.blue,
+		
+		
+		color: "#2C84B6",
 		fontSize: "0.85rem",
 		fontWeight: "600",
-		marginLeft: "auto",
+		width:"fit-content",
+		textAlign:"center",
 	},
 
 }

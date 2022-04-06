@@ -6,6 +6,15 @@ const styles = {
 		py: '40px',
 		px: '20px !important',
 		minHeight: '100vh',
+
+	},
+	productBoard: {
+		shadow: '1px solid #848484',
+		boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.25)',
+		borderRadius: '10px',
+		padding: '20px',
+		minHeight: '85vh',
+		background: "white",
 	},
 	box: {
 		display: 'flex',
@@ -61,13 +70,6 @@ const styles = {
 		fontWeight: 'bold',
 		fontSize: '35px',
 		my: '20px',
-	},
-	productBoard: {
-		shadow: '1px solid #848484',
-		boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.25)',
-		borderRadius: '10px',
-		padding: '20px',
-		minHeight: '85vh',
 	},
 }
 

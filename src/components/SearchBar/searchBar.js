@@ -6,7 +6,7 @@ import { SearchIc } from "../../constant/icon";
 import color from '../../constant/color';
 
 const SearchBar = ({
-    // width = "",
+    width = "30%",
     text = "",
     setText,
     placeholder,
@@ -14,7 +14,7 @@ const SearchBar = ({
 
     return (
         <Box
-            sx={styles.searchBox}
+            sx={{...styles.searchBox, width: width}}
         >
             <img
                 style={{ userSelect: 'none' }}

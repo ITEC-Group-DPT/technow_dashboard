@@ -4,13 +4,16 @@ import color from '../../constant/color'
 const styles = {
 
 	flex: {
-		display: 'flex', flexWrap: 'nowrap', alignItems: 'center',
+		display: 'flex', 
+		flexWrap: 'nowrap', 
+		alignItems: 'center',
 
 	},
 
 
 	pNameSlider: {
 		margin: 0,
+		marginLeft: "6px",
 		fontSize: '16px',
 
 		lineHeight: "20px",
@@ -21,9 +24,12 @@ const styles = {
 		WebkitBoxOrient: "vertical",
 
 		overflowWrap: 'anywhere',
-		textAlign: "start",
+		
 		fontWeight: "600",
 		fontSize: '17px',
+		color: "#2D2D2D",
+
+		// paddingRight: "30%",
 
 	},
 	pRatingWrapper: {
@@ -32,13 +38,10 @@ const styles = {
 		paddingLeft: '10px',
 	},
 	money: {
-		width: 'fit-content',
-		backgroundColor: color.lightBlue,
-		borderRadius: "5px", px: '8px', py:"4px",
-		color: color.blue,
+		color: "#2C84B6",
 		fontSize: "0.85rem",
 		fontWeight: "600",
-		marginLeft: "auto",
+		textAlign:"center",
 	},
 }
 

@@ -11,7 +11,7 @@ import {
 } from '@mui/material'
 import { Box } from '@mui/system'
 import _ from 'lodash'
-import { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import Pagination from '../../components/Pagination/pagination'
 import SearchBar from '../../components/SearchBar/searchBar'
 import color from '../../constant/color'
@@ -48,15 +48,16 @@ const Products = () => {
 		if (filter.category === 'Category' && filter.text === '') {
 			return productList
 		} else if (filter.text !== '') {
-			return productList.filter((item) =>
-				item.productName.includes(filter.text),
-			)
+			return productList.filter((item) => item.name.includes(filter.text))
 		} else if (filter.category !== 'Category') {
 			return productList.filter((item) => item.type === filter.category)
 		}
 	}
 
-	const totalPage = Math.ceil(filterProductList(productList).length / 6)
+	const totalPage = useMemo(() =>
+		Math.ceil(filterProductList(productList).length / 6)
+		, [productList]);
+
 
 	const handleChangeCategory = (event) => {
 		setFilter({
@@ -134,8 +135,9 @@ const Products = () => {
 						]}>
 						<Box sx={styles.box}>
 							<SearchBar
-								width='406px'
+								width='30%'
 								text={filter.text}
+								placeholder="Cai chet"
 								setText={handleChangeSearchValue}
 							/>
 							<img
@@ -160,7 +162,7 @@ const Products = () => {
 									onChange={handleChangeCategory}
 									sx={styles.selectInp}>
 									<MenuItem value='Category'>
-										<em>All category</em>
+										All
 									</MenuItem>
 									{categoryList?.map((item) => {
 										return (
@@ -229,10 +231,10 @@ const Products = () => {
 													) === 0
 														? color.green
 														: changeStockColor(
-																item.stock,
-														  ) === 1
-														? color.yellow
-														: color.darkRed
+															item.stock,
+														) === 1
+															? color.yellow
+															: color.darkRed
 												return (
 													<CustomTableRow
 														colorStock={colorStock}
