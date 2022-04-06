@@ -1,6 +1,57 @@
 import React from 'react'
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
+const months = [
+  {
+    num: 1,
+    string: 'Jan' 
+  },
+  {
+    num: 2,
+    string: 'Feb' 
+  },
+  {
+    num: 3,
+    string: 'Mar' 
+  },
+  {
+    num: 4,
+    string: 'Apr' 
+  },
+  {
+    num: 5,
+    string: 'May' 
+  },
+  {
+    num: 6,
+    string: 'Jun' 
+  },
+  {
+    num: 7,
+    string: 'Jul' 
+  },
+  {
+    num: 8,
+    string: 'Aug' 
+  },
+  {
+    num: 9,
+    string: 'Sep' 
+  },
+  {
+    num: 10,
+    string: 'Oct' 
+  },
+  {
+    num: 11,
+    string: 'Nov' 
+  },
+  {
+    num: 12,
+    string: 'Dec' 
+  }
+]
+
 const customAreaChart = ({
   data,
   width,
