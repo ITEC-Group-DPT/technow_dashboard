@@ -10,92 +10,16 @@ import SortByTime from '../../components/SortByTime/sortByTime'
 import TableUser from './tableUser'
 import AreaChart from '../../components/AreaChart/areaChart'
 
-import { getLeaderboardData, getActiveUsers, getVisitedUsers } from '../../api/customerStatistic'
-
-const dataAreaChart = [
-    {
-        month: 'Jan',
-        users: 70,
-    },
-    {
-        month: 'Feb',
-        users: 180,
-    },
-    {
-        month: 'Mar',
-        users: 200,
-    },
-    {
-        month: 'Apr',
-        users: 415,
-    },
-    {
-        month: 'May',
-        users: 390,
-    },
-    {
-        month: 'Jun',
-        users: 490,
-    },
-];
-
-const dataTable = [
-    {
-        rank: 1,
-        username: 'Tri Minh Quan',
-        amount: 12221000
-    },
-    {
-        rank: 2,
-        username: 'minhdaongtr',
-        amount: 102000000
-    },
-    {
-        rank: 3,
-        username: 'phutruong123',
-        amount: 79000000
-    },
-    {
-        rank: 4,
-        username: 'cuongvl',
-        amount: 47000000
-    },
-    {
-        rank: 5,
-        username: 'longtran',
-        amount: 18221000
-    },
-    {
-        rank: 6,
-        username: 'vanana111',
-        amount: 10221000
-    },
-    {
-        rank: 7,
-        username: 'chelinh',
-        amount: 9221000
-    },
-    {
-        rank: 8,
-        username: 'chelinh',
-        amount: 9221000
-    },
-    {
-        rank: 9,
-        username: 'chelinh',
-        amount: 9221000
-    },
-    {
-        rank: 10,
-        username: 'chelinh',
-        amount: 9221000
-    }
-];
+import { getLeaderboardData, getActiveUsers, getVisitedUsers, getChartsData } from '../../api/customerStatistic'
 
 const Customers = () => {
     const [sortTime, setSort] = useState("month");
+    const [leaderboard, updateLeaderboard] = useState([]);
+    const [activeUsers, updateActiveUsers] = useState([]);
+    const [visitedUsers, updateVisitedUsers] = useState([]);
+    const [xName, setX] = useState("month");
+    const [yName, setY] = useState("users");
 
-    const [leaderboard, updateLeaderboard] = useState(dataTable);
     useEffect(() => {
         getLeaderboardData().then((response) => {
 			if (response.data.success === true) {
@@ -103,7 +27,19 @@ const Customers = () => {
 				console.log("leaderboardData ", response.data);
 			}
         })
-    });
+    }, []);
+
+    useEffect(() => {
+        getChartsData(sortTime.toLowerCase()).then((response) => {
+            console.log("ChartsData", response.data);
+            if (response.data.success === true) {
+                setX(Object.keys(JSON.parse(response.data.data).active[0])[0]);
+                setY(Object.keys(JSON.parse(response.data.data).active[0])[1]);
+				updateActiveUsers(JSON.parse(response.data.data).active);
+				updateVisitedUsers(JSON.parse(response.data.data).visited);
+			}
+        })
+    }, [sortTime])
 
     return (
         <Box
@@ -133,9 +69,9 @@ const Customers = () => {
                                 <Typography style={{ fontSize: "22px", fontWeight: 500, textAlign: "center", paddingTop: "10px", paddingBottom: "10px"}}>Guest Visited</Typography>
                             </Box>
                             <AreaChart 
-                                data={dataAreaChart}
-                                xAxisName="month"
-                                yAxisName="users"
+                                data={visitedUsers}
+                                xAxisName={xName}
+                                yAxisName={yName}
                                 yAxisCount={6}
                                 width={430}
                                 height={270}
@@ -150,9 +86,9 @@ const Customers = () => {
                                 <Typography style={{ fontSize: "22px", fontWeight: 500, textAlign: "center", paddingTop: "10px", paddingBottom: "10px"}}>Active Users</Typography>
                             </Box>
                             <AreaChart
-                                data={dataAreaChart}
-                                xAxisName="month"
-                                yAxisName="users"
+                                data={activeUsers}
+                                xAxisName={xName}
+                                yAxisName={yName}
                                 yAxisCount={6}
                                 width={430}
                                 height={270}
@@ -164,7 +100,7 @@ const Customers = () => {
                         
                     </Grid>
                     <Grid item lg={6}>
-                        <TableUser sortTime={sortTime} data={leaderboard}/>
+                        <TableUser data={leaderboard}/>
                     </Grid>
                 </Grid>
             </Container>
