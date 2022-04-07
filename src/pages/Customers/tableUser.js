@@ -24,12 +24,19 @@ const TableUser = ({ data }) => {
     const offset = (page - 1) * itemsPerPage;
 
     useEffect(() => {
-        setTotalPage(2);
+        setTotalPage(Math.round(data.length / itemsPerPage))
         setUserList(data.slice(offset, offset + itemsPerPage));
     }, [page, data])
 
     useEffect(() => {
-        setUserList(data.reverse().slice(offset, offset + itemsPerPage));
+        if (data.length == 0) return;
+        let userData;
+
+        if (data[0].rank > 1)
+            userData = data.reverse().slice(offset, offset + itemsPerPage);
+        else
+            userData = data.slice(offset, offset + itemsPerPage);
+        setUserList(userData);
     }, [purchasedSort])
 
     const formatPrice = (value) => {

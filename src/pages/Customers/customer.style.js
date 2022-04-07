@@ -62,7 +62,9 @@ const Style = {
         paddingBottom: '10px',
         position: 'absolute',
         bottom: "10px",
-        left: "200px"
+        display:"flex",
+        justifyContent:"center",
+        width:"100%",
     },
 
     firstRank: {
