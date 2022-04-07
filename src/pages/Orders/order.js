@@ -28,7 +28,7 @@ const Orders = () => {
     const [totalPage, setTotalPage] = useState(0)
     const [page, setPage] = useState(1)
 
-    const itemsPerPage = 10
+    const itemsPerPage = 5
 
     const handleChangePage = (direction) => {
         let newPage = page

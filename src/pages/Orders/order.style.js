@@ -70,7 +70,7 @@ const styles = {
         background: 'white',
         borderRadius: '15px',
         boxShadow: '0px .5px #d5d6d8',
-        minHeight: '73vh',
+        minHeight: '50vh',
         pt: 5,
         pb: 1,
         pl: 8,

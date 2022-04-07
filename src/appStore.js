@@ -1,6 +1,4 @@
 import create from "zustand";
-import { login } from "./api/authenAPI";
-
 
 const useStore = create(set => ({
     userInfo: null,
