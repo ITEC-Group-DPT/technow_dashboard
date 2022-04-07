@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useRef } from "react"
 import styles from "./authentication.style"
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useNavigate } from 'react-router-dom'
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Input, Button, Typography, CircularProgress, IconButton, InputAdornment, useMediaQuery } from '@mui/material'
 import { Box } from '@mui/system'
 import validator from 'validator'
+import { loginAPI } from "../../api/authenAPI";
+import useStore from "../../appStore"
 // import { icons } from "../../constant"
 
-const SignInForm = ({ isSignIn, setIsSignIn }) => {
-	// const dispatch = useDispatch()
-	// const history = useHistory()
-	//const inputRef = useRef()
-	// const authErrors = useSelector(authErrorSelector)
-	// const isLoading = useSelector(authIsLoadingSelector)
+const SignInForm = () => {
+	const { loginAction } = useStore();
+
+	const navigate = useNavigate();
 
 	const [email, setEmail] = useState({
 		value: "",
@@ -22,16 +22,38 @@ const SignInForm = ({ isSignIn, setIsSignIn }) => {
 		value: "",
 		showPassword: false,
 	})
+	const [isLoading, setIsLoading] = useState(false);
 
-	// useEffect(() => {
-	// 	setEmail({ ...email, error: authErrors.emailSignIn })
-	// }, [authErrors.emailSignIn])
+	const login = () => {
 
+		setIsLoading(true)
+		loginAPI(email.value, password.value).then(response => {
+
+			const timeout = setTimeout(() => {
+				setIsLoading(false);
+			}, 500);
+
+			if (response.data.success) {
+				console.log('login success: ', response.data.data);
+
+				const { userID, username } = response.data.data;
+				loginAction(userID, username);
+
+				clearTimeout(timeout);
+				navigate("/")
+			} else {
+				const { errorEmail, errorPassword } = response.data.data;
+
+				setEmail({ ...email, error: errorEmail })
+				setPassword({ ...password, error: errorPassword })
+			}
+		})
+	}
 	const signInSubmit = () => {
-		// if (validator.isEmail(email.value) === false)
-		// 	setEmail({ ...email, error: "Email is invalid" })
-		// else
-		// 	dispatch(signIn(email.value, password.value, history))
+		if (validator.isEmail(email.value) === false)
+			setEmail({ ...email, error: "Email is invalid" })
+		else
+			login();
 	}
 
 	const isRedBorder = (type) => ({
@@ -40,10 +62,8 @@ const SignInForm = ({ isSignIn, setIsSignIn }) => {
 	})
 
 	const onClickRemoveEmailError = () => {
-		// if (authErrors.emailSignIn)
-		// 	dispatch(removeEmailError())
-		// else if (email.error)
-		// 	setEmail({ ...email, error: undefined })
+		if (email.error)
+			setEmail({ ...email, error: undefined })
 	}
 
 	const onClickRemovePasswordError = () => {
@@ -84,7 +104,9 @@ const SignInForm = ({ isSignIn, setIsSignIn }) => {
 					fullWidth
 					inputProps={{ style: styles.input }}
 				/>
-				<Typography component="div" sx={styles.errorMsg}>{email.error}</Typography>
+				<Typography component="div" sx={styles.errorMsg}>
+					{email.error}
+				</Typography>
 
 				<Input
 					sx={{
@@ -96,14 +118,13 @@ const SignInForm = ({ isSignIn, setIsSignIn }) => {
 					onClick={onClickRemovePasswordError}
 					onKeyDown={handleKeyDown}
 					type={password.showPassword ? 'text' : 'password'}
-					//inputRef={inputRef}
 					placeholder="Password"
 					disableUnderline
 					fullWidth
 					inputProps={{ style: { padding: 0 } }}
 				/>
 				<Typography sx={styles.errorMsg}>
-					{/* {authErrors.password} */}
+					{password.error}
 				</Typography>
 
 				<Box sx={styles.centerBox}>
@@ -111,7 +132,7 @@ const SignInForm = ({ isSignIn, setIsSignIn }) => {
 						onClick={signInSubmit}
 						sx={styles.mainButton}
 						variant="contained"
-						// loading={isLoading}
+						loading={isLoading}
 						loadingIndicator={<CircularProgress sx={styles.loadingIndicator} size={18} />}
 					>Sign In
 					</LoadingButton>

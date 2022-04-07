@@ -32,16 +32,6 @@ const LeftNavigation = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const checkNotFound = () => {
-        const path = location.pathname;
-        console.log('path: ', path);
-
-        return path == "/" || path == "sales" || path == "products"
-            || path == "customers" || path == "orders";
-    }
-
-    const notFound = !checkNotFound();
-
     const [tabChoose, setTabChoose] = useState();
     const [isOpen, setIsOpen] = useState(false);
 
@@ -113,7 +103,6 @@ const LeftNavigation = () => {
         }
     }
 
-    if (notFound) return <></>
     return (
         <Box sx={
             (isOpen && location.pathname != "/")

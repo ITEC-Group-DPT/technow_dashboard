@@ -3,7 +3,8 @@ import {
     BrowserRouter as Router,
     Routes as Switch,
     Route,
-    Link
+    Link,
+    Navigate,
 } from "react-router-dom";
 
 //Pages
@@ -20,33 +21,19 @@ import LeftNavigation from "../components/LeftNavigation/leftNavigation"
 
 //API && action
 import useStore from "../appStore";
-import { checkToken } from "../api/testAPI";
 
 const AppNavigagtion = () => {
 
-    const { loginAction } = useStore();
-
-
-    useEffect(() => {
-        console.log('run use effect');
-        const email = "noaccount";
-        const password = "nevergonnagiveyouup";
-
-        loginAction(email, password);
-    }, []);
-
-    const isLogin = false;
+    const isLogin = useStore(state => state.userInfo.userID) != 0;
 
     if (isLogin == false) {
         return (
             <Router>
                 <Switch>
-                    <Route
+=                    <Route
                         exact path={"/authentication"} element={<Authentication />}
                     />
-                    <Route
-                        path={"*"} element={<NotFound notLogin/>}
-                    />
+                    <Route path="*" element={<Navigate replace to="/authentication" />} />
                 </Switch>
             </Router>
         )

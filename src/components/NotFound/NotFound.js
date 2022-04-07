@@ -23,7 +23,7 @@ const NotFound = ({ notLogin = false }) => {
 				variant="contained"
 				sx={{ ...styles.button }}
 			>
-				{notLogin ? "Sign In" : "Back To Home"}
+				{notLogin ? "Login to Continue" : "Back To Home"}
 			</Button>
 		</Box>
 	);

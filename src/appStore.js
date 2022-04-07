@@ -1,5 +1,5 @@
 import create from "zustand";
-import { login } from "./api/testAPI";
+import { login } from "./api/authenAPI";
 
 
 const useStore = create(set => ({
@@ -8,23 +8,13 @@ const useStore = create(set => ({
         username: "Anonymous",
     },
 
-    loginAction: (username, password) => {
-
-        login(username, password).then(response => {
-            if (response.data.success) {
-                console.log('login success: ', response.data.data);
-
-                const { userID, username } = response.data.data;
-                set({
-                    userInfo: {
-                        userID: userID,
-                        username: username,
-                    }
-                });
+    loginAction: (userID, username) =>
+        set({
+            userInfo: {
+                userID: userID,
+                username: username,
             }
-        })
-    },
-
+        }),
     logout: () => set({ userInfo: { userID: 0, username: "" } }),
 }))
 

@@ -67,7 +67,7 @@ const styles = {
         fontFamily: "IBM Plex Serif, serif",
         fontSize: 12,
         textAlign: "center",
-        marginBottom: "24px",
+        marginBottom: "36px",
     },
 
     forgot: {
