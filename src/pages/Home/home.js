@@ -42,7 +42,7 @@ const Home = () => {
 
             let formatData = data;
             console.log('data: ', data);
-            formatData['totalSales'] = (data['totalSales'] / (1000000)).toFixed(1);
+            formatData['totalSales'] = (data['totalSales'] / (1000000000)).toFixed(1);
 
             setBannerData(formatData)
         }
