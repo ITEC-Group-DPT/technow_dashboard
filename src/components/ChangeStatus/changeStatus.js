@@ -14,6 +14,7 @@ import {
     styled,
 } from '@mui/material'
 import './changeStatus.css'
+import { updateStatus } from '../../api/orderReportAPI'
 
 const MyInput = styled(InputBase)(() => ({
     '& .MuiInputBase-input': {
@@ -55,7 +56,7 @@ const statusList = [
     },
 ]
 
-const ChangeStatus = ({ defaultValue = 0, onChangeValue }) => {
+const ChangeStatus = ({ defaultValue = 0, orderID = 0 }) => {
     const [status, setStatus] = useState(statusList[defaultValue])
     const [selectedID, setSelectedID] = useState(null)
     const [openDialog, setOpenDialog] = useState(false)
@@ -92,9 +93,15 @@ const ChangeStatus = ({ defaultValue = 0, onChangeValue }) => {
     }
 
     const handleConfirm = () => {
-        onChangeValue && onChangeValue(selectedID)
-        setStatus(statusList[selectedID])
-        handleClose()
+        updateStatus(orderID, selectedID).then(response => {
+            if (response.data.success === true) {
+                const data = response.data.data
+                console.log(data)
+
+                setStatus(statusList[selectedID])
+                handleClose()
+            }
+        })
     }
 
     return (

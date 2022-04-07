@@ -15,7 +15,6 @@ import {
     getIncomeSummary,
     getOrderByPage,
     getOrderByFilter,
-    updateStatus,
 } from '../../api/orderReportAPI'
 
 const Orders = () => {
@@ -65,23 +64,6 @@ const Orders = () => {
                 setTotalPage(totalPage)
                 setPage(1)
                 setOrderList(data.orderList)
-            }
-        })
-    }
-
-    const onChangeStatus = (orderID, statusID) => {
-        updateStatus(orderID, statusID).then(response => {
-            if (response.data.success === true) {
-                const data = response.data.data
-                console.log(data);
-
-                getIncomeSummary(sort).then(response => {
-                    if (response.data.success === true) {
-                        const data = response.data.data
-                        console.log("lineChartData: ", data)
-                        setLineChartData(data)
-                    }
-                })
             }
         })
     }
@@ -175,7 +157,7 @@ const Orders = () => {
                                     <Typography sx={styles.label} >(million VND)</Typography>
                                 </Grid>
                                 <Grid item xs={4}>
-                                    <Typography sx={styles.graphTitle}>Total Income</Typography>
+                                    <Typography sx={styles.graphTitle}>Total Value</Typography>
                                 </Grid>
                             </Grid>
                             {lineChartData.length > 0 &&
@@ -260,7 +242,6 @@ const Orders = () => {
                             <OrderItem
                                 order={order}
                                 key={order.id}
-                                onChangeStatus={(orderID, status) => onChangeStatus(orderID, status)}
                             />
                         ))}
                     </Box>

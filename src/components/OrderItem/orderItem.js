@@ -3,7 +3,7 @@ import { Typography, Grid, Box } from '@mui/material'
 import ChangeStatus from '../../components/ChangeStatus/changeStatus'
 import styles from './orderItem.style'
 
-const OrderItem = ({ order, onChangeStatus }) => {
+const OrderItem = ({ order }) => {
 
     const formatPrice = (value) => {
 		return new Intl.NumberFormat('vi-VN', {
@@ -11,10 +11,6 @@ const OrderItem = ({ order, onChangeStatus }) => {
 			currency: 'VND',
 		}).format(value)
 	}
-
-    const handleChange = (status) => {
-        onChangeStatus(order.id, status)
-    }
 
     return (
         <Grid container sx={styles.container}>
@@ -40,7 +36,7 @@ const OrderItem = ({ order, onChangeStatus }) => {
             <Grid item xs={2.5} sx={styles.changeStatusWrapper}>
                 <ChangeStatus
                     defaultValue={order.status}
-                    onChangeValue={handleChange}
+                    orderID={order.id}
                 />
             </Grid>
         </Grid>
