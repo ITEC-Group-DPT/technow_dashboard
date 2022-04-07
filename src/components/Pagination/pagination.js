@@ -73,6 +73,7 @@ const styles = {
         borderRadius: "5px",
         display: "flex",
         alignItems: "center",
+        justifyContent: "center",
 
         py: "10px",
         px: "16px",
@@ -80,6 +81,8 @@ const styles = {
     pageText: {
         fontSize: 14,
         color: color.lightGrayText,
+        whiteSpace: 'nowrap',
+        minWidth: '70px',
     },
 }
 

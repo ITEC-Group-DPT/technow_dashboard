@@ -22,13 +22,14 @@ const SortByStatus = ({ defaultValue = "All", onChangeValue }) => {
     return (
         <Box sx={styles.container}>
             <Typography sx={styles.title}>Status:</Typography>
-            <Box>
+            <Box sx={{height: "100%"}}>
                 <FormControl sx={styles.formControl}>
                     <Select
                         sx={styles.select}
                         value={status}
                         onChange={handleChange}
                         input={<MyInput />}
+                        MenuProps={{ disableScrollLock: true }}
                     >
                         {statusList.map((status) => (
                             <MenuItem value={status} key={status}>{status}</MenuItem>
@@ -44,12 +45,13 @@ const styles = {
     container: {
         display: "flex",
         alignItems: "center",
+        height: "100%",
     },
     title: {
         color: '#848484',
     },
     formControl: {
-        m: 1,
+        ml: 1,
         border: "1px solid #D0D0D0",
         borderRadius: "5px",
         boxSizing: 'border-box',

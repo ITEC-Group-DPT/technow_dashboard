@@ -4,6 +4,14 @@ import ChangeStatus from '../../components/ChangeStatus/changeStatus'
 import styles from './orderItem.style'
 
 const OrderItem = ({ order, onChangeStatus }) => {
+
+    const formatPrice = (value) => {
+		return new Intl.NumberFormat('vi-VN', {
+			style: 'currency',
+			currency: 'VND',
+		}).format(value)
+	}
+
     const handleChange = (status) => {
         onChangeStatus(order.id, status)
     }
@@ -25,10 +33,10 @@ const OrderItem = ({ order, onChangeStatus }) => {
             </Grid>
             <Grid item xs={2.5} sx={styles.priceItem}>
                 <Box sx={styles.priceWrapper}>
-                    <Typography sx={styles.price}>{order.price}</Typography>
+                    <Typography sx={styles.price}>{formatPrice(order.price)}</Typography>
                 </Box>
             </Grid>
-            
+
             <Grid item xs={2.5} sx={styles.changeStatusWrapper}>
                 <ChangeStatus
                     defaultValue={order.status}
