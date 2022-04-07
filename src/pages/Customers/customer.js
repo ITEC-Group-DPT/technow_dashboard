@@ -9,8 +9,10 @@ import color from '../../constant/color'
 import SortByTime from '../../components/SortByTime/sortByTime'
 import TableUser from './tableUser'
 import AreaChart from '../../components/AreaChart/areaChart'
+import { getLeaderboardData, getChartsData } from '../../api/customerStatistic'
 
-import { getLeaderboardData, getActiveUsers, getVisitedUsers, getChartsData } from '../../api/customerStatistic'
+import './customer.css'
+import Style from './customer.style'
 
 const Customers = () => {
     const [sortTime, setSort] = useState("month");
@@ -18,60 +20,58 @@ const Customers = () => {
     const [activeUsers, updateActiveUsers] = useState([]);
     const [visitedUsers, updateVisitedUsers] = useState([]);
     const [xName, setX] = useState("month");
-    const [yName, setY] = useState("users");
 
     useEffect(() => {
         getLeaderboardData().then((response) => {
-			if (response.data.success === true) {
-				updateLeaderboard(response.data.data);
-				console.log("leaderboardData ", response.data);
-			}
+            if (response.data.success === true) {
+                updateLeaderboard(response.data.data);
+                console.log("leaderboardData ", response.data);
+            }
         })
     }, []);
 
     useEffect(() => {
         getChartsData(sortTime.toLowerCase()).then((response) => {
             console.log("ChartsData", response.data);
+            let Cdata = JSON.parse(response.data.data);
+            console.log(Cdata);
             if (response.data.success === true) {
-                setX(Object.keys(JSON.parse(response.data.data).active[0])[0]);
-                setY(Object.keys(JSON.parse(response.data.data).active[0])[1]);
-				updateActiveUsers(JSON.parse(response.data.data).active);
-				updateVisitedUsers(JSON.parse(response.data.data).visited);
+                setX(Object.keys(Cdata.visited[0])[0]);
+				updateActiveUsers(Cdata.active);
+				updateVisitedUsers(Cdata.visited);
 			}
         })
     }, [sortTime])
 
     return (
         <Box
+            className='userStats'
             style={{
                 minHeight: "100vh",
                 background: color.background
             }}
         >
-            <Container sx={{ py: "52px"}}>
-                <Box style={{display: "flex", justifyContent: "space-between"}}>
+            <Container className='container' sx={{ py: "52px" }}>
+                <Box style={Style.titleWrapper}>
                     <Grid container spacing={2}>
-                        <Grid item lg={4}>
-                            <Typography style={{ fontSize: "32px", fontWeight: 700, textAlign: "left", marginBottom: "1rem"}}>User Statistic</Typography>
+                        <Grid item lg={4} md={4}>
+                            <Typography style={Style.title}>User Statistic</Typography>
                         </Grid>
-                        <Grid item lg={2}>
+                        <Grid item lg={2} md={3}>
                             <SortByTime onChangeValue={value => setSort(value)} />
                         </Grid>
                     </Grid>
-
-
                 </Box>     
-                <Grid container spacing={10}>
-                    <Grid item lg={6}>
-
-                        <Box style={{marginBottom: "2rem", background: color.white, borderRadius: "15px", paddingLeft: "45px"}}>
+                <Grid container spacing={9}>
+                    <Grid item lg={6} md={6}>
+                        <Box className="chart" style={Style.chart}>
                             <Box>
-                                <Typography style={{ fontSize: "22px", fontWeight: 500, textAlign: "center", paddingTop: "10px", paddingBottom: "10px"}}>Guest Visited</Typography>
+                                <Typography style={Style.chartTitle}>Guest Visited</Typography>
                             </Box>
                             <AreaChart 
                                 data={visitedUsers}
                                 xAxisName={xName}
-                                yAxisName={yName}
+                                yAxisName="guests"
                                 yAxisCount={6}
                                 width={430}
                                 height={270}
@@ -81,14 +81,14 @@ const Customers = () => {
                             />
                         </Box>
                         
-                        <Box style={{marginBottom: "2rem", background: color.white, borderRadius: "15px", paddingLeft: "45px"}}>
+                        <Box className="chart" style={Style.chart}>
                             <Box>
-                                <Typography style={{ fontSize: "22px", fontWeight: 500, textAlign: "center", paddingTop: "10px", paddingBottom: "10px"}}>Active Users</Typography>
+                                <Typography style={Style.chartTitle}>Active Users</Typography>
                             </Box>
                             <AreaChart
                                 data={activeUsers}
                                 xAxisName={xName}
-                                yAxisName={yName}
+                                yAxisName="users"
                                 yAxisCount={6}
                                 width={430}
                                 height={270}
@@ -99,7 +99,7 @@ const Customers = () => {
                         </Box>
                         
                     </Grid>
-                    <Grid item lg={6}>
+                    <Grid item lg={6} md={6}>
                         <TableUser data={leaderboard}/>
                     </Grid>
                 </Grid>

@@ -28,6 +28,7 @@ const SortPurchased = ({ defaultValue = "Top Purchased", onChangeValue }) => {
                     value={sort}
                     onChange={handleChange}
                     input={<MyInput />}
+                    MenuProps={{ disableScrollLock: true }}
                 >
                     {sortList.map((sort) => (
                         <MenuItem value={sort} key={sort}>{sort}</MenuItem>
