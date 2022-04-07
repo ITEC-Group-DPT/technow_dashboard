@@ -33,31 +33,31 @@ const TableUser = ({ data }) => {
     }, [purchasedSort])
 
     const formatPrice = (value) => {
-    	return new Intl.NumberFormat('vi-VN', {
-    		style: 'currency',
-    		currency: 'VND',
-    	}).format(value)
+        return new Intl.NumberFormat('vi-VN', {
+            style: 'currency',
+            currency: 'VND',
+        }).format(value)
     }
 
     const formatRankColor = (value) => {
-        switch(value){
-            case 1:{
+        switch (value) {
+            case 1: {
                 return Style.firstRank;
-            };break;
-            case 2:{
+            };
+            case 2: {
                 return Style.secondRank;
-            };break;
-            case 3:{
+            };
+            case 3: {
                 return Style.thirdRank;
-            };break;
+            };
             default: break;
         }
     }
 
     return (
-        <Box style={Style.leaderboard}>
+        <Box sx={Style.leaderboard}>
             <Container>
-                <Box>
+                <Box sx={{ mt: "16px", mb: "20px", ml: "14px" }}>
                     <SearchBar
                         width='100%'
                         placeholder="Search for username..."
@@ -88,9 +88,15 @@ const TableUser = ({ data }) => {
                         <Grid item lg={4} md={4}>
                             <Typography>{user.username}</Typography>
                         </Grid>
-                        <Grid item lg={5} md={5} style={{ display: 'inline-flex' }}>
+                        <Grid item lg={5} md={5} style={{
+                            display: 'flex',
+                            justifyContent: 'right',
+                            paddingRight: "11%",
+                        }}>
                             <Box style={formatRankColor(user.rank)}>
-                                <Typography>{formatPrice(user.purchasedAmount)}</Typography>                                
+                                <Typography>
+                                    {formatPrice(user.purchasedAmount)}
+                                </Typography>
                             </Box>
                         </Grid>
                     </Grid>

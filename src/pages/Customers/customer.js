@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { 
+import {
     Box,
     Container,
     Grid,
@@ -12,7 +12,7 @@ import AreaChart from '../../components/AreaChart/areaChart'
 import { getLeaderboardData, getChartsData } from '../../api/customerStatistic'
 
 import './customer.css'
-import Style from './customer.style'
+import styles from './customer.style'
 
 const Customers = () => {
     const [sortTime, setSort] = useState("month");
@@ -37,9 +37,9 @@ const Customers = () => {
             console.log(Cdata);
             if (response.data.success === true) {
                 setX(Object.keys(Cdata.visited[0])[0]);
-				updateActiveUsers(Cdata.active);
-				updateVisitedUsers(Cdata.visited);
-			}
+                updateActiveUsers(Cdata.active);
+                updateVisitedUsers(Cdata.visited);
+            }
         })
     }, [sortTime])
 
@@ -52,23 +52,28 @@ const Customers = () => {
             }}
         >
             <Container className='container' sx={{ py: "52px" }}>
-                <Box style={Style.titleWrapper}>
+                <Box style={styles.titleWrapper}>
                     <Grid container spacing={2}>
                         <Grid item lg={4} md={4}>
-                            <Typography style={Style.title}>User Statistic</Typography>
+                            <Typography style={styles.title}>User Statistic</Typography>
                         </Grid>
                         <Grid item lg={2} md={3}>
                             <SortByTime onChangeValue={value => setSort(value)} />
                         </Grid>
                     </Grid>
-                </Box>     
+                </Box>
                 <Grid container spacing={9}>
-                    <Grid item lg={6} md={6}>
-                        <Box className="chart" style={Style.chart}>
+                    <Grid item lg={6} md={6} sx={{
+                        height: "100%",
+                        display:"flex",
+                        flexDirection:"column",
+                        justifyContent:"space-between",
+                    }}>
+                        <Box className="chart" sx={styles.chart}>
                             <Box>
-                                <Typography style={Style.chartTitle}>Guest Visited</Typography>
+                                <Typography style={styles.chartTitle}>Guest Visited</Typography>
                             </Box>
-                            <AreaChart 
+                            <AreaChart
                                 data={visitedUsers}
                                 xAxisName={xName}
                                 yAxisName="guests"
@@ -77,13 +82,13 @@ const Customers = () => {
                                 height={270}
                                 lineColor={color.yellow}
                                 areaColor={color.lightYellow}
-                                style={{ fontSize: "13px"}}
+                                style={{ fontSize: "13px" }}
                             />
                         </Box>
-                        
-                        <Box className="chart" style={Style.chart}>
+
+                        <Box className="chart" sx={{...styles.chart, mb: 0}}>
                             <Box>
-                                <Typography style={Style.chartTitle}>Active Users</Typography>
+                                <Typography style={styles.chartTitle}>Active Users</Typography>
                             </Box>
                             <AreaChart
                                 data={activeUsers}
@@ -94,18 +99,18 @@ const Customers = () => {
                                 height={270}
                                 lineColor={color.green}
                                 areaColor={color.lightGreen}
-                                style={{ fontSize: "13px"}}
+                                style={{ fontSize: "13px" }}
                             />
                         </Box>
-                        
+
                     </Grid>
                     <Grid item lg={6} md={6}>
-                        <TableUser data={leaderboard}/>
+                        <TableUser data={leaderboard} />
                     </Grid>
                 </Grid>
             </Container>
 
-            
+
 
         </Box>
     )
