@@ -8,7 +8,7 @@ const styles = {
 
     main: {
         pt: 5,
-        maxWidth: '1200px !important',
+        maxWidth: '1300px !important',
         paddingLeft: '108px !important',
         height: '100%',
         pb: 5,
@@ -70,11 +70,11 @@ const styles = {
         background: 'white',
         borderRadius: '15px',
         boxShadow: '0px .5px #d5d6d8',
-        minHeight: '50vh',
-        pt: 5,
+        minHeight: '420px',
+        pt: 6,
         pb: 1,
-        pl: 8,
-        pr: 8,
+        pl: 9,
+        pr: 9,
     },
 
     controlWrapper: {

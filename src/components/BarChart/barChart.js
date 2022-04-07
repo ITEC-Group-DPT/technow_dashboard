@@ -29,6 +29,7 @@ const CustomBarChart = ({
                 tickCount={yAxisCount}
                 axisLine={false}
                 tickLine={false}
+                allowDecimals={false}
             />
 
             <Tooltip cursor={{fill: 'rgb(240 240 240)'}} />

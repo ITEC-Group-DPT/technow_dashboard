@@ -18,6 +18,13 @@ const CustomLineChart = ({
         else return number
     }
 
+    const formatPrice = (value) => {
+		return new Intl.NumberFormat('vi-VN', {
+			style: 'currency',
+			currency: 'VND',
+		}).format(value)
+	}
+
     return (
         <LineChart
             style={{ margin: 'auto', paddingRight: "20px" }}
@@ -41,9 +48,10 @@ const CustomLineChart = ({
                 axisLine={false}
                 tickLine={false}
                 tickFormatter={tickFormater}
+                allowDecimals={false}
             />
 
-            <Tooltip />
+            <Tooltip formatter={value => formatPrice(value)} />
 
             <Line
                 dataKey={yAxisName}

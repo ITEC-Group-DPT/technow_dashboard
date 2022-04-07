@@ -159,7 +159,7 @@ const Orders = () => {
                                     xAxisName="key"
                                     yAxisName="orders"
                                     yAxisCount={6}
-                                    width={430}
+                                    width={480}
                                     height={270}
                                     barSize={40}
                                     barColor={color.orange}
@@ -184,7 +184,7 @@ const Orders = () => {
                                     xAxisName="key"
                                     yAxisName="income"
                                     yAxisCount={6}
-                                    width={430}
+                                    width={470}
                                     height={270}
                                     lineColor={color.blue}
                                 />
