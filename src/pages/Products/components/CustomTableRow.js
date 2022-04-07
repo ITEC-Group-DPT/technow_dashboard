@@ -1,6 +1,6 @@
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
-import { Button, Popover, TableCell, TableRow } from '@mui/material'
+import { Button, Popover, TableCell, TableRow, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import { useState } from 'react'
 import color from '../../../constant/color'
@@ -12,6 +12,13 @@ const styles = {
 		display: 'flex',
 		alignItems: 'center',
 		color: '#000',
+	},
+	cellName: {
+		maxWidth: '180px !important',
+		overflow: 'hidden',
+		WebkitLineClamp: '2',
+		display: '-webkit-box',
+		WebkitBoxOrient: 'vertical',
 	},
 	dataCell: {
 		fontFamily: 'Segoe UI',
@@ -63,40 +70,44 @@ const CustomTableRow = ({ item, colorStock }) => {
 	return (
 		<>
 			<TableRow>
-				<TableCell sx={styles.dataCell}>{item.productID}</TableCell>
+				<TableCell align='center' sx={styles.dataCell}>
+					<Typography sx={{ pr: '20px' }}>
+						{item.productID}
+					</Typography>
+				</TableCell>
+				<TableCell align='center' sx={styles.dataCell}>
+					<img
+						src={item.img1}
+						width={75}
+						height={75}
+						style={{ paddingRight: '30px' }}
+					/>
+				</TableCell>
 				<TableCell sx={styles.dataCell}>
-					<img src={item.img1} width={75} height={75} />
+					<Typography sx={[styles.cellName]}>{item.name}</Typography>
 				</TableCell>
-				<TableCell sx={styles.dataCell}>{item.name}</TableCell>
-				<TableCell
-					sx={[
-						styles.dataCell,
-						{
-							color: color.lightGrayText,
-						},
-					]}>
-					{item.dateAdded}
+				<TableCell sx={[styles.dataCell]}>
+					<Typography sx={{ color: color.lightGrayText }}>
+						{item.dateAdded}
+					</Typography>
 				</TableCell>
-				<TableCell
-					align='right'
-					sx={[
-						styles.dataCell,
-						{
-							paddingRight: '30px',
-						},
-					]}>
-					{convertToVND(item.price)}
+				<TableCell align='right' sx={styles.dataCell}>
+					<Typography
+						sx={{
+							paddingRight: '10px',
+						}}>
+						{convertToVND(item.price)}
+					</Typography>
 				</TableCell>
-				<TableCell
-					align='center'
-					sx={[
-						styles.dataCell,
-						{
+				<TableCell align='right' sx={styles.dataCell}>
+					<Typography
+						sx={{
 							color: colorStock,
 							fontWeight: 'semibold',
-						},
-					]}>
-					{item.stock}
+							pr: '20px',
+						}}>
+						{item.stock}
+					</Typography>
 				</TableCell>
 				<TableCell sx={styles.dataCell}>
 					<img
