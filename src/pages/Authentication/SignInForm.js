@@ -36,8 +36,10 @@ const SignInForm = () => {
 			if (response.data.success) {
 				console.log('login success: ', response.data.data);
 
-				const { userID, username } = response.data.data;
-				loginAction(userID, username);
+				const {username } = response.data.data;
+				loginAction(username);
+
+				sessionStorage.setItem("username", username);
 
 				clearTimeout(timeout);
 				navigate("/")

@@ -57,6 +57,8 @@ const LeftNavigation = () => {
                 break;
 
             default:
+                if (username != null)
+                    navigate("/")
                 break;
         }
     }, [location]);

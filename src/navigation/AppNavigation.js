@@ -5,6 +5,7 @@ import {
     Route,
     Link,
     Navigate,
+    useNavigate,
 } from "react-router-dom";
 
 //Pages
@@ -24,13 +25,25 @@ import useStore from "../appStore";
 
 const AppNavigagtion = () => {
 
-    const isLogin = useStore(state => state.userInfo.userID) != 0;
+    const { loginAction } = useStore();
+
+    useEffect(() => {
+        const username = sessionStorage.getItem("username");
+
+        console.log('username: ', username);
+        if (username == null) return;
+
+        loginAction(username);
+        
+    }, []);
+
+    const isLogin = useStore(state => state.userInfo.username) != null;
 
     if (isLogin == false) {
         return (
             <Router>
                 <Switch>
-=                    <Route
+                    <Route
                         exact path={"/authentication"} element={<Authentication />}
                     />
                     <Route path="*" element={<Navigate replace to="/authentication" />} />
