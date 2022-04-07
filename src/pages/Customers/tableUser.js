@@ -50,7 +50,7 @@ const TableUser = ({ data }) => {
             case 3:{
                 return Style.thirdRank;
             };break;
-            default: break;
+            default: return Style.noRank;
         }
     }
 
