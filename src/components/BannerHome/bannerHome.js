@@ -15,7 +15,7 @@ const BannerHome = ({data}) => {
                 <img src={TotalSalesIc}/>
                 <Typography sx = {styles.statTitle}>Totals Sales</Typography>
                 <Typography sx = {styles.statData}>{data.totalSales}</Typography>
-                <Typography sx = {styles.statUnit}>tỉ đồng</Typography>
+                <Typography sx = {styles.statUnit}>triệu đồng</Typography>
             </Box>
 
             {/* Total Orders Section */}
