@@ -32,6 +32,7 @@ const OpenNav = ({
                 {
                     tabNames.map((name, index) => (
                         <Button
+                            key={`${name}_${index}}`}
                             sx={[styles.tabNameBox,
                             currentTab == index
                                 ? { background: "rgba(0,0,0,0.03)" }

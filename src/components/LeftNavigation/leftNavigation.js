@@ -110,7 +110,7 @@ const LeftNavigation = () => {
                 : styles.main
         }>
 
-            <button
+            <div
                 style={styles.navigation}
                 onMouseEnter={() => onControlOpen(true)}
                 onMouseLeave={() => onControlOpen(false)}
@@ -124,6 +124,7 @@ const LeftNavigation = () => {
                     {
                         tabIcon.map((icon, index) => (
                             <TabIcon
+                                key={index}
                                 currentTab={tabChoose}
                                 tabName={tabNames[index]}
 
@@ -139,8 +140,6 @@ const LeftNavigation = () => {
 
                 </Box>
 
-                {/* { */}
-                    // isOpen &&
                 <OpenNav
                     isOpen={isOpen}
                     tabNames={tabNames}
@@ -148,10 +147,9 @@ const LeftNavigation = () => {
                     navigateTab={navigateTab}
                     username={username}
                 />
-                {/* } */}
 
 
-            </button>
+            </div>
         </Box>
     )
 }

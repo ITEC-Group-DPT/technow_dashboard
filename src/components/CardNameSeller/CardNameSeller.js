@@ -8,16 +8,18 @@ import SaleCommonCard from '../SaleCommonCard/SaleCommonCard'
 import styles from './CardNameSeller.style'
 
 const CatalogPercentage = [1, 4, 1, 4]
-const NamePercentage = [1, 9]
+const NamePercentage = [0, 5,0,5]
 const CardNameSeller = ({ rank, name, grow, payment, isName = false }) => {
     const rankcolor = color["R" + rank]
     const flexpercentage = isName ? NamePercentage : CatalogPercentage
     const growImg = grow > 0 ? GreenUpArrIc : RedDownArrIc
     if (grow < 0) grow = grow * -1
+    payment = Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(payment)
+
 
 
     return (
-        <Box sx={{ ...styles.flex, px: 3, py: "14px" }}>
+        <Box sx={{ ...styles.flex, px: 3, py: "14px",flex: 1 }}>
             <Box sx={{
                 width: 36,
                 height: 36,
@@ -56,15 +58,9 @@ const CardNameSeller = ({ rank, name, grow, payment, isName = false }) => {
                         [<img src={growImg} style={{ height: '13px', marginTop: "2px" }} alt="" />,
                         <p style={{ color: growImg == GreenUpArrIc ? color.green : color.red, fontWeight: 500, margin: 0 }}>{grow}</p>]
                     }
-
-
                 </Box>,
                 <Box sx={{
-                    backgroundColor: "#F0F7FF",
-                    borderRadius: "5px", 
-                    px: '12px', 
-                    py: "6px",
-                    marginLeft: "12px",
+                    flex: flexpercentage[3]
                 }}>
                     <Typography sx={{ ...styles.money, }}>
                         {payment}

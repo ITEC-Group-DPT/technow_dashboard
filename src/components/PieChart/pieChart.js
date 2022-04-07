@@ -45,6 +45,7 @@ const CustomPieChart = ({
                     bottom: bottom,
                     left: left,
                     color: color.lightBlack,
+                    textAlign:"center",
                 }}
             >
                 {percent}%
