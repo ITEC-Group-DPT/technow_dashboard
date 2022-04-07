@@ -25,19 +25,19 @@ const instance = axios.create({
 // }
 
 
-instance.interceptors.request.use(
-	(config) => {
-		if (!config.headers.Userid) {
+// instance.interceptors.request.use(
+// 	(config) => {
+// 		if (!config.headers.Userid) {
 
-			try {
-				// Alter defaults after instance has been created
-				config.headers.Userid = "13";
-			} catch (error) {
-				sessionStorage.clear();
-			}
-		}
-		return config;
-	},
-	(error) => Promise.reject(error)
-);
+// 			try {
+// 				// Alter defaults after instance has been created
+// 				config.headers.Userid = "13";
+// 			} catch (error) {
+// 				sessionStorage.clear();
+// 			}
+// 		}
+// 		return config;
+// 	},
+// 	(error) => Promise.reject(error)
+// );
 export default instance;

@@ -37,7 +37,6 @@ const LeftNavigation = () => {
 
     const { username } = useStore(state => state.userInfo)
 
-
     useEffect(() => {
         switch (location.pathname) {
             case "/":
@@ -103,6 +102,7 @@ const LeftNavigation = () => {
             }, 100);
         }
     }
+
     return (
         <Box sx={
             (isOpen && location.pathname != "/")
