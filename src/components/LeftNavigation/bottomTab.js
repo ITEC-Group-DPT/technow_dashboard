@@ -10,10 +10,12 @@ import {
     LogOutIc,
 } from "../../constant/icon"
 import useStore from '../../appStore';
+import { useNavigate } from 'react-router-dom';
 
 const BottomTab = () => {
 
     const {logoutAction} = useStore();
+
     return (
         <Box
             sx={styles.bottomBox}>

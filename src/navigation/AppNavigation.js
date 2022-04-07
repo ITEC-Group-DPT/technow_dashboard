@@ -31,15 +31,16 @@ const AppNavigagtion = () => {
         const username = sessionStorage.getItem("username");
 
         console.log('username: ', username);
-        if (username == null) return;
 
         loginAction(username);
         
     }, []);
 
-    const isLogin = useStore(state => state.userInfo.username) != null;
+    const userInfo = useStore(state => state.userInfo);
 
-    if (isLogin == false) {
+    if (userInfo == null) return <></>
+
+    if (userInfo.username == null) {
         return (
             <Router>
                 <Switch>

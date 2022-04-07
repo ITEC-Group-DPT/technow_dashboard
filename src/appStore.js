@@ -3,9 +3,7 @@ import { login } from "./api/authenAPI";
 
 
 const useStore = create(set => ({
-    userInfo: {
-        username: null,
-    },
+    userInfo: null,
 
     loginAction: (username) =>
         set({
@@ -13,7 +11,7 @@ const useStore = create(set => ({
                 username: username,
             }
         }),
-    logoutAction: () => set({ userInfo: { username: null } }),
+    logoutAction: () => set({ userInfo: { username: null} }),
 }))
 
 export default useStore;
