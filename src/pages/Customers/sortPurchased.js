@@ -19,7 +19,7 @@ const SortPurchased = ({ value, onChangeValue }) => {
     }
 
     return (
-        <Box>
+        <Box sx={{display: 'flex', justifyContent: 'end'}}>
             <FormControl sx={styles.formControl}>
                 <Select
                     sx={styles.select}
@@ -45,11 +45,11 @@ const styles = {
         boxSizing: 'border-box',
         height: "100%",
         width: "150px",
-        py: 0
+        py: 0,
     },
     select: {
         textAlign: 'center',
-        fontWeight: 600
+        fontWeight: 700
     },
 }
 

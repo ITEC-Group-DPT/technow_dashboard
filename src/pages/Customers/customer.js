@@ -50,23 +50,18 @@ const Customers = () => {
                 background: color.background
             }}
         >
-            <Container className='container' sx={{ py: "52px" }}>
-                <Box style={styles.titleWrapper}>
-                    <Grid container spacing={2}>
-                        <Grid item lg={4} md={4}>
-                            <Typography style={styles.title}>User Statistic</Typography>
-                        </Grid>
-                        <Grid item lg={2} md={3}>
-                            <SortByTime onChangeValue={value => setSort(value)} />
-                        </Grid>
-                    </Grid>
+            <Container className='container' sx={{ py: 5, paddingLeft: '108px !important', maxWidth: '1300px !important' }}>
+                <Box sx={styles.titleWrapper}>
+                    <Typography style={styles.title}>User Statistic</Typography>
+                    <SortByTime onChangeValue={value => setSort(value)} />
                 </Box>
-                <Grid container spacing={9}>
-                    <Grid item lg={6} md={6} sx={{
+
+                <Grid container spacing={9} sx={{ height: '820px' }}>
+                    <Grid item xs={6} sx={{
                         height: "100%",
-                        display:"flex",
-                        flexDirection:"column",
-                        justifyContent:"space-between",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-between"
                     }}>
                         <Box className="chart" sx={styles.chart}>
                             <Box>
@@ -85,7 +80,7 @@ const Customers = () => {
                             />
                         </Box>
 
-                        <Box className="chart" sx={{...styles.chart, mb: 0}}>
+                        <Box className="chart" sx={{ ...styles.chart, mb: 0 }}>
                             <Box>
                                 <Typography style={styles.chartTitle}>Account Created</Typography>
                             </Box>
@@ -101,14 +96,15 @@ const Customers = () => {
                                 style={{ fontSize: "13px" }}
                             />
                         </Box>
-
                     </Grid>
-                    <Grid item lg={6} md={6}>
-                        <TableUser 
-                        data={leaderboard} 
+
+                    <Grid item xs={6} sx={{ height: '100%' }}>
+                        <TableUser
+                            data={leaderboard}
                         />
                     </Grid>
                 </Grid>
+
             </Container>
 
 

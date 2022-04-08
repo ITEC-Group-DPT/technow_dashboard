@@ -6,7 +6,7 @@ import {
     Divider
 } from '@mui/material'
 import SearchBar from '../../components/SearchBar/searchBar'
-import Pagination from '../../components/Pagination/pagination'
+import CenterPagination from './centerPagination'
 import SortPurchased from './sortPurchased'
 import React, { useState, useEffect } from 'react'
 
@@ -52,7 +52,7 @@ const TableUser = ({ data }) => {
         setAllUser(data);
         setSearch("");
         setPurchasedSort("Top Purchased");
-        
+
         // console.log('data: ', data);
     }, [data]);
 
@@ -61,8 +61,8 @@ const TableUser = ({ data }) => {
         setPurchasedSort(value)
 
         const sortedList = (value == "Top Purchased" ? userList[0].rank > 1 : allUser[0].rank == 1)
-                ? JSON.parse(JSON.stringify(allUser.reverse()))
-                : allUser
+            ? JSON.parse(JSON.stringify(allUser.reverse()))
+            : allUser
 
         setAllUser(sortedList);
     }
@@ -101,22 +101,22 @@ const TableUser = ({ data }) => {
 
     return (
         <Box sx={Style.leaderboard}>
-            <Container>
-                <Box sx={{ mt: "16px", mb: "20px", ml: "14px" }}>
-                    <SearchBar
-                        width='100%'
-                        placeholder="Search for username..."
-                        text={search}
-                        setText={handleSearch} />
-                </Box>
-            </Container>
+
+            <Box sx={{ display: 'flex', justifyContent: 'center', pt: 4, pb: 3}}>
+                <SearchBar
+                    width='100%'
+                    placeholder="Search for username..."
+                    text={search}
+                    setText={handleSearch} />
+            </Box>
+
             <Box style={Style.boardTitle}>
                 <Grid container spacing={1}>
                     <Grid item lg={3} md={3}>
-                        <Typography style={{ fontWeight: 600 }}>Rank</Typography>
+                        <Typography style={{ fontWeight: 700, width: 'fit-content' }}>Rank</Typography>
                     </Grid>
                     <Grid item lg={4} md={4}>
-                        <Typography style={{ fontWeight: 600 }}>Username</Typography>
+                        <Typography sx={{ fontWeight: 700, ml: 0 }}>Username</Typography>
                     </Grid>
                     <Grid item lg={5} md={5}>
                         <SortPurchased
@@ -125,21 +125,23 @@ const TableUser = ({ data }) => {
                         />
                     </Grid>
                 </Grid>
-                <Divider style={{ marginTop: '10px' }} />
+                <Divider sx={{mt: 2, mb: 3}}  />
             </Box>
             {userList?.map(user =>
-                <Box style={Style.boardRow}>
+                <Box sx={Style.boardRow}>
                     <Grid container spacing={1}>
                         <Grid item lg={3} md={3}>
-                            <Typography style={{ fontWeight: 600 }}>{user.rank}</Typography>
+                            <Box sx={{ width: '36.5px' }}>
+                                <Typography style={{ fontWeight: 700, textAlign: 'center' }}>{user.rank}</Typography>
+                            </Box>
                         </Grid>
                         <Grid item lg={4} md={4}>
-                            <Typography>{user.username}</Typography>
+                            <Typography sx={{ ml: 0 }} >{user.username}</Typography>
                         </Grid>
                         <Grid item lg={5} md={5} style={{
                             display: 'flex',
                             justifyContent: 'right',
-                            paddingRight: "11%",
+                            paddingRight: "32px",
                         }}>
                             <Box style={formatRankColor(user.rank)}>
                                 <Typography>
@@ -150,8 +152,9 @@ const TableUser = ({ data }) => {
                     </Grid>
                 </Box>
             )}
+
             <Box style={Style.paginationBox}>
-                <Pagination page={page} maxPages={totalPage}
+                <CenterPagination page={page} maxPages={totalPage}
                     onBack={() => {
                         if (page > 1)
                             setPage(page - 1)
@@ -161,6 +164,7 @@ const TableUser = ({ data }) => {
                             setPage(page + 1)
                     }} />
             </Box>
+
         </Box>
     )
 }
