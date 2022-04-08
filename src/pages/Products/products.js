@@ -19,7 +19,12 @@ import { FilterIc, PlusIc } from '../../constant/icon'
 import CustomTableHead from './components/CustomTableHead'
 import CustomTableRow from './components/CustomTableRow'
 import styles from './product.style'
-import { productList } from './store/index'
+import {
+	getTotalNumberOfProductAdmin,
+	getNumberOfProductByCategoryAdmin,
+	getAllProductByPageAdmin,
+	getProductByCategoryAdmin,
+} from '../../api/productAPI.js'
 
 const categoryList = [
 	'CPU',
@@ -42,37 +47,45 @@ const Products = () => {
 	const [filter, setFilter] = useState({ text: '', category: 'Category' })
 	const [page, setPage] = useState(1)
 	const [totalPage, setTotalPage] = useState(1)
-	const [order, setOrder] = useState('desc')
-	const [orderBy, setOrderBy] = useState('id')
+	const [order, setOrder] = useState('asc')
+	const [orderBy, setOrderBy] = useState('productID')
 	const [filteredList, setFilteredList] = useState([])
 
-	const filterProduct = (productList) => {
-		let temp = []
-		if (filter.category === 'Category' && filter.text === '') {
-			setFilteredList(productList)
-			temp = productList
-		} else if (filter.text !== '') {
-			const _temp = productList.filter((item) =>
-				item.name.includes(filter.text),
-			)
-			setFilteredList(_temp)
-			temp = _temp
-		} else if (filter.category !== 'Category') {
-			const _temp = productList.filter(
-				(item) => item.type === filter.category,
-			)
-			setFilteredList(_temp)
-			temp = _temp
-		}
-		setTotalPage(Math.ceil(temp.length / 6))
+	const initTotalPage = async () => {
+		const response = await getTotalNumberOfProductAdmin('')
+		const _totalPage = response.data.data[0].totalPage
+		setTotalPage(Math.ceil(_totalPage / 6))
 	}
 
-	const handleChangeCategory = (event) => {
+	const initProductList = async () => {
+		const response = await getAllProductByPageAdmin(1, '', orderBy, order)
+		const _productList = response.data.data
+		setFilteredList(_productList)
+	}
+
+	const handleChangeCategory = async (event) => {
+		const temp = event.target.value
+		let value = temp === 'Category' ? '' : temp
 		setFilter({
 			...filter,
 			text: '',
-			category: event.target.value,
+			category: temp,
 		})
+
+		const response1 = await getProductByCategoryAdmin(
+			value,
+			1,
+			'',
+			orderBy,
+			order,
+		)
+		const _productList = response1.data.data
+		setFilteredList(_productList)
+
+		const response2 = await getNumberOfProductByCategoryAdmin(value, '')
+		const _totalPage = response2.data.data[0].totalPage
+		setTotalPage(Math.ceil(_totalPage / 6))
+
 		setPage(1)
 	}
 
@@ -85,41 +98,51 @@ const Products = () => {
 		setPage(1)
 	}
 
-	const handleChangePage = (value) => {
+	const handleChangePage = async (value) => {
 		const temp = parseInt(page) + value
 		if (temp >= 1 && temp <= totalPage) {
 			setPage(temp)
+			let response
+			if (filter.category === 'Category') {
+				response = await getAllProductByPageAdmin(
+					temp,
+					'',
+					orderBy,
+					order,
+				)
+			} else {
+				response = await getProductByCategoryAdmin(
+					filter.category,
+					temp,
+					'',
+					orderBy,
+					order,
+				)
+			}
+			const _productList = response.data.data
+			setFilteredList(_productList)
 		}
 	}
 
-	const handleRequestSort = (event, property) => {
+	const handleRequestSort = async (event, property) => {
 		const isAsc = orderBy === property && order === 'asc'
-		setOrder(isAsc ? 'desc' : 'asc')
+		const temp = isAsc ? 'desc' : 'asc'
+		setOrder(temp)
 		setOrderBy(property)
-	}
-
-	const stableSort = (array, comparator) => {
-		const stabilizedThis = array.map((el, index) => [el, index])
-		stabilizedThis.sort((a, b) => {
-			const order = comparator(a[0], b[0])
-			if (order !== 0) {
-				return order
-			}
-			return b[1] - a[1]
-		})
-		return stabilizedThis.map((el) => el[0])
-	}
-
-	const descendingComparator = (a, b, orderBy) => {
-		if (b[orderBy] < a[orderBy]) return -1
-		if (b[orderBy] > a[orderBy]) return 1
-		return 0
-	}
-
-	const getComparator = (order, orderBy) => {
-		return order === 'desc'
-			? (a, b) => descendingComparator(a, b, orderBy)
-			: (a, b) => -descendingComparator(a, b, orderBy)
+		let response
+		if (filter.category === 'Category') {
+			response = await getAllProductByPageAdmin(1, '', property, temp)
+		} else {
+			response = await getProductByCategoryAdmin(
+				filter.category,
+				1,
+				'',
+				property,
+				temp,
+			)
+		}
+		const _productList = response.data.data
+		setFilteredList(_productList)
 	}
 
 	const changeStockColor = (value) => {
@@ -129,12 +152,19 @@ const Products = () => {
 	}
 
 	useEffect(() => {
-		filterProduct(productList)
-	}, [filter])
+		initTotalPage()
+		initProductList()
+	}, [])
+
+	useEffect(() => {
+		return {
+			filteredList,
+		}
+	}, [filteredList])
 
 	return (
 		<Box sx={styles.container}>
-			<Container>
+			<Container sx={{ maxWidth: '1300px !important' }}>
 				<Typography sx={styles.title}>Product Management</Typography>
 				<Box sx={styles.productBoard}>
 					<Box
@@ -144,11 +174,11 @@ const Products = () => {
 								justifyContent: 'space-between',
 							},
 						]}>
-						<Box sx={styles.box}>
+						<Box sx={[styles.box, { height: '38px' }]}>
 							<SearchBar
 								width='406px'
 								text={filter.text}
-								placeholder='Search for product name,...'
+								placeholder='Search for product name...'
 								setText={handleChangeSearchValue}
 							/>
 							<img
@@ -171,7 +201,10 @@ const Products = () => {
 									MenuProps={{ disableScrollLock: true }}
 									value={filter.category}
 									onChange={handleChangeCategory}
-									sx={styles.selectInp}>
+									sx={[
+										styles.selectInp,
+										{ height: '43px', p: '0px' },
+									]}>
 									<MenuItem value='Category'>All</MenuItem>
 									{categoryList?.map((item) => {
 										return (
@@ -194,13 +227,14 @@ const Products = () => {
 								onForward={() => handleChangePage(1)}
 							/>
 						</Box>
-						<Box sx={styles.box}>
+						<Box sx={[styles.box, { height: '38px' }]}>
 							<Button
 								sx={{
+									height: '100%',
 									color: color.lightGrayText,
 									border: `1px solid #c0c0c0`,
 									width: '137px',
-									height: '38px',
+									textTransform: 'capitalize',
 								}}>
 								<img
 									src={PlusIc}
@@ -211,7 +245,7 @@ const Products = () => {
 						</Box>
 					</Box>
 
-					<Box sx={styles.box}>
+					<Box sx={[styles.box, { pt: '30px' }]}>
 						<TableContainer>
 							<Table>
 								<CustomTableHead
@@ -221,36 +255,22 @@ const Products = () => {
 								/>
 								{!_.isEmpty(filteredList) ? (
 									<TableBody>
-										{stableSort(
-											filteredList,
-											getComparator(order, orderBy),
-										).map((item, index) => {
-											const minLimit = (page - 1) * 6
-											const maxLimit = page * 6
-											if (
-												_.inRange(
-													index,
-													minLimit,
-													maxLimit,
-												)
-											) {
-												const colorStock =
-													changeStockColor(
-														item.stock,
-													) === 0
-														? color.green
-														: changeStockColor(
-																item.stock,
-														  ) === 1
-														? color.yellow
-														: color.darkRed
-												return (
-													<CustomTableRow
-														colorStock={colorStock}
-														item={item}
-													/>
-												)
-											}
+										{filteredList.map((item, index) => {
+											const colorStock =
+												changeStockColor(item.stock) ===
+												0
+													? color.green
+													: changeStockColor(
+															item.stock,
+													  ) === 1
+													? color.yellow
+													: color.darkRed
+											return (
+												<CustomTableRow
+													colorStock={colorStock}
+													item={item}
+												/>
+											)
 										})}
 									</TableBody>
 								) : (

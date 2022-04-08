@@ -76,35 +76,24 @@ const CustomTableRow = ({ item, colorStock }) => {
 					</Typography>
 				</TableCell>
 				<TableCell align='center' sx={styles.dataCell}>
-					<img
-						src={item.img1}
-						width={75}
-						height={75}
-						style={{ paddingRight: '30px' }}
-					/>
+					<img src={item.img1} width={75} height={75} />
 				</TableCell>
-				<TableCell sx={styles.dataCell}>
+				<TableCell align='center' sx={styles.dataCell}>
 					<Typography sx={[styles.cellName]}>{item.name}</Typography>
 				</TableCell>
-				<TableCell sx={[styles.dataCell]}>
-					<Typography sx={{ color: color.lightGrayText }}>
-						{item.dateAdded}
+				<TableCell align='center' sx={[styles.dataCell]}>
+					<Typography sx={{ color: color.lightGrayText, pr: '5px' }}>
+						{item.dateCreated}
 					</Typography>
 				</TableCell>
-				<TableCell align='right' sx={styles.dataCell}>
-					<Typography
-						sx={{
-							paddingRight: '10px',
-						}}>
-						{convertToVND(item.price)}
-					</Typography>
+				<TableCell align='center' sx={styles.dataCell}>
+					<Typography>{convertToVND(item.price)}</Typography>
 				</TableCell>
-				<TableCell align='right' sx={styles.dataCell}>
+				<TableCell align='center' sx={styles.dataCell}>
 					<Typography
 						sx={{
 							color: colorStock,
 							fontWeight: 'semibold',
-							pr: '20px',
 						}}>
 						{item.stock}
 					</Typography>

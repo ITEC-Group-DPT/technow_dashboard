@@ -1,11 +1,4 @@
-import {
-	Box,
-	TableCell,
-	TableHead,
-	TableRow,
-	TableSortLabel,
-} from '@mui/material'
-import { visuallyHidden } from '@mui/utils'
+import { TableCell, TableHead, TableRow, TableSortLabel } from '@mui/material'
 
 const styles = {
 	dataCell: {
@@ -65,7 +58,7 @@ const headCells = [
 		label: 'Product Name',
 	},
 	{
-		id: 'dateAdded',
+		id: 'dateCreated',
 		numeric: false,
 		label: 'Date Added',
 	},
@@ -88,20 +81,7 @@ const CustomTableHead = (props) => {
 	}
 
 	const addStyleById = (id) => {
-		switch (id) {
-			case 'productID':
-				return styles.productID
-			case 'img1':
-				return styles.img1
-			case 'name':
-				return styles.name
-			case 'price':
-				return styles.price
-			case 'dateAdded':
-				return styles.dateAdded
-			case 'stock':
-				return styles.stock
-		}
+		return styles[id]
 	}
 
 	return (
@@ -112,25 +92,20 @@ const CustomTableHead = (props) => {
 						<TableCell
 							sx={[styles.dataCell, addStyleById(headCell.id)]}
 							key={headCell.id}
-							align={headCell.numeric ? 'right' : 'left'}
+							align={'center'}
 							sortDirection={
 								orderBy === headCell.id ? order : false
 							}>
 							{headCell.label}
-							<TableSortLabel
-								active={true}
-								direction={
-									orderBy === headCell.id ? order : 'desc'
-								}
-								onClick={createSortHandler(headCell.id)}>
-								{orderBy === headCell.id ? (
-									<Box component='span' sx={visuallyHidden}>
-										{order === 'desc'
-											? 'sorted descending'
-											: 'sorted ascending'}
-									</Box>
-								) : null}
-							</TableSortLabel>
+							{headCell.id !== 'img1' && (
+								<TableSortLabel
+									active={true}
+									direction={
+										orderBy === headCell.id ? order : 'asc'
+									}
+									onClick={createSortHandler(headCell.id)}
+								/>
+							)}
 						</TableCell>
 					)
 				})}

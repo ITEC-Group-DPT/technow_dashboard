@@ -3,18 +3,16 @@ import color from '../../constant/color'
 const styles = {
 	container: {
 		background: color.background,
-		py: '40px',
-		px: '20px !important',
 		minHeight: '100vh',
-
 	},
 	productBoard: {
 		shadow: '1px solid #848484',
 		boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.25)',
 		borderRadius: '10px',
-		padding: '20px',
-		minHeight: '85vh',
-		background: "white",
+		px: '40px',
+		pt: '20px',
+		minHeight: '86.5vh',
+		background: 'white',
 	},
 	box: {
 		display: 'flex',
@@ -24,6 +22,7 @@ const styles = {
 		minWidth: '132px',
 		color: color.lightGrayText,
 		mx: '10px',
+		border: '1px solid #D0D0D0',
 	},
 	navigateBtn: {
 		display: 'flex',
