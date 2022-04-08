@@ -19,7 +19,7 @@ import SortByTime from "../../components/SortByTime/sortByTime"
 
 const Sales = () => {
     const [filterTime, setFilterTime] = useState("Month");
-    const [customers, setCustomers] = useState(dummycustomers);
+    const [customers, setCustomers] = useState(dummydata.topCustomer);
     const [category, setCategory] = useState(dummydata.mostProfitableCate)
     const [topRevenue, setTopRevenue] = useState(dummydata.topRevenue)
     const [dataLineChart, setDataLineChart] = useState(dummydata.incomeByTime)
@@ -32,7 +32,7 @@ const Sales = () => {
         const response = await getSaleOverview(filterTime);
         if (response.data.success) {
             const data = response.data.data;
-            // setCustomers()
+            setCustomers(data.topCustomer)
             setCategory(data.mostProfitableCate)
             setTopRevenue(data.topRevenue)
             setDataLineChart(data.incomeByTime)
@@ -138,8 +138,8 @@ const Sales = () => {
                         <SaleCommonCard title="Top Customer" footer={true} sx={{ pb: 0 }}>
                             <Box sx={{ width: "350px", mt: "12px" }}>
                                 {
-                                    customers.map((customer, rank) =>
-                                        <CardNameSeller rank={rank + 1} name={customer} isName={true} />
+                                    customers.map((customer) =>
+                                        <CardNameSeller rank={customer.rank} name={customer.username} isName={true} />
                                     )
                                 }
                             </Box>
