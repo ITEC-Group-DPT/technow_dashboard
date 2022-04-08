@@ -47,6 +47,10 @@ const Sales = () => {
         getData()
     }, [filterTime]);
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
     return (
         <Box sx={{ backgroundColor: color.background, ml: '84px', py: 8, display: 'flex', justifyContent: 'center' }}>
             <Box sx={{ width: '1350px' }}>

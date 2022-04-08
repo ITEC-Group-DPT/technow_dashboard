@@ -11,7 +11,7 @@ import {
 } from '@mui/material'
 import { Box } from '@mui/system'
 import _ from 'lodash'
-import React, { useMemo, useState } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 import Pagination from '../../components/Pagination/pagination'
 import SearchBar from '../../components/SearchBar/searchBar'
 import color from '../../constant/color'
@@ -120,6 +120,10 @@ const Products = () => {
 		else if (value >= 5) return 1
 		else return 2
 	}
+
+	useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
 	return (
 		<Box sx={styles.container}>
