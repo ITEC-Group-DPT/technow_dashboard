@@ -179,7 +179,7 @@ const Orders = () => {
                     <Grid container sx={styles.controlWrapper}>
                         <Grid item xs={6.5} style={{ height: '100%' }}>
                             <SearchBar
-                                placeholder="Search for order, customer name..."
+                                placeholder="Search for order ID, customer name..."
                                 text={search}
                                 setText={setSearch}
                                 width="100%"

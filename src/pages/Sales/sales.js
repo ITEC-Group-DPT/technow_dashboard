@@ -122,7 +122,7 @@ const Sales = () => {
                             sx={{pt: 4}}
                             title='Total Sales'
                         >
-                            <p style={{ marginLeft: "30px", color: color.grayText }}>(million VND)</p>
+                            <p style={{ marginLeft: "35px", color: color.grayText, fontSize: '13px', marginBottom: '20px' }}>(million VND)</p>
                             <CustomLineChart
                                 data={dataLineChart}
                                 xAxisName="month"

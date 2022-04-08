@@ -44,12 +44,13 @@ const styles = {
     formControl: {
         boxSizing: 'border-box',
         height: "100%",
-        width: "150px",
+        width: "160px",
         py: 0,
     },
     select: {
         textAlign: 'center',
-        fontWeight: 700
+        fontWeight: 700,
+        fontSize: '17px',
     },
 }
 

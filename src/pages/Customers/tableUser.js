@@ -104,7 +104,7 @@ const TableUser = ({ data }) => {
     return (
         <Box sx={Style.leaderboard}>
 
-            <Box sx={{ display: 'flex', justifyContent: 'center', pt: 4, pb: 3 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', pt: 4, pb: 3, height: "37px" }}>
                 <SearchBar
                     width='100%'
                     placeholder="Search for username..."
@@ -115,10 +115,10 @@ const TableUser = ({ data }) => {
             <Box style={Style.boardTitle}>
                 <Grid container spacing={1}>
                     <Grid item lg={3} md={3}>
-                        <Typography style={{ fontWeight: 700, width: 'fit-content' }}>Rank</Typography>
+                        <Typography style={{ fontWeight: 700, fontSize: '17px', width: 'fit-content' }}>Rank</Typography>
                     </Grid>
                     <Grid item lg={4} md={4}>
-                        <Typography sx={{ fontWeight: 700, ml: 0 }}>Username</Typography>
+                        <Typography sx={{ fontWeight: 700, fontSize: '17px', ml: 0 }}>Username</Typography>
                     </Grid>
                     <Grid item lg={5} md={5}>
                         <SortPurchased
@@ -134,7 +134,7 @@ const TableUser = ({ data }) => {
                     <Grid container spacing={1}>
                         <Grid item lg={3} md={3}>
                             <Box sx={{ width: '36.5px' }}>
-                                <Typography style={{ fontWeight: 700, textAlign: 'center' }}>{user.rank}</Typography>
+                                <Typography style={{ fontWeight: 700,  textAlign: 'center' }}>{user.rank}</Typography>
                             </Box>
                         </Grid>
                         <Grid item lg={4} md={4}>

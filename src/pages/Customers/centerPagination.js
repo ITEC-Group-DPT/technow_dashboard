@@ -23,7 +23,7 @@ const centerPagination = ({
                 onClick={onBack}
                 style={styles.arrowBox}
             >
-                <img src={LeftArrowIc} width={14} height={14} />
+                <img src={LeftArrowIc} width={20} height={14} />
             </Button>
 
             {/* pages box */}
@@ -40,7 +40,7 @@ const centerPagination = ({
                 onClick={onForward}
                 style={styles.arrowBox}
             >
-                <img src={RightArrowIc} width={14} height={14} />
+                <img src={RightArrowIc} width={20} height={14} />
             </Button>
 
 

@@ -3,7 +3,7 @@ import color from '../../constant/color'
 const Style = {
     //charts
     title: {
-        fontSize: "35px",
+        fontSize: "36px",
         fontWeight: 700,
         textAlign: "left",
         marginBottom: "1rem",
@@ -33,7 +33,8 @@ const Style = {
         fontWeight: 700,
         textAlign: "center",
         paddingTop: "10px",
-        paddingBottom: "10px"
+        paddingBottom: "10px",
+        mb: 2,
     },
 
 

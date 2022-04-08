@@ -46,7 +46,7 @@ const styles = {
 
     graphTitle: {
         textAlign: 'center',
-        fontSize: '19px',
+        fontSize: '20px',
         fontWeight: 'bold',
     },
 

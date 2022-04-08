@@ -64,7 +64,7 @@ const Customers = () => {
                     <SortByTime onChangeValue={value => setSort(value)} />
                 </Box>
 
-                <Grid container spacing={9} sx={{ height: '760px' }}>
+                <Grid container spacing={9} sx={{ height: '800px' }}>
                     <Grid item xs={6.3} sx={{
                         height: "100%",
                         display: "flex",
@@ -74,7 +74,7 @@ const Customers = () => {
                     }}>
                         <Box className="font-weight-graph" sx={styles.chart}>
                             <Box>
-                                <Typography style={styles.chartTitle}>Guest Visited</Typography>
+                                <Typography sx={styles.chartTitle}>Guest Visited</Typography>
                             </Box>
                             <AreaChart
                                 data={visitedUsers}
@@ -91,7 +91,7 @@ const Customers = () => {
 
                         <Box className="font-weight-graph" sx={{ ...styles.chart, mb: 0 }}>
                             <Box>
-                                <Typography style={styles.chartTitle}>Account Created</Typography>
+                                <Typography sx={styles.chartTitle}>Account Created</Typography>
                             </Box>
                             <AreaChart
                                 data={activeUsers}
