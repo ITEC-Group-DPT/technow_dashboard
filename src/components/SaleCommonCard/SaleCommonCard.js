@@ -13,7 +13,7 @@ const SaleCommonCard = ({ title = '', children, footer = false, sx }) => {
             ...styles.card, boxShadow: '0px 1px #d5d6d8', pt: '16px', pb: '28px',
             ...sx,
         }}>
-            <CardContent sx={{ px: 4, pt: 1, py: 1 }}>
+            <CardContent sx={{ px: 4, pt: 1, pt: 1, pb:0 }}>
                 <Typography variant="h4" sx={{ fontWeight: "700", fontSize: "22px", color: "#575757", py: 0, mb: 2 }}>
                     {title}
                 </Typography>

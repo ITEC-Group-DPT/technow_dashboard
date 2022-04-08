@@ -11,8 +11,8 @@ const styles = {
         flexWrap: 'nowrap',
         marginTop: "4px",
         alignItems: 'center',
-        justifyContent: "center",
-        px: "16px",
+        // justifyContent: "center",
+        px: "32px",
     }
 }
 
