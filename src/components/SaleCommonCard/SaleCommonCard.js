@@ -7,7 +7,7 @@ import styles from './SaleCommonCard.style'
 const SaleCommonCard = ({ title = '', children, footer = false, sx }) => {
     return (
         <Card sx={{
-            ...styles.card, py: 1, dropShadow: "0px 1px 1px rgba(0, 0, 0, 0.15)",
+            ...styles.card, py: 1, boxShadow: '0px 1px #d5d6d8',
             ...sx,
         }}>
             <CardContent sx={{ px: 4, pt: 1, py: 1 }}>
