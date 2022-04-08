@@ -67,7 +67,6 @@ const Home = () => {
 
     useEffect(() => {
         getBannerData();
-        getAllHomeStat();
     }, []);
     return (
         <Box className='homeAdmin' sx={styles.main}>
