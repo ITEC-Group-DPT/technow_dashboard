@@ -11,7 +11,9 @@ const CustomBarChart = ({
     barSize,
     barColor,
     yAxisCount }) => {
+
     if(data.length == 0) return <></>
+
     return (
         <BarChart
             width={width}
@@ -31,6 +33,7 @@ const CustomBarChart = ({
                 axisLine={false}
                 tickLine={false}
                 allowDecimals={false}
+                interval={0}
             />
 
             <Tooltip cursor={{fill: 'rgb(240 240 240)'}} />

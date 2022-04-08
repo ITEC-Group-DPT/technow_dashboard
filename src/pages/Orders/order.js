@@ -142,7 +142,7 @@ const Orders = () => {
                                 yAxisName="orders"
                                 yAxisCount={6}
                                 width={480}
-                                height={270}
+                                height={280}
                                 barSize={40}
                                 barColor={color.orange}
                             />
@@ -165,7 +165,7 @@ const Orders = () => {
                                 yAxisName="income"
                                 yAxisCount={6}
                                 width={470}
-                                height={270}
+                                height={280}
                                 lineColor={color.blue}
                             />
                         </Box>

@@ -26,6 +26,7 @@ const CustomLineChart = ({
 	}
 
     if(data.length == 0) return <></>
+
     return (
         <LineChart
             style={{ margin: 'auto', paddingRight: "20px" }}
@@ -38,7 +39,7 @@ const CustomLineChart = ({
 
             <XAxis
                 dataKey={xAxisName}
-                padding={{ left: 0 }}
+                padding={{ left: 20, right: 20 }}
                 axisLine={false}
                 tickLine={false}
             />
@@ -50,6 +51,7 @@ const CustomLineChart = ({
                 tickLine={false}
                 tickFormatter={tickFormater}
                 allowDecimals={false}
+                interval={0}
             />
 
             <Tooltip formatter={value => formatPrice(value)} />
