@@ -45,9 +45,9 @@ const Customers = () => {
     return (
         <Box
             className='userStats'
-            style={{
+            sx={{
                 minHeight: "100vh",
-                background: color.background
+                background: color.background,
             }}
         >
             <Container className='container' sx={{
@@ -55,6 +55,7 @@ const Customers = () => {
                 flexDirection: "column",
                 justifyContent: "center",
                 minHeight: "100vh",
+                py: 4,
                 paddingLeft: '108px !important',
                 maxWidth: '1300px !important'
             }}>
