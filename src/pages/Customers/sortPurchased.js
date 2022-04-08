@@ -11,13 +11,11 @@ const MyInput = styled(InputBase)(() => ({
 
 const sortList = ['Top Purchased', 'Least Purchased']
 
-const SortPurchased = ({ defaultValue = "Top Purchased", onChangeValue }) => {
-    const [sort, setSort] = useState(defaultValue)
+const SortPurchased = ({ value, onChangeValue }) => {
 
     const handleChange = (event) => {
-        let value = event.target.value
-        onChangeValue && onChangeValue(value)
-        setSort(value)
+        const result = event.target.value
+        onChangeValue && onChangeValue(result)
     }
 
     return (
@@ -25,9 +23,10 @@ const SortPurchased = ({ defaultValue = "Top Purchased", onChangeValue }) => {
             <FormControl sx={styles.formControl}>
                 <Select
                     sx={styles.select}
-                    value={sort}
+                    value={value}
                     onChange={handleChange}
                     input={<MyInput />}
+                    MenuProps={{ disableScrollLock: true }}
                 >
                     {sortList.map((sort) => (
                         <MenuItem value={sort} key={sort}>{sort}</MenuItem>

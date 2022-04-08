@@ -26,6 +26,16 @@ const color = {
     lightGrayText: "#848484",
     grayText: '#868686',
 
+    //leaderboard
+    gold: '#e6cc44',
+    lightGold: '#fff6a9',
+
+    silver: '#a7a7a7',
+    lightSilver: '#ededed',
+
+    bronze: '#ce7e00',
+    lightBronze: '#ffedd2',
+
     // sale
     // R1: "#ff8a65",
     // R2: "#ffb74d",

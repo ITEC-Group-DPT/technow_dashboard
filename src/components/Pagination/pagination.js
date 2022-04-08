@@ -16,6 +16,7 @@ const Pagination = ({
     onForward,
 }) => {
     return (
+
         <Box sx={styles.container}>
 
             {/* back arrow */}
