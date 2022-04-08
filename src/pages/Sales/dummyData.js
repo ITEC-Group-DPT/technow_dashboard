@@ -1,21 +1,30 @@
+let dummycustomers = ['Kurozemi', 'Tezuko', 'Miaojee', 'Jason', 'Tory']
+
 let dummydata = {
     "saleInTime": [
-        {
-            "count": 5
-        }
-    ],
-    "itemOnSale": [
         {
             "count": 10
         }
     ],
+    "itemOnSale": [
+        {
+            "count": 20
+        }
+    ],
     "topRevenue": [
         {
-            "productID": 139,
-            "productimg": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/Mainboard%2Fmain19.webp?alt=media&token=b2ba6aa4-9255-453c-8e1f-c00abc3eb12e",
-            "name": "Mainboard GIGABYTE Z390 AORUS XTREME WATERFORCE LGA1151v2",
-            "price": 20590000,
-            "revenue": 41180000
+            "productID": 117,
+            "productimg": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/Laptop%2F17.webp?alt=media&token=43ee3694-d277-4aa1-8b95-e07e693e2337",
+            "name": "Laptop MSI Prestige 15 A10SC-222VN",
+            "price": 33999000,
+            "revenue": 33999000
+        },
+        {
+            "productID": 154,
+            "productimg": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/Monitor%2FDell%20UltraSharp%20U2721DE.jpg?alt=media&token=5c870f05-26de-42d1-99e5-80516cd22224",
+            "name": "Màn hình Dell UltraSharp U2721DE 27'",
+            "price": 10690000,
+            "revenue": 32070000
         },
         {
             "productID": 158,
@@ -25,33 +34,26 @@ let dummydata = {
             "revenue": 31890000
         },
         {
-            "productID": 136,
-            "productimg": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/Mainboard%2Fmain16.jpg?alt=media&token=5c0c9d50-5128-40c3-8e71-7899900012ea",
-            "name": "Mainboard MSI X299 PRO 10G LGA2066",
+            "productID": 243,
+            "productimg": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/Speaker%2F03.webp?alt=media&token=66e79fa8-971b-45fa-86b4-6b323d81ed05",
+            "name": "Loa Bluetooth JBL Party Box 100 (Black)",
             "price": 9500000,
-            "revenue": 19000000
+            "revenue": 28500000
         },
         {
-            "productID": 279,
-            "productimg": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/VGA%2Fvga19.webp?alt=media&token=92663ebd-1d38-417c-a89b-2e88a94229b3",
-            "name": "VGA GIGABYTE GeForce® RTX 2070 GAMING OC 8G",
-            "price": 16290000,
-            "revenue": 16290000
-        },
-        {
-            "productID": 55,
-            "productimg": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/GamingChair%2F051.jpg?alt=media&token=dad4a35a-a1cb-497f-9552-5c37fc6b5282",
-            "name": "Ghế Gamer AKRacing OnyX Deluxe K901B Real Leather ",
-            "price": 4990000,
-            "revenue": 9980000
+            "productID": 12,
+            "productimg": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/CPU%2Fcpu12.webp?alt=media&token=1da3b0b7-29cf-42e5-93fd-c0ae9a5aa82f",
+            "name": "CPU Intel Core i7 9700F",
+            "price": 8390000,
+            "revenue": 25170000
         }
     ],
     "bestSeller": [
         {
-            "productID": 96,
-            "productimg": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/Keyboard%2Fkeyboard11-20%2Fkeyboard16.webp?alt=media&token=6e9ea6e2-18b9-4cfd-9372-3fddd3f6949e",
-            "name": "Bàn phím Corsair K63",
-            "price": 1890000,
+            "productID": 2,
+            "productimg": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/CPU%2Fcpu2.webp?alt=media&token=c1f59c93-085e-479b-9472-3165d38acce4",
+            "name": "CPU AMD Ryzen 3 2200G",
+            "price": 2590000,
             "unit": "3",
             "up": "0.0000"
         }
@@ -61,95 +63,68 @@ let dummydata = {
             "productID": 78,
             "productimg": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/Headphone%2F081.webp?alt=media&token=a61ca020-fbd1-42f9-8fa5-d42168c2b8c5",
             "name": "Tai nghe Over-ear Razer Tiamat V2 ",
-            "view": 10,
-            "up": "0.0000"
+            "view": 5,
+            "up": "150.0000"
         }
     ],
     "mostProfitableCate": [
         {
-            "type": "Monitor",
-            "total": 31890000,
+            "type": "CPU",
+            "total": 59380000,
             "rank": 1,
-            "up": 3
+            "up": 7
         },
         {
-            "type": "Mainboard",
-            "total": 30090000,
+            "type": "Laptop",
+            "total": 44289000,
             "rank": 2,
-            "up": 5
+            "up": 0
+        },
+        {
+            "type": "Monitor",
+            "total": 42580000,
+            "rank": 3,
+            "up": 2
+        },
+        {
+            "type": "Headphone",
+            "total": 16879000,
+            "rank": 4,
+            "up": 4
         },
         {
             "type": "VGA",
             "total": 16290000,
-            "rank": 3,
-            "up": 7
-        },
-        {
-            "type": "GamingChair",
-            "total": 7480000,
-            "rank": 4,
-            "up": 6
-        },
-        {
-            "type": "Headphone",
-            "total": 5889000,
             "rank": 5,
-            "up": -2
+            "up": -4
         }
     ],
     "incomeByTime": [
         {
             "month": "Nov",
-            "income": 0
+            "income": 299.22
         },
         {
             "month": "Dec",
-            "income": 0
+            "income": 144.99
         },
         {
             "month": "Jan",
-            "income": 0
+            "income": 8.76
         },
         {
             "month": "Feb",
-            "income": 0
+            "income": 116.687
         },
         {
             "month": "Mar",
-            "income": 0
+            "income": 489.649
         },
         {
             "month": "Apr",
-            "income": 2157.885
-        }
-    ],
-    "topCustomer": [
-        {
-            "rank": 1,
-            "username": "Ly Vi Cuong",
-            "purchasedAmount": 52479000
-        },
-        {
-            "rank": 2,
-            "username": "kurozemi",
-            "purchasedAmount": 48180000
-        },
-        {
-            "rank": 3,
-            "username": "LowG",
-            "purchasedAmount": 28980000
-        },
-        {
-            "rank": 4,
-            "username": "asd123",
-            "purchasedAmount": 9070000
-        },
-        {
-            "rank": 5,
-            "username": "Lilina",
-            "purchasedAmount": 0
+            "income": 68.119
         }
     ]
 }
 
-export {dummydata}
+export {dummycustomers, dummydata}

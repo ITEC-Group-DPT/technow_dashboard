@@ -19,7 +19,7 @@ import SortByTime from "../../components/SortByTime/sortByTime"
 
 const Sales = () => {
     const [filterTime, setFilterTime] = useState("Month");
-    const [customers, setCustomers] = useState(dummydata.topCustomer);
+    const [customers, setCustomers] = useState(dummycustomers);
     const [category, setCategory] = useState(dummydata.mostProfitableCate)
     const [topRevenue, setTopRevenue] = useState(dummydata.topRevenue)
     const [dataLineChart, setDataLineChart] = useState(dummydata.incomeByTime)
@@ -32,7 +32,7 @@ const Sales = () => {
         const response = await getSaleOverview(filterTime);
         if (response.data.success) {
             const data = response.data.data;
-            setCustomers(data.topCustomer)
+            // setCustomers()
             setCategory(data.mostProfitableCate)
             setTopRevenue(data.topRevenue)
             setDataLineChart(data.incomeByTime)
@@ -105,7 +105,6 @@ const Sales = () => {
                         sx={{ ...styles.box }}
                         className="sale-graph"
                     >
-<<<<<<< Updated upstream
                         <SaleCommonCard
                             title="Top Revenue"
                         >
@@ -115,45 +114,6 @@ const Sales = () => {
                                         <CardProductSeller name={product.name} productImg={product.productimg} payment={product.revenue} ></CardProductSeller>
                                     )
                                 }
-=======
-                        <p style={{ marginLeft: "30px", color: color.grayText }}>(million VND)</p>
-                        <CustomLineChart
-
-                            data={dataLineChart}
-                            xAxisName="month"
-                            yAxisName="income"
-                            yAxisCount={6}
-                            width={380}
-                            height={200}
-                            lineColor={color.red}
-                        />
-                    </SaleCommonCard>
-                </Box>
-                <Box sx={{ ...styles.box, mr: 0 }}>
-                    <SaleCommonCard title="Top Customer" footer={true} sx={{ pb: 0 }}>
-                        <Box sx={{ width: "350px", mt: "12px" }}>
-                            {
-                                customers.map((customer) =>
-                                    <CardNameSeller rank={customer.rank} name={customer.username} isName={true} />
-                                )
-                            }
-                        </Box>
-                    </SaleCommonCard>
-
-                    <SaleCommonCard
-                        title="General Statistic"
-                        sx={{ pt: "18px", pb: "26px" }}
-                    >
-                        <Box sx={{ textAlign: 'center' }}>
-                            <Box sx={{ my: 6 }}>
-                                <Typography sx={{ color: color.red, fontWeight: 700, m: 0, fontSize: '52px' }} variant="h3" gutterBottom>
-                                    {itemOnSale}
-                                </Typography>
-                                <Typography sx={{ fontSize: '16px', fontWeight: 600, color: color.grayText }} gutterBottom>
-                                    Items On Sale
-                                </Typography>
-
->>>>>>> Stashed changes
                             </Box>
                         </SaleCommonCard>
 
