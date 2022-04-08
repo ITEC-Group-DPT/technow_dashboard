@@ -50,18 +50,26 @@ const Customers = () => {
                 background: color.background
             }}
         >
-            <Container className='container' sx={{ py: 5, paddingLeft: '108px !important', maxWidth: '1300px !important' }}>
+            <Container className='container' sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                minHeight: "100vh",
+                paddingLeft: '108px !important',
+                maxWidth: '1300px !important'
+            }}>
                 <Box sx={styles.titleWrapper}>
                     <Typography style={styles.title}>User Statistic</Typography>
                     <SortByTime onChangeValue={value => setSort(value)} />
                 </Box>
 
-                <Grid container spacing={9} sx={{ height: '820px' }}>
-                    <Grid item xs={6} sx={{
+                <Grid container spacing={9} sx={{ height: '760px' }}>
+                    <Grid item xs={6.3} sx={{
                         height: "100%",
                         display: "flex",
                         flexDirection: "column",
-                        justifyContent: "space-between"
+                        justifyContent: "space-between",
+                        pr: 2,
                     }}>
                         <Box className="chart" sx={styles.chart}>
                             <Box>
@@ -72,8 +80,8 @@ const Customers = () => {
                                 xAxisName={xName}
                                 yAxisName="guests"
                                 yAxisCount={6}
-                                width={430}
-                                height={270}
+                                width={500}
+                                height={250}
                                 lineColor={color.yellow}
                                 areaColor={color.lightYellow}
                                 style={{ fontSize: "13px" }}
@@ -89,8 +97,8 @@ const Customers = () => {
                                 xAxisName={xName}
                                 yAxisName="users"
                                 yAxisCount={6}
-                                width={430}
-                                height={270}
+                                width={500}
+                                height={250}
                                 lineColor={color.green}
                                 areaColor={color.lightGreen}
                                 style={{ fontSize: "13px" }}
@@ -98,7 +106,7 @@ const Customers = () => {
                         </Box>
                     </Grid>
 
-                    <Grid item xs={6} sx={{ height: '100%' }}>
+                    <Grid item xs={5.7} sx={{ height: '100%' }}>
                         <TableUser
                             data={leaderboard}
                         />

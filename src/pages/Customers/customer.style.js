@@ -22,8 +22,9 @@ const Style = {
         background: color.white,
         borderRadius: "15px",
         boxShadow: '0px 1px #d5d6d8',
-        paddingLeft: "22px",
+        paddingLeft: "12px",
         py: "16px",
+        width:"100%",
     },
 
 

@@ -71,7 +71,9 @@ const TableUser = ({ data }) => {
     const handleSearch = (value) => {
         setSearch(value);
 
-        const searchList = data.filter(user => user.username.includes(value));
+        const searchList = data.filter(user =>
+            (user.username).toUpperCase().includes(value.toUpperCase())
+        );
 
         setAllUser(searchList);
     }
@@ -102,7 +104,7 @@ const TableUser = ({ data }) => {
     return (
         <Box sx={Style.leaderboard}>
 
-            <Box sx={{ display: 'flex', justifyContent: 'center', pt: 4, pb: 3}}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', pt: 4, pb: 3 }}>
                 <SearchBar
                     width='100%'
                     placeholder="Search for username..."
@@ -125,7 +127,7 @@ const TableUser = ({ data }) => {
                         />
                     </Grid>
                 </Grid>
-                <Divider sx={{mt: 2, mb: 3}}  />
+                <Divider sx={{ mt: 2, mb: 3 }} />
             </Box>
             {userList?.map(user =>
                 <Box sx={Style.boardRow}>
