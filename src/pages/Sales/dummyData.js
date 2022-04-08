@@ -59,10 +59,10 @@ let dummydata = {
     ],
     "mostViewed": [
         {
-            "productID": 78,
-            "productimg": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/Headphone%2F081.webp?alt=media&token=a61ca020-fbd1-42f9-8fa5-d42168c2b8c5",
-            "name": "Tai nghe Over-ear Razer Tiamat V2 ",
-            "view": 10,
+            "productID": 218,
+            "productimg": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/RAM%2Fram18.jpg?alt=media&token=ff0f01ff-022d-4268-a73d-f10183456934",
+            "name": "RAM GSKILL Trident Z Neo DDR4",
+            "view": 50,
             "up": "0.0000"
         }
     ],
