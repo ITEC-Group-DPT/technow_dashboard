@@ -50,12 +50,6 @@ const Style = {
         position: "relative"
     },
 
-    boardTitle: {
-        // paddingLeft: "50px",
-        // paddingTop: "20px",
-        // paddingBottom: "10px"
-    },
-
     boardRow: {
         // paddingLeft: "60px",
         //paddingTop: "20px",

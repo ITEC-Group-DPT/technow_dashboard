@@ -91,7 +91,7 @@ const Customers = () => {
 
                         <Box className="font-weight-graph" sx={{ ...styles.chart, mb: 0 }}>
                             <Box>
-                                <Typography sx={styles.chartTitle}>Account Created</Typography>
+                                <Typography sx={styles.chartTitle}>New Users</Typography>
                             </Box>
                             <AreaChart
                                 data={activeUsers}

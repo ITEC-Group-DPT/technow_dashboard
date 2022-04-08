@@ -19,7 +19,7 @@ const CardNameSeller = ({ rank, name, grow, payment, isName = false }) => {
 
 
     return (
-        <Box sx={{ ...styles.flex, px: 3, py: "14px",flex: 1 }}>
+        <Box sx={{ ...styles.flex, px: 3, pb: "25px",flex: 1 }}>
             <Box sx={{
                 width: 36,
                 height: 36,

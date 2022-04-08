@@ -60,9 +60,11 @@ const TableUser = ({ data }) => {
     const handleSortPrice = (value) => {
         setPurchasedSort(value)
 
-        const sortedList = (value == "Top Purchased" ? userList[0].rank > 1 : allUser[0].rank == 1)
-            ? JSON.parse(JSON.stringify(allUser.reverse()))
-            : allUser
+        const sortedList = (value == "Top Purchased" ?
+            allUser[0].rank > allUser[1].rank
+            : allUser[0].rank < allUser[1].rank)
+                ? JSON.parse(JSON.stringify(allUser.reverse()))
+                : allUser
 
         setAllUser(sortedList);
     }
@@ -71,11 +73,16 @@ const TableUser = ({ data }) => {
     const handleSearch = (value) => {
         setSearch(value);
 
+        console.log('search: ', value);
+
         const searchList = data.filter(user =>
             (user.username).toUpperCase().includes(value.toUpperCase())
         );
 
+        console.log('search list: ', searchList);
+
         setAllUser(searchList);
+        setPage(1)
     }
 
 
@@ -134,7 +141,7 @@ const TableUser = ({ data }) => {
                     <Grid container spacing={1}>
                         <Grid item lg={3} md={3}>
                             <Box sx={{ width: '36.5px' }}>
-                                <Typography style={{ fontWeight: 700,  textAlign: 'center' }}>{user.rank}</Typography>
+                                <Typography style={{ fontWeight: 700, textAlign: 'center' }}>{user.rank}</Typography>
                             </Box>
                         </Grid>
                         <Grid item lg={4} md={4}>
@@ -143,7 +150,7 @@ const TableUser = ({ data }) => {
                         <Grid item lg={5} md={5} style={{
                             display: 'flex',
                             justifyContent: 'right',
-                            paddingRight: "32px",
+                            paddingRight: "24px",
                         }}>
                             <Box style={formatRankColor(user.rank)}>
                                 <Typography>

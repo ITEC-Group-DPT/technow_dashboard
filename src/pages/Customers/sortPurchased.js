@@ -1,43 +1,40 @@
-import React, { useState } from 'react'
-import { Select, FormControl, MenuItem, styled, InputBase, Box } from '@mui/material'
-
-const MyInput = styled(InputBase)(() => ({
-    '& .MuiInputBase-input': {
-        borderWidth: 0,
-        paddingTop: 0,
-        'aria-label': 'Without label',
-    },
-}))
-
-const sortList = ['Top Purchased', 'Least Purchased']
+import React from 'react'
+import { Box, Typography } from '@mui/material'
+import { DropDownIc } from '../../constant/icon'
 
 const SortPurchased = ({ value, onChangeValue }) => {
 
-    const handleChange = (event) => {
-        const result = event.target.value
+    const handleChange = () => {
+
+        const result = value == "Top Purchased" ? "Least Purchased" : "Top Purchased";
         onChangeValue && onChangeValue(result)
     }
 
     return (
-        <Box sx={{display: 'flex', justifyContent: 'end'}}>
-            <FormControl sx={styles.formControl}>
-                <Select
-                    sx={styles.select}
-                    value={value}
-                    onChange={handleChange}
-                    input={<MyInput />}
-                    MenuProps={{ disableScrollLock: true }}
-                >
-                    {sortList.map((sort) => (
-                        <MenuItem value={sort} key={sort}>{sort}</MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
+        <Box
+            sx={styles.box}
+            onClick={handleChange}
+        >
+            <Typography sx={styles.title}>
+                Purchased Amount
+            </Typography>
+
+            <img src={DropDownIc} style={{
+                width: 15,
+                height: 15,
+                transform: value == "Least Purchased" && "scaleY(-1)"
+            }} />
         </Box>
     )
 }
 
 const styles = {
+    box: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        cursor: "pointer"
+    },
     title: {
         color: '#848484',
     },
@@ -47,7 +44,7 @@ const styles = {
         width: "160px",
         py: 0,
     },
-    select: {
+    title: {
         textAlign: 'center',
         fontWeight: 700,
         fontSize: '17px',
