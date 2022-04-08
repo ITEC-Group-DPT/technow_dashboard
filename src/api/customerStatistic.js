@@ -2,9 +2,9 @@ import axios from "./axios"
 
 const API_URL = "http://localhost:8080/Technowz_Backend/adminAPI/"
 
-const getLeaderboardData = () => {
+const getLeaderboardData = (time) => {
     let command = 'getLeaderboardData';
-    return axios.get(API_URL + `customerStatistic.php?command=${command}`);
+    return axios.get(API_URL + `customerStatistic.php?command=${command}&each=${time}`);
 }
 
 const getVisitedUsers = (time) => {

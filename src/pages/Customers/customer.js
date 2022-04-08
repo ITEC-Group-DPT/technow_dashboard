@@ -22,23 +22,22 @@ const Customers = () => {
     const [xName, setX] = useState("month");
 
     useEffect(() => {
-        getLeaderboardData().then((response) => {
+        getChartsData(sortTime).then((response) => {
+            console.log('sort time: ', sortTime);
+            console.log("sort by time: ", response.data);
+
+            if (response.data.success === true) {
+                const data = response.data.data;
+
+                setX(Object.keys(data.visited[0])[0]);
+                updateActiveUsers(data.active);
+                updateVisitedUsers(data.visited);
+            }
+        })
+        getLeaderboardData(sortTime).then((response) => {
             if (response.data.success === true) {
                 updateLeaderboard(response.data.data);
                 console.log("leaderboardData ", response.data);
-            }
-        })
-    }, []);
-
-    useEffect(() => {
-        getChartsData(sortTime.toLowerCase()).then((response) => {
-            console.log("ChartsData", response.data);
-            let Cdata = JSON.parse(response.data.data);
-            console.log(Cdata);
-            if (response.data.success === true) {
-                setX(Object.keys(Cdata.visited[0])[0]);
-                updateActiveUsers(Cdata.active);
-                updateVisitedUsers(Cdata.visited);
             }
         })
     }, [sortTime])
@@ -88,7 +87,7 @@ const Customers = () => {
 
                         <Box className="chart" sx={{...styles.chart, mb: 0}}>
                             <Box>
-                                <Typography style={styles.chartTitle}>Active Users</Typography>
+                                <Typography style={styles.chartTitle}>Account Created</Typography>
                             </Box>
                             <AreaChart
                                 data={activeUsers}
@@ -105,7 +104,9 @@ const Customers = () => {
 
                     </Grid>
                     <Grid item lg={6} md={6}>
-                        <TableUser data={leaderboard} />
+                        <TableUser 
+                        data={leaderboard} 
+                        />
                     </Grid>
                 </Grid>
             </Container>

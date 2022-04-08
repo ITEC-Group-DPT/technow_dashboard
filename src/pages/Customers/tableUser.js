@@ -14,7 +14,10 @@ import Style from './customer.style'
 
 const TableUser = ({ data }) => {
 
-    const [userList, setUserList] = useState(data);
+    const [allUser, setAllUser] = useState(data);
+    const [userList, setUserList] = useState();
+
+
     const [totalPage, setTotalPage] = useState(1);
     const [page, setPage] = useState(1);
     const [purchasedSort, setPurchasedSort] = useState("Top Purchased");
@@ -23,21 +26,56 @@ const TableUser = ({ data }) => {
     const itemsPerPage = 10;
     const offset = (page - 1) * itemsPerPage;
 
-    useEffect(() => {
-        setTotalPage(Math.round(data.length / itemsPerPage))
-        setUserList(data.slice(offset, offset + itemsPerPage));
-    }, [page, data])
+    const formatedList = (list) => {
+        // console.log('list: ', list);
+        return list
+            // .filter(user => user.purchasedAmount != 0)
+            .slice(offset, offset + itemsPerPage);
+    }
+
 
     useEffect(() => {
-        if (data.length == 0) return;
-        let userData;
+        setUserList(formatedList(allUser));
+    }, [page])
 
-        if (data[0].rank > 1)
-            userData = data.reverse().slice(offset, offset + itemsPerPage);
-        else
-            userData = data.slice(offset, offset + itemsPerPage);
-        setUserList(userData);
-    }, [purchasedSort])
+
+    useEffect(() => {
+        // console.log('userList: ', userList);
+    }, [userList]);
+
+    useEffect(() => {
+        setTotalPage(Math.ceil(allUser.length / itemsPerPage));
+        setUserList(formatedList(allUser))
+    }, [allUser]);
+
+    useEffect(() => {
+        setAllUser(data);
+        setSearch("");
+        setPurchasedSort("Top Purchased");
+        
+        // console.log('data: ', data);
+    }, [data]);
+
+
+    const handleSortPrice = (value) => {
+        setPurchasedSort(value)
+
+        const sortedList = (value == "Top Purchased" ? userList[0].rank > 1 : allUser[0].rank == 1)
+                ? JSON.parse(JSON.stringify(allUser.reverse()))
+                : allUser
+
+        setAllUser(sortedList);
+    }
+
+
+    const handleSearch = (value) => {
+        setSearch(value);
+
+        const searchList = data.filter(user => user.username.includes(value));
+
+        setAllUser(searchList);
+    }
+
 
     const formatPrice = (value) => {
         return new Intl.NumberFormat('vi-VN', {
@@ -69,7 +107,7 @@ const TableUser = ({ data }) => {
                         width='100%'
                         placeholder="Search for username..."
                         text={search}
-                        setText={setSearch} />
+                        setText={handleSearch} />
                 </Box>
             </Container>
             <Box style={Style.boardTitle}>
@@ -81,12 +119,15 @@ const TableUser = ({ data }) => {
                         <Typography style={{ fontWeight: 600 }}>Username</Typography>
                     </Grid>
                     <Grid item lg={5} md={5}>
-                        <SortPurchased onChangeValue={value => setPurchasedSort(value)} />
+                        <SortPurchased
+                            value={purchasedSort}
+                            onChangeValue={handleSortPrice}
+                        />
                     </Grid>
                 </Grid>
                 <Divider style={{ marginTop: '10px' }} />
             </Box>
-            {userList.map(user =>
+            {userList?.map(user =>
                 <Box style={Style.boardRow}>
                     <Grid container spacing={1}>
                         <Grid item lg={3} md={3}>
