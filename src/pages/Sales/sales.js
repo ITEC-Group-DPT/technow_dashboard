@@ -119,7 +119,6 @@ const Sales = () => {
 
 
                         <SaleCommonCard
-                            sx={{pt: 4}}
                             title='Total Sales'
                         >
                             <p style={{ marginLeft: "35px", color: color.grayText, fontSize: '13px', marginBottom: '20px' }}>(million VND)</p>
