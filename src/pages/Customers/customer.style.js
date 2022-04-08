@@ -3,32 +3,33 @@ import color from '../../constant/color'
 const Style = {
     //charts
     title: {
-        fontSize: "32px",
+        fontSize: "35px",
         fontWeight: 700,
         textAlign: "left",
-        marginBottom: "1rem"
+        marginBottom: "1rem",
+        fontFamily: 'Roboto',
     },
 
 
     titleWrapper: {
         display: "flex",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        mb: 1,
     },
 
 
     chart: {
-        marginBottom: "2rem",
         background: color.white,
         borderRadius: "15px",
-        paddingLeft: "45px",
+        boxShadow: '0px 1px #d5d6d8',
+        paddingLeft: "22px",
         py: "16px",
-
     },
 
 
     chartTitle: {
-        fontSize: "22px",
-        fontWeight: 500,
+        fontSize: "20px",
+        fontWeight: 700,
         textAlign: "center",
         paddingTop: "10px",
         paddingBottom: "10px"
@@ -40,21 +41,23 @@ const Style = {
     leaderboard: {
         display: "block",
         background: color.white,
-        paddingTop: "20px",
         borderRadius: '15px',
-        minHeight: "88vh",
+        boxShadow: '0px 1px #d5d6d8',
+        p: '0px 37px',
+        height: "100%",
         position: "relative"
     },
 
     boardTitle: {
-        paddingLeft: "50px",
-        paddingTop: "20px",
-        paddingBottom: "10px"
+        // paddingLeft: "50px",
+        // paddingTop: "20px",
+        // paddingBottom: "10px"
     },
 
     boardRow: {
-        paddingLeft: "60px",
-        paddingTop: "20px",
+        // paddingLeft: "60px",
+        //paddingTop: "20px",
+        my: 2,
     },
 
     paginationBox: {
@@ -63,6 +66,7 @@ const Style = {
         position: 'absolute',
         bottom: "10px",
         display:"flex",
+        left: 0,
         justifyContent:"center",
         width:"100%",
     },

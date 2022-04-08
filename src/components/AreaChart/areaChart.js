@@ -11,6 +11,7 @@ const customAreaChart = ({
   lineColor,
   areaColor,
   yAxisCount }) => {
+  if (data.length == 0) return <></>
   return (
     <AreaChart
       width={width}
@@ -31,7 +32,10 @@ const customAreaChart = ({
         tickMargin={20}
         tickCount={yAxisCount}
         axisLine={false}
-        tickLine={false} />
+        tickLine={false}
+        allowDecimals={false}
+      />
+
 
       <Tooltip />
 
@@ -40,7 +44,7 @@ const customAreaChart = ({
         stroke={lineColor}
         strokeWidth={2}
         fill={areaColor}
-        dot={{ fill: lineColor, strokeWidth: 1, r: 3}}
+        dot={{ fill: lineColor, strokeWidth: 1, r: 3 }}
         activeDot={{ r: 6 }}
         animationDuration={1000}
       />

@@ -11,6 +11,7 @@ const CustomBarChart = ({
     barSize,
     barColor,
     yAxisCount }) => {
+    if(data.length == 0) return <></>
     return (
         <BarChart
             width={width}

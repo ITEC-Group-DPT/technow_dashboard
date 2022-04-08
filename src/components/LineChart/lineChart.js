@@ -25,6 +25,7 @@ const CustomLineChart = ({
 		}).format(value)
 	}
 
+    if(data.length == 0) return <></>
     return (
         <LineChart
             style={{ margin: 'auto', paddingRight: "20px" }}
