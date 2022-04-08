@@ -5,7 +5,7 @@ import { Box, Slide, Fade, useMediaQuery } from '@mui/material'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Button from '@mui/base/ButtonUnstyled';
 
-//component 
+//component
 import TabIcon from './tabIcon'
 import BottomTab from './bottomTab';
 import OpenNav from "./openNav"
@@ -89,6 +89,8 @@ const LeftNavigation = () => {
             default:
                 break;
         }
+
+        if (index != 0) setIsOpen(false)
     }
 
     const onControlOpen = (open) => {

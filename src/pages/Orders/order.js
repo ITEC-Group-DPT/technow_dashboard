@@ -131,7 +131,7 @@ const Orders = () => {
                 </Box>
                 <Grid container spacing={6} sx={styles.graphContent}>
                     <Grid item xs={6}>
-                        <Box sx={styles.graphWrapper}>
+                        <Box className="font-weight-graph" sx={styles.graphWrapper}>
                             <Box sx={{ mb: 4 }}>
                                 <Typography sx={styles.graphTitle}>Total Orders</Typography>
                             </Box>
@@ -149,7 +149,7 @@ const Orders = () => {
                     </Grid>
 
                     <Grid item xs={6}>
-                        <Box sx={styles.graphWrapper}>
+                        <Box className="font-weight-graph" sx={styles.graphWrapper}>
                             <Grid container sx={{ mb: 4 }}>
                                 <Grid item xs={4} sx={styles.labelWrapper}>
                                     <Typography sx={styles.label} >(million VND)</Typography>

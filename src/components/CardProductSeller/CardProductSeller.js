@@ -14,7 +14,7 @@ const CardProductSeller = ({ productImg = false, name, payment }) => {
             flex: 1,
             px: 3,
             py: 1,
-            width: '454px',
+            width: '400px',
         }}>
             <Box sx={{
                 maxWidth: 70,
@@ -36,7 +36,7 @@ const CardProductSeller = ({ productImg = false, name, payment }) => {
             </Box>
 
             <Box sx={{
-                flex: 4,
+                flex: 5,
 
             }}>
                 <Typography sx={{

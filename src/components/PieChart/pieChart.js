@@ -16,8 +16,6 @@ const CustomPieChart = ({
         { percentage: 100 - percent },
     ];
 
-    if(!percent) return <></>
-
     return (
         <Box sx={{ position: "relative" }}>
             <PieChart

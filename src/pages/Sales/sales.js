@@ -48,8 +48,8 @@ const Sales = () => {
     }, [filterTime]);
 
     return (
-        <Box sx={{ backgroundColor: color.background, ml: '84px', py: 8, display:'flex', justifyContent: 'center' }}>
-            <Box sx={{width: '1350px'}}>
+        <Box sx={{ backgroundColor: color.background, ml: '84px', py: 8, display: 'flex', justifyContent: 'center' }}>
+            <Box sx={{ width: '1350px' }}>
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                     <Typography sx={styles.pageTitle}>Sales Overview</Typography>
 
@@ -61,7 +61,7 @@ const Sales = () => {
                     <Box sx={{ ...styles.box, ml: 0 }}>
                         <SaleCommonCard
                             title='Best Seller'
-                            sx={{ pt: "18px", pb: "16px" }}
+                            sx={{ width: "420px" }}
                         >
                             <CardItemSellerStock
                                 productImg={bestSeller[0].productimg} isView={false} content={bestSeller[0].price}
@@ -72,7 +72,6 @@ const Sales = () => {
 
                         <SaleCommonCard
                             title='Most Viewed Product'
-                            sx={{ pt: "18px", pb: "16px" }}
                         >
                             <CardItemSellerStock
                                 productImg={mostViewed[0].productimg}
@@ -85,8 +84,6 @@ const Sales = () => {
 
                         <SaleCommonCard
                             title='Most Profitable Categories'
-                            sx={{ pt: "18px", pb: "26px" }}
-
                         >
                             <Box sx={{ mt: 1, }}>
                                 {
@@ -100,13 +97,14 @@ const Sales = () => {
                     </Box>
 
 
-                    <Box sx={{ ...styles.box }}>
-
+                    <Box
+                        sx={{ ...styles.box }}
+                        className="sale-graph"
+                    >
                         <SaleCommonCard
                             title="Top Revenue"
-                            sx={{ pt: "18px", pb: "26px" }}
                         >
-                            <Box>
+                            <Box sx={{ pl: 1 }}>
                                 {
                                     topRevenue.map((product) =>
                                         <CardProductSeller name={product.name} productImg={product.productimg} payment={product.revenue} ></CardProductSeller>
@@ -117,18 +115,16 @@ const Sales = () => {
 
 
                         <SaleCommonCard
+                            sx={{pt: 4}}
                             title='Total Sales'
-                            sx={{ pt: "18px", pb: "26px" }}
-
                         >
                             <p style={{ marginLeft: "30px", color: color.grayText }}>(million VND)</p>
                             <CustomLineChart
-
                                 data={dataLineChart}
                                 xAxisName="month"
                                 yAxisName="income"
                                 yAxisCount={6}
-                                width={380}
+                                width={350}
                                 height={200}
                                 lineColor={color.red}
                             />
@@ -147,7 +143,6 @@ const Sales = () => {
 
                         <SaleCommonCard
                             title="General Statistic"
-                            sx={{ pt: "18px", pb: "26px" }}
                         >
                             <Box sx={{ textAlign: 'center' }}>
                                 <Box sx={{ my: 6 }}>
@@ -164,7 +159,7 @@ const Sales = () => {
                                         {saleInTime}
                                     </Typography>
                                     <Typography sx={{ fontSize: '16px', fontWeight: 600, color: color.grayText }} gutterBottom>
-                                        Sales this {filterTime}
+                                        Sales This {filterTime}
                                     </Typography>
                                 </Box>
 

@@ -71,7 +71,7 @@ const Customers = () => {
                         justifyContent: "space-between",
                         pr: 2,
                     }}>
-                        <Box className="chart" sx={styles.chart}>
+                        <Box className="font-weight-graph" sx={styles.chart}>
                             <Box>
                                 <Typography style={styles.chartTitle}>Guest Visited</Typography>
                             </Box>
@@ -88,7 +88,7 @@ const Customers = () => {
                             />
                         </Box>
 
-                        <Box className="chart" sx={{ ...styles.chart, mb: 0 }}>
+                        <Box className="font-weight-graph" sx={{ ...styles.chart, mb: 0 }}>
                             <Box>
                                 <Typography style={styles.chartTitle}>Account Created</Typography>
                             </Box>

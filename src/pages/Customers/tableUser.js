@@ -52,7 +52,7 @@ const TableUser = ({ data }) => {
         setAllUser(data);
         setSearch("");
         setPurchasedSort("Top Purchased");
-
+        setPage(1)
         // console.log('data: ', data);
     }, [data]);
 
