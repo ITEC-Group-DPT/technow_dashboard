@@ -126,7 +126,7 @@ const Orders = () => {
                     <Typography sx={styles.title}>Order Report</Typography>
                     <SortByTime
                         onChangeValue={value => setSort(value)}
-                        sortList = {["Day", "Month", "Year"]}
+                        sortList={["Day", "Month", "Year"]}
                     />
                 </Box>
                 <Grid container spacing={6} sx={styles.graphContent}>
@@ -135,18 +135,16 @@ const Orders = () => {
                             <Box sx={{ mb: 4 }}>
                                 <Typography sx={styles.graphTitle}>Total Orders</Typography>
                             </Box>
-                            {barChartData.length > 0 &&
-                                <BarChart
-                                    data={barChartData}
-                                    xAxisName="key"
-                                    yAxisName="orders"
-                                    yAxisCount={6}
-                                    width={480}
-                                    height={270}
-                                    barSize={40}
-                                    barColor={color.orange}
-                                />
-                            }
+                            <BarChart
+                                data={barChartData}
+                                xAxisName="key"
+                                yAxisName="orders"
+                                yAxisCount={6}
+                                width={480}
+                                height={270}
+                                barSize={40}
+                                barColor={color.orange}
+                            />
                         </Box>
                     </Grid>
 
@@ -160,17 +158,15 @@ const Orders = () => {
                                     <Typography sx={styles.graphTitle}>Total Value</Typography>
                                 </Grid>
                             </Grid>
-                            {lineChartData.length > 0 &&
-                                <LineChart
-                                    data={lineChartData}
-                                    xAxisName="key"
-                                    yAxisName="income"
-                                    yAxisCount={6}
-                                    width={470}
-                                    height={270}
-                                    lineColor={color.blue}
-                                />
-                            }
+                            <LineChart
+                                data={lineChartData}
+                                xAxisName="key"
+                                yAxisName="income"
+                                yAxisCount={6}
+                                width={470}
+                                height={270}
+                                lineColor={color.blue}
+                            />
                         </Box>
                     </Grid>
                 </Grid>

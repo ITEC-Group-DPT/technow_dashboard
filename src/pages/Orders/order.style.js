@@ -7,11 +7,10 @@ const styles = {
     },
 
     main: {
-        pt: 5,
+        py: 5,
         maxWidth: '1300px !important',
         paddingLeft: '108px !important',
         height: '100%',
-        pb: 5,
     },
 
     title1Wrapper: {
@@ -21,8 +20,9 @@ const styles = {
     },
 
     title: {
-        fontSize: '27px',
+        fontSize: '32px',
         fontWeight: 'bold',
+        fontFamily: 'Roboto',
     },
 
     graphContent: {
@@ -32,10 +32,11 @@ const styles = {
     graphWrapper: {
         background: 'white',
         borderRadius: '15px',
-        boxShadow: '0px .5px #d5d6d8',
+        boxShadow: '0px 1px #d5d6d8',
         pt: 3,
         pb: 2,
         px: 4,
+        minHeight: '340px',
     },
 
     lineTitleWrapper: {
@@ -69,7 +70,7 @@ const styles = {
     orderContent: {
         background: 'white',
         borderRadius: '15px',
-        boxShadow: '0px .5px #d5d6d8',
+        boxShadow: '0px 1px #d5d6d8',
         minHeight: '420px',
         pt: 6,
         pb: 1,

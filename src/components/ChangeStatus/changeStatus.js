@@ -142,6 +142,7 @@ const ChangeStatus = ({ defaultValue = 0, orderID = 0 }) => {
                 onClose={handleClose}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
+                disableScrollLock
             >
                 <DialogTitle id="alert-dialog-title">
                     Confirmation
