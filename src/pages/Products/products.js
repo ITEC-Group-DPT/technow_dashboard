@@ -81,7 +81,10 @@ const Products = () => {
 		const _productList = response1.data.data
 		setFilteredList(_productList)
 
-		const response2 = await getNumberOfProductByCategoryAdmin(value, '')
+		const response2 = await getNumberOfProductByCategoryAdmin(
+			value,
+			filter.text,
+		)
 		const _totalPage = response2.data.data[0].totalPage
 		setTotalPage(Math.ceil(_totalPage / 6))
 
@@ -106,11 +109,11 @@ const Products = () => {
 		const _productList = response1.data.data
 		setFilteredList(_productList)
 
-		const response2 = await getNumberOfProductByCategoryAdmin(temp, '')
+		const response2 = await getNumberOfProductByCategoryAdmin(temp, value)
 		const _totalPage = response2.data.data[0].totalPage
 		setTotalPage(Math.ceil(_totalPage / 6))
-
-		setPage(1)
+		if (_totalPage !== 0) setPage(1)
+		else setPage(0)
 	}
 
 	const handleChangePage = async (value) => {
@@ -140,8 +143,15 @@ const Products = () => {
 	}
 
 	const handleRequestSort = async (event, property) => {
-		const isAsc = orderBy === property && order === 'asc'
-		const temp = isAsc ? 'desc' : 'asc'
+		let isAsc
+		let temp
+		debugger
+		if (property === orderBy) {
+			isAsc = order === 'asc'
+			temp = isAsc ? 'desc' : 'asc'
+		} else {
+			temp = 'desc'
+		}
 		setOrder(temp)
 		setOrderBy(property)
 		let response

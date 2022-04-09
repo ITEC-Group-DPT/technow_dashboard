@@ -83,7 +83,7 @@ const CustomTableRow = ({ item, colorStock }) => {
 				</TableCell>
 				<TableCell align='center' sx={[styles.dataCell]}>
 					<Typography sx={{ color: color.lightGrayText, pr: '5px' }}>
-						{item.dateCreated}
+						{item.dateCreated.substring(0, 10)}
 					</Typography>
 				</TableCell>
 				<TableCell align='center' sx={styles.dataCell}>
