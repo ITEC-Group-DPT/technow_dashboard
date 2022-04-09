@@ -60,7 +60,7 @@ const Customers = () => {
                 maxWidth: '1300px !important'
             }}>
                 <Box sx={styles.titleWrapper}>
-                    <Typography style={styles.title}>User Statistic</Typography>
+                    <Typography style={styles.title}>Customer Statistics</Typography>
                     <SortByTime onChangeValue={value => setSort(value)} />
                 </Box>
 
