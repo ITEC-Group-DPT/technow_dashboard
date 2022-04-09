@@ -1,6 +1,7 @@
 import {
 	Button,
 	Container,
+	Divider,
 	FormControl,
 	MenuItem,
 	Select,
@@ -19,6 +20,7 @@ import { FilterIc, PlusIc } from '../../constant/icon'
 import CustomTableHead from './components/CustomTableHead'
 import CustomTableRow from './components/CustomTableRow'
 import styles from './product.style'
+import "./products.css"
 import {
 	getTotalNumberOfProductAdmin,
 	getNumberOfProductByCategoryAdmin,
@@ -200,10 +202,12 @@ const Products = () => {
 						sx={[
 							styles.box,
 							{
+								mt: "16px",
 								justifyContent: 'space-between',
+								// px: "16px"
 							},
 						]}>
-						<Box sx={[styles.box, { height: '37px' }]}>
+						<Box sx={[styles.box, { height: '44px' }]}>
 							<SearchBar
 								width='500px'
 								text={filter.text}
@@ -227,14 +231,20 @@ const Products = () => {
 							</Typography>
 							<FormControl sx={{ height: '100%', mr: 2 }}>
 								<Select
+									className='categorySelect'
 									MenuProps={{ disableScrollLock: true }}
 									value={filter.category}
 									onChange={handleChangeCategory}
 									sx={[
 										styles.selectInp,
 										{ height: '100%', p: '0px' },
-									]}>
-									<MenuItem value='Category'>All</MenuItem>
+									]}
+								>
+									<MenuItem value='Category'
+										sx={{ color: color.lightGrayText }}
+									>
+										All
+									</MenuItem>
 									{categoryList?.map((item) => {
 										return (
 											<MenuItem
@@ -270,33 +280,33 @@ const Products = () => {
 									src={PlusIc}
 									style={{ marginRight: '10px' }}
 								/>
-								<Typography sx={{ fontSize: '14px' }}>
-									Add Product
-								</Typography>
+								<Typography sx={{ fontSize: '14px' }}>Add Product</Typography>
 							</Button>
 						</Box>
 					</Box>
 
 					<Box sx={[styles.box, { pt: '30px' }]}>
-						<TableContainer>
+						<TableContainer className='productTable'>
 							<Table>
 								<CustomTableHead
 									order={order}
 									orderBy={orderBy}
 									onRequestSort={handleRequestSort}
 								/>
-								{!_.isEmpty(filteredList) ? (
+
+ 								{!_.isEmpty(filteredList) ? (
+
 									<TableBody>
 										{filteredList.map((item, index) => {
 											const colorStock =
 												changeStockColor(item.stock) ===
-												0
+													0
 													? color.green
 													: changeStockColor(
-															item.stock,
-													  ) === 1
-													? color.yellow
-													: color.darkRed
+														item.stock,
+													) === 1
+														? color.yellow
+														: color.darkRed
 											return (
 												<CustomTableRow
 													colorStock={colorStock}

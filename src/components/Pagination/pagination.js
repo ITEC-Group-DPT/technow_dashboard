@@ -83,6 +83,7 @@ const styles = {
         fontSize: 14,
         color: color.lightGrayText,
         whiteSpace: 'nowrap',
+        textAlign: "center",
         minWidth: '70px',
     },
 }

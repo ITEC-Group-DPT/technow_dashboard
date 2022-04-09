@@ -7,6 +7,7 @@ import color from '../../../constant/color'
 import { ThreeDotIc } from '../../../constant/icon'
 import CustomEditProductDialog from './CustomEditProductDialog'
 import DeleteProductDialog from './DeleteProductDialog'
+import { headCells } from '../tableConfig'
 
 const styles = {
 	box: {
@@ -33,6 +34,7 @@ const styles = {
 		width: '106px',
 		height: '83px',
 		justifyContent: 'space-around',
+
 	},
 	pointerCursor: {
 		cursor: 'pointer',
@@ -76,35 +78,43 @@ const CustomTableRow = ({ item, colorStock }) => {
 	return (
 		<>
 			<TableRow>
-				<TableCell align='center' sx={styles.dataCell}>
-					<Typography sx={{ pr: '20px' }}>
+				<TableCell align={headCells[0].align} sx={{
+					...styles.dataCell,
+					pl: 0,
+				}}>
+					<Typography sx={{
+						pr: "26px",
+					}}>
 						{item.productID}
 					</Typography>
 				</TableCell>
-				<TableCell align='center' sx={styles.dataCell}>
-					<img src={item.img1} width={75} height={75} />
+				<TableCell align={headCells[1].align} sx={styles.dataCell}>
+					<img src={item.img1} width={100} height={100} />
 				</TableCell>
-				<TableCell align='center' sx={styles.dataCell}>
+				<TableCell align={headCells[2].align} sx={styles.dataCell}>
 					<Typography sx={[styles.cellName]}>{item.name}</Typography>
 				</TableCell>
-				<TableCell align='center' sx={[styles.dataCell]}>
-					<Typography sx={{ color: color.lightGrayText, pr: '5px' }}>
+				<TableCell align={headCells[3].align} sx={[styles.dataCell]}>
+					<Typography sx={{ color: color.lightGrayText, pr: "6px" }}>
 						{item.dateCreated.substring(0, 10)}
 					</Typography>
 				</TableCell>
-				<TableCell align='center' sx={styles.dataCell}>
-					<Typography>{convertToVND(item.price)}</Typography>
+				<TableCell align={headCells[4].align} sx={styles.dataCell}>
+					<Typography sx={{ pr: "26px" }}>{convertToVND(item.price)}</Typography>
 				</TableCell>
-				<TableCell align='center' sx={styles.dataCell}>
+				<TableCell align={headCells[5].align} sx={styles.dataCell}>
 					<Typography
 						sx={{
 							color: colorStock,
 							fontWeight: 'semibold',
+							pr: "26px"
 						}}>
 						{item.stock}
 					</Typography>
 				</TableCell>
-				<TableCell sx={styles.dataCell}>
+				<TableCell sx={{
+					...styles.dataCell, px: 0, textAlign: "right"
+				}}>
 					<img
 						style={styles.pointerCursor}
 						src={ThreeDotIc}
