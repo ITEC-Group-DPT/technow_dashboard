@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 
 //MUI
-import { Box, Slide, Fade, useMediaQuery } from '@mui/material'
+import { Box} from '@mui/material'
 import { useLocation, useNavigate } from 'react-router-dom'
-import Button from '@mui/base/ButtonUnstyled';
 
 //component
 import TabIcon from './tabIcon'
@@ -60,7 +59,8 @@ const LeftNavigation = () => {
             default:
                 break;
         }
-    }, [location]);
+    }, []);
+
     const navigateTab = (index) => {
 
         if (tabChoose == index) return;

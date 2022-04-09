@@ -31,7 +31,7 @@ const CustomPieChart = ({
                     cx="50%"
                     cy="50%"
                     innerRadius={innerRadius}
-                    animationDuration={1000}
+                    animationDuration={1200}
                 >
                     <Cell strokeOpacity={"0"} fill={color.lightBlack} />
                     <Cell strokeOpacity={"0"} fill='rgba(255, 0, 0, 0)' />

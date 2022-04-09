@@ -24,7 +24,6 @@ const StatHome = ({
         return (price / 1000000).toFixed(1) + " triệu";
     }
 
-
     const numberData =
         title != "Sales"
             ? stat.current
@@ -47,17 +46,20 @@ const StatHome = ({
                 </Typography>
             </Box>
 
-            <PieChart
-                percent={Math.floor(Math.abs(stat.percent) * 100)}
+            {
+                stat.isLoading != true &&
+                <PieChart
+                    percent={Math.floor(Math.abs(stat.percent) * 100)}
 
-                width={135}
-                height={135}
+                    width={135}
+                    height={135}
 
-                innerRadius={44}
-                left={Math.abs(stat.percent) == 1 ? 40 : 45}
-                bottom={52}
-                fontSize={22}
-            />
+                    innerRadius={44}
+                    left={Math.abs(stat.percent) >= 1 ? 40 : 45}
+                    bottom={52}
+                    fontSize={22}
+                />
+            }
 
             <Box sx={styles.arrowBox}>
                 {

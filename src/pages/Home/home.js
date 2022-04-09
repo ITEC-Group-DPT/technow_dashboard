@@ -36,7 +36,6 @@ const Home = () => {
     const getBannerData = async () => {
         const response = await getOverallStatistic();
 
-        console.log('response home:', response);
         if (response.data.success) {
             const data = response.data.data;
 
@@ -49,24 +48,28 @@ const Home = () => {
 
     }
 
-    const getAllHomeStat = async () => {
-        const response = await getDashboardDataByTime(filterTime);
+    const getAllHomeStat = async (filter) => {
+        const response = await getDashboardDataByTime(filter);
 
         if (response.data.success) {
             const data = response.data.data;
+            console.log('home data: ', data);
 
             setHomeStat(data);
         }
 
     }
 
-    useEffect(() => {
-        getAllHomeStat()
-    }, [filterTime]);
-
+    const handleFilterTime = (filter) => {
+        console.log('get home stat: ', filter);
+        getAllHomeStat(filter);
+        setFilterTime(filter);
+    }
 
     useEffect(() => {
         getBannerData();
+        getAllHomeStat(filterTime);
+
     }, []);
     return (
         <Box className='homeAdmin' sx={styles.main}>
@@ -76,7 +79,7 @@ const Home = () => {
 
                 <SortByTime
                     sortList={["Day", "Month", "Year"]}
-                    onChangeValue={setFilterTime}
+                    onChangeValue={handleFilterTime}
                 />
             </Box>
 

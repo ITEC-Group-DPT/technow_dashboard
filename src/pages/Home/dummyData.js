@@ -6,22 +6,28 @@ const mockBannerData = {
 
 const salesSection = {
     current: 12400000,
-    percent: -0.5,
+    percent: 0.01,
+    isLoading: true,
 }
 
 const productsSection = {
     current: 73,
-    percent: 0.3,
+    percent: 0.01,
+    isLoading: true,
+
 }
 
 const ordersSection = {
     current: 50,
-    percent: 0.7,
+    percent: 0.01,
+    isLoading: true,
+
 }
 
 const customersSection = {
     current: 35,
-    percent: -0.4,
+    percent: 0.01,
+    isLoading: true,
 }
 export {
     mockBannerData,
