@@ -7,11 +7,10 @@ const styles = {
     },
 
     main: {
-        pt: 5,
-        maxWidth: '1200px !important',
+        py: 5,
+        maxWidth: '1300px !important',
         paddingLeft: '108px !important',
         height: '100%',
-        pb: 5,
     },
 
     title1Wrapper: {
@@ -21,8 +20,9 @@ const styles = {
     },
 
     title: {
-        fontSize: '27px',
+        fontSize: '32px',
         fontWeight: 'bold',
+        fontFamily: 'Roboto',
     },
 
     graphContent: {
@@ -32,10 +32,11 @@ const styles = {
     graphWrapper: {
         background: 'white',
         borderRadius: '15px',
-        boxShadow: '0px .5px #d5d6d8',
+        boxShadow: '0px 1px #d5d6d8',
         pt: 3,
         pb: 2,
         px: 4,
+        minHeight: '340px',
     },
 
     lineTitleWrapper: {
@@ -45,7 +46,7 @@ const styles = {
 
     graphTitle: {
         textAlign: 'center',
-        fontSize: '18px',
+        fontSize: '20px',
         fontWeight: 'bold',
     },
 
@@ -69,12 +70,12 @@ const styles = {
     orderContent: {
         background: 'white',
         borderRadius: '15px',
-        boxShadow: '0px .5px #d5d6d8',
-        minHeight: '48vh',
-        pt: 5,
+        boxShadow: '0px 1px #d5d6d8',
+        minHeight: '420px',
+        pt: 6,
         pb: 1,
-        pl: 8,
-        pr: 8,
+        pl: 9,
+        pr: 9,
     },
 
     controlWrapper: {

@@ -8,7 +8,7 @@ import { LeftArrowIc, RightArrowIc } from "../../constant/icon";
 import { Typography } from '@mui/material';
 import color from '../../constant/color';
 
-const Pagination = ({
+const centerPagination = ({
     page,
     maxPages,
 
@@ -16,7 +16,6 @@ const Pagination = ({
     onForward,
 }) => {
     return (
-
         <Box sx={styles.container}>
 
             {/* back arrow */}
@@ -24,15 +23,7 @@ const Pagination = ({
                 onClick={onBack}
                 style={styles.arrowBox}
             >
-                <img src={LeftArrowIc} width={14} height={14} />
-            </Button>
-
-            {/* forward arrow */}
-            <Button
-                onClick={onForward}
-                style={styles.arrowBox}
-            >
-                <img src={RightArrowIc} width={14} height={14} />
+                <img src={LeftArrowIc} width={20} height={14} />
             </Button>
 
             {/* pages box */}
@@ -43,6 +34,14 @@ const Pagination = ({
                     Page {page}/{maxPages}
                 </Typography>
             </Box>
+
+            {/* forward arrow */}
+            <Button
+                onClick={onForward}
+                style={styles.arrowBox}
+            >
+                <img src={RightArrowIc} width={20} height={14} />
+            </Button>
 
 
         </Box>
@@ -63,12 +62,11 @@ const styles = {
         display: "flex",
         alignItems: "center",
 
-        marginRight: "6px",
+
         py: "10px",
         px: "9px",
     },
     pageBox: {
-        border: "1px solid #D0D0D0",
         background: "white",
 
         borderRadius: "5px",
@@ -76,6 +74,8 @@ const styles = {
         alignItems: "center",
         justifyContent: "center",
 
+        marginRight: "6px",
+        marginLeft: "6px",
         py: "10px",
         px: "16px",
     },
@@ -84,7 +84,8 @@ const styles = {
         color: color.lightGrayText,
         whiteSpace: 'nowrap',
         minWidth: '70px',
+        textAlign: 'center',
     },
 }
 
-export default Pagination;
+export default centerPagination;

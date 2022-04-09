@@ -5,142 +5,177 @@ import {
     Typography,
     Divider
 } from '@mui/material'
-import color from '../../constant/color'
 import SearchBar from '../../components/SearchBar/searchBar'
-import Pagination from '../../components/Pagination/pagination'
+import CenterPagination from './centerPagination'
 import SortPurchased from './sortPurchased'
 import React, { useState, useEffect } from 'react'
 
-const dataTable = [
-    {
-        rank: 1,
-        username: 'Tri Minh Quan',
-        amount: 12221000
-    },
-    {
-        rank: 2,
-        username: 'minhdaongtr',
-        amount: 102000000
-    },
-    {
-        rank: 3,
-        username: 'phutruong123',
-        amount: 79000000
-    },
-    {
-        rank: 4,
-        username: 'cuongvl',
-        amount: 47000000
-    },
-    {
-        rank: 5,
-        username: 'longtran',
-        amount: 18221000
-    },
-    {
-        rank: 6,
-        username: 'vanana111',
-        amount: 10221000
-    },
-    {
-        rank: 7,
-        username: 'chelinh',
-        amount: 9221000
-    },
-    {
-        rank: 8,
-        username: 'chelinh',
-        amount: 9221000
-    },
-    {
-        rank: 9,
-        username: 'chelinh',
-        amount: 9221000
-    },
-    {
-        rank: 10,
-        username: 'chelinh',
-        amount: 9221000
-    }
-];
-const TableUser = ({ sortTime = "month" }) => {
+import Style from './customer.style'
 
-    const [userList, setUserList] = useState(dataTable);
-    const [totalPage, setTotalPage] = useState(3);
+const TableUser = ({ data }) => {
+
+    const [allUser, setAllUser] = useState(data);
+    const [userList, setUserList] = useState();
+
+
+    const [totalPage, setTotalPage] = useState(1);
     const [page, setPage] = useState(1);
     const [purchasedSort, setPurchasedSort] = useState("Top Purchased");
     const [search, setSearch] = useState("");
 
-    const itemsPerPage = 5;
+    const itemsPerPage = 10;
     const offset = (page - 1) * itemsPerPage;
 
-    useEffect(() => {
-        setTotalPage(3)
-    }, [])
+    const formatedList = (list) => {
+        // console.log('list: ', list);
+        return list
+            // .filter(user => user.purchasedAmount != 0)
+            .slice(offset, offset + itemsPerPage);
+    }
+
 
     useEffect(() => {
-        setUserList(dataTable.slice(offset, offset + itemsPerPage))
-    }, [page, sortTime]);
+        setUserList(formatedList(allUser));
+    }, [page])
 
-    // const [userList, updateUserList] = useState({"isLoading": true});
-    // useEffect(() => {
-    //     getUserListAPI().then((response) => {
-    // 		if (response.data.success === true) {
-    // 			updateUserList({ "isLoading": false, data: response.data.data })
-    // 			console.log("userList ", response.data)
-    // 		}
-    //     })
-    // }, [])
 
-    // const formatPrice = (value) => {
-    // 	return new Intl.NumberFormat('vi-VN', {
-    // 		style: 'currency',
-    // 		currency: '₫',
-    // 	}).format(value)
-    // }
+    useEffect(() => {
+        // console.log('userList: ', userList);
+    }, [userList]);
+
+    useEffect(() => {
+        setTotalPage(Math.ceil(allUser.length / itemsPerPage));
+        setUserList(formatedList(allUser))
+        console.log('allUser: ', allUser);
+    }, [allUser]);
+
+    useEffect(() => {
+        setAllUser(data);
+        setSearch("");
+        setPurchasedSort("Top Purchased");
+        setPage(1)
+        console.log('data: ', data);
+    }, [data]);
+
+
+    const handleSortPrice = (value) => {
+        setPurchasedSort(value)
+
+        const sortedList = (value == "Top Purchased" ?
+            allUser[0].rank > allUser[1].rank
+            : allUser[0].rank < allUser[1].rank)
+            ? JSON.parse(JSON.stringify(allUser.reverse()))
+            : allUser
+
+        setAllUser(sortedList);
+    }
+
+
+
+    const handleSearch = (value) => {
+        setSearch(value);
+        setPage(1)
+
+        console.log('search: ', value);
+
+        const searchList = data.filter(user =>
+            (user.username).toUpperCase().includes(value.toUpperCase())
+        );
+
+        console.log('search list: ', searchList);
+
+        if (searchList.length > 1) {
+            const sortedList = (purchasedSort == "Top Purchased" ?
+                searchList[0].rank > searchList[1].rank
+                : searchList[0].rank < searchList[1].rank)
+                ? JSON.parse(JSON.stringify(searchList.reverse()))
+                : searchList
+            setAllUser(sortedList);
+            return;
+        }
+
+        setAllUser(searchList);
+    }
+
+
+    const formatPrice = (value) => {
+        return new Intl.NumberFormat('vi-VN', {
+            style: 'currency',
+            currency: 'VND',
+        }).format(value)
+    }
+
+    const formatRankColor = (value) => {
+        switch (value) {
+            case 1: {
+                return Style.firstRank;
+            };
+            case 2: {
+                return Style.secondRank;
+            };
+            case 3: {
+                return Style.thirdRank;
+            };
+            default: return Style.noRank;
+        }
+    }
 
     return (
-        <Box style={{ display: "block", background: color.white, paddingTop: "20px", borderRadius: '15px' }}>
-            <Container>
-                <Box>
-                    <SearchBar
-                        width='100%'
-                        placeholder="Search for username..."
-                        text={search}
-                        setText={setSearch} />
-                </Box>
-            </Container>
-            <Box style={{ paddingLeft: "50px", paddingTop: "20px", paddingBottom: "20px" }}>
+        <Box sx={Style.leaderboard}>
+
+            <Box sx={{ display: 'flex', justifyContent: 'center', pt: 4, pb: 3, height: "37px" }}>
+                <SearchBar
+                    width='100%'
+                    placeholder="Search for username..."
+                    text={search}
+                    setText={handleSearch} />
+            </Box>
+
+            <Box style={Style.boardTitle}>
                 <Grid container spacing={1}>
-                    <Grid item lg={3}>
-                        <Typography style={{ fontWeight: 600 }}>Rank</Typography>
+                    <Grid item lg={3} md={3}>
+                        <Typography style={{ fontWeight: 700, fontSize: '17px', width: 'fit-content' }}>Rank</Typography>
                     </Grid>
-                    <Grid item lg={4}>
-                        <Typography style={{ fontWeight: 600 }}>Username</Typography>
+                    <Grid item lg={4} md={4}>
+                        <Typography sx={{ fontWeight: 700, fontSize: '17px', ml: 0 }}>Username</Typography>
                     </Grid>
-                    <Grid item lg={5}>
-                        <SortPurchased onChangeValue={setPurchasedSort} />
+                    <Grid item lg={5} md={5}>
+                        <SortPurchased
+                            value={purchasedSort}
+                            onChangeValue={handleSortPrice}
+                        />
                     </Grid>
                 </Grid>
-                <Divider style={{ marginTop: '10px' }} />
+                <Divider sx={{ mt: 2, mb: 3 }} />
             </Box>
-            {userList.map(user =>
-                <Box style={{ paddingLeft: "50px", paddingTop: "15px", paddingBottom: "10px" }}>
+            {userList?.map(user =>
+                <Box sx={Style.boardRow}>
                     <Grid container spacing={1}>
-                        <Grid item lg={3}>
-                            <Typography>{user.rank}</Typography>
+                        <Grid item lg={3} md={3}>
+                            <Box sx={{ width: '36.5px' }}>
+                                <Typography style={{ fontWeight: 700, textAlign: 'center' }}>{user.rank}</Typography>
+                            </Box>
                         </Grid>
-                        <Grid item lg={4}>
-                            <Typography>{user.username}</Typography>
+                        <Grid item lg={4} md={4}>
+                            <Typography sx={{ ml: 0 }} >{user.username}</Typography>
                         </Grid>
-                        <Grid item lg={5}>
-                            <Typography>{user.amount}</Typography>
+                        <Grid item lg={5} md={5} style={{
+                            display: 'flex',
+                            justifyContent: 'right',
+                            paddingRight: "24px",
+                        }}>
+                            <Box style={formatRankColor(user.rank)}>
+                                <Typography>
+                                    {formatPrice(user.purchasedAmount)}
+                                </Typography>
+                            </Box>
                         </Grid>
                     </Grid>
                 </Box>
             )}
-            <Box style={{ display: 'flex', justifyContent: 'center', paddingTop: '20px', paddingBottom: '10px' }}>
-                <Pagination page={page} maxPages={totalPage}
+
+            <Box style={Style.paginationBox}>
+                <CenterPagination page={page} maxPages={totalPage}
                     onBack={() => {
                         if (page > 1)
                             setPage(page - 1)
@@ -150,6 +185,7 @@ const TableUser = ({ sortTime = "month" }) => {
                             setPage(page + 1)
                     }} />
             </Box>
+
         </Box>
     )
 }

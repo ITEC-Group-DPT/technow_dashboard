@@ -11,7 +11,7 @@ import {
 } from '@mui/material'
 import { Box } from '@mui/system'
 import _ from 'lodash'
-import React, { useEffect, useState } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 import Pagination from '../../components/Pagination/pagination'
 import SearchBar from '../../components/SearchBar/searchBar'
 import color from '../../constant/color'

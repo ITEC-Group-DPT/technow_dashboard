@@ -73,6 +73,8 @@ const styles = {
     select: {
         py: "4px",
         paddingLeft: "20px",
+        color: 'black',
+        fontWeight: 600,
     },
 }
 

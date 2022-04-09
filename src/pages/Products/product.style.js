@@ -67,7 +67,7 @@ const styles = {
 	title: {
 		fontFamily: 'Roboto',
 		fontWeight: 'bold',
-		fontSize: '35px',
+		fontSize: '38px',
 		my: '20px',
 	},
 }

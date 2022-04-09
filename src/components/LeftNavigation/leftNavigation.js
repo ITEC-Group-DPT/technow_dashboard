@@ -5,7 +5,7 @@ import { Box, Slide, Fade, useMediaQuery } from '@mui/material'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Button from '@mui/base/ButtonUnstyled';
 
-//component 
+//component
 import TabIcon from './tabIcon'
 import BottomTab from './bottomTab';
 import OpenNav from "./openNav"
@@ -37,8 +37,8 @@ const LeftNavigation = () => {
 
     const { username } = useStore(state => state.userInfo)
 
-
     useEffect(() => {
+        console.log('location change');
         switch (location.pathname) {
             case "/":
                 setIsOpen(true);
@@ -50,7 +50,7 @@ const LeftNavigation = () => {
             case "/products":
                 setTabChoose(2)
                 break;
-            case "customers":
+            case "/customers":
                 setTabChoose(3)
                 break;
             case "/orders":
@@ -90,6 +90,8 @@ const LeftNavigation = () => {
             default:
                 break;
         }
+
+        if (index != 0) setIsOpen(false)
     }
 
     const onControlOpen = (open) => {
@@ -103,6 +105,7 @@ const LeftNavigation = () => {
             }, 100);
         }
     }
+
     return (
         <Box sx={
             (isOpen && location.pathname != "/")

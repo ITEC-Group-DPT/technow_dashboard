@@ -36,6 +36,7 @@ const Home = () => {
     const getBannerData = async () => {
         const response = await getOverallStatistic();
 
+        console.log('response home:', response);
         if (response.data.success) {
             const data = response.data.data;
 
@@ -63,10 +64,9 @@ const Home = () => {
         getAllHomeStat()
     }, [filterTime]);
 
-    
+
     useEffect(() => {
         getBannerData();
-        getAllHomeStat();
     }, []);
     return (
         <Box className='homeAdmin' sx={styles.main}>

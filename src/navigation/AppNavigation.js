@@ -3,45 +3,60 @@ import {
     BrowserRouter as Router,
     Routes as Switch,
     Route,
-    Link
+    Link,
+    Navigate,
+    useNavigate,
 } from "react-router-dom";
 
 //Pages
+import Authentication from '../pages/Authentication/authentication'
 import Home from '../pages/Home/home'
 import Sales from '../pages/Sales/sales'
 import Products from '../pages/Products/products'
 import Customers from '../pages/Customers/customer'
 import Orders from '../pages/Orders/order'
+import NotFound from "../components/NotFound/NotFound";
 
 //navigation
 import LeftNavigation from "../components/LeftNavigation/leftNavigation"
 
-//demo purpose
-import ChartDemo from "../demo/chart";
-import OtherDemo from "../demo/others"
-
-
 //API && action
 import useStore from "../appStore";
-import { checkToken } from "../api/testAPI";
-
 
 const AppNavigagtion = () => {
 
     const { loginAction } = useStore();
 
     useEffect(() => {
-        console.log('run use effect');
-        const email = "noaccount";
-        const password = "nevergonnagiveyouup";
+        const username = sessionStorage.getItem("username");
 
-        loginAction(email, password);
+        console.log('username: ', username);
+
+        loginAction(username);
+        
     }, []);
+
+    const userInfo = useStore(state => state.userInfo);
+
+    if (userInfo == null) return <></>
+
+    if (userInfo.username == null) {
+        return (
+            <Router>
+                <Switch>
+                    <Route
+                        exact path={"/authentication"} element={<Authentication />}
+                    />
+                    <Route path="*" element={<Navigate replace to="/authentication" />} />
+                </Switch>
+            </Router>
+        )
+    }
+
     return (
         <Router>
             <LeftNavigation />
             <Switch>
-
                 <Route
                     exact path={"/"} element={<Home />}
                 />
@@ -62,12 +77,8 @@ const AppNavigagtion = () => {
                     exact path={"/orders"} element={<Orders />}
                 />
 
-                {/* demo */}
                 <Route
-                    exact path={"/chartdemo"} element={<ChartDemo />}
-                />
-                <Route
-                    exact path={"/otherdemo"} element={<OtherDemo />}
+                    path={"*"} element={<NotFound />}
                 />
 
             </Switch>

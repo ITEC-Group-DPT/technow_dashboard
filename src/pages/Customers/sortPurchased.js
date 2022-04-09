@@ -1,56 +1,53 @@
-import React, { useState } from 'react'
-import { Select, FormControl, MenuItem, styled, InputBase, Box } from '@mui/material'
+import React from 'react'
+import { Box, Typography } from '@mui/material'
+import { DropDownIc } from '../../constant/icon'
 
-const MyInput = styled(InputBase)(() => ({
-    '& .MuiInputBase-input': {
-        borderWidth: 0,
-        paddingTop: 0,
-        'aria-label': 'Without label',
-    },
-}))
+const SortPurchased = ({ value, onChangeValue }) => {
 
-const sortList = ['Top Purchased', 'Least Purchased']
+    const handleChange = () => {
 
-const SortPurchased = ({ defaultValue = "Top Purchased", onChangeValue }) => {
-    const [sort, setSort] = useState(defaultValue)
-
-    const handleChange = (event) => {
-        let value = event.target.value
-        onChangeValue && onChangeValue(value)
-        setSort(value)
+        const result = value == "Top Purchased" ? "Least Purchased" : "Top Purchased";
+        onChangeValue && onChangeValue(result)
     }
 
     return (
-        <Box>
-            <FormControl sx={styles.formControl}>
-                <Select
-                    sx={styles.select}
-                    value={sort}
-                    onChange={handleChange}
-                    input={<MyInput />}
-                >
-                    {sortList.map((sort) => (
-                        <MenuItem value={sort} key={sort}>{sort}</MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
+        <Box
+            sx={styles.box}
+            onClick={handleChange}
+        >
+            <Typography sx={styles.title}>
+                Purchased Amount
+            </Typography>
+
+            <img src={DropDownIc} style={{
+                width: 15,
+                height: 15,
+                transform: value == "Least Purchased" && "scaleY(-1)"
+            }} />
         </Box>
     )
 }
 
 const styles = {
+    box: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        cursor: "pointer"
+    },
     title: {
         color: '#848484',
     },
     formControl: {
         boxSizing: 'border-box',
         height: "100%",
-        width: "150px",
-        py: 0
+        width: "160px",
+        py: 0,
     },
-    select: {
+    title: {
         textAlign: 'center',
-        fontWeight: 600
+        fontWeight: 700,
+        fontSize: '17px',
     },
 }
 
