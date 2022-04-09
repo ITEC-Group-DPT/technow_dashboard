@@ -65,7 +65,6 @@ const Products = () => {
 
 	const handleChangeCategory = async (event) => {
 		const temp = event.target.value
-		console.log(temp);
 		let value = temp === 'Category' ? '' : temp
 		setFilter({
 			...filter,
@@ -146,7 +145,6 @@ const Products = () => {
 	const handleRequestSort = async (event, property) => {
 		let isAsc
 		let temp
-		debugger
 		if (property === orderBy) {
 			isAsc = order === 'asc'
 			temp = isAsc ? 'desc' : 'asc'
@@ -205,7 +203,7 @@ const Products = () => {
 								justifyContent: 'space-between',
 							},
 						]}>
-						<Box sx={[styles.box, { height: "37px" }]}>
+						<Box sx={[styles.box, { height: '37px' }]}>
 							<SearchBar
 								width='500px'
 								text={filter.text}
@@ -227,7 +225,7 @@ const Products = () => {
 								}}>
 								Category
 							</Typography>
-							<FormControl sx={{height: '100%', mr: 2}}>
+							<FormControl sx={{ height: '100%', mr: 2 }}>
 								<Select
 									MenuProps={{ disableScrollLock: true }}
 									value={filter.category}
@@ -272,10 +270,11 @@ const Products = () => {
 									src={PlusIc}
 									style={{ marginRight: '10px' }}
 								/>
-								<Typography sx={{fontSize: '14px'}}>Add Product</Typography>
+								<Typography sx={{ fontSize: '14px' }}>
+									Add Product
+								</Typography>
 							</Button>
 						</Box>
-
 					</Box>
 
 					<Box sx={[styles.box, { pt: '30px' }]}>
