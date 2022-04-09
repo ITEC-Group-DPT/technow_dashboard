@@ -74,7 +74,7 @@ const Customers = () => {
                     }}>
                         <Box className="font-weight-graph" sx={styles.chart}>
                             <Box>
-                                <Typography sx={styles.chartTitle}>Guest Visited</Typography>
+                                <Typography sx={styles.chartTitle}>Customer Visited</Typography>
                             </Box>
                             <AreaChart
                                 data={visitedUsers}
