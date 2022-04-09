@@ -19,7 +19,7 @@ const CardNameSeller = ({ rank, name, grow, payment, isName = false }) => {
 
 
     return (
-        <Box sx={{ ...styles.flex, px: 3, py: "14px",flex: 1 }}>
+        <Box sx={{ ...styles.flex, px: 3, pb: "25px",flex: 1 }}>
             <Box sx={{
                 width: 36,
                 height: 36,
@@ -44,7 +44,6 @@ const CardNameSeller = ({ rank, name, grow, payment, isName = false }) => {
             </Box>
 
 
-
             <Typography sx={{ ...styles.pNameSlider, flex: flexpercentage[1], }}>
                 {name}
             </Typography>
@@ -53,7 +52,7 @@ const CardNameSeller = ({ rank, name, grow, payment, isName = false }) => {
                 ? <></>
                 :
                 [<Box sx={{ ...styles.flex, flex: flexpercentage[2], justifyContent: 'center', ml: "2px" }}>
-                    {rank < 4
+                    {(rank < 4 && grow != 0)
                         &&
                         [<img src={growImg} style={{ height: '13px', marginTop: "2px" }} alt="" />,
                         <p style={{ color: growImg == GreenUpArrIc ? color.green : color.red, fontWeight: 500, margin: 0 }}>{grow}</p>]

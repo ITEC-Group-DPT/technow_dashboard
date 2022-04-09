@@ -10,9 +10,26 @@ const CustomLineChart = ({
     yAxisName,
     lineColor,
     yAxisCount }) => {
+
+    const tickFormater = (number) => {
+        if (number > 1000000) {
+            return parseInt(number / 1000000)
+        }
+        else return number
+    }
+
+    const formatPrice = (value) => {
+		return new Intl.NumberFormat('vi-VN', {
+			style: 'currency',
+			currency: 'VND',
+		}).format(value)
+	}
+
+    if(data.length == 0) return <></>
+
     return (
         <LineChart
-            style={{margin:'auto',paddingRight:"20px"}}
+            style={{ margin: 'auto', paddingRight: "20px" }}
             width={width}
             height={height}
             data={data}
@@ -22,7 +39,7 @@ const CustomLineChart = ({
 
             <XAxis
                 dataKey={xAxisName}
-                padding={{ left: 0}}
+                padding={{ left: 20, right: 20 }}
                 axisLine={false}
                 tickLine={false}
             />
@@ -30,21 +47,23 @@ const CustomLineChart = ({
                 padding={{ bottom: 15 }}
                 tickMargin={20}
                 tickCount={yAxisCount}
-                domain={[0, 'dataMax + 10']}
                 axisLine={false}
                 tickLine={false}
+                tickFormatter={tickFormater}
+                allowDecimals={false}
+                interval={0}
             />
 
-            <Tooltip />
+            <Tooltip formatter={value => formatPrice(value)} />
 
             <Line
                 dataKey={yAxisName}
                 stroke={lineColor}
                 strokeWidth={2}
-                dot={{ fill: lineColor, strokeWidth: 1, r: 3}}
+                dot={{ fill: lineColor, strokeWidth: 1, r: 3 }}
                 activeDot={{ r: 6 }}
                 animationDuration={1000}
-                />
+            />
 
         </LineChart>
     )

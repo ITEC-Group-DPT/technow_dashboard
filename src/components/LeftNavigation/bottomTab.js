@@ -9,8 +9,13 @@ import {
     VersionIc,
     LogOutIc,
 } from "../../constant/icon"
+import useStore from '../../appStore';
+import { useNavigate } from 'react-router-dom';
 
 const BottomTab = () => {
+
+    const {logoutAction} = useStore();
+
     return (
         <Box
             sx={styles.bottomBox}>
@@ -24,7 +29,11 @@ const BottomTab = () => {
             <Button
                 sx={styles.bottomIc}
                 color={"error"}
-                disableRipple
+                // disableRipple
+                onClick={() => {
+                    sessionStorage.clear();
+                    logoutAction()
+                }}
             >
                 <img src={LogOutIc} width={20} height={20} />
             </Button>

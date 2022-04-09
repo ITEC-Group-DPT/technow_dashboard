@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react'
 import color from '../../constant/color'
 import { borderRadius, Box, height, width } from '@mui/system'
 import { Typography, useMediaQuery } from '@mui/material'
-import { EyeIc, GreenUpArrIc, RedDownArrIc, GreenUpStonkIc, RedDownStonkIc } from '../../constant/icon'
 
+import { dummycustomers, dummydata } from './dummyData'
 import styles from './sales.style'
 import "./sales.css"
 import CardItemSellerStock from '../../components/CardItemSellerStock/CardItemSellerStock'
@@ -16,139 +16,10 @@ import { getSaleOverview } from '../../api/saleAPI'
 import SortByTime from "../../components/SortByTime/sortByTime"
 
 
-let dummycustomers = ['Kurozemi', 'Tezuko', 'Miaojee', 'Jason', 'Tory']
 
-let dummydata = {
-    "saleInTime": [
-        {
-            "count": 10
-        }
-    ],
-    "itemOnSale": [
-        {
-            "count": 20
-        }
-    ],
-    "topRevenue": [
-        {
-            "productID": 117,
-            "productimg": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/Laptop%2F17.webp?alt=media&token=43ee3694-d277-4aa1-8b95-e07e693e2337",
-            "name": "Laptop MSI Prestige 15 A10SC-222VN",
-            "price": 33999000,
-            "revenue": 33999000
-        },
-        {
-            "productID": 154,
-            "productimg": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/Monitor%2FDell%20UltraSharp%20U2721DE.jpg?alt=media&token=5c870f05-26de-42d1-99e5-80516cd22224",
-            "name": "Màn hình Dell UltraSharp U2721DE 27'",
-            "price": 10690000,
-            "revenue": 32070000
-        },
-        {
-            "productID": 158,
-            "productimg": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/Monitor%2FSamsung%20LC49J890.jpg?alt=media&token=2cbc46d5-2884-47e4-8282-40f948768bf4",
-            "name": "Màn hình SAMSUNG LC49J890 49'",
-            "price": 31890000,
-            "revenue": 31890000
-        },
-        {
-            "productID": 243,
-            "productimg": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/Speaker%2F03.webp?alt=media&token=66e79fa8-971b-45fa-86b4-6b323d81ed05",
-            "name": "Loa Bluetooth JBL Party Box 100 (Black)",
-            "price": 9500000,
-            "revenue": 28500000
-        },
-        {
-            "productID": 12,
-            "productimg": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/CPU%2Fcpu12.webp?alt=media&token=1da3b0b7-29cf-42e5-93fd-c0ae9a5aa82f",
-            "name": "CPU Intel Core i7 9700F",
-            "price": 8390000,
-            "revenue": 25170000
-        }
-    ],
-    "bestSeller": [
-        {
-            "productID": 2,
-            "productimg": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/CPU%2Fcpu2.webp?alt=media&token=c1f59c93-085e-479b-9472-3165d38acce4",
-            "name": "CPU AMD Ryzen 3 2200G",
-            "price": 2590000,
-            "unit": "3",
-            "up": "0.0000"
-        }
-    ],
-    "mostViewed": [
-        {
-            "productID": 78,
-            "productimg": "https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/Headphone%2F081.webp?alt=media&token=a61ca020-fbd1-42f9-8fa5-d42168c2b8c5",
-            "name": "Tai nghe Over-ear Razer Tiamat V2 ",
-            "view": 5,
-            "up": "150.0000"
-        }
-    ],
-    "mostProfitableCate": [
-        {
-            "type": "CPU",
-            "total": 59380000,
-            "rank": 1,
-            "up": 7
-        },
-        {
-            "type": "Laptop",
-            "total": 44289000,
-            "rank": 2,
-            "up": 0
-        },
-        {
-            "type": "Monitor",
-            "total": 42580000,
-            "rank": 3,
-            "up": 2
-        },
-        {
-            "type": "Headphone",
-            "total": 16879000,
-            "rank": 4,
-            "up": 4
-        },
-        {
-            "type": "VGA",
-            "total": 16290000,
-            "rank": 5,
-            "up": -4
-        }
-    ],
-    "incomeByTime": [
-        {
-            "month": "Nov",
-            "income": 299.22
-        },
-        {
-            "month": "Dec",
-            "income": 144.99
-        },
-        {
-            "month": "Jan",
-            "income": 8.76
-        },
-        {
-            "month": "Feb",
-            "income": 116.687
-        },
-        {
-            "month": "Mar",
-            "income": 489.649
-        },
-        {
-            "month": "Apr",
-            "income": 68.119
-        }
-    ]
-}
 const Sales = () => {
-    const largeScreen = useMediaQuery('(min-width:1500px)');
-
     const [filterTime, setFilterTime] = useState("Month");
-    const [customers, setCustomers] = useState(dummycustomers);
+    const [customers, setCustomers] = useState(dummydata.topCustomer);
     const [category, setCategory] = useState(dummydata.mostProfitableCate)
     const [topRevenue, setTopRevenue] = useState(dummydata.topRevenue)
     const [dataLineChart, setDataLineChart] = useState(dummydata.incomeByTime)
@@ -157,13 +28,11 @@ const Sales = () => {
     const [itemOnSale, setItemOnSale] = useState(dummydata.itemOnSale[0].count)
     const [saleInTime, setSaleInTime] = useState(dummydata.saleInTime[0].count)
 
-
-
     const getData = async () => {
         const response = await getSaleOverview(filterTime);
         if (response.data.success) {
             const data = response.data.data;
-            // setCustomers()
+            setCustomers(data.topCustomer)
             setCategory(data.mostProfitableCate)
             setTopRevenue(data.topRevenue)
             setDataLineChart(data.incomeByTime)
@@ -178,132 +47,133 @@ const Sales = () => {
         getData()
     }, [filterTime]);
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
     return (
-        <Box sx={{ backgroundColor: color.background, ml: '84px', py: 8, px: largeScreen ? "4.5%" : "7%" }}>
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                <Typography sx={styles.pageTitle}>Sales Overview</Typography>
+        <Box sx={{ backgroundColor: color.background, ml: '84px', py: 8, display: 'flex', justifyContent: 'center' }}>
+            <Box sx={{ width: '1350px' }}>
+                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                    <Typography sx={styles.pageTitle}>Sales Overview</Typography>
 
-                <SortByTime
-                    onChangeValue={setFilterTime}
-                />
-            </Box>
-            <Box sx={{ ...styles.flex, justifyContent: 'space-between' }}>
-                <Box sx={{ ...styles.box, ml: 0 }}>
-                    <SaleCommonCard
-                        title='Best seller'
-                        sx={{ pt: "18px", pb: "16px" }}
-                    >
-                        <CardItemSellerStock
-                            productImg={bestSeller[0].productimg} isView={false} content={bestSeller[0].price}
-                            percentage={bestSeller[0].up}
-                        />
-                    </SaleCommonCard>
-
-
-                    <SaleCommonCard
-                        title='Most viewed product'
-                        sx={{ pt: "18px", pb: "16px" }}
-                    >
-                        <CardItemSellerStock
-                            productImg={mostViewed[0].productimg}
-                            isView={true}
-                            content={mostViewed[0].view}
-                            percentage={mostViewed[0].up}
-                        />
-                    </SaleCommonCard>
-
-
-                    <SaleCommonCard
-                        title='Most profitable categories'
-                        sx={{ pt: "18px", pb: "26px" }}
-
-                    >
-                        <Box sx={{ mt: 1, }}>
-                            {
-                                category.map((cata) =>
-                                    <CardNameSeller name={cata.type} rank={cata.rank} grow={cata.up} payment={cata.total}></CardNameSeller>
-                                )
-                            }
-                        </Box>
-                    </SaleCommonCard>
-
+                    <SortByTime
+                        onChangeValue={setFilterTime}
+                    />
                 </Box>
+                <Box sx={{ ...styles.flex, justifyContent: 'space-between' }}>
+                    <Box sx={{ ...styles.box, ml: 0 }}>
+                        <SaleCommonCard
+                            title='Best Seller'
+                            sx={{ width: "420px", pb:"20px" }}
+                        >
+                            <CardItemSellerStock
+                                productImg={bestSeller[0].productimg} isView={false} content={bestSeller[0].price}
+                                percentage={bestSeller[0].up}
+                            />
+                        </SaleCommonCard>
 
 
-                <Box sx={{ ...styles.box }}>
+                        <SaleCommonCard
+                            title='Most Viewed Product'
+                            sx={{ width: "420px", pb:"20px" }}
+                        >
+                            <CardItemSellerStock
+                                productImg={mostViewed[0].productimg}
+                                isView={true}
+                                content={mostViewed[0].view}
+                                percentage={mostViewed[0].up}
+                            />
+                        </SaleCommonCard>
 
-                    <SaleCommonCard
-                        title="Top revenue by products"
-                        sx={{ pt: "18px", pb: "26px" }}
+
+                        <SaleCommonCard
+                            title='Most Profitable Categories'
+                            sx = {{pb: "20px"}}
+                        >
+                            <Box sx={{ mt: "36px", }}>
+                                {
+                                    category.map((cata) =>
+                                        <CardNameSeller name={cata.type} rank={cata.rank} grow={cata.up} payment={cata.total}></CardNameSeller>
+                                    )
+                                }
+                            </Box>
+                        </SaleCommonCard>
+
+                    </Box>
+
+
+                    <Box
+                        sx={{ ...styles.box }}
+                        className="sale-graph"
                     >
-                        <Box>
-                            {
-                                topRevenue.map((product) =>
-                                    <CardProductSeller name={product.name} productImg={product.productimg} payment={product.revenue} ></CardProductSeller>
-                                )
-                            }
-                        </Box>
-                    </SaleCommonCard>
+                        <SaleCommonCard
+                            title="Top Revenue"
+                        >
+                            <Box sx={{ pl: 1 }}>
+                                {
+                                    topRevenue.map((product) =>
+                                        <CardProductSeller name={product.name} productImg={product.productimg} payment={product.revenue} ></CardProductSeller>
+                                    )
+                                }
+                            </Box>
+                        </SaleCommonCard>
 
 
-                    <SaleCommonCard
-                        title='Total sales'
-                        sx={{ pt: "18px", pb: "26px" }}
+                        <SaleCommonCard
+                            title='Total Sales'
+                        >
+                            <p style={{ marginLeft: "35px", color: color.grayText, fontSize: '13px', marginBottom: '20px' }}>(million VND)</p>
+                            <CustomLineChart
+                                data={dataLineChart}
+                                xAxisName="month"
+                                yAxisName="income"
+                                yAxisCount={6}
+                                width={350}
+                                height={200}
+                                lineColor={color.red}
+                            />
+                        </SaleCommonCard>
+                    </Box>
+                    <Box sx={{ ...styles.box, mr: 0 }}>
+                        <SaleCommonCard title="Top Customer" footer={true} sx={{ pb: 0 }}>
+                            <Box sx={{ width: "350px", mt: "24px" }}>
+                                {
+                                    customers.map((customer) =>
+                                        <CardNameSeller rank={customer.rank} name={customer.username} isName={true} />
+                                    )
+                                }
+                            </Box>
+                        </SaleCommonCard>
 
-                    >
-                        <p style={{ marginLeft: "30px", color: color.grayText }}>(million VND)</p>
-                        <CustomLineChart
+                        <SaleCommonCard
+                            title="General Statistic"
+                        >
+                            <Box sx={{ textAlign: 'center' }}>
+                                <Box sx={{ my: 6 }}>
+                                    <Typography sx={{ color: color.red, fontWeight: 700, m: 0, fontSize: '52px' }} variant="h3" gutterBottom>
+                                        {itemOnSale}
+                                    </Typography>
+                                    <Typography sx={{ fontSize: '16px', fontWeight: 600, color: color.grayText }} gutterBottom>
+                                        Items On Sale
+                                    </Typography>
 
-                            data={dataLineChart}
-                            xAxisName="month"
-                            yAxisName="income"
-                            yAxisCount={6}
-                            width={380}
-                            height={200}
-                            lineColor={color.red}
-                        />
-                    </SaleCommonCard>
-                </Box>
-                <Box sx={{ ...styles.box, mr: 0 }}>
-                    <SaleCommonCard title="Top Customer" footer={true} sx={{ pb: 0 }}>
-                        <Box sx={{ width: "350px", mt: "12px" }}>
-                            {
-                                customers.map((customer, rank) =>
-                                    <CardNameSeller rank={rank + 1} name={customer} isName={true} />
-                                )
-                            }
-                        </Box>
-                    </SaleCommonCard>
-
-                    <SaleCommonCard
-                        title="General Statistic"
-                        sx={{ pt: "18px", pb: "26px" }}
-                    >
-                        <Box sx={{ textAlign: 'center' }}>
-                            <Box sx={{ my: 6 }}>
-                                <Typography sx={{ color: color.red, fontWeight: 700, m: 0, fontSize: '52px' }} variant="h3" gutterBottom>
-                                    {itemOnSale}
-                                </Typography>
-                                <Typography sx={{ fontSize: '16px', fontWeight: 600, color: color.grayText }} gutterBottom>
-                                    Items On Sale
-                                </Typography>
+                                </Box>
+                                <Box sx={{ my: 6 }}>
+                                    <Typography sx={{ color: color.red, fontWeight: 700, m: 0, fontSize: '52px' }} variant="h3" gutterBottom>
+                                        {saleInTime}
+                                    </Typography>
+                                    <Typography sx={{ fontSize: '16px', fontWeight: 600, color: color.grayText }} gutterBottom>
+                                        Sales This {filterTime}
+                                    </Typography>
+                                </Box>
 
                             </Box>
-                            <Box sx={{ my: 6 }}>
-                                <Typography sx={{ color: color.red, fontWeight: 700, m: 0, fontSize: '52px' }} variant="h3" gutterBottom>
-                                    {saleInTime}
-                                </Typography>
-                                <Typography sx={{ fontSize: '16px', fontWeight: 600, color: color.grayText }} gutterBottom>
-                                    Sales this {filterTime}
-                                </Typography>
-                            </Box>
 
-                        </Box>
-
-                    </SaleCommonCard>
+                        </SaleCommonCard>
+                    </Box>
                 </Box>
             </Box>
-
         </Box>
 
 

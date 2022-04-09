@@ -4,8 +4,8 @@ import color from '../../constant/color'
 const styles = {
 
 	flex: {
-		display: 'flex', 
-		flexWrap: 'nowrap', 
+		display: 'flex',
+		flexWrap: 'nowrap',
 		alignItems: 'center',
 
 	},
@@ -14,7 +14,7 @@ const styles = {
 	pNameSlider: {
 		margin: 0,
 		marginLeft: "6px",
-		fontSize: '16px',
+
 
 		lineHeight: "20px",
 		textOverflow: "ellipsis",
@@ -24,9 +24,8 @@ const styles = {
 		WebkitBoxOrient: "vertical",
 
 		overflowWrap: 'anywhere',
-		
 		fontWeight: "600",
-		fontSize: '17px',
+		fontSize: '14px',
 		color: "#2D2D2D",
 
 		// paddingRight: "30%",
@@ -39,8 +38,8 @@ const styles = {
 	},
 	money: {
 		backgroundColor: "#F0F7FF",
-		borderRadius: "5px", 
-		px: '12px', 
+		borderRadius: "5px",
+		px: '12px',
 		py: "6px",
 		marginLeft: 'auto',
 		color: "#2C84B6",
@@ -48,7 +47,7 @@ const styles = {
 		fontWeight: "600",
 		width:"fit-content",
 		textAlign:"end",
-	
+
 	},
 }
 

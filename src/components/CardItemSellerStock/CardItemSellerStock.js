@@ -12,18 +12,20 @@ const CardItemSellerStock = ({ productImg, isView = false, content, percentage }
     percentage = Number.parseInt(percentage)
     let stonkImg = percentage < 0 ? RedDownStonkIc : GreenUpStonkIc
     percentage = percentage < 0 ? percentage * -1 : percentage
-    if (isView == false)  content = Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(content)
+    if (isView == false) content = Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(content)
     return (
-        <Box sx={{ ...styles.flex }}>
-            <CardMedia
-                component="img"
-                sx={{ height: '130px',width:'130px' }}
-                image={productImg}
-            >
-            </CardMedia>
-            <CardContent sx={{ pl: 7.5, mx: 1 }}>
-                <Box sx={{ ...styles.flex, pb: "18px", }}>
-                    {isView && <img src={contentImg} style={{ marginRight: "20px",}} alt="" />}
+        <Box sx={{ ...styles.flex, flex: 1 }}>
+            <Box sx={{ flex: 1, display:"flex", justifyContent:"center" }}>
+                <CardMedia
+                    component="img"
+                    sx={{ height: '110px', width: '110px' }}
+                    image={productImg}
+                >
+                </CardMedia>
+            </Box>
+            <CardContent sx={{ pl: 7.5, mx: 1, flex: 1 }}>
+                <Box sx={{ ...styles.flex, pb: "8px", }}>
+                    {isView && <img src={contentImg} style={{ marginRight: "20px", }} alt="" />}
                     <Typography sx={{ textAlign: "center", fontWeight: 600, fontSize: "20px", color: "#2D2D2D" }}>
                         {content}
                     </Typography>

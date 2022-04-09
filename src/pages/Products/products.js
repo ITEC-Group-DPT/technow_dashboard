@@ -11,7 +11,7 @@ import {
 } from '@mui/material'
 import { Box } from '@mui/system'
 import _ from 'lodash'
-import React, { useEffect, useState } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 import Pagination from '../../components/Pagination/pagination'
 import SearchBar from '../../components/SearchBar/searchBar'
 import color from '../../constant/color'
@@ -65,6 +65,7 @@ const Products = () => {
 
 	const handleChangeCategory = async (event) => {
 		const temp = event.target.value
+		console.log(temp);
 		let value = temp === 'Category' ? '' : temp
 		setFilter({
 			...filter,
@@ -194,7 +195,7 @@ const Products = () => {
 
 	return (
 		<Box sx={styles.container}>
-			<Container sx={{ maxWidth: '1300px !important' }}>
+			<Container sx={{ maxWidth: '1300px !important', py: 4 }}>
 				<Typography sx={styles.title}>Product Management</Typography>
 				<Box sx={styles.productBoard}>
 					<Box
@@ -204,9 +205,9 @@ const Products = () => {
 								justifyContent: 'space-between',
 							},
 						]}>
-						<Box sx={[styles.box, { height: '38px' }]}>
+						<Box sx={[styles.box, { height: "37px" }]}>
 							<SearchBar
-								width='406px'
+								width='500px'
 								text={filter.text}
 								placeholder='Search for product name...'
 								setText={handleChangeSearchValue}
@@ -226,14 +227,14 @@ const Products = () => {
 								}}>
 								Category
 							</Typography>
-							<FormControl>
+							<FormControl sx={{height: '100%', mr: 2}}>
 								<Select
 									MenuProps={{ disableScrollLock: true }}
 									value={filter.category}
 									onChange={handleChangeCategory}
 									sx={[
 										styles.selectInp,
-										{ height: '43px', p: '0px' },
+										{ height: '100%', p: '0px' },
 									]}>
 									<MenuItem value='Category'>All</MenuItem>
 									{categoryList?.map((item) => {
@@ -257,6 +258,7 @@ const Products = () => {
 								onForward={() => handleChangePage(1)}
 							/>
 						</Box>
+
 						<Box sx={[styles.box, { height: '38px' }]}>
 							<Button
 								sx={{
@@ -270,9 +272,10 @@ const Products = () => {
 									src={PlusIc}
 									style={{ marginRight: '10px' }}
 								/>
-								Add Product
+								<Typography sx={{fontSize: '14px'}}>Add Product</Typography>
 							</Button>
 						</Box>
+
 					</Box>
 
 					<Box sx={[styles.box, { pt: '30px' }]}>

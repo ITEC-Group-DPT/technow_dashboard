@@ -1,6 +1,7 @@
 import { Button, Fade, Slide, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
+import useStore from '../../appStore'
 
 import styles from "./leftNavigation.style"
 
@@ -12,6 +13,7 @@ const OpenNav = ({
     navigateTab,
 }) => {
 
+    const { logoutAction } = useStore();
     return (
         <Slide
             in={isOpen}
@@ -72,8 +74,11 @@ const OpenNav = ({
                     <Button
                         sx={styles.bottomTextBox}
                         color={"error"}
-
-                        disableRipple
+                        onClick={() => {
+                            sessionStorage.clear();
+                            logoutAction()
+                        }}
+                    // disableRipple
                     >
                         <Typography
                             sx={[styles.tabName, styles.logoutText]}

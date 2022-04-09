@@ -1,171 +1,122 @@
 import React, { useState, useEffect } from 'react'
-import { 
+import {
     Box,
     Container,
     Grid,
     Typography
 } from '@mui/material'
-import SearchBar from '../../components/SearchBar/searchBar'
-import SortByTime from '../../components/SortByTime/sortByTime'
-import Pagination from '../../components/Pagination/pagination'
 import color from '../../constant/color'
-import AreaChart from '../../components/AreaChart/areaChart'
-import SortPurchased from './sortPurchased'
+import SortByTime from '../../components/SortByTime/sortByTime'
 import TableUser from './tableUser'
+import AreaChart from '../../components/AreaChart/areaChart'
+import { getLeaderboardData, getChartsData } from '../../api/customerStatistic'
 
-// import axios from 'axios'
-// import { BASE_API_URL, TEST_API_URL } from '../constant/string';
-
-// import { getUserListAPI } from '../../api/userApi'
-
-const dataAreaChart = [
-    {
-        month: 'Jan',
-        users: 70,
-    },
-    {
-        month: 'Feb',
-        users: 180,
-    },
-    {
-        month: 'Mar',
-        users: 200,
-    },
-    {
-        month: 'Apr',
-        users: 415,
-    },
-    {
-        month: 'May',
-        users: 390,
-    },
-    {
-        month: 'Jun',
-        users: 490,
-    },
-];
-
-const dataTable = [
-    {
-        rank: 1,
-        username: 'Tri Minh Quan',
-        amount: 12221000
-    },
-    {
-        rank: 2,
-        username: 'minhdaongtr',
-        amount: 102000000
-    },
-    {
-        rank: 3,
-        username: 'phutruong123',
-        amount: 79000000
-    },
-    {
-        rank: 4,
-        username: 'cuongvl',
-        amount: 47000000
-    },
-    {
-        rank: 5,
-        username: 'longtran',
-        amount: 18221000
-    },
-    {
-        rank: 6,
-        username: 'vanana111',
-        amount: 10221000
-    },
-    {
-        rank: 7,
-        username: 'chelinh',
-        amount: 9221000
-    },
-    {
-        rank: 8,
-        username: 'chelinh',
-        amount: 9221000
-    },
-    {
-        rank: 9,
-        username: 'chelinh',
-        amount: 9221000
-    },
-    {
-        rank: 10,
-        username: 'chelinh',
-        amount: 9221000
-    }
-];
+import './customer.css'
+import styles from './customer.style'
 
 const Customers = () => {
     const [sortTime, setSort] = useState("month");
+    const [leaderboard, updateLeaderboard] = useState([]);
+    const [activeUsers, updateActiveUsers] = useState([]);
+    const [visitedUsers, updateVisitedUsers] = useState([]);
+    const [xName, setX] = useState("month");
+
+    useEffect(() => {
+        getChartsData(sortTime).then((response) => {
+            console.log('sort time: ', sortTime);
+            console.log("sort by time: ", response.data);
+
+            if (response.data.success === true) {
+                const data = response.data.data;
+
+                setX(Object.keys(data.visited[0])[0]);
+                updateActiveUsers(data.active);
+                updateVisitedUsers(data.visited);
+            }
+        })
+        getLeaderboardData(sortTime).then((response) => {
+            if (response.data.success === true) {
+                updateLeaderboard(response.data.data);
+                console.log("leaderboardData ", response.data);
+            }
+        })
+    }, [sortTime])
 
     return (
         <Box
-            style={{
+            className='userStats'
+            sx={{
                 minHeight: "100vh",
-                background: color.background
+                background: color.background,
             }}
         >
-            <Container sx={{ py: "52px"}}>
-                <Box style={{display: "flex", justifyContent: "space-between"}}>
-                    <Grid container spacing={2}>
-                        <Grid item lg={4}>
-                            <Typography style={{ fontSize: "32px", fontWeight: 700, textAlign: "left", marginBottom: "1rem"}}>User Statistic</Typography>
-                        </Grid>
-                        <Grid item lg={2}>
-                            <SortByTime onChangeValue={value => setSort(value)} />
-                        </Grid>
-                    </Grid>
+            <Container className='container' sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                minHeight: "100vh",
+                py: 4,
+                paddingLeft: '108px !important',
+                maxWidth: '1300px !important'
+            }}>
+                <Box sx={styles.titleWrapper}>
+                    <Typography style={styles.title}>User Statistic</Typography>
+                    <SortByTime onChangeValue={value => setSort(value)} />
+                </Box>
 
-
-                </Box>     
-                <Grid container spacing={10}>
-                    <Grid item lg={6}>
-
-                        <Box style={{marginBottom: "2rem", background: color.white, borderRadius: "15px", paddingLeft: "45px"}}>
+                <Grid container spacing={9} sx={{ height: '800px' }}>
+                    <Grid item xs={6.3} sx={{
+                        height: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-between",
+                        pr: 2,
+                    }}>
+                        <Box className="font-weight-graph" sx={styles.chart}>
                             <Box>
-                                <Typography style={{ fontSize: "22px", fontWeight: 500, textAlign: "center", paddingTop: "10px", paddingBottom: "10px"}}>Guest Visited</Typography>
-                            </Box>
-                            <AreaChart 
-                                data={dataAreaChart}
-                                xAxisName="month"
-                                yAxisName="users"
-                                yAxisCount={6}
-                                width={430}
-                                height={270}
-                                lineColor={color.yellow}
-                                areaColor={color.lightYellow}
-                                style={{ fontSize: "13px"}}
-                            />
-                        </Box>
-                        
-                        <Box style={{marginBottom: "2rem", background: color.white, borderRadius: "15px", paddingLeft: "45px"}}>
-                            <Box>
-                                <Typography style={{ fontSize: "22px", fontWeight: 500, textAlign: "center", paddingTop: "10px", paddingBottom: "10px"}}>Active Users</Typography>
+                                <Typography sx={styles.chartTitle}>Customer Visited</Typography>
                             </Box>
                             <AreaChart
-                                data={dataAreaChart}
-                                xAxisName="month"
-                                yAxisName="users"
+                                data={visitedUsers}
+                                xAxisName={xName}
+                                yAxisName="guests"
                                 yAxisCount={6}
-                                width={430}
-                                height={270}
-                                lineColor={color.green}
-                                areaColor={color.lightGreen}
-                                style={{ fontSize: "13px"}}
+                                width={500}
+                                height={250}
+                                lineColor={color.yellow}
+                                areaColor={color.lightYellow}
+                                style={{ fontSize: "13px" }}
                             />
                         </Box>
-                        
+
+                        <Box className="font-weight-graph" sx={{ ...styles.chart, mb: 0 }}>
+                            <Box>
+                                <Typography sx={styles.chartTitle}>New Users</Typography>
+                            </Box>
+                            <AreaChart
+                                data={activeUsers}
+                                xAxisName={xName}
+                                yAxisName="users"
+                                yAxisCount={6}
+                                width={500}
+                                height={250}
+                                lineColor={color.green}
+                                areaColor={color.lightGreen}
+                                style={{ fontSize: "13px" }}
+                            />
+                        </Box>
                     </Grid>
-                    <Grid item lg={6}>
-                        <TableUser sortTime={sortTime}/>
+
+                    <Grid item xs={5.7} sx={{ height: '100%' }}>
+                        <TableUser
+                            data={leaderboard}
+                        />
                     </Grid>
                 </Grid>
+
             </Container>
 
-            
+
 
         </Box>
     )

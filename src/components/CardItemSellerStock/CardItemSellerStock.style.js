@@ -7,11 +7,12 @@ const styles = {
         width: "400px",
     },
     flex: {
-        display: 'flex', 
+        display: 'flex',
         flexWrap: 'nowrap',
+        marginTop: "4px",
         alignItems: 'center',
         // justifyContent: "center",
-        px: "16px",
+        px: "32px",
     }
 }
 

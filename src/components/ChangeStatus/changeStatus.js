@@ -1,6 +1,20 @@
-import React, { useState } from 'react'
-import { Select, FormControl, MenuItem, styled, InputBase, Box } from '@mui/material'
+import React, { useState, useEffect } from 'react'
+import {
+    Select,
+    FormControl,
+    MenuItem,
+    InputBase,
+    Box,
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    styled,
+} from '@mui/material'
 import './changeStatus.css'
+import { updateStatus } from '../../api/orderReportAPI'
 
 const MyInput = styled(InputBase)(() => ({
     '& .MuiInputBase-input': {
@@ -42,13 +56,52 @@ const statusList = [
     },
 ]
 
-const ChangeStatus = ({ defaultValue = 0, onChangeValue }) => {
+const ChangeStatus = ({ defaultValue = 0, orderID = 0 }) => {
     const [status, setStatus] = useState(statusList[defaultValue])
+    const [selectedID, setSelectedID] = useState(null)
+    const [openDialog, setOpenDialog] = useState(false)
+    const [activeList, setActiveList] = useState(statusList)
+
+    useEffect(() => {
+        const index = statusList.findIndex(item => item.id == status.id)
+        if (index == -1) return
+
+        if (index == 0 || index == 4) {
+            setActiveList([statusList[index]])
+            return
+        }
+
+        const sliceData = statusList.slice(index)
+        sliceData.push(statusList[0])
+        setActiveList(sliceData)
+
+    }, [status])
+
+
+    const handleOpen = () => {
+        setOpenDialog(true)
+    }
+
+    const handleClose = () => {
+        setOpenDialog(false)
+        setSelectedID(null)
+    }
 
     const handleChange = (event) => {
-        const newID = event.target.value
+        handleOpen()
+        setSelectedID(event.target.value)
+    }
 
-        setStatus(statusList[newID]);
+    const handleConfirm = () => {
+        updateStatus(orderID, selectedID).then(response => {
+            if (response.data.success === true) {
+                const data = response.data.data
+                console.log(data)
+
+                setStatus(statusList[selectedID])
+                handleClose()
+            }
+        })
     }
 
     return (
@@ -57,7 +110,8 @@ const ChangeStatus = ({ defaultValue = 0, onChangeValue }) => {
                 <FormControl
                     sx={[styles.formControl, {
                         backgroundColor: status.bgColor
-                    }]}>
+                    }]}
+                >
                     <Select
                         sx={[styles.select, {
                             color: status.color,
@@ -69,8 +123,9 @@ const ChangeStatus = ({ defaultValue = 0, onChangeValue }) => {
                         onChange={handleChange}
                         input={<MyInput />}
                         className="STATUS-WRAPPER"
+                        MenuProps={{ disableScrollLock: true }}
                     >
-                        {statusList.map((status) => (
+                        {activeList.map((status) => (
                             <MenuItem
                                 value={status.id}
                                 key={status.id}
@@ -81,6 +136,30 @@ const ChangeStatus = ({ defaultValue = 0, onChangeValue }) => {
                     </Select>
                 </FormControl>
             </Box>
+
+            <Dialog
+                open={openDialog}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+                disableScrollLock
+            >
+                <DialogTitle id="alert-dialog-title">
+                    Confirmation
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Are you sure you want to update this order status?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={handleConfirm} autoFocus>
+                        Confirm
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
         </Box>
     )
 }

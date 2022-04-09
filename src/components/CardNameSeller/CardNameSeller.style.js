@@ -4,8 +4,8 @@ import color from '../../constant/color'
 const styles = {
 
 	flex: {
-		display: 'flex', 
-		flexWrap: 'nowrap', 
+		display: 'flex',
+		flexWrap: 'nowrap',
 		alignItems: 'center',
 	},
 
@@ -23,7 +23,7 @@ const styles = {
 		overflowWrap: 'anywhere',
 		textAlign: "start",
 		fontWeight: "600",
-		fontSize: '17px',
+		fontSize: '16px',
 
 	},
 	pRatingWrapper: {
@@ -33,8 +33,8 @@ const styles = {
 	},
 	money: {
 		backgroundColor: "#F0F7FF",
-		borderRadius: "5px", 
-		px: '12px', 
+		borderRadius: "5px",
+		px: '12px',
 		py: "6px",
 
 

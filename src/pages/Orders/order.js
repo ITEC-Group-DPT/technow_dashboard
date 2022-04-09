@@ -10,153 +10,16 @@ import SearchBar from '../../components/SearchBar/searchBar'
 import Pagination from '../../components/Pagination/pagination'
 import SortByStatus from '../../components/SortByStatus/sortByStatus'
 import OrderItem from '../../components/OrderItem/orderItem'
-
-const dataBarChart = [
-    {
-        month: 'Jan',
-        orders: 55,
-    },
-    {
-        month: 'Feb',
-        orders: 42,
-    },
-    {
-        month: 'Mar',
-        orders: 78,
-    },
-    {
-        month: 'Apr',
-        orders: 58,
-    },
-    {
-        month: 'May',
-        orders: 96,
-    },
-]
-
-const dataLineChart = [
-    {
-        month: 'Jan',
-        income: 25,
-    },
-    {
-        month: 'Feb',
-        income: 28,
-    },
-    {
-        month: 'Mar',
-        income: 23,
-    },
-    {
-        month: 'Apr',
-        income: 37,
-    },
-    {
-        month: 'May',
-        income: 40,
-    },
-]
-
-const dataOrder = [
-    //page 1
-    {
-        id: 'HLS1293',
-        cusName: 'Quan Minh Tri',
-        date: '15/01/2022',
-        price: '3,210,000 đ',
-        status: 1,
-    },
-    {
-        id: 'AKT9023',
-        cusName: 'Tran Nguyen Minh Dao',
-        date: '07/01/2022',
-        price: '799,000 đ',
-        status: 2,
-    },
-    {
-        id: 'VED0054',
-        cusName: 'Truong Minh Nam Phu',
-        date: '02/01/2022',
-        price: '1,500,000 đ',
-        status: 3,
-    },
-    {
-        id: 'MNI6381',
-        cusName: 'Tran Ngoc Hien Long',
-        date: '10/12/2021',
-        price: '1,990,000 đ',
-        status: 4,
-    },
-    {
-        id: 'TLA3424',
-        cusName: 'Ly Vi Cuong',
-        date: '05/12/2021',
-        price: '12,499,000 đ',
-        status: 0,
-    },
-
-    //page 2
-    {
-        id: 'CLG1035',
-        cusName: 'Nguyen Van An',
-        date: '01/12/2021',
-        price: '10,990,000 đ',
-        status: 4,
-    },
-    {
-        id: 'DLK2781',
-        cusName: 'Nguyen Ngoc Minh Thu',
-        date: '22/11/2021',
-        price: '590,000 đ',
-        status: 2,
-    },
-    {
-        id: 'TKL1001',
-        cusName: 'Tran Thi Thu Trang',
-        date: '20/11/2021',
-        price: '2,500,000 đ',
-        status: 4,
-    },
-    {
-        id: 'BBC1419',
-        cusName: 'Phan Quang Anh Hao',
-        date: '17/11/2021',
-        price: '9,990,000 đ',
-        status: 2,
-    },
-    {
-        id: 'DNB3812',
-        cusName: 'Truong Ngoc Quang Minh',
-        date: '11/10/2021',
-        price: '2,490,000 đ',
-        status: 0,
-    },
-
-    //page 3
-    {
-        id: 'PQC1592',
-        cusName: 'Ly Van Tai',
-        date: '02/10/2021',
-        price: '200,000 đ',
-        status: 1,
-    },
-    {
-        id: 'PQJ1178',
-        cusName: 'Pham Thi Anh Dung',
-        date: '30/09/2021',
-        price: '690,000 đ',
-        status: 3,
-    },
-    {
-        id: 'DPC4921',
-        cusName: 'Phi Thu Lan',
-        date: '23/09/2021',
-        price: '1,590,000 đ',
-        status: 2,
-    },
-]
+import {
+    getOrderSummary,
+    getIncomeSummary,
+    getOrderByPage,
+    getOrderByFilter,
+} from '../../api/orderReportAPI'
 
 const Orders = () => {
+    const [barChartData, setBarChartData] = useState([])
+    const [lineChartData, setLineChartData] = useState([])
     const [orderList, setOrderList] = useState([])
     const [sort, setSort] = useState("Month")
     const [search, setSearch] = useState("")
@@ -165,65 +28,144 @@ const Orders = () => {
     const [page, setPage] = useState(1)
 
     const itemsPerPage = 5
-    const offset = (page - 1) * itemsPerPage
 
-    useEffect(() => {
-        //call getTotalPage API here
-        setTotalPage(3)
-    }, [])
+    const handleChangePage = (direction) => {
+        let newPage = page
 
-    useEffect(() => {
-        //call getOrderList with offset API here
-        setOrderList(dataOrder.slice(offset, offset + itemsPerPage))
-    }, [page, sort])
+        if (direction == "back" && page > 1)
+            newPage = page - 1
+        else if (direction == "forward" && page < totalPage)
+            newPage = page + 1
 
-    const onChangeStatus = (orderID, status) => {
-        console.log(orderID + " : " + status)
+        const offset = (newPage - 1) * itemsPerPage
+
+        if (newPage != page) {
+            getOrderByPage(search, sortByStatus, offset, itemsPerPage).then(response => {
+                if (response.data.success === true) {
+                    const data = response.data.data
+                    console.log("order list (PAGINATION): ", data.orderList)
+
+                    setPage(newPage)
+                    setOrderList(data.orderList)
+                }
+            })
+        }
     }
+
+    const handleChangeSortByStatus = (status) => {
+        getOrderByFilter(search, status).then(response => {
+            if (response.data.success === true) {
+                const data = response.data.data
+                const totalPage = Math.ceil(data.total / itemsPerPage)
+                console.log("total page (SORT): ", totalPage)
+                console.log("order list (SORT): ", data.orderList)
+
+                setSortByStatus(status)
+                setTotalPage(totalPage)
+                setPage(1)
+                setOrderList(data.orderList)
+            }
+        })
+    }
+
+    useEffect(() => {
+        const delay = setTimeout(() => {
+            getOrderByFilter(search, sortByStatus).then(response => {
+                if (response.data.success === true) {
+                    const data = response.data.data
+                    const totalPage = Math.ceil(data.total / itemsPerPage)
+                    console.log("total page (SEARCH): ", totalPage)
+                    console.log("order list (SEARCH): ", data.orderList)
+
+                    setTotalPage(totalPage)
+                    setPage(1)
+                    setOrderList(data.orderList)
+                }
+            })
+        }, 500)
+        return () => clearTimeout(delay)
+
+    }, [search])
+
+    useEffect(() => {
+        getOrderSummary(sort).then(response => {
+            if (response.data.success === true) {
+                const data = response.data.data
+                console.log("barChartData: ", data)
+                setBarChartData(data)
+            }
+        })
+
+        getIncomeSummary(sort).then(response => {
+            if (response.data.success === true) {
+                const data = response.data.data
+                console.log("lineChartData: ", data)
+                setLineChartData(data)
+            }
+        })
+    }, [sort])
+
+    useEffect(() => {
+        getOrderByFilter(search, sortByStatus).then(response => {
+            if (response.data.success === true) {
+                const data = response.data.data
+                const totalPage = Math.ceil(data.total / itemsPerPage)
+                console.log("total page (ON PAGE LOAD): ", totalPage)
+                console.log("order list (ON PAGE LOAD): ", data.orderList)
+
+                setTotalPage(totalPage)
+                setOrderList(data.orderList)
+            }
+        })
+        window.scrollTo(0, 0)
+    }, [])
 
     return (
         <Box sx={styles.bg}>
             <Container maxWidth="md" sx={styles.main}>
                 <Box sx={styles.title1Wrapper}>
                     <Typography sx={styles.title}>Order Report</Typography>
-                    <SortByTime onChangeValue={value => setSort(value)} />
+                    <SortByTime
+                        onChangeValue={value => setSort(value)}
+                        sortList={["Day", "Month", "Year"]}
+                    />
                 </Box>
                 <Grid container spacing={6} sx={styles.graphContent}>
                     <Grid item xs={6}>
-                        <Box sx={styles.graphWrapper}>
+                        <Box className="font-weight-graph" sx={styles.graphWrapper}>
                             <Box sx={{ mb: 4 }}>
                                 <Typography sx={styles.graphTitle}>Total Orders</Typography>
                             </Box>
                             <BarChart
-                                data={dataBarChart}
-                                xAxisName="month"
+                                data={barChartData}
+                                xAxisName="key"
                                 yAxisName="orders"
                                 yAxisCount={6}
-                                width={430}
-                                height={270}
-                                barSize={45}
+                                width={480}
+                                height={280}
+                                barSize={40}
                                 barColor={color.orange}
                             />
                         </Box>
                     </Grid>
 
                     <Grid item xs={6}>
-                        <Box sx={styles.graphWrapper}>
+                        <Box className="font-weight-graph" sx={styles.graphWrapper}>
                             <Grid container sx={{ mb: 4 }}>
                                 <Grid item xs={4} sx={styles.labelWrapper}>
                                     <Typography sx={styles.label} >(million VND)</Typography>
                                 </Grid>
                                 <Grid item xs={4}>
-                                    <Typography sx={styles.graphTitle}>Total Income</Typography>
+                                    <Typography sx={styles.graphTitle}>Total Value</Typography>
                                 </Grid>
                             </Grid>
                             <LineChart
-                                data={dataLineChart}
-                                xAxisName="month"
+                                data={lineChartData}
+                                xAxisName="key"
                                 yAxisName="income"
                                 yAxisCount={6}
-                                width={430}
-                                height={270}
+                                width={470}
+                                height={280}
                                 lineColor={color.blue}
                             />
                         </Box>
@@ -237,28 +179,23 @@ const Orders = () => {
                     <Grid container sx={styles.controlWrapper}>
                         <Grid item xs={6.5} style={{ height: '100%' }}>
                             <SearchBar
-                                placeholder="Search for order, customer name..."
+                                placeholder="Search for order ID, customer name..."
                                 text={search}
                                 setText={setSearch}
+                                width="100%"
                             />
                         </Grid>
                         <Grid item xs={3.5} style={styles.centerHori}>
                             <SortByStatus
-                                onChangeValue={setSortByStatus}
+                                onChangeValue={handleChangeSortByStatus}
                             />
                         </Grid>
                         <Grid item xs={2} style={styles.endHori}>
                             <Pagination
                                 page={page}
                                 maxPages={totalPage}
-                                onBack={() => {
-                                    if (page > 1)
-                                        setPage(page - 1)
-                                }}
-                                onForward={() => {
-                                    if (page < totalPage)
-                                        setPage(page + 1)
-                                }}
+                                onBack={() => handleChangePage("back")}
+                                onForward={() => handleChangePage("forward")}
                             />
                         </Grid>
                     </Grid>
@@ -302,7 +239,6 @@ const Orders = () => {
                             <OrderItem
                                 order={order}
                                 key={order.id}
-                                onChangeStatus={(orderID, status) => onChangeStatus(orderID, status)}
                             />
                         ))}
                     </Box>
