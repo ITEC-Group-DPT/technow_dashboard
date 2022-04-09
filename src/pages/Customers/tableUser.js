@@ -46,6 +46,7 @@ const TableUser = ({ data }) => {
     useEffect(() => {
         setTotalPage(Math.ceil(allUser.length / itemsPerPage));
         setUserList(formatedList(allUser))
+        console.log('allUser: ', allUser);
     }, [allUser]);
 
     useEffect(() => {
@@ -53,7 +54,7 @@ const TableUser = ({ data }) => {
         setSearch("");
         setPurchasedSort("Top Purchased");
         setPage(1)
-        // console.log('data: ', data);
+        console.log('data: ', data);
     }, [data]);
 
 
@@ -63,15 +64,17 @@ const TableUser = ({ data }) => {
         const sortedList = (value == "Top Purchased" ?
             allUser[0].rank > allUser[1].rank
             : allUser[0].rank < allUser[1].rank)
-                ? JSON.parse(JSON.stringify(allUser.reverse()))
-                : allUser
+            ? JSON.parse(JSON.stringify(allUser.reverse()))
+            : allUser
 
         setAllUser(sortedList);
     }
 
 
+
     const handleSearch = (value) => {
         setSearch(value);
+        setPage(1)
 
         console.log('search: ', value);
 
@@ -81,8 +84,17 @@ const TableUser = ({ data }) => {
 
         console.log('search list: ', searchList);
 
+        if (searchList.length > 1) {
+            const sortedList = (purchasedSort == "Top Purchased" ?
+                searchList[0].rank > searchList[1].rank
+                : searchList[0].rank < searchList[1].rank)
+                ? JSON.parse(JSON.stringify(searchList.reverse()))
+                : searchList
+            setAllUser(sortedList);
+            return;
+        }
+
         setAllUser(searchList);
-        setPage(1)
     }
 
 
