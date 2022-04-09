@@ -92,7 +92,6 @@ const CustomEditProductDialog = ({ item, open, setOpen }) => {
 
 	const onSubmit = async () => {
 		const response = await editProduct(newValue)
-		console.log(response.data.success)
 		if (response.data.success) setOpen(false)
 	}
 
