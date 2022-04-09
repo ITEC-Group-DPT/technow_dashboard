@@ -68,14 +68,13 @@ const Products = () => {
 		let value = temp === 'Category' ? '' : temp
 		setFilter({
 			...filter,
-			text: '',
 			category: temp,
 		})
 
 		const response1 = await getProductByCategoryAdmin(
 			value,
 			1,
-			'',
+			filter.text,
 			orderBy,
 			order,
 		)
@@ -89,12 +88,28 @@ const Products = () => {
 		setPage(1)
 	}
 
-	const handleChangeSearchValue = (value) => {
+	const handleChangeSearchValue = async (value) => {
 		setFilter({
 			...filter,
 			text: value,
-			category: 'Category',
 		})
+
+		const temp = filter.category === 'Category' ? '' : filter.category
+
+		const response1 = await getProductByCategoryAdmin(
+			temp,
+			1,
+			value,
+			orderBy,
+			order,
+		)
+		const _productList = response1.data.data
+		setFilteredList(_productList)
+
+		const response2 = await getNumberOfProductByCategoryAdmin(temp, '')
+		const _totalPage = response2.data.data[0].totalPage
+		setTotalPage(Math.ceil(_totalPage / 6))
+
 		setPage(1)
 	}
 
@@ -106,7 +121,7 @@ const Products = () => {
 			if (filter.category === 'Category') {
 				response = await getAllProductByPageAdmin(
 					temp,
-					'',
+					filter.text,
 					orderBy,
 					order,
 				)
@@ -114,7 +129,7 @@ const Products = () => {
 				response = await getProductByCategoryAdmin(
 					filter.category,
 					temp,
-					'',
+					filter.text,
 					orderBy,
 					order,
 				)
@@ -131,12 +146,17 @@ const Products = () => {
 		setOrderBy(property)
 		let response
 		if (filter.category === 'Category') {
-			response = await getAllProductByPageAdmin(1, '', property, temp)
+			response = await getAllProductByPageAdmin(
+				1,
+				filter.text,
+				property,
+				temp,
+			)
 		} else {
 			response = await getProductByCategoryAdmin(
 				filter.category,
 				1,
-				'',
+				filter.text,
 				property,
 				temp,
 			)
