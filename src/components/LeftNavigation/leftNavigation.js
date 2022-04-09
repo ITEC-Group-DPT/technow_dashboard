@@ -37,7 +37,8 @@ const LeftNavigation = () => {
     const { username } = useStore(state => state.userInfo)
 
     useEffect(() => {
-        console.log('location change');
+        console.log('location change: ', location.pathname);
+
         switch (location.pathname) {
             case "/":
                 setIsOpen(true);
@@ -59,12 +60,12 @@ const LeftNavigation = () => {
             default:
                 break;
         }
-    }, []);
+    }, [location]);
 
     const navigateTab = (index) => {
 
         if (tabChoose == index) return;
-        setTabChoose(index);
+        // setTabChoose(index);
 
         switch (index) {
             case 0:
