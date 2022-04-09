@@ -4,7 +4,7 @@ import { Button, Popover, TableCell, TableRow, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import { useState } from 'react'
 import color from '../../../constant/color'
-import { ThreeDotIc } from '../../../constant/icon'
+import { ThreeDotIc, EditIc, DeleteIc } from '../../../constant/icon'
 import CustomEditProductDialog from './CustomEditProductDialog'
 import DeleteProductDialog from './DeleteProductDialog'
 import { headCells } from '../tableConfig'
@@ -30,11 +30,9 @@ const styles = {
 	popupBox: {
 		display: 'flex',
 		flexDirection: 'column',
-		px: '15px',
 		width: '106px',
-		height: '83px',
 		justifyContent: 'space-around',
-
+		py: "8px"
 	},
 	pointerCursor: {
 		cursor: 'pointer',
@@ -44,9 +42,17 @@ const styles = {
 	},
 	button: {
 		display: 'flex',
-		justifyContent: 'flex-start',
+		justifyContent: 'start',
 		mx: '0px',
-		px: '0px',
+		pl: '8px',
+		py: "6px",
+	},
+	buttonText: {
+		fontFamily: "Roboto",
+		textTransform: "capitalize",
+		fontWeight: 100,
+		color: color.lightBlack,
+		pl: "4px"
 	},
 }
 
@@ -102,7 +108,8 @@ const CustomTableRow = ({ item, colorStock }) => {
 				<TableCell align={headCells[4].align} sx={styles.dataCell}>
 					<Typography sx={{ pr: "26px" }}>{convertToVND(item.price)}</Typography>
 				</TableCell>
-				<TableCell align={headCells[5].align} sx={styles.dataCell}>
+				<TableCell
+					align={headCells[5].align} sx={styles.dataCell}>
 					<Typography
 						sx={{
 							color: colorStock,
@@ -112,6 +119,7 @@ const CustomTableRow = ({ item, colorStock }) => {
 						{item.stock}
 					</Typography>
 				</TableCell>
+
 				<TableCell sx={{
 					...styles.dataCell, px: 0, textAlign: "right"
 				}}>
@@ -132,17 +140,23 @@ const CustomTableRow = ({ item, colorStock }) => {
 						transformOrigin={{
 							vertical: 'center',
 							horizontal: 'left',
-						}}>
-						<Box sx={styles.popupBox}>
+						}}
+						className="productOption"
+					>
+						<Box
+
+							sx={styles.popupBox}
+						>
 							<Button
 								sx={[
 									styles.box,
 									styles.pointerCursor,
 									styles.button,
 								]}
-								onClick={handleEditClick}>
-								<EditOutlinedIcon sx={styles.marginRight10} />
-								Edit
+							onClick={handleEditClick}
+							>
+								<img src={EditIc} style={{ paddingLeft: "6px" }} />
+								<Typography sx={styles.buttonText}>Edit</Typography>
 							</Button>
 							<Button
 								onClick={handleDeleteClick}
@@ -151,8 +165,9 @@ const CustomTableRow = ({ item, colorStock }) => {
 									styles.pointerCursor,
 									styles.button,
 								]}>
-								<DeleteOutlinedIcon sx={styles.marginRight10} />
-								Delete
+								<img src={DeleteIc} style={{ paddingLeft: "6px" }} />
+
+								<Typography sx={styles.buttonText}>Delete</Typography>
 							</Button>
 						</Box>
 					</Popover>

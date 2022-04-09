@@ -33,6 +33,9 @@ import RedDownStonkIc from '../assets/ic_red_down_stonk.svg'
 import FilterIc from '../assets/ic_filter.svg'
 import PlusIc from '../assets/ic_plus.svg'
 import ThreeDotIc from '../assets/ic_three_dot.svg'
+import EditIc from "../assets/ic_edit.svg"
+import DeleteIc from "../assets/ic_delete.svg"
+
 
 // order
 import RecDropIc from '../assets/ic_received_dropdown.svg'
@@ -47,5 +50,6 @@ export {
     TotalSalesIc, TotalOrdersIc, TotalUsersIc, UpDegreeArrow, DownDegreeArrow,
     EyeIc, GreenUpArrIc, RedDownArrIc, GreenUpStonkIc, RedDownStonkIc,
     SearchIc, FilterIc, LeftArrowIc, RightArrowIc, PlusIc, ThreeDotIc,
-    RecDropIc, ProcDropIc, ShipDropIc, CompDropIc, CanDropIc
+    RecDropIc, ProcDropIc, ShipDropIc, CompDropIc, CanDropIc,
+    EditIc, DeleteIc,
 }

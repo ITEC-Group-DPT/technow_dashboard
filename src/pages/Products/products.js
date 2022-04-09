@@ -51,7 +51,7 @@ const Products = () => {
 	const [totalPage, setTotalPage] = useState(1)
 	const [order, setOrder] = useState('asc')
 	const [orderBy, setOrderBy] = useState('productID')
-	const [filteredList, setFilteredList] = useState([])
+	const [filteredList, setFilteredList] = useState(null)
 
 	const initTotalPage = async () => {
 		const response = await getTotalNumberOfProductAdmin('')
@@ -294,7 +294,7 @@ const Products = () => {
 									onRequestSort={handleRequestSort}
 								/>
 
- 								{!_.isEmpty(filteredList) ? (
+								{!_.isEmpty(filteredList) &&
 
 									<TableBody>
 										{filteredList.map((item, index) => {
@@ -315,7 +315,9 @@ const Products = () => {
 											)
 										})}
 									</TableBody>
-								) : (
+								}
+								{
+									filteredList != null && filteredList.length == 0 &&
 									<Box
 										sx={{
 											display: 'flex',
@@ -328,7 +330,7 @@ const Products = () => {
 											Không tìm được sản phẩm nào phù hợp
 										</Typography>
 									</Box>
-								)}
+								}
 							</Table>
 						</TableContainer>
 					</Box>
