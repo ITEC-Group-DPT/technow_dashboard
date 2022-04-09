@@ -13,6 +13,7 @@ import {
 } from '@mui/material'
 import { Box } from '@mui/system'
 import { useState } from 'react'
+import { editProduct } from '../../../api/productAPI'
 
 const ITEM_HEIGHT = 40
 const ITEM_PADDING_TOP = 8
@@ -89,16 +90,18 @@ const category = [
 const CustomEditProductDialog = ({ item, open, setOpen }) => {
 	const [newValue, setNewValue] = useState({ ...item })
 
+	const onSubmit = async () => {
+		const response = await editProduct(newValue)
+		console.log(response.data.success)
+		if (response.data.success) setOpen(false)
+	}
+
 	const closeDialog = () => {
 		setOpen(false)
 	}
 
 	return (
-		<Dialog
-			open={open}
-			onClose={closeDialog}
-			sx={styles.dialogBox}
-			fullWidth='true'>
+		<Dialog open={open} sx={styles.dialogBox} fullWidth='true'>
 			<DialogActions>
 				<Box sx={{ width: '100%' }}>
 					<DialogTitle>Edit Product</DialogTitle>
@@ -269,14 +272,12 @@ const CustomEditProductDialog = ({ item, open, setOpen }) => {
 						</FormControl>
 					</DialogContent>
 					<Box sx={{ display: 'flex', justifyContent: 'center' }}>
-						<Button
-							sx={styles.cancelBtn}
-							onClick={() => setOpen(false)}>
+						<Button sx={styles.cancelBtn} onClick={closeDialog}>
 							Cancel
 						</Button>
 						<Button
 							sx={styles.submitBtn}
-							onClick={() => setOpen(false)}
+							onClick={onSubmit}
 							type='submit'>
 							Submit
 						</Button>

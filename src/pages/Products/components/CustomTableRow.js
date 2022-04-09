@@ -6,6 +6,7 @@ import { useState } from 'react'
 import color from '../../../constant/color'
 import { ThreeDotIc } from '../../../constant/icon'
 import CustomEditProductDialog from './CustomEditProductDialog'
+import DeleteProductDialog from './DeleteProductDialog'
 
 const styles = {
 	box: {
@@ -48,7 +49,8 @@ const styles = {
 }
 
 const CustomTableRow = ({ item, colorStock }) => {
-	const [open, setOpen] = useState(false)
+	const [openEdit, setOpenEdit] = useState(false)
+	const [openDelete, setOpenDelete] = useState(false)
 	const [anchorEl, setAnchorEl] = useState(false)
 	const openShowMore = Boolean(anchorEl)
 
@@ -63,8 +65,12 @@ const CustomTableRow = ({ item, colorStock }) => {
 		return parseInt(value).toLocaleString() + ' đ'
 	}
 
+	const handleDeleteClick = () => {
+		setOpenDelete(true)
+	}
+
 	const handleEditClick = () => {
-		setOpen(true)
+		setOpenEdit(true)
 	}
 
 	return (
@@ -129,6 +135,7 @@ const CustomTableRow = ({ item, colorStock }) => {
 								Edit
 							</Button>
 							<Button
+								onClick={handleDeleteClick}
 								sx={[
 									styles.box,
 									styles.pointerCursor,
@@ -142,9 +149,14 @@ const CustomTableRow = ({ item, colorStock }) => {
 				</TableCell>
 			</TableRow>
 			<CustomEditProductDialog
-				open={open}
+				open={openEdit}
 				item={item}
-				setOpen={setOpen}
+				setOpen={setOpenEdit}
+			/>
+			<DeleteProductDialog
+				open={openDelete}
+				productID={item.productID}
+				setOpen={setOpenDelete}
 			/>
 		</>
 	)
