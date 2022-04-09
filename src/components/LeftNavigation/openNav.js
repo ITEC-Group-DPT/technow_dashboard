@@ -17,7 +17,7 @@ const OpenNav = ({
     return (
         <Slide
             in={isOpen}
-            timeout={280}
+            timeout={400}
             direction="right"
         >
             <Box

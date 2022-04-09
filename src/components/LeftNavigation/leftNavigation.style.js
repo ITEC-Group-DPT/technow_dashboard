@@ -24,11 +24,13 @@ const styles = {
 		padding: 0,
 		zIndex: 9999,
 		height: '100vh',
+		
 	},
 	container: {
 		position: 'fixed',
 		background: 'white',
 
+		boxShadow: "0.5px 0 0.5px rgba(0,0,0,0.15)",
 		display: 'flex',
 		flexDirection: 'column',
 
@@ -43,13 +45,14 @@ const styles = {
 		position: 'fixed',
 		background: 'white',
 
+		boxShadow: "0px 0 0px rgba(0,0,0,0.15)",
 		display: 'flex',
 		flexDirection: 'column',
 
 		border: 'none',
+
 		padding: 0,
 
-		boxShadow: '0px',
 		height: '100vh',
 		zIndex: 9999,
 	},
