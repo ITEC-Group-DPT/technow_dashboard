@@ -316,6 +316,7 @@ const Products = () => {
 										})}
 									</TableBody>
 								}
+
 								{
 									filteredList != null && filteredList.length == 0 &&
 									<Box
@@ -324,17 +325,21 @@ const Products = () => {
 											justifyContent: 'center',
 											position: 'absolute',
 											zIndex: 999,
-											width: '60%',
+											left: 0,
+											right: 0,
 										}}>
 										<Typography sx={styles.searchNotFound} >
 											No products found
 										</Typography>
 									</Box>
 								}
+
 							</Table>
 						</TableContainer>
 					</Box>
+
 				</Box>
+
 			</Container>
 		</Box>
 	)
