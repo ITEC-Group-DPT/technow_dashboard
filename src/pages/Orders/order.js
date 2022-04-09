@@ -241,6 +241,16 @@ const Orders = () => {
                                 key={order.id}
                             />
                         ))}
+
+                        {orderList.length != 0 ? ("") :
+                            (
+                                <Typography sx={styles.searchNotFound}  >
+                                    No orders found
+                                </Typography>
+                            )
+                        }
+
+
                     </Box>
                 </Box>
             </Container>

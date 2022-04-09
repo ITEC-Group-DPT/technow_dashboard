@@ -90,7 +90,14 @@ const Style = {
 
     noRank: {
         padding: '3px 10px',
-    }
+    },
+
+    searchNotFound: {
+        textAlign: 'center',
+        mt: 6,
+		fontSize: '20px',
+		color: color.lightGrayText,
+    },
 };
 
 export default Style;

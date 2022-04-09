@@ -174,6 +174,14 @@ const TableUser = ({ data }) => {
                 </Box>
             )}
 
+            {allUser.length != 0 ? ("") :
+                (
+                    <Typography sx={Style.searchNotFound}  >
+                        No users found
+                    </Typography>
+                )
+            }
+
             <Box style={Style.paginationBox}>
                 <CenterPagination page={page} maxPages={totalPage}
                     onBack={() => {

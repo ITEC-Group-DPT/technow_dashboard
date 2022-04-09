@@ -7,7 +7,7 @@ const styles = {
 	},
 	productBoard: {
 		shadow: '1px solid #848484',
-		boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.25)',
+		boxShadow: '0px 1px #d5d6d8',
 		borderRadius: '10px',
 		px: 6,
 		py: 4,
@@ -19,7 +19,7 @@ const styles = {
 		alignItems: 'center',
 	},
 	selectInp: {
-		minWidth: '132px',
+		minWidth: '140px',
 		color: color.lightGrayText,
 		mx: '10px',
         borderRadius: "5px",
@@ -71,6 +71,11 @@ const styles = {
 		fontSize: '38px',
 		mb: '20px',
 	},
+	searchNotFound: {
+		mt: 8,
+		fontSize: '26px',
+		color: color.lightGrayText,
+	}
 }
 
 export default styles

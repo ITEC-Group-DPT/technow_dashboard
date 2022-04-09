@@ -25,10 +25,6 @@ const styles = {
         fontFamily: 'Roboto',
     },
 
-    graphContent: {
-
-    },
-
     graphWrapper: {
         background: 'white',
         borderRadius: '15px',
@@ -41,7 +37,6 @@ const styles = {
 
     lineTitleWrapper: {
         display: 'flex',
-
     },
 
     graphTitle: {
@@ -59,7 +54,6 @@ const styles = {
         color: '#868686',
         fontSize: '13px',
         fontWeight: 500,
-
     },
 
     title2Wrapper: {
@@ -95,11 +89,6 @@ const styles = {
         justifyContent: 'end',
     },
 
-    tableWrapper: {
-
-
-    },
-
     divider: {
         borderColor: "#EAEAEA",
         mt: 2,
@@ -130,6 +119,13 @@ const styles = {
 
     textEnd: {
         textAlign: 'end',
+    },
+
+    searchNotFound: {
+        textAlign: 'center',
+        mt: 6,
+		fontSize: '20px',
+		color: color.lightGrayText,
     },
 }
 

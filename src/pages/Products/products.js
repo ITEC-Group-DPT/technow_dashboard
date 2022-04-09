@@ -237,7 +237,7 @@ const Products = () => {
 									onChange={handleChangeCategory}
 									sx={[
 										styles.selectInp,
-										{ height: '100%', p: '0px' },
+										{ height: '100%', p: '0px', textAlign: 'center', },
 									]}
 								>
 									<MenuItem value='Category'
@@ -267,7 +267,7 @@ const Products = () => {
 							/>
 						</Box>
 
-						<Box sx={[styles.box, { height: '38px' }]}>
+						<Box sx={[styles.box, { height: '44px' }]}>
 							<Button
 								sx={{
 									height: '100%',
@@ -326,8 +326,8 @@ const Products = () => {
 											zIndex: 999,
 											width: '60%',
 										}}>
-										<Typography variant='h3'>
-											Không tìm được sản phẩm nào phù hợp
+										<Typography sx={styles.searchNotFound} >
+											No products found
 										</Typography>
 									</Box>
 								}
