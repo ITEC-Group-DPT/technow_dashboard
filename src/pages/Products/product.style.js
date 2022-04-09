@@ -9,8 +9,8 @@ const styles = {
 		shadow: '1px solid #848484',
 		boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.25)',
 		borderRadius: '10px',
-		px: '40px',
-		pt: '20px',
+		px: 6,
+		py: 4,
 		minHeight: '86.5vh',
 		background: 'white',
 	},
@@ -22,7 +22,8 @@ const styles = {
 		minWidth: '132px',
 		color: color.lightGrayText,
 		mx: '10px',
-		border: '1px solid #D0D0D0',
+        borderRadius: "5px",
+        boxSizing: 'border-box',
 	},
 	navigateBtn: {
 		display: 'flex',
@@ -68,7 +69,7 @@ const styles = {
 		fontFamily: 'Roboto',
 		fontWeight: 'bold',
 		fontSize: '38px',
-		my: '20px',
+		mb: '20px',
 	},
 }
 
