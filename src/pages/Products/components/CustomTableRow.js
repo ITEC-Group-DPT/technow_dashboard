@@ -84,8 +84,12 @@ const CustomTableRow = ({ item, colorStock, handleEdit, handleDelete }) => {
 	}
 
 	const checkURL = (url) => {
-		console.log('url: ', url);
-		return (url.includes("https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/"));
+
+		const isFirebase = url.includes("https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/");
+
+		const isImg = (url.match(/\.(jpeg|jpg|gif|png)$/) != null);
+
+		return (isFirebase || isImg);
 	}
 	return (
 		<>
@@ -183,18 +187,24 @@ const CustomTableRow = ({ item, colorStock, handleEdit, handleDelete }) => {
 					</Popover>
 				</TableCell>
 			</TableRow>
-			<CustomEditProductDialog
-				open={openEdit}
-				item={item}
-				setOpen={setOpenEdit}
-				handleEdit={handleEdit}
-			/>
-			<DeleteProductDialog
-				open={openDelete}
-				productID={item.productID}
-				setOpen={setOpenDelete}
-				handleDelete={handleDelete}
-			/>
+			{
+				openEdit &&
+				<CustomEditProductDialog
+					open={openEdit}
+					item={item}
+					setOpen={setOpenEdit}
+					handleEdit={handleEdit}
+				/>
+			}
+			{
+				openDelete &&
+				<DeleteProductDialog
+					open={openDelete}
+					productID={item.productID}
+					setOpen={setOpenDelete}
+					handleDelete={handleDelete}
+				/>
+			}
 		</>
 	)
 }

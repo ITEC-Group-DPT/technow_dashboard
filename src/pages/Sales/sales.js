@@ -65,7 +65,7 @@ const Sales = () => {
                     <Box sx={{ ...styles.box, ml: 0 }}>
                         <SaleCommonCard
                             title='Best Seller'
-                            sx={{ width: "420px", pb:"20px" }}
+                            sx={{ width: "420px", pb: "20px" }}
                         >
                             <CardItemSellerStock
                                 productImg={bestSeller[0].productimg} isView={false} content={bestSeller[0].price}
@@ -76,7 +76,7 @@ const Sales = () => {
 
                         <SaleCommonCard
                             title='Most Viewed Product'
-                            sx={{ width: "420px", pb:"20px" }}
+                            sx={{ width: "420px", pb: "20px" }}
                         >
                             <CardItemSellerStock
                                 productImg={mostViewed[0].productimg}
@@ -89,12 +89,17 @@ const Sales = () => {
 
                         <SaleCommonCard
                             title='Most Profitable Categories'
-                            sx = {{pb: "20px"}}
+                            sx={{ pb: "20px" }}
                         >
                             <Box sx={{ mt: "36px", }}>
                                 {
-                                    category.map((cata) =>
-                                        <CardNameSeller name={cata.type} rank={cata.rank} grow={cata.up} payment={cata.total}></CardNameSeller>
+                                    category.map((cata, index) =>
+                                        <CardNameSeller
+                                            name={cata.type}
+                                            rank={index + 1}
+                                            grow={cata.up}
+                                            payment={cata.total}
+                                        />
                                     )
                                 }
                             </Box>
@@ -112,8 +117,14 @@ const Sales = () => {
                         >
                             <Box sx={{ pl: 1 }}>
                                 {
-                                    topRevenue.map((product) =>
-                                        <CardProductSeller name={product.name} productImg={product.productimg} payment={product.revenue} ></CardProductSeller>
+                                    topRevenue.map((product, index) =>
+                                        <CardProductSeller
+                                            key={index}
+                                            name={product.name}
+                                            productImg={product.productimg}
+                                            payment={product.revenue} >
+
+                                        </CardProductSeller>
                                     )
                                 }
                             </Box>
@@ -139,8 +150,13 @@ const Sales = () => {
                         <SaleCommonCard title="Top Customer" footer={true} sx={{ pb: 0 }}>
                             <Box sx={{ width: "350px", mt: "24px" }}>
                                 {
-                                    customers.map((customer) =>
-                                        <CardNameSeller rank={customer.rank} name={customer.username} isName={true} />
+                                    customers.map((customer, index) =>
+                                        <CardNameSeller
+
+                                            key={index}
+                                            rank={customer.rank}
+                                            name={customer.username}
+                                            isName={true} />
                                     )
                                 }
                             </Box>
