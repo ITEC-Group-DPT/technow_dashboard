@@ -27,6 +27,7 @@ import {
 	getAllProductByPageAdmin,
 	getProductByCategoryAdmin,
 } from '../../api/productAPI.js'
+import CustomEditProductDialog from './components/CustomEditProductDialog'
 
 const categoryList = [
 	'CPU',
@@ -51,7 +52,9 @@ const Products = () => {
 	const [totalPage, setTotalPage] = useState(1)
 	const [order, setOrder] = useState('asc')
 	const [orderBy, setOrderBy] = useState('productID')
-	const [filteredList, setFilteredList] = useState(null)
+	const [filteredList, setFilteredList] = useState(null);
+
+	const [isCreate, setIsCreate] = useState(false);
 
 	const initTotalPage = async () => {
 		const response = await getTotalNumberOfProductAdmin('')
@@ -187,6 +190,39 @@ const Products = () => {
 		initProductList()
 	}, [])
 
+	const handleCreateProduct = (product) => {
+		console.log('fu');
+	}
+	const handleEdit = (index, newItem) => {
+
+		if (newItem.type != filter.category && filter.category != "Category") {
+			handleDelete(index);
+			return;
+		}
+
+		const newFilterList = _.cloneDeep(filteredList);
+
+		newFilterList[index] = newItem;
+
+
+		setFilteredList(newFilterList)
+	}
+
+	const handleDelete = (index) => {
+		console.log('handle delete: ', index);
+
+		const firstPart = filteredList.slice(0, index);
+		console.log('firstPart: ', firstPart);
+		const secondPart = filteredList.slice(index + 1);
+		console.log('secondPart: ', secondPart);
+
+		const newFilterList = firstPart.concat(secondPart);
+
+		// console.log('filter List: ', newFilterList);
+
+		setFilteredList(newFilterList)
+	}
+
 	useEffect(() => {
 		return {
 			filteredList,
@@ -232,7 +268,7 @@ const Products = () => {
 							<FormControl sx={{ height: '100%', mr: 2 }}>
 								<Select
 									className='categorySelect'
-									MenuProps={{ disableScrollLock: true }}
+									// MenuProps={{ disableScrollLock: true }}
 									value={filter.category}
 									onChange={handleChangeCategory}
 									sx={[
@@ -248,6 +284,7 @@ const Products = () => {
 									{categoryList?.map((item) => {
 										return (
 											<MenuItem
+												key={item}
 												value={item}
 												sx={{
 													color: color.lightGrayText,
@@ -275,13 +312,27 @@ const Products = () => {
 									border: `1px solid #c0c0c0`,
 									width: '137px',
 									textTransform: 'capitalize',
-								}}>
+								}}
+								onClick={() => setIsCreate(true)}
+							>
 								<img
 									src={PlusIc}
 									style={{ marginRight: '10px' }}
 								/>
 								<Typography sx={{ fontSize: '14px' }}>Add Product</Typography>
+
 							</Button>
+							<CustomEditProductDialog
+								open={isCreate}
+								item = {{
+									name: "",
+									img1: "",
+									price: "",
+								}}
+								setOpen={setIsCreate}
+								handleEdit={handleCreateProduct}
+								isCreate
+							/>
 						</Box>
 					</Box>
 
@@ -309,8 +360,12 @@ const Products = () => {
 														: color.darkRed
 											return (
 												<CustomTableRow
+													key={index}
 													colorStock={colorStock}
 													item={item}
+
+													handleEdit={(newItem) => handleEdit(index, newItem)}
+													handleDelete={() => handleDelete(index)}
 												/>
 											)
 										})}

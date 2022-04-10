@@ -23,10 +23,6 @@ const styles = {
 		textTransform: 'none',
 		px: 2,
 		py: 1,
-		mx: {
-			xs: 1,
-			md: 5,
-		},
 		'&: hover': {
 			backgroundColor: '#b90000',
 		},
@@ -37,23 +33,18 @@ const styles = {
 		textTransform: 'none',
 		px: 2,
 		py: 1,
-		mx: {
-			xs: 1,
-			md: 5,
-		},
+		ml: 3,
 		'&: hover': {
 			backgroundColor: '#000000',
 		},
 	},
 }
 
-const DeleteProductDialog = ({ productID, open, setOpen }) => {
+const DeleteProductDialog = ({ productID, open, setOpen, handleDelete }) => {
 	const onSubmit = async () => {
-		const response = await deleteProduct(productID)
-		if (response.data.success) {
-			setOpen(false)
-			window.location.reload()
-		}
+		const response = await deleteProduct(productID);
+		handleDelete();
+		closeDialog();
 	}
 
 	const closeDialog = () => {
@@ -61,16 +52,16 @@ const DeleteProductDialog = ({ productID, open, setOpen }) => {
 	}
 
 	return (
-		<Dialog open={open} sx={styles.dialogBox} fullWidth='true'>
+		<Dialog open={open} sx={styles.dialogBox} fullWidth onClose={closeDialog}>
 			<DialogActions>
-				<Box sx={{ width: '100%' }}>
-					<DialogTitle>Edit Product</DialogTitle>
+				<Box sx={{ width: '100%', display: "flex", flexDirection: "column", alignItems: "center", py: "24px" }}>
+					<DialogTitle sx={{ fontWeight: "600", p: 0 }}>Edit Product</DialogTitle>
 					<DialogContent>
 						<Typography>
 							Do you want to delete this product ?
 						</Typography>
 					</DialogContent>
-					<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+					<Box sx={{ display: 'flex' }}>
 						<Button sx={styles.cancelBtn} onClick={closeDialog}>
 							Cancel
 						</Button>

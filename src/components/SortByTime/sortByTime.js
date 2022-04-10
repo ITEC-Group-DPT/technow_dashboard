@@ -39,7 +39,7 @@ const SortByTime = ({
                         value={sortValue}
                         onChange={handleChange}
                         input={<MyInput />}
-                        MenuProps={{ disableScrollLock: true }}
+                        // MenuProps={{ disableScrollLock: true }}
 
                     >
                         {

@@ -123,7 +123,7 @@ const ChangeStatus = ({ defaultValue = 0, orderID = 0 }) => {
                         onChange={handleChange}
                         input={<MyInput />}
                         className="STATUS-WRAPPER"
-                        MenuProps={{ disableScrollLock: true }}
+                        // MenuProps={{ disableScrollLock: true }}
                     >
                         {activeList.map((status) => (
                             <MenuItem
@@ -142,7 +142,7 @@ const ChangeStatus = ({ defaultValue = 0, orderID = 0 }) => {
                 onClose={handleClose}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
-                disableScrollLock
+                // disableScrollLock
             >
                 <DialogTitle id="alert-dialog-title">
                     Confirmation

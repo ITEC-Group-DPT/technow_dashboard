@@ -29,7 +29,7 @@ const SortByStatus = ({ defaultValue = "All", onChangeValue }) => {
                         value={status}
                         onChange={handleChange}
                         input={<MyInput />}
-                        MenuProps={{ disableScrollLock: true }}
+                        // MenuProps={{ disableScrollLock: true }}
                     >
                         {statusList.map((status) => (
                             <MenuItem value={status} key={status}>{status}</MenuItem>

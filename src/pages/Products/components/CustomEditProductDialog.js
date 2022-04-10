@@ -12,8 +12,9 @@ import {
 	Button,
 } from '@mui/material'
 import { Box } from '@mui/system'
-import { useState } from 'react'
-import { editProduct } from '../../../api/productAPI'
+import { useEffect, useState, useRef } from 'react'
+import { createProduct, editProduct } from '../../../api/productAPI'
+import _ from "lodash"
 
 const ITEM_HEIGHT = 40
 const ITEM_PADDING_TOP = 8
@@ -46,10 +47,6 @@ const styles = {
 		textTransform: 'none',
 		px: 2,
 		py: 1,
-		mx: {
-			xs: 1,
-			md: 5,
-		},
 		'&: hover': {
 			backgroundColor: '#b90000',
 		},
@@ -60,13 +57,13 @@ const styles = {
 		textTransform: 'none',
 		px: 2,
 		py: 1,
-		mx: {
-			xs: 1,
-			md: 5,
-		},
+		ml: 3,
 		'&: hover': {
 			backgroundColor: '#000000',
 		},
+	},
+	error: {
+		color: "red",
 	},
 }
 
@@ -87,25 +84,76 @@ const category = [
 	'VGA',
 ]
 
-const CustomEditProductDialog = ({ item, open, setOpen }) => {
-	const [newValue, setNewValue] = useState({ ...item })
+const CustomEditProductDialog = ({ item, open, setOpen, handleEdit, isCreate = false }) => {
+	const [newValue, setNewValue] = useState(item)
 
+	const [isError, setIsError] = useState({});
+
+
+	const isFormValid = () => {
+		const newError = {};
+
+		for (const input in newValue) {
+			if (input != "name" && input != "price" && input != "img1") continue;
+
+			if (newValue[input] == "") newError[input] = true;
+		}
+
+		setIsError(newError);
+
+		if (!_.isEmpty(newError)) alert("Please check your data again")
+
+		return _.isEmpty(newError)
+	}
 	const onSubmit = async () => {
-		const response = await editProduct(newValue)
-		if (response.data.success) setOpen(false)
+
+		if (isFormValid() == false) return;
+		console.log('valid ?');
+
+		if (isCreate == false) {
+			editProduct(newValue);
+		} else {
+			const response = await createProduct(newValue);
+			if (response.data.success) {
+				alert("Create product successfully")
+				window.location.reload()
+			}
+		}
+		handleEdit(newValue);
+
+
+		setOpen(false);
 	}
 
 	const closeDialog = () => {
 		setOpen(false)
 	}
 
+	useEffect(() => {
+		setNewValue(item);
+		setIsError({})
+	}, [open]);
+
 	return (
-		<Dialog open={open} sx={styles.dialogBox} fullWidth='true'>
-			<DialogActions>
-				<Box sx={{ width: '100%' }}>
+		<Dialog
+			onClose={closeDialog}
+			open={open}
+			sx={styles.dialogBox}
+			fullWidth
+		>
+			<DialogActions
+			>
+				<Box sx={{ width: '100%', pt: 1, pb: 3, }}
+				>
 					<DialogTitle>Edit Product</DialogTitle>
 					<DialogContent>
-						<FormControl fullWidth='true'>
+						<FormControl fullWidth
+						>
+							{
+								!_.isEmpty(isError) &&
+								<Typography sx={styles.error}> * These fields can not be empty</Typography>
+							}
+
 							<TextField
 								sx={styles.textField}
 								name='name'
@@ -117,8 +165,9 @@ const CustomEditProductDialog = ({ item, open, setOpen }) => {
 									})
 								}
 								placeholder='Product name'
-								value={newValue.name}
+								value={newValue?.name || ""}
 								variant='outlined'
+								error={isError?.name}
 							/>
 							<Box sx={{ position: 'relative' }}>
 								<InputLabel id='zzzz'>Category</InputLabel>
@@ -127,8 +176,9 @@ const CustomEditProductDialog = ({ item, open, setOpen }) => {
 									labelId='zzzz'
 									sx={styles.textField}
 									id='demo-simple-select'
-									value={newValue.type}
-									label='Category'
+									defaultValue={"CPU"}
+									value={newValue?.type || "CPU"}
+									// label='Category'
 									MenuProps={MenuProps}
 									onChange={(e) => {
 										setNewValue({
@@ -137,9 +187,12 @@ const CustomEditProductDialog = ({ item, open, setOpen }) => {
 										})
 									}}>
 									{category.map((catItem) => {
-										let value = catItem.replace(' ', '')
+										const value = catItem.replace(' ', '')
 										return (
-											<MenuItem value={value}>
+											<MenuItem
+												key={value}
+												value={value}
+											>
 												{catItem}
 											</MenuItem>
 										)
@@ -166,8 +219,9 @@ const CustomEditProductDialog = ({ item, open, setOpen }) => {
 								InputProps={{
 									endAdornment: <Typography>VND</Typography>,
 								}}
-								value={newValue.price}
+								value={newValue?.price || ""}
 								variant='outlined'
+								error={isError?.price}
 							/>
 
 							<TextField
@@ -181,8 +235,10 @@ const CustomEditProductDialog = ({ item, open, setOpen }) => {
 										img1: e.target.value,
 									})
 								}
-								value={newValue.img1}
+								value={newValue?.img1 || ""}
 								variant='outlined'
+								error={isError?.img1}
+
 							/>
 
 							<TextField
@@ -196,7 +252,7 @@ const CustomEditProductDialog = ({ item, open, setOpen }) => {
 										img2: e.target.value,
 									})
 								}
-								value={newValue.img2}
+								value={newValue?.img2 || ""}
 								variant='outlined'
 							/>
 
@@ -211,7 +267,7 @@ const CustomEditProductDialog = ({ item, open, setOpen }) => {
 										img3: e.target.value,
 									})
 								}
-								value={newValue.img3}
+								value={newValue?.img3 || ""}
 								variant='outlined'
 							/>
 
@@ -226,7 +282,7 @@ const CustomEditProductDialog = ({ item, open, setOpen }) => {
 										img4: e.target.value,
 									})
 								}
-								value={newValue.img4}
+								value={newValue?.img4 || ""}
 								variant='outlined'
 							/>
 
@@ -237,10 +293,12 @@ const CustomEditProductDialog = ({ item, open, setOpen }) => {
 								style={{
 									textAlign: 'left',
 									background: 'white',
+									overflow: "hidden"
 								}}
 								multiline
 								rows={5}
-								value={newValue.spec}
+
+								value={newValue?.spec || ""}
 								placeholder='Product specification'
 								onChange={(e) =>
 									setNewValue({
@@ -260,7 +318,7 @@ const CustomEditProductDialog = ({ item, open, setOpen }) => {
 								multiline
 								rows={5}
 								placeholder='Product description'
-								value={newValue.description}
+								value={newValue?.description || ""}
 								onChange={(e) =>
 									setNewValue({
 										...newValue,

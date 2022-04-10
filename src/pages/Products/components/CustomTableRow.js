@@ -56,7 +56,7 @@ const styles = {
 	},
 }
 
-const CustomTableRow = ({ item, colorStock }) => {
+const CustomTableRow = ({ item, colorStock, handleEdit, handleDelete }) => {
 	const [openEdit, setOpenEdit] = useState(false)
 	const [openDelete, setOpenDelete] = useState(false)
 	const [anchorEl, setAnchorEl] = useState(false)
@@ -74,13 +74,19 @@ const CustomTableRow = ({ item, colorStock }) => {
 	}
 
 	const handleDeleteClick = () => {
-		setOpenDelete(true)
+		setOpenDelete(true);
+		handleShowMoreClose();
 	}
 
 	const handleEditClick = () => {
-		setOpenEdit(true)
+		setOpenEdit(true);
+		handleShowMoreClose();
 	}
 
+	const checkURL = (url) => {
+		console.log('url: ', url);
+		return (url.includes("https://firebasestorage.googleapis.com/v0/b/technow-4b3ab.appspot.com/o/"));
+	}
 	return (
 		<>
 			<TableRow>
@@ -95,7 +101,11 @@ const CustomTableRow = ({ item, colorStock }) => {
 					</Typography>
 				</TableCell>
 				<TableCell align={headCells[1].align} sx={styles.dataCell}>
-					<img src={item.img1} width={100} height={100} />
+					<img
+						src={checkURL(item.img1) ? item.img1 : require("../../../assets/not-found.png")}
+						width={100}
+						height={100}
+					/>
 				</TableCell>
 				<TableCell align={headCells[2].align} sx={styles.dataCell}>
 					<Typography sx={[styles.cellName]}>{item.name}</Typography>
@@ -132,7 +142,7 @@ const CustomTableRow = ({ item, colorStock }) => {
 						open={openShowMore}
 						anchorEl={anchorEl}
 						onClose={handleShowMoreClose}
-						disableScrollLock={true}
+						// disableScrollLock={true}
 						anchorOrigin={{
 							vertical: 'center',
 							horizontal: 'right',
@@ -153,7 +163,7 @@ const CustomTableRow = ({ item, colorStock }) => {
 									styles.pointerCursor,
 									styles.button,
 								]}
-							onClick={handleEditClick}
+								onClick={handleEditClick}
 							>
 								<img src={EditIc} style={{ paddingLeft: "6px" }} />
 								<Typography sx={styles.buttonText}>Edit</Typography>
@@ -177,11 +187,13 @@ const CustomTableRow = ({ item, colorStock }) => {
 				open={openEdit}
 				item={item}
 				setOpen={setOpenEdit}
+				handleEdit={handleEdit}
 			/>
 			<DeleteProductDialog
 				open={openDelete}
 				productID={item.productID}
 				setOpen={setOpenDelete}
+				handleDelete={handleDelete}
 			/>
 		</>
 	)

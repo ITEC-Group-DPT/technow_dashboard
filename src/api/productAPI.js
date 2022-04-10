@@ -31,6 +31,21 @@ const getProductByCategoryAdmin = (type, page, value, orderBy, order) => {
 	)
 }
 
+const createProduct = (product) => {
+	let data = new FormData()
+	data.append('command', 'create')
+	data.append('type', product?.type || "CPU")
+	data.append('description', product?.description || "")
+	data.append('spec', product?.spec || "")
+	data.append('name', product?.name)
+	data.append('price', product?.price)
+	data.append('img1', product?.img1)
+	data.append('img2', product?.img2 || "")
+	data.append('img3', product?.img3 || "")
+	data.append('img4', product?.img4 || "")
+
+	return axios.post(API_URL, data)
+}
 const editProduct = (product) => {
 	let data = new FormData()
 	data.append('command', 'modify')
@@ -63,6 +78,7 @@ export {
 	getNumberOfProductByCategoryAdmin,
 	getAllProductByPageAdmin,
 	getProductByCategoryAdmin,
+	createProduct,
 	editProduct,
 	deleteProduct,
 }

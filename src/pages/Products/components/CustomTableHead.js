@@ -20,7 +20,6 @@ const CustomTableHead = (props) => {
 		<TableHead>
 			<TableRow>
 				{headCells.map((headCell) => {
-					console.log('headCell: ', headCell);
 					return (
 						<TableCell
 							sx={[styles.dataCell, tableStyle[headCell.id]]}
