@@ -176,6 +176,7 @@ const Products = () => {
 			)
 		}
 		const _productList = response.data.data
+		setPage(1);
 		setFilteredList(_productList)
 	}
 
